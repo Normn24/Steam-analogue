@@ -9,7 +9,7 @@ const filterParser = require("../commonHelpers/filterParser");
 const _ = require("lodash");
 
 exports.addImages = (req, res, next) => {
-  if (req.files.length > 0) {
+  if (req.files > 0) {
     res.json({
       message: "Photos are received"
     });
@@ -60,7 +60,7 @@ exports.updateProduct = (req, res, next) => {
     });
   }
 
-  Product.findById( id)
+  Product.findById(id)
     .then(product => {
       if (!product) {
         return res.status(400).json({

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
+const cors = require("cors")
 require('dotenv').config();
 
 const globalConfigs = require('./routes/globalConfigs');
@@ -25,6 +26,11 @@ const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
 
 const app = express();
+const corsOptions = {
+  origin: "http://localhost:5173",
+};
+
+app.use(cors(corsOptions));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -75,3 +81,4 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
+

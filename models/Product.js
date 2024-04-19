@@ -33,31 +33,29 @@ const ProductSchema = new Schema(
         required: true
       }
     ],
+    genres: [
+      {
+        type: String,
+        required: true
+      }
+    ],
     quantity: {
       type: Number,
-      required: true,
       default: 0
     },
-    color: {
-      type: String
+    publisher: {
+      type: String,
+      required: true
     },
-    sizes: {
-      type: String
+    developer: {
+      type: String,
+      required: true
     },
     productUrl: {
       type: String
     },
-    brand: {
-      type: String
-    },
-    manufacturer: {
-      type: String
-    },
-    manufacturerCountry: {
-      type: String
-    },
-    seller: {
-      type: String
+    yearOfPublication: {
+      type: Date
     },
     date: {
       type: Date,
