@@ -17,7 +17,7 @@ export default function Prodcts() {
   }, [dispatch]);
 
   function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
+    const { className, onClick } = props;
     return (
       <div onClick={onClick} className={`arrow ${className}`}>
         <button className="arrows arrow__prev" />
@@ -26,7 +26,7 @@ export default function Prodcts() {
   }
 
   function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
+    const { className, onClick } = props;
     return (
       <div onClick={onClick} className={`arrow ${className}`}>
         <button onClick={onClick} className="arrows arrow__next" />
@@ -35,7 +35,6 @@ export default function Prodcts() {
   }
   const settings = {
     dots: true,
-    dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 3,
