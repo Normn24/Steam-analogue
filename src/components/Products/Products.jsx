@@ -59,7 +59,6 @@ export default function Prodcts() {
       </Typography>
       <Slider {...settings}>
         {products.data?.map((product, index) => {
-          console.log(product);
           return <ProductItem key={index} product={product} />;
         })}
       </Slider>
