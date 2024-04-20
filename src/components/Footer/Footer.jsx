@@ -1,4 +1,4 @@
-import { StyledFooter, StyledNavLink, StyledTitle, InfoWrapper } from "./StyledFooter";
+import { StyledFooter, StyledNavLink, StyledTitle, InfoWrapper } from "./FooterStyle";
 export default function Footer() {
     return (
         <StyledFooter>
