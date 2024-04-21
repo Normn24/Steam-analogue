@@ -1,0 +1,14 @@
+@use "../../styles/variables/colors";
+
+@mixin button-transition($transition-duration: 0.3s, $hover-color: $grey) {
+    background-color: $blue;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color $transition-duration;
+  
+    &:hover {
+      background-color: $hover-color;
+    }
+  }

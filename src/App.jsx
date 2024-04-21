@@ -1,11 +1,26 @@
 import "./App.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Home from "./pages/home/Home";
+import ProductPage from "./pages/productPage/productPage";
 
-function App() {
-  return (
-    <>
-      <h1>Hello World!</h1>
-    </>
-  );
-}
+const router = createBrowserRouter([
+  {
+    //path: "products/:id",
+    path: "/",
+    element: <Home />,
+    //errorElement: <ErrorFallback />,
+  },
+  {
+    //path: "products/:id",
+    path: "products",
+    element: <ProductPage />,
+    //errorElement: <ErrorFallback />,
+  }
+]);
 
-export default App;
+const App = () => <RouterProvider router={router} />;
+
+export default App

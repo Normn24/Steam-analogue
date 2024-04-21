@@ -1,0 +1,46 @@
+@use '../../styles/variables/colors';
+
+.button {
+	position: relative;
+	display: inline-flex;
+	vertical-align: middle;
+	text-align: center;
+	box-sizing: border-box;
+    border-radius: 4px;
+    height: 48px;
+    width:192px;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none !important;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
+	font-family: Roboto, sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #fff;
+	margin-bottom: 25px;
+
+
+    &._dark {
+        background-color: #1c62cd;
+        &:hover {
+            border: 1px solid #1c62cd;
+            background-color: #fff;
+            color: #828386;
+        }
+    }
+
+    &._light {
+        border: 1px solid #1c62cd;
+        color: #828386;
+        &:hover {
+            background-color: #1c62cd;
+            color: #fff;
+        }
+    }
+
+}
+
