@@ -1,3 +1,6 @@
+import Prodcts from "./components/Products/Products";
+import Footer from "./components/Footer/Footer";
+import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
 import {
   createBrowserRouter,
@@ -20,7 +23,15 @@ const router = createBrowserRouter([
     //errorElement: <ErrorFallback />,
   }
 ]);
-
-const App = () => <RouterProvider router={router} />;
+function App() {
+  return (
+    <>
+      <RouterProvider router={router} />
+      <NavBar />
+      <Prodcts />
+      <Footer />
+    </>
+  );
+}
 
 export default App
