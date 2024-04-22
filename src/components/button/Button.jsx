@@ -4,9 +4,9 @@ import './Button.scss'
 
 
 const Button = (props) => {
-  const {type, classNames, darkButton, lightButton, children, click} = props
+  const {type, className, darkButton, lightButton, children, click} = props
   return (
-    <button onClick={click} className={cx("button", classNames, {_dark:darkButton}, {_light:lightButton})} type={type}>{children}</button>
+    <button onClick={click} className={cx("button", className, {_dark:darkButton}, {_light:lightButton})} type={type}>{children}</button>
   )
 }
 Button.defaultProps = {
