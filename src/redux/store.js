@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
+import productsSlice from './products.slice/products.slice';
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    products: productsSlice,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
