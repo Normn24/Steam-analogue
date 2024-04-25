@@ -1,9 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Paper, Button } from '@mui/material';
 import axios from 'axios';
+import { makeStyles } from '@mui/styles';
 
-function Item() {
-    const [items, setItems] = useState([]);
+const useStyles = makeStyles({
+    itemPaper: {
+        width: 1200,
+        margin: '0 auto',
+        padding: '10px',
+        display: 'flex',
+    },
+    imgContainer: {
+        flex: 1,
+    },
+    description: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '-100px',
+    },
+});
+
+function Item({ item }) {
+    const classes = useStyles();
 
     useEffect(() => {
         fetchData();
@@ -20,25 +41,19 @@ function Item() {
 
     return (
         <div>
-            {items.map((item) => (
-                <Paper key={item._id} className="ItemPaper" style={{ width: 1200, margin: '0 auto', padding: '10px', display: 'flex' }}>
-                    <div style={{ flex: 1 }}>
-                        <div className="img-container">
-                            <img src={item.imageUrls[0]} alt={item.name} style={{ width: '100%' }} />
-                        </div>
+            <Paper className={classes.itemPaper}>
+                <div className={classes.imgContainer}>
+                    <div className="img-container">
+                        <img src={item.imageUrls[0]} alt={item.name} style={{ width: '100%' }} />
                     </div>
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginLeft: '-100px' }}>
-                        <div className="description">
-                            <h1>{item.name}</h1>
-                            <p>{item.genres.join(', ')}</p>
-                            <p>{item.currentPrice}</p>
-                            <Button className="CheckButton" variant="contained">
-                                Check it out!
-                            </Button>
-                        </div>
-                    </div>
-                </Paper>
-            ))}
+                </div>
+                <div className={classes.description}>
+                    <h1>{item.name}</h1>
+                    <p>{item.genres.join(', ')}</p>
+                    <p>{item.currentPrice}</p>
+                    <Button variant="contained">Check it out!</Button>
+                </div>
+            </Paper>
         </div>
     );
 }

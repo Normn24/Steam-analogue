@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Carousel from 'react-material-ui-carousel'
-import Item from "../Item/Item"
+import Carousel from 'react-material-ui-carousel';
+import Item from '../Item/Item';
 import axios from 'axios';
+import './Slider.css';
 
 function Slider() {
     const [sliderData, setSliderData] = useState([]);
@@ -21,7 +22,11 @@ function Slider() {
 
     return (
         <Carousel>
-            {sliderData.map(item => <Item key={item._id} item={item} />)}
+            {sliderData.map(item => (
+                <div key={item._id} className="image-container">
+                    <Item item={item} />
+                </div>
+            ))}
         </Carousel>
     );
 }
