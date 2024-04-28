@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductId } from "../../redux/productItem.slice/productItem.slice";
 import styles from './styles.module.scss'
-import Button from '../../components/button/Button';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { Box, Tabs, Tab } from '@mui/material';
+import { Container, Box, Tabs, Tab, Table, TableBody, TableRow, TableCell, Button } from '@mui/material';
 import { Rating } from '@mui/material';
 import { TabContext, TabPanel } from '@mui/lab';
 
+
 const ProductPage = ({ productId }) => {
-  //const [product, setProduct] = useState({name: 'DARK SOULS REMASTERED', year: '24-05-2018', developer: 'QLOC', publisher: 'Bandai Namco Entertainment , From Softwate inc', rating: 84, genres: 'Соулс-лайк, Темне фентезі, Рольова гра, RPG', imageUrl: 'https://cdn.cloudflare.steamstatic.com/steam/apps/570940/header.jpg?t=1700659167', price: 799, description: "Потім була пожежа. Знову відчуйте визнану критиками гру, що визначає жанр, з якої все почалося. Прекрасно оновлений, поверніться до Lordran у приголомшливій високій чіткості деталей зі швидкістю 60 кадрів в секунду. Dark Souls Remastered включає основну гру та DLC Artorias of the Abyss. Ключові особливості: • Глибокий і Темний Всесвіт • Кожен кінець — це новий початок • Багатство та можливості ігрового процесу • Почуття навчання, майстерності та досягнення • Шлях багатокористувацької гри (до 6 гравців із виділеними серверами)"});
+  const [product, setProduct] = useState({name: 'DARK SOULS REMASTERED', year: '24-05-2018', developer: 'QLOC', publisher: 'Bandai Namco Entertainment , From Softwate inc', rating: 84, genres: 'Соулс-лайк, Темне фентезі, Рольова гра, RPG', imageUrl: 'https://cdn.cloudflare.steamstatic.com/steam/apps/570940/header.jpg?t=1700659167', price: 799, description: "Потім була пожежа. Знову відчуйте визнану критиками гру, що визначає жанр, з якої все почалося. Прекрасно оновлений, поверніться до Lordran у приголомшливій високій чіткості деталей зі швидкістю 60 кадрів в секунду. Dark Souls Remastered включає основну гру та DLC Artorias of the Abyss. Ключові особливості: • Глибокий і Темний Всесвіт • Кожен кінець — це новий початок • Багатство та можливості ігрового процесу • Почуття навчання, майстерності та досягнення • Шлях багатокористувацької гри (до 6 гравців із виділеними серверами)"});
   //setProduct({name: 'DARK SOULS REMASTERED', year: '24-05-2018', developer: 'QLOC', publisher: 'Bandai Namco Entertainment , From Softwate inc', rating: 84, genres: 'Соулс-лайк, Темне фентезі, Рольова гра, RPG', imageUrl: 'https://cdn.cloudflare.steamstatic.com/steam/apps/570940/header.jpg?t=1700659167'})
   
-  const dispatch = useDispatch();
-  const { product, status } = useSelector((state) => state.product);
+  //const dispatch = useDispatch();
+  //const { product, status } = useSelector((state) => state.product);
   
-  
+  //sx={{marginTop: '10px', borderCollapse: 'collapse', border-spacing: '0'}}
   
   const [favorite, setFavorite] = useState(false);
   const [value, setValue] = useState('1');
@@ -25,53 +25,54 @@ const ProductPage = ({ productId }) => {
 
   console.log(product);
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(fetchProductId());
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   if (!product) {
     return <div className={styles.productContainer}>Loading...</div>;
   }
 
   return (
-    <div className={styles.productContainer}>
-      <div className={styles.productItem}>
-        <div className={styles.productCard}>
-          <Button darkButton className={styles.salesButton}>Sale</Button>
+    <Container sx={{width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', margin: '20px 0', gap: '20px', fontFamily: '"Gill Sans", sans-serif'}}>
+      <Box component="div" sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', gap: '50px'}}>
+        <Box component="div" sx={{marginTop: '25px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', position: 'relative', width: '60%'}}>
+          <Button variant='contained' sx={{position: 'absolute', width: '30%'}}>Sale</Button>
           <img src={product.imageUrl} alt={product.name} className={styles.productImg}/>
           <h2>{product.price} ₴</h2> 
-        </div>
-        <div className={styles.productDescription}>
+        </Box>
+        <Box component="div" sx={{textAlign: 'left'}}>
            <h3>{product.name}</h3>
-           <div className={styles.ratingCont}>
-             {!favorite && <AiOutlineHeart className={styles.favoriteItem}/>}
-             {favorite && <AiFillHeart className={styles.favoriteItem}/>}
-             <div className={styles.ratingLine}><Rating name="half-rating" defaultValue={product.rating / 100 * 5} precision={0.1} /><span>{product.rating} / 100</span></div>
-           </div>
-           <table>
-              <tbody>
-              <tr>
-                <td>Дата виходу</td>
-                <td>{product.year}</td>
-              </tr>
-              <tr>
-                <td>Розробник</td>
-                <td>{product.developer}</td>
-              </tr>
-              <tr>
-                <td>Видавець</td>
-                <td>{product.publisher}</td>
-              </tr>
-              <tr>
-                <td>Жанр</td>
-                <td>{product.genres}</td>
-              </tr>
-              </tbody>
-           </table>
-           <Button darkButton className={styles.buyButton}>Купити</Button>
-        </div>
-      </div>
-      <div className={styles.productOptions}>
+           <Box component="div" sx={{display: 'flex', justifyContent: 'flex-start', gap: '20p'}}>
+             {!favorite && <AiOutlineHeart style={{height: '25px', width: 'auto', color: '#828386'}}/>}
+             {favorite && <AiFillHeart style={{height: '25px', width: 'auto', color: '#828386'}}/>}
+             <Box component="div" sx={{display: 'flex', alignItems: 'center', gap: '12px'}}><Rating name="half-rating" defaultValue={product.rating / 100 * 5} precision={0.1} /><span>{product.rating} / 100</span></Box>
+           </Box>
+           
+           <Table >
+              <TableBody>
+              <TableRow>
+                <TableCell sx={{ minWidth: '150px' }}>Дата виходу</TableCell>
+                <TableCell>{product.year}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Розробник</TableCell>
+                <TableCell>{product.developer}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Видавець</TableCell>
+                <TableCell>{product.publisher}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Жанр</TableCell>
+                <TableCell>{product.genres}</TableCell>
+              </TableRow>
+              </TableBody>
+           </Table>
+           <Button variant='contained' sx={{marginTop: '20px', fontSize: '18px', width: '30%'}}>Купити</Button>
+        </Box>
+      </Box>
+      <Box component="div">
       <TabContext value={value}>
        <Box sx={{borderBottom: 1, borderColor: 'divider', backgroundColor: '#fff'}}>
         <Tabs
@@ -94,12 +95,12 @@ const ProductPage = ({ productId }) => {
           <Tab value="2" label="Системні вимоги" />
         </Tabs>
        </Box>
-        <TabPanel value="1" index={0} className={styles.tabText}>{product.description}</TabPanel>
+        <TabPanel value="1" index={0} sx={{textAlign: 'left', fontSize: '18px'}}>{product.description}</TabPanel>
         <TabPanel value="2" index={1}>Tab Two</TabPanel>
       </TabContext>
-      </div>
+      </Box>
       <div className="products-carousel"></div>
-    </div>
+    </Container>
   );
 };
 

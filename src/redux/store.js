@@ -4,7 +4,7 @@ import productsSlice from './products.slice/products.slice';
 
 export const store = configureStore({
   reducer: {
-    product: productItemSlice,
+    //product: productItemSlice,
     products: productsSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),

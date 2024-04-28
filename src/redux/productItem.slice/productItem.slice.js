@@ -13,7 +13,7 @@ export const fetchProductId = createAsyncThunk('products/fetchProducts', async (
 });
 
 const productItemSlice = createSlice({
-  name: 'products',
+  name: 'product',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
