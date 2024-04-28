@@ -8,23 +8,40 @@ import {
   List,
   ListItem,
   ListItemText,
+  Collapse,
+  ImageListItem,
 } from "@mui/material";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({
+  product,
+  hoveredItem,
+  handleMouseEnter,
+}) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
+
   return (
-    <Card
-      sx={{
-        width: 380,
-        boxShadow: 10,
-        borderRadius: 2,
-        margin: "20px 20px",
-      }}
-    >
-      <Link className="post__more" to={`/products/${_id}`}>
-        <CardMedia sx={{ height: 280 }} image={imageUrls[0]} title={name} />
+    <Link className="post__more" to={`/products/${_id}`}>
+      <Card
+        onMouseEnter={() => handleMouseEnter(product._id)}
+        sx={{
+          width: "70%",
+          boxShadow: 5,
+          borderRadius: 2,
+          margin: "10px 0",
+          display: "flex",
+          paddingRight: hoveredItem === product._id ? "20px" : "0",
+          backgroundColor:
+            hoveredItem === product._id ? "#bdbdbd" : "transparent",
+        }}
+      >
+        <CardMedia
+          sx={{ height: "auto", width: "300px", objectFit: "cover" }}
+          image={imageUrls[0]}
+          title={name}
+        />
         <CardContent
           sx={{
+            width: "100%",
             minHeight: 83,
             padding: "5px 16px",
             position: "relative",
@@ -41,16 +58,17 @@ export default function ProductItem({ product }) {
           <List
             sx={{
               display: "flex",
-              width: "100%",
-              maxWidth: "70%",
+              maxWidth: "50%",
               bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
-              flexWrap: "wrap",
               columnGap: "15px",
+              overflow: "hidden",
+              backgroundColor:
+                hoveredItem === product._id ? "#bdbdbd" : "transparent",
             }}
           >
-            {genres.slice(0, 3).map((value) => (
+            {genres.map((value) => (
               <ListItem
                 sx={{
                   width: "auto",
@@ -63,6 +81,8 @@ export default function ProductItem({ product }) {
                 <ListItemText
                   sx={{
                     margin: "0",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                   }}
                   primary={value}
                 />
@@ -81,8 +101,82 @@ export default function ProductItem({ product }) {
             {currentPrice}$
           </Typography>
         </CardContent>
-      </Link>
-    </Card>
+      </Card>
+      <Collapse
+        sx={{
+          position: "absolute",
+          right: "20px",
+          top: "20px",
+          width: "28%",
+          backgroundColor: "#bdbdbd",
+          marginTop: "10px",
+          borderRadius: 2,
+        }}
+        in={hoveredItem == product._id}
+        timeout="auto"
+      >
+        <Typography
+          sx={{
+            padding: "10px 15px 0",
+            textTransform: "capitalize",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+          variant="h5"
+          component="h5"
+        >
+          {name}
+        </Typography>
+        <List
+          sx={{
+            display: "flex",
+            maxWidth: "70%",
+            padding: "5px 0",
+            marginLeft: "15px",
+            bgcolor: "background.paper",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            columnGap: "15px",
+            overflow: "hidden",
+            backgroundColor: "#bdbdbd",
+          }}
+        >
+          {genres.map((value) => (
+            <ListItem
+              sx={{
+                width: "auto",
+                padding: "0",
+                textTransform: "capitalize",
+              }}
+              key={value}
+              disableGutters
+            >
+              <ListItemText
+                sx={{
+                  margin: "0",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+                primary={value}
+              />
+            </ListItem>
+          ))}
+        </List>
+        <List sx={{ padding: 0 }}>
+          {imageUrls.slice(1, 5).map((item) => (
+            <ImageListItem key={item} sx={{ padding: "0 15px 15px" }}>
+              <img
+                srcSet={item}
+                src={item}
+                alt={item}
+                loading="lazy"
+                style={{ width: "100%", height: "170px", objectFit: "cover" }}
+              />
+            </ImageListItem>
+          ))}
+        </List>
+      </Collapse>
+    </Link>
   );
 }
 
@@ -94,4 +188,6 @@ ProductItem.propTypes = {
     genres: PropTypes.array.isRequired,
     currentPrice: PropTypes.number.isRequired,
   }).isRequired,
+  hoveredItem: PropTypes.string,
+  handleMouseEnter: PropTypes.func.isRequired,
 };

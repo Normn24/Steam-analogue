@@ -1,66 +1,58 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/products.slice/products.slice";
+import { Box, Button, Typography } from "@mui/material";
 import ProductItem from "../ProductItem/ProductItem";
-import { Typography } from "@mui/material";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./Products.css";
 
-export default function Prodcts() {
+export default function Products() {
   const dispatch = useDispatch();
   const { products, status } = useSelector((state) => state.products);
 
+  const [hoveredItem, setHoveredItem] = useState(null);
+
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts("http://localhost:4000/api/products/"));
   }, [dispatch]);
 
-  function SamplePrevArrow(props) {
-    const { className, onClick } = props;
-    return (
-      <div onClick={onClick} className={`arrow ${className}`}>
-        <button className="arrows arrow__prev" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (products?.data?.length > 0) {
+      setHoveredItem(products.data[0]._id);
+    }
+  }, [products]);
 
-  function SampleNextArrow(props) {
-    const { className, onClick } = props;
-    return (
-      <div onClick={onClick} className={`arrow ${className}`}>
-        <button onClick={onClick} className="arrows arrow__next" />
-      </div>
-    );
-  }
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    centerMode: true,
+  const handleMouseEnter = (productId) => {
+    setHoveredItem(productId);
   };
 
   if (status === "failed") {
     return <h1>No products 😢</h1>;
   }
+
   return (
     <>
-      <Typography
-        sx={{ textTransform: "capitalize" }}
-        variant="h5"
-        component="h5"
-      >
-        SELECTED AND RECOMMENDED
-      </Typography>
-      <Slider {...settings}>
-        {products.data?.map((product, index) => {
-          return <ProductItem key={index} product={product} />;
-        })}
-      </Slider>
+      <Box sx={{ padding: "20px", position: "relative" }}>
+        {products?.data?.slice(0, 8).map((product) => (
+          <ProductItem
+            key={product._id}
+            product={product}
+            hoveredItem={hoveredItem}
+            handleMouseEnter={handleMouseEnter}
+          />
+        ))}
+        <Typography variant="p" component="p" sx={{ wordSpacing: "10px" }}>
+          More:
+          <Button
+            variant="outlined"
+            href="#outlined-buttons"
+            sx={{
+              padding: "3px",
+              marginLeft: "5px",
+            }}
+          >
+            Link
+          </Button>
+        </Typography>
+      </Box>
     </>
   );
 }

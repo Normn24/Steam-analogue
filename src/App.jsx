@@ -1,14 +1,17 @@
-import Prodcts from "./components/Products/Products";
-import Footer from "./components/Footer/Footer";
-import NavBar from "./components/NavBar/NavBar";
+import { Routes, Route } from "react-router-dom";
+// import Footer from "./components/Footer/Footer";
+// import NavBar from "./components/NavBar/NavBar";
+import MainPage from "./pages/MainPage";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <NavBar />
-      <Prodcts />
-      <Footer />
+      {/* <NavBar /> */}
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+      {/* <Footer /> */}
     </>
   );
 }
