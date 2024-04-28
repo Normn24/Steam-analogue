@@ -1,4 +1,4 @@
-import { NavBarWrapper, NavBarItem, StyledNavBarLink } from "./NacBarStyled"
+import { NavBarItem, NavBarWrapper, StyledNavBarLink} from "./NavBarStyled"
 export default function NavBar() {
     return (
         <NavBarWrapper>
