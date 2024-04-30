@@ -1,36 +1,36 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  products: [],
+  slides: [],
   error: null,
   status: null
 }
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async (url) => {
+export const fetchSlides = createAsyncThunk('slides/fetchSlides', async (url) => {
   const data = await fetch(url)
     .then((res) => res.json())
   return data;
 });
 
-const productsSlice = createSlice({
-  name: 'products',
+const slidesSlice = createSlice({
+  name: 'slides',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchSlides.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchProducts.rejected, (state, action) => {
+      .addCase(fetchSlides.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
+      .addCase(fetchSlides.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.products = action.payload;
+        state.slides = action.payload;
       });
   },
 });
 
 
-export default productsSlice.reducer;
+export default slidesSlice.reducer;

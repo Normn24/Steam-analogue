@@ -24,14 +24,14 @@
 }
 
 .arrow__prev {
-  background-image: url("../../img/chevron-left-solid.svg");
+  background-image: url("../../../img/chevron-left-solid.svg");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 
 .arrow__next {
-  background-image: url("../../img/chevron-right-solid.svg");
+  background-image: url("../../../img/chevron-right-solid.svg");
   background-repeat: no-repeat;
   background-size: contain;
 }
