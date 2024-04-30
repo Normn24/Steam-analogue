@@ -12,7 +12,7 @@ export default function NavBar() {
                 <StyledNavBarLink>Топ рейтингу</StyledNavBarLink>
             </NavBarItem>
             <NavBarItem>
-                <StyledNavBarLink>Топ рейтингу</StyledNavBarLink>
+                <StyledNavBarLink to='/cart'>Basket</StyledNavBarLink>
             </NavBarItem>
         </NavBarWrapper>
     )

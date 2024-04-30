@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/carts.slice/carts.slice";
+
 import {
   Card,
   CardMedia,
@@ -10,6 +13,7 @@ import {
   ListItemText,
   Collapse,
   ImageListItem,
+  Button,
 } from "@mui/material";
 
 export default function ProductItem({
@@ -18,9 +22,12 @@ export default function ProductItem({
   handleMouseEnter,
 }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
+  const dispatch = useDispatch()
+
 
   return (
-    <Link className="post__more" to={`/products/${_id}`}>
+    <>
+    {/* // <Link className="post__more" to={`/products/${_id}`}> */}
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
         sx={{
@@ -100,6 +107,11 @@ export default function ProductItem({
           >
             {currentPrice}$
           </Typography>
+          <Button onClick={(e) =>{
+            // e.stopPropagation()
+            dispatch(addToCart(_id))
+          } } variant="contained">Add to Basket</Button>
+         
         </CardContent>
       </Card>
       <Collapse
@@ -176,7 +188,8 @@ export default function ProductItem({
           ))}
         </List>
       </Collapse>
-    </Link>
+    {/* // </Link> */}
+    </>
   );
 }
 

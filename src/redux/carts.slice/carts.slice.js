@@ -8,8 +8,16 @@ const initialState = {
 const cartsSlice = createSlice({
   name: 'carts',
   initialState,
-  reducers: {},
+  reducers: {addToCart: (state, action) => {
+    state.carts.push(action.payload)
+  },
+removeToCart: (state, action) => {
+  state.carts = state.carts.filter((cartId) => cartId !== action.payload)
+},
+},
 });
 
 
+
+export const {addToCart} = cartsSlice.actions
 export default cartsSlice.reducer;
