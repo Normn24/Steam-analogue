@@ -1,57 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Paper, Button } from '@mui/material';
-import axios from 'axios';
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles({
-    itemPaper: {
-        width: 1200,
-        margin: '0 auto',
-        padding: '10px',
-        display: 'flex',
-    },
-    imgContainer: {
-        flex: 1,
-    },
-    description: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '-100px',
-    },
-});
+import { useStyles } from '../../styles';
 
 function Item({ item }) {
     const classes = useStyles();
+    const [thumbnailIndex, setThumbnailIndex] = useState(0);
+    const [mainImage, setMainImage] = useState(item.imageUrls[4]);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/api/products');
-            setItems(response.data.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+    const handleThumbnailClick = (index) => {
+        setThumbnailIndex(index);
+        setMainImage(item.imageUrls[index]);
     };
 
     return (
         <div>
             <Paper className={classes.itemPaper}>
                 <div className={classes.imgContainer}>
-                    <div className="img-container">
-                        <img src={item.imageUrls[0]} alt={item.name} style={{ width: '100%' }} />
-                    </div>
+                    {item.imageUrls.slice(0, 4).map((imageUrl, index) => (
+                        <img
+                            key={index}
+                            src={imageUrl}
+                            alt={item.name}
+                            className={classes.imgItem}
+                            onMouseEnter={() => handleThumbnailClick(index)}
+                        />
+                    ))}
                 </div>
                 <div className={classes.description}>
-                    <h1>{item.name}</h1>
-                    <p>{item.genres.join(', ')}</p>
-                    <p>{item.currentPrice}</p>
-                    <Button variant="contained">Check it out!</Button>
+                    <h1>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</h1>
+                    <img
+                        src={mainImage}
+                        alt={item.name}
+                        className={classes.fullSizeImage}
+                    />
+                    <div className={classes.genreContainer}>
+                        {item.genres.map((genre, index) => (
+                            <div key={index} className={classes.genreItem}>
+                                {genre}
+                            </div>
+                        ))}
+                    </div>
+                    <Button variant="contained">Посмотреть</Button>
                 </div>
             </Paper>
         </div>
