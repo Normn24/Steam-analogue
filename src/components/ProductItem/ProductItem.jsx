@@ -29,7 +29,7 @@ export default function ProductItem({
           borderRadius: 2,
           margin: "10px 0",
           display: "flex",
-          paddingRight: hoveredItem === product._id ? "20px" : "0",
+          paddingRight: hoveredItem === product._id ? "24px" : "0",
           backgroundColor:
             hoveredItem === product._id ? "#bdbdbd" : "transparent",
         }}
