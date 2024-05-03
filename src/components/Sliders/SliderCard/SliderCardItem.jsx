@@ -21,7 +21,7 @@ export default function SliderCardItem({ product }) {
         margin: "20px 20px",
       }}
     >
-      <Link className="post__more" to={`/products/${_id}`}>
+      <Link className="post__more" to={`/product/${_id}`}>
         <CardMedia sx={{ height: 280 }} image={imageUrls[0]} title={name} />
         <CardContent
           sx={{

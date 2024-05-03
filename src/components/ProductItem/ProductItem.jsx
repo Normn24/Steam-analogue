@@ -20,7 +20,7 @@ export default function ProductItem({
   const { _id, name, imageUrls, genres, currentPrice } = product;
 
   return (
-    <Link className="post__more" to={`/products/${_id}`}>
+    <Link className="post__more" to={`/product/${_id}`}>
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
         sx={{
