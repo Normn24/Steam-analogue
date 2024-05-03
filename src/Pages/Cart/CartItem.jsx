@@ -5,26 +5,49 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { ListItemText, List, ListItem, } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import { removeToCart } from '../../redux/carts.slice/carts.slice';
+import { useDispatch } from 'react-redux';
 
-export default function CartItem() {
+
+export default function CartItem({product}) {
+const dispatch = useDispatch()
+const {name, imageUrls, developer, publisher, _id} = product
+
+
+
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ 
+      maxWidth: 345,
+      background: 'grey',
+     }}>
       <CardMedia
         sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
+        image={imageUrls[0]}
+        title={name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+        <Typography gutterBottom variant="h5" component="div">
+          Options:
+        </Typography>
+        <List>
+          <ListItem>
+            <ListItemText secondary={developer} primary={<h3>developer</h3>}/> 
+          </ListItem>
+          <ListItem>
+            <ListItemText secondary={publisher} primary={<h3>publisher</h3>}/> 
+          </ListItem>
+        </List>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Delete</Button>
+        <Button onClick={() => dispatch(removeToCart(_id))} size="small">Delete</Button>
         <Button size="small">Buy</Button>
       </CardActions>
     </Card>

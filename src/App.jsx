@@ -4,8 +4,19 @@ import NavBar from "./components/NavBar/NavBar";
 import MainPage from "./Pages/MainPage";
 import Cart from "./Pages/Cart/Cart";
 import "./App.css";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 
 function App() {
+  const {carts} = useSelector((state) => state.carts)
+
+useEffect(() => {
+  localStorage.setItem('carts', JSON.stringify(carts))
+}, [carts] )
+
+
+
   return (
     <>
       <NavBar />
