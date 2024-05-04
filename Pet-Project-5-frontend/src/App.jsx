@@ -1,9 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
-import FilterSearch from './filter/FilterSearch';
-import FilterGenres from './filter/FilterGenres';
-import FilterHeader from './filter/FilterHeader';
+import store from './store/store';
+import FilterSearch from './components/filter/FilterSearch';
+import FilterGenres from './components/filter/FilterGenres';
+import FilterHeader from './components/filter/FilterHeader';
 import "./App.css";
 
 function App() {

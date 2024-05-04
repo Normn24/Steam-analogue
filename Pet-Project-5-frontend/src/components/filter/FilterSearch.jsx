@@ -1,20 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, FormControl, ButtonGroup } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { fetchProducts, applyFilters } from '../redux/filterSlice'; 
+import { useDispatch,  useSelector } from 'react-redux';
+import { fetchProducts} from '../../store/filterSlice'; 
 import './filter.css';
 
 const FilterSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchType, setSearchType] = useState('Year');
+    const [searchType, setSearchType] = useState('Name');
     const dispatch = useDispatch();
 
-    const handleSearch = () => {
-        dispatch(fetchProducts()).then(() => {
-            dispatch(applyFilters({ searchTerm, searchType }));
-            // console.log(`Search by ${searchType} :`, searchTerm);
+    useEffect(() => {
+        dispatch(fetchProducts());
+      }, []);
+    const products = useSelector((state) => state.filter.products);
+
+    const applyFilters = () => {
+        return products.filter(product => {
+            switch (searchType) {
+                case 'Name':
+                    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+                case 'Categories':
+                    return product.categories.toLowerCase().includes(searchTerm.toLowerCase());
+                case 'Publisher':
+                    return product.publisher.toLowerCase().includes(searchTerm.toLowerCase());
+                case 'Developer':
+                    return product.developer.toLowerCase().includes(searchTerm.toLowerCase());
+                case 'Year':
+                    return product.yearOfPublication.includes(searchTerm);
+                case 'Genres':
+                    return product.genres.some(genre =>
+                        genre.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                default:
+                    return true;
+            }
         });
+    };
+
+    const handleSearch = () => {
+        const filteredProducts = applyFilters();
+        console.log('Filtered products:', filteredProducts);
     };
 
     return (

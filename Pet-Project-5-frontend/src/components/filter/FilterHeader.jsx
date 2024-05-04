@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Paper } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { fetchProducts, filterByGenre } from '../redux/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../store/filterSlice';
 
 const FilterHeader = () => {
-    const dispatch = useDispatch();
 
-    const handleFilter = (genre) => {
-        dispatch(fetchProducts()).then(() => {
-          dispatch(filterByGenre(genre));
-        });
-    }
+    // const dispatch = useDispatch();
+    const [filteredProducts, setFilteredProducts] = useState([]);
+  
+    // useEffect(() => {
+    //   dispatch(fetchProducts());
+    // }, []);
+  
+    const products = useSelector((state) => state.filter.products);
+    const genres = useSelector((state) => state.filter.genres);
     
-    const genres = [
-        'RPG',
-        'souls like',
-        'dark fantasy',
-        'cyberpunk',
-        'Shooter',
-        'open world',
-        'single-player',
-        'action'
-    ];
-
+    const handleFilter = (genre) => {
+      const filtered = products.filter((product) =>
+        product.genres.some((g) => g.toLowerCase().includes(genre.toLowerCase()))
+      );
+      setFilteredProducts(filtered);
+    };
+  
+    console.log('filteredProducts by genre', filteredProducts);
+  
     return (
         <div style={{
             width: '1170px',
