@@ -1,6 +1,6 @@
 const Product = require("../models/Product");
 const isValidMongoId = require("../validation/isValidMongoId");
-
+const mongoose = require('mongoose');
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
 
@@ -117,6 +117,7 @@ exports.getProducts = async (req, res, next) => {
 
   try {
     const products = await Product.find(mongooseQuery)
+      .populate('genres', 'name')
       .skip(startPage * perPage - perPage)
       .limit(perPage)
       .sort(sort)
@@ -139,6 +140,7 @@ exports.getProductById = (req, res, next) => {
     });
   }
   Product.findById(id)
+    .populate('genres', 'name')
     .then(product => {
       if (!product) {
         res.status(400).json({
@@ -153,4 +155,67 @@ exports.getProductById = (req, res, next) => {
         message: `Error happened on server: "${err}" `
       })
     );
+};
+
+exports.getProductsByCategory = async (req, res, next) => {
+  const { name } = req.params;
+  const mongooseQuery = filterParser(req.query);
+  const perPage = Number(req.query.perPage);
+  const startPage = Number(req.query.startPage);
+  const sort = req.query.sort;
+  const q = typeof req.query.q === 'string' ? req.query.q.trim() : null
+  if (q) {
+    mongooseQuery.name = {
+      $regex: new RegExp(q, "i"),
+    };
+  }
+
+  try {
+    const categoryId = await Catalog.where("name").equals(name)
+    const products = await Product.find(mongooseQuery)
+      .populate('genres', 'name')
+      .where("category").equals(categoryId)
+      .skip(startPage * perPage - perPage)
+      .limit(perPage)
+      .sort(sort)
+
+    const total = products.length
+
+    res.json({ data: products, total });
+  } catch (err) {
+    res.status(400).json({
+      message: `Error happened on server: "${err}" `
+    });
+  }
+};
+
+exports.getProductsByGenre = async (req, res, next) => {
+  const { genre } = req.params;
+  const mongooseQuery = filterParser(req.query);
+  const perPage = Number(req.query.perPage);
+  const startPage = Number(req.query.startPage);
+  const sort = req.query.sort;
+  const q = typeof req.query.q === 'string' ? req.query.q.trim() : null
+  if (q) {
+    mongooseQuery.name = {
+      $regex: new RegExp(q, "i"),
+    };
+  }
+
+
+  try {
+    const products = await Product.find(mongooseQuery)
+      .where("genres").equals(genre)
+      .skip(startPage * perPage - perPage)
+      .limit(perPage)
+      .sort(sort)
+      .populate('genres', 'name')
+
+    const total = products.length
+    res.json({ data: products, total });
+  } catch (err) {
+    res.status(400).json({
+      message: `Error happened on server: "${err}" `
+    });
+  }
 };

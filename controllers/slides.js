@@ -93,7 +93,10 @@ exports.deleteSlide = (req, res, next) => {
 
 exports.getSlides = (req, res, next) => {
   Slider.find()
-    .populate("product")
+    .populate({
+      path: 'product',
+      populate: { path: 'genres', select: 'name' }
+    })
     .populate("category")
     .populate("customer")
     .then(slides => res.status(200).json(slides))

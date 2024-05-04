@@ -23,7 +23,7 @@ exports.addCategory = (req, res, next) => {
   });
 };
 
-exports.aupdateCategory = (req, res, next) => {
+exports.updateCategory = (req, res, next) => {
   Catalog.findOne({ id: req.params.id })
     .then(category => {
       if (!category) {

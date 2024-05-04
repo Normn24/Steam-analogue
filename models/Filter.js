@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 const FilterSchema = new Schema(
   {
-    type: {
-      type: String,
-      required: true
-    },
     name: {
       type: String,
       required: true

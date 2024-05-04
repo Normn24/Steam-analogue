@@ -23,9 +23,9 @@ const ProductSchema = new Schema(
     previousPrice: {
       type: Number
     },
-    categories: {
-      type: String,
-      required: true
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "catalogs"
     },
     imageUrls: [
       {
@@ -35,10 +35,12 @@ const ProductSchema = new Schema(
     ],
     genres: [
       {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "filters",
         required: true
       }
-    ],
+    ]
+    ,
     quantity: {
       type: Number,
       default: 0
