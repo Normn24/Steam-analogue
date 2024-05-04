@@ -28,8 +28,12 @@ export default function ProductItem({
   const [toggleModal, setToggleModal] = useState(false);
 
   return (
+<<<<<<< HEAD
     <>
       {/* // <Link className="post__more" to={`/products/${_id}`}> */}
+=======
+    <Link className="post__more" to={`/product/${_id}`}>
+>>>>>>> frontend
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
         sx={{
