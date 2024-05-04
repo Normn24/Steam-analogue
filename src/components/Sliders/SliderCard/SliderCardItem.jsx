@@ -57,14 +57,14 @@ export default function SliderCardItem({ product }) {
                   padding: "0",
                   textTransform: "capitalize",
                 }}
-                key={value}
+                key={value._id}
                 disableGutters
               >
                 <ListItemText
                   sx={{
                     margin: "0",
                   }}
-                  primary={value}
+                  primary={value.name}
                 />
               </ListItem>
             ))}

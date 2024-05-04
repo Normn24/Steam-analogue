@@ -75,7 +75,7 @@ export default function ProductItem({
                   padding: "0",
                   textTransform: "capitalize",
                 }}
-                key={value}
+                key={value._id}
                 disableGutters
               >
                 <ListItemText
@@ -84,7 +84,7 @@ export default function ProductItem({
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
                   }}
-                  primary={value}
+                  primary={value.name}
                 />
               </ListItem>
             ))}
@@ -148,7 +148,7 @@ export default function ProductItem({
                 padding: "0",
                 textTransform: "capitalize",
               }}
-              key={value}
+              key={value._id}
               disableGutters
             >
               <ListItemText
@@ -157,7 +157,7 @@ export default function ProductItem({
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
                 }}
-                primary={value}
+                primary={value.name}
               />
             </ListItem>
           ))}
