@@ -7,18 +7,30 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { ListItemText, List, ListItem, } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import { removeToCart } from '../../redux/carts.slice/carts.slice';
+import { addToCart, removeToCart } from '../../redux/carts.slice/carts.slice';
 import { useDispatch } from 'react-redux';
+import Counter from '../../components/Counter/Counter';
+import { decrementQuantity } from '../../redux/carts.slice/carts.slice';
+import Payment from './Paymant';
+import { useState } from 'react';
+import Modal from '../../components/Modal/Modal';
 
 
 export default function CartItem({product}) {
 const dispatch = useDispatch()
-const {name, imageUrls, developer, publisher, _id} = product
+const {name, imageUrls, developer, publisher, _id, quantity} = product
+const [toggleModal, setToggleModal] = useState(false);
 
-
+const incrementCounter = () => {
+  dispatch(addToCart(product))
+}
+const decrementCounter = () => {
+  dispatch(decrementQuantity(_id))
+}
 
 
   return (
+    <>
     <Card sx={{ 
       maxWidth: 345,
       background: 'grey',
@@ -45,11 +57,19 @@ const {name, imageUrls, developer, publisher, _id} = product
           </ListItem>
         </List>
         </Typography>
+        <Counter number={quantity} incrementCounter={incrementCounter} decrementCounter={decrementCounter}/>
       </CardContent>
       <CardActions>
         <Button onClick={() => dispatch(removeToCart(_id))} size="small">Delete</Button>
-        <Button size="small">Buy</Button>
+        <Button onClick={() => {setToggleModal(true)}} size="small">Buy</Button>
       </CardActions>
     </Card>
+    
+    {toggleModal && (
+      <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
+          <Payment/>
+      </Modal>
+    )}
+    </>
   );
 }

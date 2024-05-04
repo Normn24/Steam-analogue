@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/carts.slice/carts.slice";
-import { useState } from "react";
-import Modal from "../Modal/Modal";
+
+
 
 import {
   Card,
@@ -15,7 +14,6 @@ import {
   ListItemText,
   Collapse,
   ImageListItem,
-  Button,
 } from "@mui/material";
 
 export default function ProductItem({
@@ -25,15 +23,10 @@ export default function ProductItem({
 }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
   const dispatch = useDispatch();
-  const [toggleModal, setToggleModal] = useState(false);
+ 
 
   return (
-<<<<<<< HEAD
-    <>
-      {/* // <Link className="post__more" to={`/products/${_id}`}> */}
-=======
     <Link className="post__more" to={`/product/${_id}`}>
->>>>>>> frontend
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
         sx={{
@@ -113,16 +106,6 @@ export default function ProductItem({
           >
             {currentPrice}$
           </Typography>
-          <Button
-            onClick={(e) => {
-              // e.stopPropagation()
-              // dispatch(addToCart(_id))
-              setToggleModal(true);
-            }}
-            variant="contained"
-          >
-            Add to Basket
-          </Button>
         </CardContent>
       </Card>
       <Collapse
@@ -200,33 +183,8 @@ export default function ProductItem({
         </List>
       </Collapse>
       {/* // </Link> */}
-      {toggleModal && (
-        <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
-          <header className="modal__header">
-            <h2>Замовлення</h2>
-          </header>
-          <div className="modal__content">
-            <p>Ваш товар</p>
-          </div>
-          <footer className="modal__footer">
-            <button
-              onClick={() => {
-                dispatch(addToCart(_id)) 
-                setToggleModal(false)} }
-              className="modal__btn-success"
-            >
-              Додати
-            </button>
-            <button
-              onClick={() => setToggleModal(false)}
-              className="modal__btn-cancel"
-            >
-              Відмінити
-            </button>
-          </footer>
-        </Modal>
-      )}
-    </>
+      
+    </Link>
   );
 }
 

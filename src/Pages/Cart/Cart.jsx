@@ -13,17 +13,17 @@ function Cart() {
     dispatch(fetchProducts("http://localhost:4000/api/products/"));
   }, [dispatch]);
 
-  const cart =
-    products?.data?.filter((item) => {
-      return carts.includes(item._id);
-    }) || [];
+  // const cart =
+  //   products?.data?.filter((item) => {
+  //     return carts.includes(item._id);
+  //   }) || [];
 
-  const totalQuantity = cart.reduce(
+  const totalQuantity = carts.reduce(
     (total, product) => total + product.quantity,
     0
   );
 
-  const totalPrice = cart.reduce((total, product) => total + product.currentPrice, 0);
+  const totalPrice = carts.reduce((total, product) => total + (product.currentPrice * product.quantity), 0);
 
   return (
     <section>
@@ -37,7 +37,7 @@ function Cart() {
         </strong>
       </div>
       <div>
-        {cart.map((product) => (
+        {carts.map((product) => (
           <CartItem key={product._id} product={product} />
         ))}
       </div>
