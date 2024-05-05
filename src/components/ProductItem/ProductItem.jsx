@@ -86,7 +86,12 @@ export default function ProductItem({
                     margin: "0",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    backgroundColor: hoveredItem === product._id ? "#fff" : "",
+                    backgroundColor:
+                      hoveredItem === product._id ? "transparent" : "",
+                    border:
+                      hoveredItem === product._id
+                        ? "1px solid #000"
+                        : "1px solid transparent ",
                   }}
                   primary={value.name}
                 />
@@ -161,7 +166,8 @@ export default function ProductItem({
                   margin: "0",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
-                  backgroundColor: hoveredItem === product._id ? "#fff" : "",
+                  backgroundColor: "transparent",
+                  border: "1px solid #000",
                 }}
                 primary={value.name}
               />

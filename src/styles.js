@@ -37,7 +37,7 @@ export const useStyles = makeStyles({
     },
     fullSizeImage: {
         width: '100%',
-        height: '479px',
+        height: '470px',
         objectFit: 'cover',
         borderRadius: "6px",
     },

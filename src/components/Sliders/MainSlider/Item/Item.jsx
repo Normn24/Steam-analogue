@@ -48,7 +48,11 @@ function Item({ item }) {
             />
             <div className={classes.genreContainer}>
               {item?.genres.map((genre, index) => (
-                <div key={index} className={classes.genreItem}>
+                <div
+                  key={index}
+                  style={{ padding: "7px 9px" }}
+                  className={classes.genreItem}
+                >
                   {genre.name}
                 </div>
               ))}
