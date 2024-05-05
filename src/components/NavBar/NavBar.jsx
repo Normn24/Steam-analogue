@@ -3,6 +3,9 @@ import { fetchLinks } from "../../redux/links.slice/links.slice";
 import { fetchCatalogs } from "../../redux/catalogs.slice/catalogs.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function NavBar() {
     const dispatch = useDispatch();
@@ -12,6 +15,16 @@ export default function NavBar() {
     
     const [filterLinks, setFilterLinks] = useState([]);
     const [linkToNav, setLinkToNav] = useState('');
+    const [searchQuery, setSearchQuery] = useState(''); 
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        onSearch(searchQuery);
+    };
 
     useEffect(() => {
         dispatch(fetchLinks());
@@ -42,6 +55,21 @@ export default function NavBar() {
                     </NavBarItem>
                 ))
             )}
+            <form onSubmit={handleSearchSubmit} style={{ margin: "0 auto" }}>
+                <TextField
+                    placeholder="Search..."
+                    variant="outlined"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    InputProps={{
+                        endAdornment: (
+                            <IconButton type="submit" aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                        ),
+                    }}
+                />
+            </form>
         </NavBarWrapper>
     );
 }
