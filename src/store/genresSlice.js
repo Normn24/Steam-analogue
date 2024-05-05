@@ -1,27 +1,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchCatalog = createAsyncThunk(
-  'catalog/fetchCatalog',
-  async (categoryName) => {
+export const fetchGenres = createAsyncThunk(
+  'catalog/fetchGenres',
+  async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/products/category=${categoryName}`);
+      const response = await fetch(`http://localhost:4000/api/filters`);
       if (!response.ok) {
-        throw new Error('Failed to fetch catalog');
+        throw new Error('Failed to fetch genres');
       }
       const { data } = await response.json();
-      console.log('fetched catalog', data);
+      console.log('fetched genres', data);
       return data;
     } catch (error) {
-      console.error('Error fetching catalog:', error);
+      console.error('Error fetching genres:', error);
       throw error;
     }
   }
 );
 
-const catalogSlice = createSlice({
-  name: 'catalog',
+const genresSlice = createSlice({
+  name: 'genres',
   initialState: {
-    categories: [],
+    genres: [],
     // categoryNames: [],
     loading: false,
     error: null
@@ -29,23 +29,23 @@ const catalogSlice = createSlice({
   reducers: { },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCatalog.pending, (state) => {
+      .addCase(fetchGenres.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCatalog.fulfilled, (state, action) => {
+      .addCase(fetchGenres.fulfilled, (state, action) => {
         state.loading = false;
-        state.categories = action.payload;
+        state.genres = action.payload;
         
-        console.log('fetch catalegories:', state.categories);
+        console.log('fetch genres:', state.genres);
       })
-      .addCase(fetchCatalog.rejected, (state, action) => {
+      .addCase(fetchGenres.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   }
 });
 
-export const { } = catalogSlice.actions;
+export const { } = genresSlice.actions;
 
-export default catalogSlice.reducer;
+export default genresSlice.reducer;
