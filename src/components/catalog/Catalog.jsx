@@ -8,7 +8,7 @@ function Catalog() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCatalog("Popular"));
+    dispatch(fetchCatalog());
   }, []);
 
   const categories = useSelector((state) => state.catalog.categories);
