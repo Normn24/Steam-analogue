@@ -6,8 +6,7 @@ export const NavBarWrapper = styled("div")({
     width: "100%",
     height: "60px",
     backgroundColor: "#F0F0F4",
-    marginLeft: "0 auto",
-    paddingLeft: "30px"
+    paddingLeft: "15px"
 });
 
 export const NavBarItem = styled("div")({
