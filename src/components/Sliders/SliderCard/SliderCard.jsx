@@ -1,5 +1,5 @@
 import { fetchSlides } from "../../../redux/slides.slice/slides.slice";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import SliderCardItem from "./SliderCardItem";
@@ -47,18 +47,20 @@ export default function SliderCard() {
 
   return (
     <>
-      <Typography
-        sx={{ textTransform: "capitalize", paddingLeft: "20px" }}
-        variant="h5"
-        component="h5"
-      >
-        SELECTED AND RECOMMENDED
-      </Typography>
-      <Slider {...settings}>
-        {slides?.map((product, index) => {
-          return <SliderCardItem key={index} product={product.product} />;
-        })}
-      </Slider>
+      <Box sx={{ marginTop: "60px" }}>
+        <Typography
+          sx={{ textTransform: "capitalize", paddingLeft: "20px" }}
+          variant="h5"
+          component="h5"
+        >
+          SELECTED AND RECOMMENDED
+        </Typography>
+        <Slider {...settings}>
+          {slides?.map((product, index) => {
+            return <SliderCardItem key={index} product={product.product} />;
+          })}
+        </Slider>
+      </Box>
     </>
   );
 }
