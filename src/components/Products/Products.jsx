@@ -41,7 +41,6 @@ export default function Products() {
   if (loading) {
     return "";
   }
-  console.log(catalogItem);
   return (
     <>
       <Box sx={{ padding: "20px", position: "relative", height: "855px" }}>

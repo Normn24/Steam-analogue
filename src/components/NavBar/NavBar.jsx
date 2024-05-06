@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import { Box } from "@mui/material";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -46,15 +47,18 @@ export default function NavBar() {
     <NavBarWrapper>
       {status === "loading" && <p>Loading...</p>}
       {status === "failed" && <p>Error: {error}</p>}
-      {status === "succeeded" &&
-        catalogs.slice(0, 4).map((catalog) => (
-          <NavBarItem key={catalog.id}>
-            <StyledNavBarLink to={`/products/category=${catalog.name}`}>
-              {catalog.name}
-            </StyledNavBarLink>
-          </NavBarItem>
-        ))}
-      <form onSubmit={handleSearchSubmit} style={{ margin: "0 auto" }}>
+      {status === "succeeded" && (
+        <Box sx={{ display: "flex" }}>
+          {catalogs.slice(0, 4).map((catalog) => (
+            <NavBarItem key={catalog.id}>
+              <StyledNavBarLink to={`/products/category=${catalog.name}`}>
+                {catalog.name}
+              </StyledNavBarLink>
+            </NavBarItem>
+          ))}
+        </Box>
+      )}
+      <form onSubmit={handleSearchSubmit}>
         <TextField
           placeholder="Search..."
           variant="outlined"

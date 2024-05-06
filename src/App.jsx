@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import HeaderPage from "./pages/HeaderPage";
 import ProductPage from "./pages/productPage/productPage";
 import Footer from "./components/Footer/Footer";
-import NavBar from "./components/NavBar/NavBar";
-import "./App.css";
 import Products from "./components/Products/Products";
+import "./App.css";
 
 function App() {
   return (
     <>
-      <NavBar />
+      <HeaderPage />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/product/:id" element={<ProductPage />} />

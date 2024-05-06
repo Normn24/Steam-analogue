@@ -118,7 +118,6 @@ export default function ProductItem({
           top: "20px",
           width: "28%",
           backgroundColor: "#bdbdbd",
-          marginTop: "10px",
           borderRadius: 2,
         }}
         in={hoveredItem == product._id}
