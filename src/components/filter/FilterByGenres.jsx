@@ -33,6 +33,9 @@ function FilterByGenres() {
 
   return (
     <div style={{ width: '1200px', margin: '0 auto' }}>
+      <Typography variant="h6" gutterBottom style={{ marginBottom: '20px', textAlign: 'left' }}>
+        BROWSE BY GENRE
+      </Typography>
       <Grid container spacing={2}>
         {genres.map((genre) => (
           <Grid item xs={12} sm={6} md={4} key={genre._id}>
