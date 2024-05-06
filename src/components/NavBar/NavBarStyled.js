@@ -5,12 +5,12 @@ export const NavBarWrapper = styled("div")({
     display: "flex",
     width: "100%",
     height: "60px",
-    backgroundColor: "#F0F0F4",
+    backgroundColor: "#bdbdbd",
     paddingLeft: "15px"
 });
 
 export const NavBarItem = styled("div")({
-    width: "200px",
+    width: "150px",
     height: "100%",
     display: "flex",
     justifyContent: "center",

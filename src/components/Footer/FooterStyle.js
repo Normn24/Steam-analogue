@@ -5,7 +5,7 @@ import { Typography } from '@mui/material';
 export const StyledFooter = styled('footer')({
     width: '100%',
     height: '170px',
-    backgroundColor: '#F0F0F4',
+    backgroundColor: '#bdbdbd',
     display: 'flex',
     gap: '40px',
     padding: "15px",

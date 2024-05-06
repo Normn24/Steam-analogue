@@ -7,25 +7,25 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function NavBar() {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const { catalogs, status, error } = useSelector((state) => state.catalogs);
+    const { catalogs, status, error } = useSelector((state) => state.catalogs);
 
-  //   const [filterLinks, setFilterLinks] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+    //   const [filterLinks, setFilterLinks] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    // onSearch(searchQuery);
-  };
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+      // onSearch(searchQuery);
+    };
 
-  useEffect(() => {
-    dispatch(fetchCatalogs());
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(fetchCatalogs());
+    }, [dispatch]);
 
   //   useEffect(() => {
   //     if (Array.isArray(links)) {
@@ -42,7 +42,7 @@ export default function NavBar() {
   //     }
   //   }, [filterLinks]);
 
-  return (
+return (
     <NavBarWrapper>
       {status === "loading" && <p>Loading...</p>}
       {status === "failed" && <p>Error: {error}</p>}
