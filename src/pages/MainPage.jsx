@@ -1,11 +1,11 @@
 import Prodcts from "../components/Products/Products";
 import SliderCard from "../components/Sliders/SliderCard/SliderCard";
-import Slider from "../components/Sliders/MainSlider/Slider/Slider";
+import MainSlider from "../components/Sliders/MainSlider/MainSlider/MainSlider";
 
 export default function MainPage() {
   return (
     <>
-      <Slider />
+      <MainSlider />
       <SliderCard />
       <Prodcts />
     </>

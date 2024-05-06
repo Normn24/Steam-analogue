@@ -3,7 +3,7 @@ import { Paper } from "@mui/material";
 import { useStyles } from "../../../../styles";
 import { Link } from "react-router-dom";
 
-function Item({ item }) {
+function MainSliderItem({ item }) {
   const classes = useStyles();
   const [mainImage, setMainImage] = useState(item.imageUrls[4]);
 
@@ -64,4 +64,4 @@ function Item({ item }) {
   );
 }
 
-export default Item;
+export default MainSliderItem;

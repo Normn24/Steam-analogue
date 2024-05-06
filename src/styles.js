@@ -3,9 +3,9 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
     itemPaper: {
         display: 'flex',
-        width: 1200,
+        width: 1220,
         margin: '0 auto',
-        padding: '10px',
+        padding: '15px',
     },
     imgContainer: {
         display: 'flex',
@@ -17,7 +17,7 @@ export const useStyles = makeStyles({
         marginRight: '20px',
     },
     imgItem: {
-        margin: '5px',
+        margin: '5px 5px 5px 0',
         width: '200px',
         height: '135px',
         objectFit: 'cover',
@@ -54,7 +54,14 @@ export const useStyles = makeStyles({
         borderRadius: '3px',
     },
     carouselRoot: {
-        width: 1340,
+        width: 1440,
         margin: '0 auto',
     },
+    buttonsSlider: {
+        opacity: 1,
+        background: "none",
+        borderRadius: 0,
+        color: "#000",
+        fontSize: "80px",
+    }
 });
