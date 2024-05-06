@@ -15,7 +15,7 @@ export default function Header() {
           />
         </NavLink>
         <UserWrapper>
-          <NavLink>
+          <NavLink to={'/cart'}>
             <CiShoppingBasket style={{ width: "30px", height: "30px" }} />
           </NavLink>
           <NavLink>
