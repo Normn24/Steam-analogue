@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 
 export const NavBarWrapper = styled("div")({
     display: "flex",
-    width: "100%",
-    height: "60px",
+    justifyContent: "space-between",
+    width: "auto",
+    height: "auto",
     backgroundColor: "#F0F0F4",
-    justifyContent: "center",
 });
 
 export const NavBarItem = styled("div")({
-    width: "200px",
+    width: "150px",
     height: "100%",
     display: "flex",
     justifyContent: "center",

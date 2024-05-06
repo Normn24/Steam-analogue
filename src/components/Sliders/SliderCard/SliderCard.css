@@ -4,34 +4,19 @@
 }
 
 .slick-prev {
-  left: -50px;
+  left: -80px;
 }
 
 .slick-next {
-  right: -35px;
+  right: -7px;
 }
 
 
 .arrows {
-  height: 50px;
-  width: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: auto;
   border: none;
   border-radius: 5px;
-  opacity: 0.8;
-}
-
-.arrow__prev {
-  background-image: url("../../../img/chevron-left-solid.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-
-.arrow__next {
-  background-image: url("../../../img/chevron-right-solid.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
+  font-size: 80px;
+  opacity: 1;
+  background: none;
 }

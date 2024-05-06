@@ -1,33 +1,32 @@
 import { styled } from '@mui/system';
 import { Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+
 
 export const StyledFooter = styled('footer')({
-    width: '100%',
-    height: '232px',
-    backgroundColor: '#F0F0F4',
+    width: 'auto',
+    height: 'auto',
+    backgroundColor: '#bdbdbd',
     display: 'flex',
-    justifyContent: 'center',
-    gap: '40px',
+    gap: '10px',
+    // padding: "15px",
+    flexDirection: "column",
 });
 
 export const InfoWrapper = styled('div')({
     display: 'flex',
-    flexDirection: 'column',
+    gap: "10px",
+    justifyContent: "right",
+    fontSize: "40px",
+    padding: "0 20px",
+
 });
 
 export const StyledTitle = styled(Typography)({
     color: '#2f3035',
     fontFamily: '"Gill Sans", sans-serif',
-    fontSize: '24px',
-    fontWeight: 700,
-});
+    fontSize: '14px',
+    fontWeight: 400,
+    padding: "15px 20px",
 
-export const StyledNavLink = styled(NavLink)({
-    color: '#2f3035',
-    textDecoration: 'none',
-    fontFamily: '"Gill Sans", sans-serif',
-    fontSize: '20px',
-    fontWeight: 500,
 });
 

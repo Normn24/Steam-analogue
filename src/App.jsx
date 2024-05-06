@@ -6,6 +6,9 @@ import ProductPage from "./Pages/productPage/productPage";
 import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import Cart from "./Pages/Cart/Cart";
+import HeaderPage from "./pages/HeaderPage";
+import Footer from "./components/Footer/Footer";
+import Products from "./components/Products/Products";
 import "./App.css";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -22,14 +25,14 @@ useEffect(() => {
 
   return (
     <>
-      <NavBar />
+      <HeaderPage />
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<MainPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/products/category=:catalogItem" element={<Products />} />
       </Routes>
-      {<Footer />}
+      <Footer />
     </>
   );
 }

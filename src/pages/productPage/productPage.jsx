@@ -154,7 +154,9 @@ const ProductPage = () => {
               </TableRow>
               <TableRow>
                 <TableCell>Жанр</TableCell>
-                <TableCell>{product.genres}</TableCell>
+                <TableCell>
+                  {product?.genres?.map((value) => value.name)}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>

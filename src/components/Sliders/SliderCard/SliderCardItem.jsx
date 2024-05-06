@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useStyles } from "../../../styles";
+
 import {
   Card,
   CardMedia,
@@ -12,6 +14,8 @@ import {
 
 export default function SliderCardItem({ product }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
+  const classes = useStyles();
+
   return (
     <Card
       sx={{
@@ -57,14 +61,15 @@ export default function SliderCardItem({ product }) {
                   padding: "0",
                   textTransform: "capitalize",
                 }}
-                key={value}
+                key={value._id}
                 disableGutters
               >
                 <ListItemText
+                  className={classes.genreItem}
                   sx={{
                     margin: "0",
                   }}
-                  primary={value}
+                  primary={value.name}
                 />
               </ListItem>
             ))}
