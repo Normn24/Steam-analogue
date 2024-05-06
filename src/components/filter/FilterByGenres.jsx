@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../../store/filterSlice';
-import { fetchGenres } from '../../store/genresSlice';
+import { fetchProducts } from '../../redux/products.slice/products.slice';
+import { fetchGenres } from '../../redux/genres.slice/genres.slice';
 
-function FilterGenres() {
+function FilterByGenres() {
   const dispatch = useDispatch();
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     dispatch(fetchProducts())
-  })
+  }, [])
 
   useEffect(() => {
     dispatch(fetchGenres());
   }, []);
 
-  const products = useSelector((state) => state.filter.products)
+  const products = useSelector((state) => state.products.products)
   const genres = useSelector((state) => state.genres.genres);
+
+  console.log('g', genres);
 
   // const handleFilter = (genre) => {
   //   const filtered = products.filter((product) =>
@@ -31,17 +33,17 @@ function FilterGenres() {
 
   return (
     <div style={{ width: '1200px', margin: '0 auto' }}>
-      <Grid container spacing={3}>
-        {genres.map((item) => (
-          <Grid item xs={4} key={item}>
-            {/* <Link to="/catalogue" style={{ textDecoration: 'none' }}> */}
-              <Paper
-                style={{ height: '100px', textAlign: 'center', padding: '20px', cursor: 'pointer' }}
-                // onClick={() => handleFilter(genre)}
-              >
-                Genre: {item}
-              </Paper>
-            {/* </Link> */}
+      <Grid container spacing={2}>
+        {genres.map((genre) => (
+          <Grid item xs={12} sm={6} md={4} key={genre._id}>
+            <Paper elevation={3} style={{ padding: '20px', textAlign: 'center' }}>
+              <Typography variant="h6" gutterBottom>
+                {genre.name.toUpperCase()}
+              </Typography>
+              <Link to={`/products/${genre._id}`}>
+                <Typography color="primary">View Products</Typography>
+              </Link>
+            </Paper>
           </Grid>
         ))}
       </Grid>
@@ -49,7 +51,7 @@ function FilterGenres() {
   );
 }
 
-export default FilterGenres;
+export default FilterByGenres;
 
 
 

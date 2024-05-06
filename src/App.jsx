@@ -5,6 +5,9 @@ import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
 
+import FilterByGenres from "./components/Filter/FilterByGenres";
+
+
 function App() {
   return (
     <>
@@ -14,6 +17,8 @@ function App() {
         <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
+
+    <FilterByGenres />
     </>
   );
 }
