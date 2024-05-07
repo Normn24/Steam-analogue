@@ -11,17 +11,21 @@ import {
 import ProductItem from "../ProductItem/ProductItem";
 import { fetchCatalogProducts } from "../../redux/catalogProducts.slice/catalogProducts.slice";
 import { Link } from "react-router-dom";
+import { fetchWishList } from "../../redux/wishList.slice/wishList.slice";
 
 export default function Products() {
   const dispatch = useDispatch();
   const { categoriesProducts, loading } = useSelector(
     (state) => state.categoriesProducts
   );
+
   const { catalogs } = useSelector((state) => state.catalogs);
+  const { wishList } = useSelector((state) => state.wishList);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [catalogItem, setCatalogItem] = useState(null);
-
+  console.log(wishList);
   useEffect(() => {
+    dispatch(fetchWishList(catalogItem));
     if (catalogItem !== null) {
       dispatch(fetchCatalogProducts(catalogItem));
     }

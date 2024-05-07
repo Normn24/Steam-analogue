@@ -19,10 +19,10 @@ export default function SliderCardItem({ product }) {
   return (
     <Card
       sx={{
-        width: 380,
+        width: 385,
         boxShadow: 10,
         borderRadius: 2,
-        margin: "20px 20px",
+        margin: "20px 20.8px",
       }}
     >
       <Link className="post__more" to={`/product/${_id}`}>

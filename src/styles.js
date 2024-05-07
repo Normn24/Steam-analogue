@@ -46,7 +46,7 @@ export const useStyles = makeStyles({
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: '5px',
-        margin: '13px 0px 13px 0px',
+        margin: '14px 0px 0px',
     },
     genreItem: {
         backgroundColor: '#cccc',

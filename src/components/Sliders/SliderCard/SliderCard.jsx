@@ -46,6 +46,7 @@ export default function SliderCard() {
     autoplaySpeed: 4000,
     slidesToShow: 3,
     slidesToScroll: 1,
+    cssEase: "linear",
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
