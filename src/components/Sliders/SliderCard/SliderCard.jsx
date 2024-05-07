@@ -1,5 +1,5 @@
 import { fetchSlides } from "../../../redux/slides.slice/slides.slice";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import SliderCardItem from "./SliderCardItem";
@@ -21,9 +21,19 @@ export default function SliderCard() {
     const { className, onClick } = props;
     return (
       <div onClick={onClick} className={`arrow ${className}`}>
-        <button className="arrows">
+        <Button
+          className="arrows"
+          sx={{
+            opacity: 1,
+            background: "none",
+            borderRadius: 0,
+            color: "#000",
+            fontSize: "80px",
+            top: "-30px",
+          }}
+        >
           <IoIosArrowBack />
-        </button>
+        </Button>
       </div>
     );
   }
@@ -32,9 +42,19 @@ export default function SliderCard() {
     const { className, onClick } = props;
     return (
       <div onClick={onClick} className={`arrow ${className}`}>
-        <button onClick={onClick} className="arrows">
+        <Button
+          className="arrows"
+          sx={{
+            opacity: 1,
+            background: "none",
+            borderRadius: 0,
+            color: "#000",
+            fontSize: "80px",
+            top: "-30px",
+          }}
+        >
           <IoIosArrowForward />
-        </button>
+        </Button>
       </div>
     );
   }

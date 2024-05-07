@@ -10,6 +10,7 @@ export const StyledFooter = styled('footer')({
     gap: '10px',
     // padding: "15px",
     flexDirection: "column",
+
 });
 
 export const InfoWrapper = styled('div')({

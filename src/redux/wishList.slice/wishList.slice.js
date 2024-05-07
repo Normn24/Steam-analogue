@@ -87,8 +87,8 @@ const wishListSlice = createSlice({
       .addCase(removeFromWishList.fulfilled, (state, action) => {
         console.log("Removed from wishList:", action.payload);
         state.loading = false;
-        state.wishList.filter((product) => {
-          return product.pk !== action.payload.pk;
+        state.wishList.products.filter((item) => {
+          return item._id !== action.payload._id;
         });
       })
       .addCase(fetchWishList.fulfilled, (state, action) => {

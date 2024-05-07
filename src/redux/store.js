@@ -6,6 +6,7 @@ import linksSlice from './links.slice/links.slice';
 import catalogsSlice from './catalogs.slice/catalogs.slice';
 import catalogProductsSlice from './catalogProducts.slice/catalogProducts.slice';
 import wishListSlice from './wishList.slice/wishList.slice';
+import commentsSlice from './comments.slice/comments.slice';
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     links: linksSlice,
     catalogs: catalogsSlice,
     categoriesProducts: catalogProductsSlice,
-    wishList: wishListSlice
+    wishList: wishListSlice,
+    comments: commentsSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
