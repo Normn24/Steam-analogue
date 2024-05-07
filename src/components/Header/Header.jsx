@@ -2,6 +2,7 @@ import { HeaderWrapper, UserWrapper } from "./HeaderStyle";
 import { NavLink } from "react-router-dom";
 import { CiShoppingBasket } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
+import { CiViewList } from "react-icons/ci";
 
 export default function Header() {
   return (
@@ -15,11 +16,14 @@ export default function Header() {
           />
         </NavLink>
         <UserWrapper>
-          <NavLink to={'/cart'}>
-            <CiShoppingBasket style={{ width: "30px", height: "30px" }} />
+          <NavLink to={"/wishlist"}>
+            <CiViewList />
+          </NavLink>
+          <NavLink to={"/cart"}>
+            <CiShoppingBasket />
           </NavLink>
           <NavLink>
-            <CiUser style={{ width: "30px", height: "30px" }} />
+            <CiUser />
           </NavLink>
         </UserWrapper>
       </HeaderWrapper>

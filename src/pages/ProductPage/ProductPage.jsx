@@ -161,7 +161,7 @@ const ProductPage = () => {
             </TableBody>
           </Table>
           <Button
-            onClick={(e) => {
+            onClick={() => {
               setToggleModal(true);
             }}
             variant="contained"

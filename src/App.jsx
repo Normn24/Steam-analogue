@@ -1,17 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-// import Home from "./pages/home/Home";
-import MainPage from "./pages/MainPage";
-// import Prodcts from "./components/Products/Products";
-import Footer from "./components/Footer/Footer";
-// import NavBar from "./components/NavBar/NavBar";
-import Cart from "./pages/Cart/Cart";
-import HeaderPage from "./pages/HeaderPage";
-import Products from "./components/Products/Products";
-import "./App.css";
-import WishListPage from "./pages/WishListPage";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import ProductPage from "./pages/ProductPage/ProductPage";
+import HeaderPage from "./pages/HeaderPage";
+import Footer from "./components/Footer/Footer";
+import MainPage from "./pages/MainPage";
+import Products from "./components/Products/Products";
+import ProductPage from "./pages/productPage/productPage";
+import WishListPage from "./pages/WishListPage";
+import Cart from "./pages/Cart/Cart";
+import "./App.css";
 
 function App() {
   const { carts } = useSelector((state) => state.carts);

@@ -13,5 +13,7 @@ export const HeaderWrapper = styled("div")({
 
 export const UserWrapper = styled("div")({
     display: "flex",
+    alignItems: "center",
+    fontSize: "26px",
     gap: "15px"
 })

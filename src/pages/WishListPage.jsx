@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
-import { fetchWishList } from "../redux/wishList.slice/wishList.slice";
+import {
+  fetchWishList,
+  removeFromWishList,
+} from "../redux/wishList.slice/wishList.slice";
 import WishListItem from "../components/WishListItem/WishListItem";
-import { removeFromWishList } from "../redux/wishList.slice/wishList.slice";
 
 export default function WishListPage() {
   const dispatch = useDispatch();
@@ -20,7 +22,7 @@ export default function WishListPage() {
   };
 
   if (loading) {
-    return <h1>Loading</h1>;
+    return <h4>Loading</h4>;
   }
   return (
     <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
@@ -44,6 +46,16 @@ export default function WishListPage() {
         </Typography>
       ) : (
         <>
+          <Typography
+            sx={{
+              width: "auto",
+              textTransform: "uppercase",
+            }}
+            variant="h4"
+            component="h4"
+          >
+            Wishlist {wishList?.customerId?.login}
+          </Typography>
           {wishList?.products?.map((product) => (
             <WishListItem
               key={product._id}
