@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+
+
 import { useStyles } from "../../styles";
 import {
   Card,
@@ -19,6 +23,8 @@ export default function ProductItem({
   handleMouseEnter,
 }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
+  const dispatch = useDispatch();
+ 
   const classes = useStyles();
 
   return (
@@ -187,6 +193,8 @@ export default function ProductItem({
           ))}
         </List>
       </Collapse>
+      {/* // </Link> */}
+      
     </Link>
   );
 }

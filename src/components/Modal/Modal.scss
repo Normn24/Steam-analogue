@@ -1,0 +1,80 @@
+.modal {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(3, 1, 14, 0.2);
+  mix-blend-mode: normal;
+  backdrop-filter: blur(10px);
+  z-index: 99999;
+}
+
+.modal__btn-close {
+  position: absolute;
+}
+
+.modal__container {
+  aspect-ratio: 1/0.7;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  background: white;
+  z-index: 100;
+
+  @media (max-width: 767px) {
+    margin: 0 20px;
+  }
+}
+
+.modal__header {
+  text-align: center;
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  flex: 1;
+}
+
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+// MODAL BTN
+.modal__btn-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  background: green;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.modal__btn-cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  background: #F70003;
+  border-radius: 10px;
+  cursor: pointer;
+}

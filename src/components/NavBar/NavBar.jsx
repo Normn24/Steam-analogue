@@ -55,6 +55,18 @@ export default function NavBar() {
                 {catalog.name}
               </StyledNavBarLink>
             </NavBarItem>
+            // <NavBarItem>
+            //     <StyledNavBarLink>Топ рейтингу</StyledNavBarLink>
+            // </NavBarItem>
+            // <NavBarItem>
+            //     <StyledNavBarLink>Топ рейтингу</StyledNavBarLink>
+            // </NavBarItem>
+            // <NavBarItem>
+            //     <StyledNavBarLink to='/cart'>Basket</StyledNavBarLink>
+            // </NavBarItem>
+        // </NavBarWrapper>
+    // )
+// }
           ))}
         </Box>
       )}
