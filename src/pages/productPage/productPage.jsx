@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { fetchProductId } from "../../redux/productItem.slice/productItem.slice";
 import styles from "./styles.module.scss";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import Modal from "../../components/Modal/Modal";
+import { addToCart } from "../../redux/carts.slice/carts.slice";
 import {
   Container,
   Box,
@@ -23,6 +25,7 @@ const ProductPage = () => {
   console.log(id);
   const dispatch = useDispatch();
   const { product, status } = useSelector((state) => state.product);
+  const [toggleModal, setToggleModal] = useState(false);
 
   const [favorite, setFavorite] = useState(false);
   const handleFavorite = () => setFavorite(!favorite);
@@ -158,6 +161,9 @@ const ProductPage = () => {
             </TableBody>
           </Table>
           <Button
+            onClick={(e) => {
+              setToggleModal(true);
+            }}
             variant="contained"
             sx={{ marginTop: "20px", fontSize: "18px", width: "30%" }}
           >
@@ -213,6 +219,33 @@ const ProductPage = () => {
         </TabContext>
       </Box>
       <div className="products-carousel"></div>
+      {toggleModal && (
+        <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
+          <header className="modal__header">
+            <h2>Замовлення</h2>
+          </header>
+          <div className="modal__content">
+            <p>Ваш товар</p>
+          </div>
+          <footer className="modal__footer">
+            <button
+              onClick={() => {
+                dispatch(addToCart(product));
+                setToggleModal(false);
+              }}
+              className="modal__btn-success"
+            >
+              Додати
+            </button>
+            <button
+              onClick={() => setToggleModal(false)}
+              className="modal__btn-cancel"
+            >
+              Відмінити
+            </button>
+          </footer>
+        </Modal>
+      )}
     </Container>
   );
 };
