@@ -1,6 +1,9 @@
 
+import { makeStyles } from '@mui/styles';
+
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+
 
 export const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -24,9 +27,18 @@ export const MyButtonDelete = styled(Button)({
   padding: '0 30px',
 });
 
-// export const MyButton = styled('div')(({ theme }) => ({
-//       display: 'flex',
-//       alignItems: 'center',
-//       borderRadius: 20,
-//       background: theme.palette.grey[50],
-//     }))
+
+
+export const useStyles = makeStyles({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  icon: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+})
+
+

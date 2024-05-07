@@ -18,13 +18,12 @@ import Payment from "../Paymant";
 import { useState } from "react";
 import Modal from "../../../components/Modal/Modal";
 import { MyButton, MyButtonDelete } from "./styles.js";
-import {Box} from "@mui/material"
+import { Box } from "@mui/material";
 
 export default function CartItem({ product }) {
   const dispatch = useDispatch();
   const { name, imageUrls, developer, publisher, _id, quantity } = product;
   const [toggleModal, setToggleModal] = useState(false);
-
   const incrementCounter = () => {
     dispatch(addToCart(product));
   };
@@ -45,10 +44,10 @@ export default function CartItem({ product }) {
       >
         <CardMedia sx={{ height: 140 }} image={imageUrls[0]} title={name} />
         <CardContent
-           sx={{
-          flex: "1 1 auto"
+          sx={{
+            flex: "1 1 auto",
           }}
-          >
+        >
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
@@ -73,36 +72,36 @@ export default function CartItem({ product }) {
           </Typography>
         </CardContent>
         <CardActions
-           sx={{
+          sx={{
             display: "flex",
             flexDirection: "column",
             gap: 3,
           }}
-          >
+        >
           <Counter
             number={quantity}
             incrementCounter={incrementCounter}
             decrementCounter={decrementCounter}
           />
-          <Box >
-          <MyButton onClick={() => dispatch(removeToCart(_id))} size="small">
-            Delete
-          </MyButton>
-          <MyButtonDelete
-            onClick={() => {
-              setToggleModal(true);
-            }}
-            size="small"
-          >
-            Buy
-          </MyButtonDelete>
+          <Box>
+            <MyButton onClick={() => dispatch(removeToCart(_id))} size="small">
+              Delete
+            </MyButton>
+            <MyButtonDelete
+              onClick={() => {
+                setToggleModal(true);
+              }}
+              size="small"
+            >
+              Buy
+            </MyButtonDelete>
           </Box>
         </CardActions>
       </Card>
 
       {toggleModal && (
         <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
-          <Payment />
+          <Payment modalClose={() => setToggleModal(false)} />
         </Modal>
       )}
     </>
