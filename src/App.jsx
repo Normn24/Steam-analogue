@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import HeaderPage from "./pages/HeaderPage";
 import ProductPage from "./pages/productPage/productPage";
 import Footer from "./components/Footer/Footer";
-import NavBar from "./components/NavBar/NavBar";
+import Products from "./components/Products/Products";
 import "./App.css";
 
 import FilterByGenres from "./components/Filter/FilterByGenres";
@@ -11,10 +12,11 @@ import FilterByGenres from "./components/Filter/FilterByGenres";
 function App() {
   return (
     <>
-      <NavBar />
+      <HeaderPage />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/products/category=:catalogItem" element={<Products />} />
       </Routes>
       <Footer />
 

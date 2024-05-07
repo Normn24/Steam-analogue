@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useStyles } from "../../styles";
 import {
   Card,
   CardMedia,
@@ -18,6 +19,7 @@ export default function ProductItem({
   handleMouseEnter,
 }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
+  const classes = useStyles();
 
   return (
     <Link className="post__more" to={`/product/${_id}`}>
@@ -79,10 +81,17 @@ export default function ProductItem({
                 disableGutters
               >
                 <ListItemText
+                  className={classes.genreItem}
                   sx={{
                     margin: "0",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
+                    backgroundColor:
+                      hoveredItem === product._id ? "transparent" : "",
+                    border:
+                      hoveredItem === product._id
+                        ? "1px solid #000"
+                        : "1px solid transparent ",
                   }}
                   primary={value.name}
                 />
@@ -109,7 +118,6 @@ export default function ProductItem({
           top: "20px",
           width: "28%",
           backgroundColor: "#bdbdbd",
-          marginTop: "10px",
           borderRadius: 2,
         }}
         in={hoveredItem == product._id}
@@ -152,10 +160,13 @@ export default function ProductItem({
               disableGutters
             >
               <ListItemText
+                className={classes.genreItem}
                 sx={{
                   margin: "0",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
+                  backgroundColor: "transparent",
+                  border: "1px solid #000",
                 }}
                 primary={value.name}
               />
@@ -164,7 +175,7 @@ export default function ProductItem({
         </List>
         <List sx={{ padding: 0 }}>
           {imageUrls.slice(1, 5).map((item) => (
-            <ImageListItem key={item} sx={{ padding: "0 15px 15px" }}>
+            <ImageListItem key={item} sx={{ padding: "0 15px 20px" }}>
               <img
                 srcSet={item}
                 src={item}

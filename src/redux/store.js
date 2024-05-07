@@ -5,6 +5,8 @@ import slidesSlice from './slides.slice/slides.slice';
 import linksSlice from './links.slice/links.slice';
 import catalogsSlice from './catalogs.slice/catalogs.slice';
 import genresSlice from './genres.slice/genres.slice';
+import catalogProductsSlice from './catalogProducts.slice/catalogProducts.slice';
+import productsByGenreSlice from './productsByGenre/productsByGenre.slice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     links: linksSlice,
     catalogs: catalogsSlice, 
     genres: genresSlice,
+    categoriesProducts: catalogProductsSlice,
+    productsByGenre: productsByGenreSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

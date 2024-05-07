@@ -3,25 +3,30 @@ import { Typography } from '@mui/material';
 
 
 export const StyledFooter = styled('footer')({
-    width: '100%',
-    height: '170px',
-    backgroundColor: '#F0F0F4',
+    width: 'auto',
+    height: 'auto',
+    backgroundColor: '#bdbdbd',
     display: 'flex',
-    gap: '40px',
-    padding: "15px",
+    gap: '10px',
+    // padding: "15px",
     flexDirection: "column",
 });
 
 export const InfoWrapper = styled('div')({
     display: 'flex',
-    gap: "20px",
-    justifyContent: "right"
+    gap: "10px",
+    justifyContent: "right",
+    fontSize: "40px",
+    padding: "0 20px",
+
 });
 
 export const StyledTitle = styled(Typography)({
     color: '#2f3035',
     fontFamily: '"Gill Sans", sans-serif',
-    fontSize: '18px',
-    fontWeight: 700,
+    fontSize: '14px',
+    fontWeight: 400,
+    padding: "15px 20px",
+
 });
 
