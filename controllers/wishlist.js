@@ -226,7 +226,10 @@ exports.deleteWishlist = (req, res, next) => {
 
 exports.getWishlist = (req, res, next) => {
   Wishlist.findOne({ customerId: req.user.id })
-    .populate('products')
+    .populate({
+      path: 'products',
+      populate: { path: 'genres', select: 'name' }
+    })
     .populate('customerId')
     .then((wishlist) => res.json(wishlist))
     .catch((err) =>
