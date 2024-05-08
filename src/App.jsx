@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer";
 import Products from "./components/Products/Products";
 import "./App.css";
 
-import FilterByGenres from "./components/Filter/FilterByGenres";
+import FilterByGenre from "./components/Filter/FilterByGenre";
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       </Routes>
       <Footer />
 
-    <FilterByGenres />
+    <FilterByGenre />
     </>
   );
 }
