@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import ProductItem from "../ProductItem/ProductItem";
 import { fetchCatalogProducts } from "../../redux/catalogProducts.slice/catalogProducts.slice";
+import { fetchWishList } from "../../redux/wishList.slice/wishList.slice";
 import { Link } from "react-router-dom";
 
 export default function Products() {
@@ -25,6 +26,7 @@ export default function Products() {
     if (catalogItem !== null) {
       dispatch(fetchCatalogProducts(catalogItem));
     }
+    dispatch(fetchWishList());
   }, [dispatch, catalogItem]);
 
   useEffect(() => {

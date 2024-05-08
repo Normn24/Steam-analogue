@@ -80,13 +80,13 @@ const wishListSlice = createSlice({
       .addCase(addToWishList.fulfilled, (state, action) => {
         console.log("Added to wishList:", action.payload);
         state.loading = false;
-        state.wishList.push(action.payload);
+        state.wishList?.products.push(action.payload);
       })
       .addCase(removeFromWishList.fulfilled, (state, action) => {
         console.log("Removed from wishList:", action.payload);
         state.loading = false;
         state.wishList.products.filter((item) => {
-          return item._id !== action.payload._id;
+          item._id !== action.payload._id;
         });
       })
       .addCase(fetchWishList.fulfilled, (state, action) => {
