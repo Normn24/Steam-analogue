@@ -23,6 +23,7 @@ export default function ProductPageSlider({ product }) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
   return (
     <div className="slider-container">
       <Slider {...settings} className="slider-items">

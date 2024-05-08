@@ -27,6 +27,7 @@ export default function NavBar() {
   useEffect(() => {
     dispatch(fetchCatalogs());
   }, [dispatch]);
+  
 
   //   useEffect(() => {
   //     if (Array.isArray(links)) {

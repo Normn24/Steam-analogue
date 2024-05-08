@@ -45,7 +45,14 @@ export default function Products() {
   }
   return (
     <>
-      <Box sx={{ padding: "20px", position: "relative", height: "855px" }}>
+      <Box
+        sx={{
+          padding: "20px",
+          position: "relative",
+          height: "855px",
+          m: "60px 0",
+        }}
+      >
         <List
           sx={{
             display: "flex",
