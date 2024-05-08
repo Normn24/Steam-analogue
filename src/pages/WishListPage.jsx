@@ -26,7 +26,7 @@ export default function WishListPage() {
   }
   return (
     <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
-      {wishList === null ? (
+      {wishList === null || wishList?.products?.length === 0 ? (
         <Typography
           sx={{
             textAlign: "center",
