@@ -20,7 +20,7 @@ export default function SliderCard() {
   function SamplePrevArrow(props) {
     const { className, onClick } = props;
     return (
-      <div onClick={onClick} className={`arrow ${className}`}>
+      <Box onClick={onClick} className={`arrow ${className}`}>
         <Button
           className="arrows"
           sx={{
@@ -34,16 +34,15 @@ export default function SliderCard() {
         >
           <IoIosArrowBack />
         </Button>
-      </div>
+      </Box>
     );
   }
 
   function SampleNextArrow(props) {
     const { className, onClick } = props;
     return (
-      <div onClick={onClick} className={`arrow ${className}`}>
+      <Box onClick={onClick} className={`arrow ${className}`}>
         <Button
-          className="arrows"
           sx={{
             opacity: 1,
             background: "none",
@@ -55,7 +54,7 @@ export default function SliderCard() {
         >
           <IoIosArrowForward />
         </Button>
-      </div>
+      </Box>
     );
   }
   const settings = {

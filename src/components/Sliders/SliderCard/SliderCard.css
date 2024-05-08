@@ -3,21 +3,10 @@
   display: none;
 }
 
-
 .slick-prev {
   left: -80px;
 }
 
 .slick-next {
   right: -7px;
-}
-
-
-.arrows {
-  height: auto;
-  border: none;
-  border-radius: 5px;
-  font-size: 80px;
-  opacity: 1;
-  background: none;
 }

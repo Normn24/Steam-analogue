@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import MainSliderItem from "./MainSliderItem";
-import { fetchProducts } from "../../../../redux/products.slice/products.slice";
-import { useStyles } from "../../../../styles";
+import { fetchProducts } from "../../../redux/products.slice/products.slice";
+import { useStyles } from "../../../styles";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
@@ -40,7 +40,6 @@ function MainSlider() {
           </Button>
         );
       }}
-      sx={{ marginTop: "40px", marginLeft: "-80px" }}
       className={classes.carouselRoot}
     >
       {products?.data?.map((item) => (

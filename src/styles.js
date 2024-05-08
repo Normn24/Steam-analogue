@@ -55,7 +55,7 @@ export const useStyles = makeStyles({
     },
     carouselRoot: {
         width: 1440,
-        margin: '0 auto',
+        marginTop: "40px", marginLeft: "-81px"
     },
     buttonsSlider: {
         opacity: 1,

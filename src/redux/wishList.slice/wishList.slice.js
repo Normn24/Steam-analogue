@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export function getAccessToken() {
   // return localStorage.getItem("accessToken");
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUwODk1NzEsImV4cCI6MTcxNTEyNTU3MX0.Hz8oCGi7Xt7D4BaUS0ey4xhZiommUPQ27b_wBdtazn0"
+  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUxNzM2NDMsImV4cCI6MTcxNTIwOTY0M30.gVjvbSzXER1tZylbt5haxqv5xxUDxbUEvB6W-pJoDTU"
 }
 
 export const addToWishList = createAsyncThunk(
@@ -14,7 +14,6 @@ export const addToWishList = createAsyncThunk(
         Authorization: `Bearer ${getAccessToken()}`,
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({ article_id: payload.pk }),
     });
     if (!response.ok) {
       throw new Error("Failed to add to favorites");
@@ -35,7 +34,6 @@ export const removeFromWishList = createAsyncThunk(
           Authorization: `Bearer ${getAccessToken()}`,
           "Content-Type": "application/json",
         },
-        // body: JSON.stringify({ id: payload.pk }),
       }
     );
     if (!response.ok) {
@@ -98,7 +96,5 @@ const wishListSlice = createSlice({
       });
   },
 });
-
-export const selectWishList = (state) => state.wishList;
 
 export default wishListSlice.reducer;
