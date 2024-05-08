@@ -6,7 +6,7 @@ import { fetchGenres } from '../../redux/genres.slice/genres.slice';
 import { fetchProductsByGenre } from '../../redux/productsByGenre/productsByGenre.slice';
 import { ScrollableContainer, StyledPaper } from './FilterByGenreStyled';
 
-function FilterByGenres() {
+function FilterByGenre() {
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
 
@@ -68,4 +68,4 @@ function FilterByGenres() {
   );
 }
 
-export default FilterByGenres;
+export default FilterByGenre;
