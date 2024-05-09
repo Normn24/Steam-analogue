@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import HeaderPage from "./pages/HeaderPage";
+import HeaderPage from "./Pages/HeaderPage";
 import Footer from "./components/Footer/Footer";
-import MainPage from "./pages/MainPage";
+import MainPage from "./Pages/MainPage";
 import Products from "./components/Products/Products";
-import ProductPage from "./pages/productPage/productPage";
-import WishListPage from "./pages/WishListPage";
-import Cart from "./pages/Cart/Cart";
+import ProductPage from "./Pages/ProductPage/ProductPage";
+import WishListPage from "./Pages/WishListPage";
+import Cart from "./Pages/Cart/Cart";
 import "./App.css";
 
 function App() {

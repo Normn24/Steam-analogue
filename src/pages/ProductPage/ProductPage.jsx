@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Modal from "../../components/Modal/Modal";
 import { addToCart } from "../../redux/carts.slice/carts.slice";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import {
   Container,
   Box,
@@ -19,8 +20,9 @@ import {
 } from "@mui/material";
 import { Rating } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
+import { MyButton } from "../Cart/CartItem/styles";
 
-const ProductPage = () => {
+const ProductPage = ({modalClose}) => {
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
@@ -221,14 +223,21 @@ const ProductPage = () => {
       <div className="products-carousel"></div>
       {toggleModal && (
         <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
+          <HighlightOffIcon sx={{
+           position: 'absolute',
+           top: '10px',
+           right: '10px',
+           cursor: 'pointer',
+          }}
+           onClick={() => setToggleModal(false)}/>
           <header className="modal__header">
             <h2>Замовлення</h2>
           </header>
           <div className="modal__content">
-            <p>Ваш товар</p>
+            <p>Ваш товар буде доданий до кошику</p>
           </div>
           <footer className="modal__footer">
-            <button
+            <MyButton
               onClick={() => {
                 dispatch(addToCart(product));
                 setToggleModal(false);
@@ -236,13 +245,13 @@ const ProductPage = () => {
               className="modal__btn-success"
             >
               Додати
-            </button>
-            <button
+            </MyButton>
+            <MyButton
               onClick={() => setToggleModal(false)}
               className="modal__btn-cancel"
             >
               Відмінити
-            </button>
+            </MyButton>
           </footer>
         </Modal>
       )}
