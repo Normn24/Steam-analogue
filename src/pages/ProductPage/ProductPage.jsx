@@ -242,13 +242,11 @@ const ProductPage = ({modalClose}) => {
                 dispatch(addToCart(product));
                 setToggleModal(false);
               }}
-              className="modal__btn-success"
             >
               Додати
             </MyButton>
             <MyButton
               onClick={() => setToggleModal(false)}
-              className="modal__btn-cancel"
             >
               Відмінити
             </MyButton>
