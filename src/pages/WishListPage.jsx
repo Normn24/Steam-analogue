@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import {
@@ -10,10 +9,6 @@ import WishListItem from "../components/WishListItem/WishListItem";
 export default function WishListPage() {
   const dispatch = useDispatch();
   const { wishList, loading } = useSelector((state) => state.wishList);
-
-  useEffect(() => {
-    dispatch(fetchWishList());
-  }, [dispatch]);
 
   const handleRemove = (_id) => {
     dispatch(removeFromWishList(_id)).then(() => {

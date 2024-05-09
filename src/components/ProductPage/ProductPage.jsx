@@ -188,7 +188,7 @@ export default function ProductPage() {
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>Release date</TableCell>
+                <TableCell>Release</TableCell>
                 <TableCell>{productYear}</TableCell>
               </TableRow>
               <TableRow>

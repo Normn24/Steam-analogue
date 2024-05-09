@@ -74,11 +74,11 @@ export default function SliderCard() {
     <>
       <Box sx={{ margin: "60px auto 0", width: "auto" }}>
         <Typography
-          sx={{ textTransform: "capitalize", paddingLeft: "20px" }}
+          sx={{ textTransform: "uppercase", paddingLeft: "20px" }}
           variant="h5"
           component="h5"
         >
-          SELECTED AND RECOMMENDED
+          special offers
         </Typography>
         <Slider {...settings}>
           {slides?.map((product, index) => {

@@ -1,6 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchWishList } from "./redux/wishList.slice/wishList.slice";
+
 import HeaderPage from "./pages/HeaderPage";
 import MainPage from "./pages/MainPage";
 import Footer from "./components/Footer/Footer";
@@ -11,11 +14,16 @@ import Cart from "./pages/Cart/Cart";
 import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
 
   useEffect(() => {
     localStorage.setItem("carts", JSON.stringify(carts));
   }, [carts]);
+
+  useEffect(() => {
+    dispatch(fetchWishList());
+  }, [dispatch]);
 
   return (
     <>

@@ -17,7 +17,6 @@ function FilterByGenre() {
   const genres = useSelector((state) => state.genres.genres);
 
   const handleClick = (genreId) => {
-    // console.log('Clicked Genre:', genreId);
     dispatch(fetchProductsByGenre(genreId));
   };
 

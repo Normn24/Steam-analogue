@@ -11,11 +11,6 @@ export default function Header() {
       <HeaderWrapper>
         <NavLink to={"/"}>
           <SiRepublicofgamers style={{ fontSize: "50px" }} />
-          {/* <img
-            style={{ width: "30px", height: "30px" }}
-            src="/src/img/icons8-game-controller-50.svg"
-            alt=""
-          /> */}
         </NavLink>
         <UserWrapper>
           <NavLink to={"/wishlist"}>

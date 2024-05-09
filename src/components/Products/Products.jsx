@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import ProductItem from "../ProductItem/ProductItem";
 import { fetchCatalogProducts } from "../../redux/catalogProducts.slice/catalogProducts.slice";
-import { fetchWishList } from "../../redux/wishList.slice/wishList.slice";
 import { Link } from "react-router-dom";
 
 export default function Products() {
@@ -26,7 +25,6 @@ export default function Products() {
     if (catalogItem !== null) {
       dispatch(fetchCatalogProducts(catalogItem));
     }
-    dispatch(fetchWishList());
   }, [dispatch, catalogItem]);
 
   useEffect(() => {
@@ -102,7 +100,12 @@ export default function Products() {
         <Typography
           variant="p"
           component="div"
-          sx={{ display: "flex", alignItems: "flex-end" }}
+          sx={{
+            display: "flex",
+            alignItems: "flex-end",
+            width: "70%",
+            justifyContent: "flex-end",
+          }}
         >
           More:
           <Link to={`/products/category=${catalogItem}`}>
