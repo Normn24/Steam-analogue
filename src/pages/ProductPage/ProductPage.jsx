@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { Rating } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
-import { MyButton } from "../Cart/CartItem/styles";
+import { MyButton } from "../Cart/CartItem/styles.js";
 
 const ProductPage = ({modalClose}) => {
   const { id } = useParams();
