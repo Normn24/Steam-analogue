@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchProductId } from "../../redux/productItem.slice/productItem.slice";
-import styles from "./styles.module.scss";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Modal from "../../components/Modal/Modal";
 import { addToCart } from "../../redux/carts.slice/carts.slice";
@@ -221,7 +220,7 @@ const ProductPage = ({modalClose}) => {
         </TabContext>
       </Box>
       <div className="products-carousel"></div>
-      {toggleModal && (
+      {/* {toggleModal && (
         <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
           <HighlightOffIcon sx={{
            position: 'absolute',
@@ -254,7 +253,7 @@ const ProductPage = ({modalClose}) => {
             </MyButton>
           </footer>
         </Modal>
-      )}
+      )} */}
     </Container>
   );
 };
