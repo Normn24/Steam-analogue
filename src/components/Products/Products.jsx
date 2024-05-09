@@ -43,7 +43,14 @@ export default function Products() {
   }
   return (
     <>
-      <Box sx={{ padding: "20px", position: "relative", height: "855px" }}>
+      <Box
+        sx={{
+          padding: "20px",
+          position: "relative",
+          height: "855px",
+          m: "60px 0",
+        }}
+      >
         <List
           sx={{
             display: "flex",
@@ -93,7 +100,12 @@ export default function Products() {
         <Typography
           variant="p"
           component="div"
-          sx={{ display: "flex", alignItems: "flex-end" }}
+          sx={{
+            display: "flex",
+            alignItems: "flex-end",
+            width: "70%",
+            justifyContent: "flex-end",
+          }}
         >
           More:
           <Link to={`/products/category=${catalogItem}`}>

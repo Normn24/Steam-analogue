@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import {
@@ -11,10 +10,6 @@ export default function WishListPage() {
   const dispatch = useDispatch();
   const { wishList, loading } = useSelector((state) => state.wishList);
 
-  useEffect(() => {
-    dispatch(fetchWishList());
-  }, [dispatch]);
-
   const handleRemove = (_id) => {
     dispatch(removeFromWishList(_id)).then(() => {
       dispatch(fetchWishList());
@@ -26,7 +21,7 @@ export default function WishListPage() {
   }
   return (
     <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
-      {wishList === null ? (
+      {wishList === null || wishList?.products?.length === 0 ? (
         <Typography
           sx={{
             textAlign: "center",

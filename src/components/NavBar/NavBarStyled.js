@@ -5,7 +5,7 @@ export const NavBarWrapper = styled("div")({
     display: "flex",
     justifyContent: "space-between",
     width: "auto",
-    height: "auto",
+    height: "56px",
     backgroundColor: "#F0F0F4",
 });
 
@@ -26,4 +26,5 @@ export const StyledNavBarLink = styled(NavLink)({
     fontFamily: '"Gill Sans", sans-serif',
     fontSize: '20px',
     fontWeight: 500,
+    textTransform: "capitalize"
 });

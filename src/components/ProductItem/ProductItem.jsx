@@ -1,9 +1,5 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-
-
 import { useStyles } from "../../styles";
 import {
   Card,
@@ -23,8 +19,7 @@ export default function ProductItem({
   handleMouseEnter,
 }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
-  const dispatch = useDispatch();
- 
+
   const classes = useStyles();
 
   return (
@@ -153,6 +148,7 @@ export default function ProductItem({
             columnGap: "15px",
             overflow: "hidden",
             backgroundColor: "#bdbdbd",
+            mb: "5px",
           }}
         >
           {genres.map((value) => (
@@ -187,14 +183,13 @@ export default function ProductItem({
                 src={item}
                 alt={item}
                 loading="lazy"
-                style={{ width: "100%", height: "170px", objectFit: "cover" }}
+                style={{ width: "100%", height: "180px", objectFit: "cover" }}
               />
             </ImageListItem>
           ))}
         </List>
       </Collapse>
       {/* // </Link> */}
-      
     </Link>
   );
 }

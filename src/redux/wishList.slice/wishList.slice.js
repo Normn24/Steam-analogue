@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export function getAccessToken() {
   // return localStorage.getItem("accessToken");
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUxNzM2NDMsImV4cCI6MTcxNTIwOTY0M30.gVjvbSzXER1tZylbt5haxqv5xxUDxbUEvB6W-pJoDTU"
+  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUyNDgyNTMsImV4cCI6MTcxNTI4NDI1M30.oDu0GV1LozJeF0IlFnBzBnv2Wyfgepmcm6CK1CXf-PU"
 }
 
 export const addToWishList = createAsyncThunk(
@@ -78,19 +78,16 @@ const wishListSlice = createSlice({
         state.loading = true;
       })
       .addCase(addToWishList.fulfilled, (state, action) => {
-        console.log("Added to wishList:", action.payload);
         state.loading = false;
-        state.wishList.push(action.payload);
+        state.wishList?.products.push(action.payload);
       })
       .addCase(removeFromWishList.fulfilled, (state, action) => {
-        console.log("Removed from wishList:", action.payload);
         state.loading = false;
         state.wishList.products.filter((item) => {
-          return item._id !== action.payload._id;
+          item._id !== action.payload._id;
         });
       })
       .addCase(fetchWishList.fulfilled, (state, action) => {
-        console.log("Fetched wishList:", action.payload);
         state.loading = false;
         state.wishList = action.payload;
       });

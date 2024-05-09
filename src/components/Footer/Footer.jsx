@@ -18,18 +18,14 @@ export default function Footer() {
         <InfoWrapper>
           <NavLink to="https://discord.com/">
             <FaDiscord />
-            {/* <img src="/src/img/discord-svgrepo-com.svg" alt="discord_logo" /> */}
           </NavLink>
           <NavLink to="https://twitter.com/">
-            {/* <img src="/src/img/twitter-x.svg" alt="twitter_x" /> */}
             <FaTwitterSquare />
           </NavLink>
           <NavLink to="https://ua.linkedin.com/">
-            {/* <img src="/src/img/linkedin-svgrepo-com.svg" alt="linkedin" /> */}
             <FaLinkedin />
           </NavLink>
           <NavLink to="https://www.instagram.com/">
-            {/* <img src="/src/img/icons8-instagram.svg" alt="instagram" /> */}
             <FaInstagramSquare />
           </NavLink>
         </InfoWrapper>

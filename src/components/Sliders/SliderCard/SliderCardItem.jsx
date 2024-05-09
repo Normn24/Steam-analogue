@@ -10,11 +10,15 @@ import {
   List,
   ListItem,
   ListItemText,
+  Box,
 } from "@mui/material";
 
 export default function SliderCardItem({ product }) {
   const { _id, name, imageUrls, genres, currentPrice } = product;
   const classes = useStyles();
+  const previousPrice = 520;
+
+  const percent = Math.floor((currentPrice * 100) / previousPrice);
 
   return (
     <Card
@@ -26,7 +30,7 @@ export default function SliderCardItem({ product }) {
       }}
     >
       <Link className="post__more" to={`/product/${_id}`}>
-        <CardMedia sx={{ height: 280 }} image={imageUrls[0]} title={name} />
+        <CardMedia sx={{ height: 300 }} image={imageUrls[0]} title={name} />
         <CardContent
           sx={{
             minHeight: 83,
@@ -74,17 +78,57 @@ export default function SliderCardItem({ product }) {
               </ListItem>
             ))}
           </List>
-          <Typography
+          <Box
             sx={{
-              position: "absolute",
-              right: "16px",
-              bottom: "11px",
+              display: "flex",
+              gap: "11px",
+              alignItems: "baseline",
+              position: "relative",
+              mb: "10px",
+              paddingRight: "4px",
+              backgroundColor: "#cccc",
+              width: "fit-content",
+              borderRadius: "4px",
             }}
-            variant="p"
-            component="p"
           >
-            {currentPrice}$
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: "34px",
+                lineHeight: "1",
+                backgroundColor: "#4c6b22",
+                padding: "2px",
+                color: "#BDED11",
+                borderRadius: "4px 0 0 4px",
+              }}
+              variant="p"
+              component="p"
+            >
+              -{percent}%
+            </Typography>
+            <Typography
+              sx={{
+                position: "absolute",
+                right: "3.5%",
+                fontSize: "12px",
+                bottom: "17px",
+                color: "#647984",
+                textDecorationLine: "line-through",
+              }}
+              variant="p"
+              component="p"
+            >
+              {previousPrice}$
+            </Typography>
+            <Typography
+              sx={{
+                color: "#4c6b22",
+              }}
+              variant="p"
+              component="p"
+            >
+              {currentPrice}$
+            </Typography>
+          </Box>
         </CardContent>
       </Link>
     </Card>
