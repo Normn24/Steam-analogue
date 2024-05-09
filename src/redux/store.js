@@ -10,6 +10,7 @@ import catalogProductsSlice from './catalogProducts.slice/catalogProducts.slice'
 import wishListSlice from './wishList.slice/wishList.slice';
 import commentsSlice from './comments.slice/comments.slice';
 import productsByGenreSlice from './productsByGenre/productsByGenre.slice';
+import filteredProductsSlice from './filteredProducts.slice/filteredProducts.slice';
 
 export const store = configureStore({
   reducer: {
@@ -23,7 +24,8 @@ export const store = configureStore({
     categoriesProducts: catalogProductsSlice,
     wishList: wishListSlice,
     comments: commentsSlice,
-    productsByGenre: productsByGenreSlice
+    productsByGenre: productsByGenreSlice,
+    productList: filteredProductsSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

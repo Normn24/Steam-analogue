@@ -6,13 +6,11 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-
   const { catalogs, status, error } = useSelector((state) => state.catalogs);
-
-  //   const [filterLinks, setFilterLinks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (event) => {
@@ -21,28 +19,11 @@ export default function NavBar() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    // onSearch(searchQuery);
   };
 
   useEffect(() => {
     dispatch(fetchCatalogs());
   }, [dispatch]);
-  
-
-  //   useEffect(() => {
-  //     if (Array.isArray(links)) {
-  //       const filtered = links.filter(
-  //         (link) => link.title && link.title.includes("NAVBAR")
-  //       );
-  //       setFilterLinks(filtered);
-  //     }
-  //   }, [links]);
-
-  //   useEffect(() => {
-  //     if (filterLinks.length > 0) {
-  //       setLinkToNav(filterLinks[0]?.links[0]?.url || "");
-  //     }
-  //   }, [filterLinks]);
 
   return (
     <NavBarWrapper>
@@ -50,24 +31,15 @@ export default function NavBar() {
       {status === "failed" && <p>Error: {error}</p>}
       {status === "succeeded" && (
         <Box sx={{ display: "flex" }}>
+          <NavBarItem>
+            <StyledNavBarLink to={`/`}>Home</StyledNavBarLink>
+          </NavBarItem>
           {catalogs.slice(0, 4).map((catalog) => (
             <NavBarItem key={catalog.id}>
               <StyledNavBarLink to={`/products/category=${catalog.name}`}>
                 {catalog.name}
               </StyledNavBarLink>
             </NavBarItem>
-            // <NavBarItem>
-            //     <StyledNavBarLink>Топ рейтингу</StyledNavBarLink>
-            // </NavBarItem>
-            // <NavBarItem>
-            //     <StyledNavBarLink>Топ рейтингу</StyledNavBarLink>
-            // </NavBarItem>
-            // <NavBarItem>
-            //     <StyledNavBarLink to='/cart'>Basket</StyledNavBarLink>
-            // </NavBarItem>
-        // </NavBarWrapper>
-    // )
-// }
           ))}
         </Box>
       )}
@@ -77,11 +49,16 @@ export default function NavBar() {
           variant="outlined"
           value={searchQuery}
           onChange={handleSearchChange}
+          size="small"
+          sx={{ margin: "8px" }}
           InputProps={{
+            style: { paddingRight: "4px" },
             endAdornment: (
-              <IconButton type="submit" aria-label="search">
-                <SearchIcon />
-              </IconButton>
+              <NavLink to={`/products/${searchQuery}`}>
+                <IconButton type="submit" aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+              </NavLink>
             ),
           }}
         />
