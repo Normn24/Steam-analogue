@@ -149,7 +149,7 @@ export default function CartItem({ product }) {
               setAlertModal(false);
             }}
           >
-            This Alert uses a Button component for its action.
+            Дякуємо за замовлення!
           </Alert>
         </Modal>
       )}

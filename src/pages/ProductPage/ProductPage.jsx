@@ -220,7 +220,7 @@ const ProductPage = ({modalClose}) => {
         </TabContext>
       </Box>
       <div className="products-carousel"></div>
-      {/* {toggleModal && (
+      {toggleModal && (
         <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
           <HighlightOffIcon sx={{
            position: 'absolute',
@@ -249,7 +249,7 @@ const ProductPage = ({modalClose}) => {
               Відмінити
             </MyButton>
         </Modal>
-      )} */}
+      )}
     </Container>
   );
 };
