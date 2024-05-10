@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { fetchProductId } from "../../redux/productItem.slice/productItem.slice";
 // import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Modal from "../../components/Modal/Modal";
-import { addToCart } from "../../redux/carts.slice/carts.slice";
 import {
   Box,
   Tabs,
@@ -24,16 +23,26 @@ import {
   fetchWishList,
   removeFromWishList,
 } from "../../redux/wishList.slice/wishList.slice";
+import {
+  removeFromCart,
+  addToCart,
+  fetchCart,
+} from "../../redux/cart.slice/cart.slice";
 
 export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { product, status } = useSelector((state) => state.product);
   const { wishList } = useSelector((state) => state.wishList);
+  const { cart } = useSelector((state) => state.cart);
   const [toggleModal, setToggleModal] = useState(false);
   const [onWishList, setOnWishList] = useState(false);
+  const [onCart, setOnCart] = useState(false);
   const [orientation, setOrientation] = useState("horizontal");
   const [value, setValue] = useState("1");
+  const percent = product.previousPrice
+    ? Math.floor((product.currentPrice * 100) / product.previousPrice)
+    : null;
 
   useEffect(() => {
     if (wishList?.products?.some((item) => item._id === product._id)) {
@@ -41,7 +50,12 @@ export default function ProductPage() {
     } else {
       setOnWishList(false);
     }
-  }, [wishList, product]);
+    if (cart?.products?.some((item) => item?.product?._id === product._id)) {
+      setOnCart(true);
+    } else {
+      setOnCart(false);
+    }
+  }, [cart, product, wishList]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -71,12 +85,22 @@ export default function ProductPage() {
       dispatch(removeFromWishList(_id)).then(() => {
         dispatch(fetchWishList());
       });
-      setOnWishList(false);
     } else {
       dispatch(addToWishList(_id)).then(() => {
         dispatch(fetchWishList());
       });
-      setOnWishList(false);
+    }
+  };
+
+  const handleCartList = (_id) => {
+    if (onCart) {
+      dispatch(removeFromCart(_id)).then(() => {
+        dispatch(fetchCart());
+      });
+    } else {
+      dispatch(addToCart(_id)).then(() => {
+        dispatch(fetchCart());
+      });
     }
   };
 
@@ -92,12 +116,6 @@ export default function ProductPage() {
       day: "numeric",
     }
   );
-
-  /*const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleContent = () => {
-    setIsExpanded(!isExpanded);
-  };*/
 
   return (
     <Box
@@ -149,11 +167,6 @@ export default function ProductPage() {
             </Button>
           )}
 
-          {/* <img
-            src={product.imageUrls ? product.imageUrls[0] : ""}
-            alt={product.name}
-            className={styles.productImg}
-          /> */}
           <ProductPageSlider product={product?.imageUrls} />
         </Box>
         <Box
@@ -180,6 +193,7 @@ export default function ProductPage() {
               "&::first-letter": { textTransform: "uppercase" },
               fontSize: "32px",
               margin: "10px 0",
+              fontWeight: 600,
               "@media (max-width: 600px)": { fontSize: "22px" },
             }}
           >
@@ -247,7 +261,7 @@ export default function ProductPage() {
                 width: "auto",
                 backgroundColor: onWishList ? "#bdbdbd" : "#cccc",
                 borderRadius: "3px",
-                padding: "5px 12px",
+                padding: "9.75px 12px",
                 ":hover": { backgroundColor: onWishList ? "#cccc" : "#bdbdbd" },
               }}
               startIcon={onWishList ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
@@ -259,44 +273,73 @@ export default function ProductPage() {
             <Box
               sx={{
                 display: "flex",
-                gap: "15px",
-                alignItems: "center",
+                alignItems: product.previousPrice ? "flex-end" : "center",
+                backgroundColor: "#cccc",
+                justifyContent: "space-between",
+                padding: "3px 3px 3px 10px",
+                borderRadius: "3px",
+                gap: "8px",
                 position: "relative",
               }}
             >
-              {product.previousPrice && (
-                <Typography
-                  variant="p"
-                  sx={{
-                    fontSize: "16px",
-                    textDecoration: "line-through",
-                    color: "grey",
-                    position: "absolute",
-                    top: "-13px",
-                    left: "5%",
-                    "@media (max-width: 600px)": { fontSize: "18px" },
-                  }}
-                >
-                  {product.previousPrice}₴
+              {product.previousPrice ? (
+                <>
+                  <Typography
+                    sx={{
+                      fontSize: "24px",
+                      lineHeight: "1",
+                      backgroundColor: "#4c6b22",
+                      padding: "8.25px 3px",
+                      color: "#BDED11",
+                      position: "absolute",
+                      top: "0px",
+                      left: "-62px",
+                      borderRadius: "4px 0 0 4px",
+                    }}
+                    variant="p"
+                    component="p"
+                  >
+                    -{percent}%
+                  </Typography>
+                  <Typography
+                    sx={{
+                      position: "absolute",
+                      left: "11.5%",
+                      fontSize: "12px",
+                      bottom: "19px",
+                      color: "#647984",
+                      textDecorationLine: "line-through",
+                    }}
+                    variant="p"
+                    component="p"
+                  >
+                    {product.previousPrice}$
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#4c6b22",
+                    }}
+                    variant="p"
+                    component="p"
+                  >
+                    {product.currentPrice}$
+                  </Typography>
+                </>
+              ) : (
+                <Typography variant="p" component="p">
+                  {product.currentPrice}$
                 </Typography>
               )}
-              <Typography
-                variant="p"
-                sx={{
-                  fontSize: "20px",
-                  "@media (max-width: 600px)": { fontSize: "18px" },
-                }}
-              >
-                {product.currentPrice}₴
-              </Typography>
               <Button
-                onClick={() => {
-                  setToggleModal(true);
+                onClick={() => handleCartList(product?._id)}
+                sx={{
+                  padding: "5px 12px  ",
+                  textTransform: "initial",
+                  backgroundColor: "#bdbdbd",
+                  borderRadius: "3px",
                 }}
-                variant="contained"
-                sx={{ fontSize: "12px", width: "auto" }}
               >
-                Add to card
+                {onCart ? "In cart" : "Add to cart"}
               </Button>
             </Box>
           </Box>
@@ -347,7 +390,6 @@ export default function ProductPage() {
             index={0}
             sx={{
               display: value == 1 ? "flex" : "none",
-
               textAlign: "left",
               fontSize: "28px",
               backgroundImage: `url(${

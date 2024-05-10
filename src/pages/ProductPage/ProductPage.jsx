@@ -22,7 +22,7 @@ import { Rating } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
 import { MyButton } from "../Cart/CartItem/styles.js";
 
-const ProductPage = ({modalClose}) => {
+const ProductPage = () => {
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
@@ -223,13 +223,15 @@ const ProductPage = ({modalClose}) => {
       <div className="products-carousel"></div>
       {toggleModal && (
         <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
-          <HighlightOffIcon sx={{
-           position: 'absolute',
-           top: '10px',
-           right: '10px',
-           cursor: 'pointer',
-          }}
-           onClick={() => setToggleModal(false)}/>
+          <HighlightOffIcon
+            sx={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              cursor: "pointer",
+            }}
+            onClick={() => setToggleModal(false)}
+          />
           <header className="modal__header">
             <h2>Замовлення</h2>
           </header>
@@ -245,11 +247,7 @@ const ProductPage = ({modalClose}) => {
             >
               Додати
             </MyButton>
-            <MyButton
-              onClick={() => setToggleModal(false)}
-            >
-              Відмінити
-            </MyButton>
+            <MyButton onClick={() => setToggleModal(false)}>Відмінити</MyButton>
           </footer>
         </Modal>
       )}

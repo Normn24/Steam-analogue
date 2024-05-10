@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchProducts } from "../../redux/products.slice/products.slice";
@@ -11,7 +10,7 @@ function Cart() {
   const { carts } = useSelector((state) => state.carts);
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  console.log(carts);
   useEffect(() => {
     dispatch(fetchProducts("http://localhost:4000/api/products/"));
   }, [dispatch]);
@@ -31,7 +30,8 @@ function Cart() {
       <div className={classes.total}>
         <strong>
           Total: <span>{totalQuantity}</span>
-        </strong> <br/>
+        </strong>{" "}
+        <br />
         <strong>
           Total Price: <span>${totalPrice.toFixed(2)} </span>{" "}
         </strong>
@@ -51,16 +51,16 @@ function Cart() {
         >
           OOPS, THERE`S NOTHING TO SHOW HERE
           <br />
-          You don't have any goods 
+          You don`t have any goods
         </Typography>
       ) : (
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 2, sm: 4, md: 12 }}
-          sx={{ paddingTop: '40px' }}
+          sx={{ paddingTop: "40px" }}
         >
-          {carts.map((product, index) => (
+          {carts.map((product) => (
             <Grid item xs={2} sm={2} md={4} key={product._id}>
               <CartItem product={product} />
             </Grid>

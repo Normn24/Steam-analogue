@@ -24,7 +24,12 @@ export default function WishListItem({ product, handleRemove }) {
     currentPrice,
     yearOfPublication,
     developer,
+    previousPrice,
   } = product;
+
+  const percent = previousPrice
+    ? Math.floor((currentPrice * 100) / previousPrice)
+    : null;
 
   const dateOfPublication = new Date(yearOfPublication).toLocaleDateString(
     "en-US",
@@ -139,17 +144,63 @@ export default function WishListItem({ product, handleRemove }) {
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
+              alignItems: previousPrice ? "flex-end" : "center",
               backgroundColor: "#cccc",
               justifyContent: "space-between",
               padding: "3px 3px 3px 10px",
               borderRadius: "3px",
               gap: "10px",
+              position: "relative",
             }}
           >
-            <Typography variant="p" component="p">
-              {currentPrice}$
-            </Typography>
+            {previousPrice ? (
+              <>
+                <Typography
+                  sx={{
+                    fontSize: "24px",
+                    lineHeight: "1",
+                    backgroundColor: "#4c6b22",
+                    padding: "8.25px 3px",
+                    color: "#BDED11",
+                    position: "absolute",
+                    top: "0px",
+                    left: "-37%",
+                    borderRadius: "4px 0 0 4px",
+                  }}
+                  variant="p"
+                  component="p"
+                >
+                  -{percent}%
+                </Typography>
+                <Typography
+                  sx={{
+                    position: "absolute",
+                    left: "11%",
+                    fontSize: "12px",
+                    bottom: "18px",
+                    color: "#647984",
+                    textDecorationLine: "line-through",
+                  }}
+                  variant="p"
+                  component="p"
+                >
+                  {previousPrice}$
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#4c6b22",
+                  }}
+                  variant="p"
+                  component="p"
+                >
+                  {currentPrice}$
+                </Typography>
+              </>
+            ) : (
+              <Typography variant="p" component="p">
+                {currentPrice}$
+              </Typography>
+            )}
             <Button
               sx={{
                 padding: "5px 12px  ",
