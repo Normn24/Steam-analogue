@@ -9,6 +9,7 @@ export const HeaderWrapper = styled("div")({
     padding: "5px 20.5px 5px 40px",
     // backgroundColor: "#F0F0F4",
     backgroundColor: "#bdbdbd",
+   
 })
 
 export const UserWrapper = styled("div")({

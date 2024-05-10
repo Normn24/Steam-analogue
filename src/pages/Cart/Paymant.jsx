@@ -8,24 +8,15 @@ const Payment = ({modalClose}) => {
   const classes = useStyles();
 
   const SignupSchema = Yup.object().shape({
-    password: Yup.string()
+    phone: Yup.string()
       .min(2, "Too Short!")
       .max(20, "Too Long!")
+      .matches(/^\+38 \((?!0{3}\))\d{3}\) [1-9]\d{2}-\d{2}-\d{2}$/ )
       .required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+    email: Yup.string().email("Invalid email"),
   });
 
-  const validateEmail = (email) => {
-    const regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-
-    if (email.value === "") {
-      setError(email, "Email is required");
-    } else if (!regex.test(email.value)) {
-      setError(email, "Email is incorrect");
-    } else {
-      setValid(email);
-    }
-  };
+  
 
   return (
     <div>
@@ -34,8 +25,8 @@ const Payment = ({modalClose}) => {
         <HighlightOffIcon  onClick={modalClose}/>
       </Box>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={() => {modalClose()}}
+        initialValues={{ email: "", phone: "" }}
+        onSubmit={() => {modalClose(true)}}
         validationSchema={SignupSchema}
       >
         {({
@@ -55,7 +46,6 @@ const Payment = ({modalClose}) => {
               onBlur={handleBlur}
               value={values.email}
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email Address"
@@ -64,19 +54,19 @@ const Payment = ({modalClose}) => {
             />
             {errors.email && touched.email && errors.email}
             <TextField
-              type="password"
-              name="password"
+              type="phone"
+              name="phone"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.password}
+              value={values.phone}
               margin="normal"
               required
               fullWidth
-              label="Password"
-              id="password"
+              label="+38 (067) 123-45-67"
+              id="phone"
               autoComplete="current-password"
             />
-            {errors.password && touched.password && errors.password}
+            {errors.phone && touched.phone && errors.phone}
             <Button
               type="submit"
               disabled={isSubmitting}

@@ -4,15 +4,15 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchWishList } from "./redux/wishList.slice/wishList.slice";
 
-import HeaderPage from "./pages/HeaderPage";
-import MainPage from "./pages/MainPage";
+import HeaderPage from "./Pages/HeaderPage";
+import MainPage from "./Pages/MainPage";
 import Footer from "./components/Footer/Footer";
 // import Products from "./components/Products/Products";
 import ProductPage from "./components/ProductPage/ProductPage";
-import WishListPage from "./pages/WishListPage";
-import Cart from "./pages/Cart/Cart";
+import WishListPage from "./Pages/WishListPage";
+import Cart from "./Pages/Cart/Cart";
 import "./App.css";
-import FilteredPage from "./pages/FilteredPage";
+import FilteredPage from "./Pages/FilteredPage";
 
 function App() {
   const dispatch = useDispatch();

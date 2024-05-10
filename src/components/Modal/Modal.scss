@@ -18,7 +18,6 @@
 }
 
 .modal__container {
-  aspect-ratio: 1/0.7;
   position: relative;
   max-width: 500px;
   width: 100%;
@@ -30,6 +29,7 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   background: white;
   z-index: 100;
+  justify-content: center;
 
   @media (max-width: 767px) {
     margin: 0 20px;
@@ -57,24 +57,24 @@
 }
 
 // MODAL BTN
-.modal__btn-success {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  color: white;
-  background: green;
-  border-radius: 10px;
-  cursor: pointer;
-}
+// .modal__btn-success {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 15px;
+//   color: white;
+//   background: green;
+//   border-radius: 10px;
+//   cursor: pointer;
+// }
 
-.modal__btn-cancel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  color: white;
-  background: #F70003;
-  border-radius: 10px;
-  cursor: pointer;
-}
+// .modal__btn-cancel {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 15px;
+//   color: white;
+//   background: #F70003;
+//   border-radius: 10px;
+//   cursor: pointer;
+// }
