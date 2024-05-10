@@ -41,9 +41,9 @@ const ProductSchema = new Schema(
       }
     ]
     ,
-    quantity: {
-      type: Number,
-      default: 0
+    description: {
+      type: String,
+      required: true
     },
     publisher: {
       type: String,
@@ -53,9 +53,18 @@ const ProductSchema = new Schema(
       type: String,
       required: true
     },
-    productUrl: {
-      type: String
-    },
+    requirementsMin: [
+      {
+        type: String,
+        required: true
+      }
+    ],
+    requirementsRec: [
+      {
+        type: String,
+        required: true
+      }
+    ],
     yearOfPublication: {
       type: Date
     },

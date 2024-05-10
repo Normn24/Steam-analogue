@@ -219,3 +219,4 @@ exports.getProductsByGenre = async (req, res, next) => {
     });
   }
 };
+

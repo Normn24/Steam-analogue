@@ -17,9 +17,6 @@ const OrderSchema = new Schema(
         required: true
       }
     ],
-    deliveryAddress: {
-      type: Schema.Types.Mixed
-    },
     shipping: {
       type: Schema.Types.Mixed
     },
