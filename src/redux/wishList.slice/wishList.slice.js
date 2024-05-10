@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export function getAccessToken() {
   // return localStorage.getItem("accessToken");
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUyNDgyNTMsImV4cCI6MTcxNTI4NDI1M30.oDu0GV1LozJeF0IlFnBzBnv2Wyfgepmcm6CK1CXf-PU"
+  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUzNDg2NDQsImV4cCI6MTcxNTM4NDY0NH0.bkt7DlDNGm_ubQCeb56lbkT4BOhurThc1RCCdYW4i_E"
 }
 
 export const addToWishList = createAsyncThunk(
