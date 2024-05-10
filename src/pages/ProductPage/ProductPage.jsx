@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { Rating } from "@mui/material";
 import { TabContext, TabPanel } from "@mui/lab";
-import { MyButton } from "../Cart/CartItem/styles";
+import { MyButton } from "../Cart/CartItem/styles.js";
 
 const ProductPage = ({modalClose}) => {
   const { id } = useParams();
@@ -241,13 +241,11 @@ const ProductPage = ({modalClose}) => {
                 dispatch(addToCart(product));
                 setToggleModal(false);
               }}
-              className="modal__btn-success"
             >
               Додати
             </MyButton>
             <MyButton
               onClick={() => setToggleModal(false)}
-              className="modal__btn-cancel"
             >
               Відмінити
             </MyButton>
