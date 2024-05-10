@@ -247,10 +247,10 @@ export default function ProductPage() {
               sx={{
                 fontSize: "12px",
                 width: "auto",
-                backgroundColor: "#bdbdbd",
+                backgroundColor: onWishList ? "#bdbdbd" : "#cccc",
                 borderRadius: "3px",
                 padding: "5px 12px",
-                ":hover": { backgroundColor: "#cccc" },
+                ":hover": { backgroundColor: onWishList ? "#cccc" : "#bdbdbd" },
               }}
               startIcon={onWishList ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
               onClick={() => handleWishList(product._id)}
@@ -304,7 +304,7 @@ export default function ProductPage() {
           </Box>
         </Box>
       </Box>
-      <Box component="div" sx={{ marginTop: "100px" }}>
+      <Box component="div" sx={{ marginTop: "110px" }}>
         <TabContext value={value}>
           <Box
             sx={{
@@ -327,10 +327,12 @@ export default function ProductPage() {
               aria-label="secondary tabs example"
               sx={{
                 border: "none",
-                "& button": {},
+                "& button": {
+                  fontSize: "16px",
+                  textTransform: "uppercase",
+                },
                 "& button:hover": {
                   backgroundColor: "#c4c4c4",
-                  fontWeight: 500,
                 },
                 "& button:active": { borderColor: "transparent" },
                 "& button:Mui-selected": {
@@ -338,19 +340,122 @@ export default function ProductPage() {
                 },
               }}
             >
-              <Tab value="1" label="Опис" />
-              <Tab value="2" label="Системні вимоги" />
+              <Tab value="1" label="ABOUT THIS GAME" />
+              <Tab value="2" label="SYSTEM REQUIREMENTS" />
             </Tabs>
           </Box>
           <TabPanel
             value="1"
             index={0}
-            sx={{ textAlign: "left", fontSize: "18px" }}
+            sx={{
+              display: value == 1 ? "flex" : "none",
+
+              textAlign: "left",
+              fontSize: "28px",
+              backgroundImage: `url(${
+                product?.imageUrls ? product.imageUrls[2] : ""
+              })`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            }}
           >
-            {product.description}
+            <Typography
+              variant="p"
+              sx={{
+                width: "75%",
+                margin: "0 auto",
+                backgroundColor: "#ffffff",
+                opacity: "0.65",
+                padding: "20px",
+                fontSize: "22px",
+                "@media (max-width: 600px)": { fontSize: "18px" },
+              }}
+            >
+              {product.description}
+            </Typography>
           </TabPanel>
-          <TabPanel value="2" index={1}>
-            Tab Two
+          <TabPanel
+            value="2"
+            index={1}
+            sx={{
+              display: value == 2 ? "flex" : "none",
+              height: "auto",
+              width: "auto",
+              gap: "50px",
+              alignItems: "center",
+              backgroundImage: `url(${
+                product?.imageUrls ? product.imageUrls[0] : ""
+              })`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "50%",
+                backgroundColor: "#ffffff",
+                opacity: "0.65",
+                padding: "20px",
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: "700",
+                  "@media (max-width: 600px)": { fontSize: "18px" },
+                }}
+              >
+                MINIMUM:
+              </Typography>
+              {product?.requirementsMin?.map((item, index) => (
+                <Typography
+                  key={index}
+                  variant="p"
+                  sx={{
+                    fontSize: "20px",
+                    "@media (max-width: 600px)": { fontSize: "18px" },
+                  }}
+                >
+                  {item}
+                </Typography>
+              ))}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "50%",
+                backgroundColor: "#ffffff",
+                opacity: "0.65",
+                padding: "20px",
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: "700",
+                  "@media (max-width: 600px)": { fontSize: "18px" },
+                }}
+              >
+                RECOMMENDED:
+              </Typography>
+              {product?.requirementsRec?.map((item, index) => (
+                <Typography
+                  key={index}
+                  variant="p"
+                  sx={{
+                    fontSize: "20px",
+                    "@media (max-width: 600px)": { fontSize: "18px" },
+                  }}
+                >
+                  {item}
+                </Typography>
+              ))}
+            </Box>
           </TabPanel>
         </TabContext>
       </Box>
