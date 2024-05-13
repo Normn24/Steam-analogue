@@ -14,6 +14,8 @@ import Cart from "./pages/Cart/Cart";
 import "./App.css";
 import FilteredPage from "./pages/FilteredPage";
 
+import FilterPanel from "./components/Filter/FilterPanel";
+
 function App() {
   const dispatch = useDispatch();
   const { carts } = useSelector((state) => state.carts);
@@ -37,6 +39,8 @@ function App() {
         <Route path="/wishlist" element={<WishListPage />} />
       </Routes>
       <Footer />
+
+      <FilterPanel/>
     </>
   );
 }
