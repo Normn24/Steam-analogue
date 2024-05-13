@@ -6,8 +6,8 @@ const initialState = {
   status: null
 }
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async (url) => {
-  const data = await fetch(url)
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+  const data = await fetch("http://localhost:4000/api/products")
     .then((res) => res.json())
   return data;
 });
