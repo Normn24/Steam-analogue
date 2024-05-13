@@ -14,6 +14,8 @@ import "./App.css";
 import LogInForm from "./components/LogInForm/LogInForm";
 import CartPage from "./pages/CartPage";
 
+import FilterPanel from "./components/Filter/FilterPanel";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -71,6 +73,8 @@ function App() {
         <Route path="/wishlist" element={<WishListPage />} />
       </Routes>
       <Footer />
+
+      <FilterPanel/>
     </>
   );
 }
