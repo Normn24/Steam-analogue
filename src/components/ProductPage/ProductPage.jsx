@@ -20,13 +20,13 @@ import { TabContext, TabPanel } from "@mui/lab";
 import ProductPageSlider from "../../components/Sliders/ProductPageSlider/ProductPageSlider";
 import {
   addToWishList,
-  fetchWishList,
+  // fetchWishList,
   removeFromWishList,
 } from "../../redux/wishList.slice/wishList.slice";
 import {
   removeFromCart,
   addToCart,
-  fetchCart,
+  // fetchCart,
 } from "../../redux/cart.slice/cart.slice";
 
 export default function ProductPage() {
@@ -82,25 +82,29 @@ export default function ProductPage() {
 
   const handleWishList = (_id) => {
     if (onWishList) {
-      dispatch(removeFromWishList(_id)).then(() => {
-        dispatch(fetchWishList());
-      });
+      dispatch(removeFromWishList(_id));
+      // .then(() => {
+      //   dispatch(fetchWishList());
+      // });
     } else {
-      dispatch(addToWishList(_id)).then(() => {
-        dispatch(fetchWishList());
-      });
+      dispatch(addToWishList(_id));
+      // .then(() => {
+      //   dispatch(fetchWishList());
+      // });
     }
   };
 
   const handleCartList = (_id) => {
     if (onCart) {
-      dispatch(removeFromCart(_id)).then(() => {
-        dispatch(fetchCart());
-      });
+      dispatch(removeFromCart(_id));
+      // .then(() => {
+      //   dispatch(fetchCart());
+      // });
     } else {
-      dispatch(addToCart(_id)).then(() => {
-        dispatch(fetchCart());
-      });
+      dispatch(addToCart(_id));
+      // .then(() => {
+      //   dispatch(fetchCart());
+      // });
     }
   };
 

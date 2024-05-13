@@ -43,4 +43,5 @@ const productsByGenre = createSlice({
   }
 });
 
+
 export default productsByGenre.reducer;

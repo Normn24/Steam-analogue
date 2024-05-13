@@ -1,11 +1,19 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./LogInForm.scss";
+import { loginUser } from "../../redux/auth.slice/login.slice";
+import { useDispatch } from "react-redux";
 
-export default function LogInForm({ isModalOpen, setIsModalOpen }) {
+export default function LogInForm() {
+  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
-    loginOrEmail: Yup.string().min(4, "Login or Email must be at least 4 characters").required("Login or Email is required"),
-    password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+    loginOrEmail: Yup.string().min(
+      4,
+      "loginOrEmail must be at least 4 characters"
+    ),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
   });
 
   const initialValues = {
@@ -13,33 +21,9 @@ export default function LogInForm({ isModalOpen, setIsModalOpen }) {
     password: "",
   };
 
-  function onSubmit(values, { setSubmitting, setErrors }) {
-    fetch("http://localhost:4000/api/customers/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const token = data.token;
-        localStorage.setItem("token", token);
-        console.log("Response from server:", data);
-        setIsModalOpen(isModalOpen);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-        setErrors({ loginOrEmail: "Invalid login or password", password: "Invalid login or password" });
-      })
-      .finally(() => {
-        setSubmitting(false);
-      });
+  function onSubmit(values) {
+    console.log("submit", values);
+    dispatch(loginUser(values));
   }
 
   return (

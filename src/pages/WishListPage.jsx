@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
-import {
-  fetchWishList,
-  removeFromWishList,
-} from "../redux/wishList.slice/wishList.slice";
+import { removeFromWishList } from "../redux/wishList.slice/wishList.slice";
 import WishListItem from "../components/WishListItem/WishListItem";
 
 export default function WishListPage() {
@@ -11,9 +8,7 @@ export default function WishListPage() {
   const { wishList, loading } = useSelector((state) => state.wishList);
 
   const handleRemove = (_id) => {
-    dispatch(removeFromWishList(_id)).then(() => {
-      dispatch(fetchWishList());
-    });
+    dispatch(removeFromWishList(_id));
   };
 
   if (loading) {

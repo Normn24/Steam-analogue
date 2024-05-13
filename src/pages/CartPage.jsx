@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Button } from "@mui/material";
-import { fetchCart, removeFromCart } from "../redux/cart.slice/cart.slice";
+import { removeFromCart } from "../redux/cart.slice/cart.slice";
 import CartListItem from "../components/CartListItem/CartListItem";
 
 export default function CartPage() {
@@ -11,11 +11,8 @@ export default function CartPage() {
     0
   );
 
-  console.log(totalPrice);
   const handleRemove = (_id) => {
-    dispatch(removeFromCart(_id)).then(() => {
-      dispatch(fetchCart());
-    });
+    dispatch(removeFromCart(_id));
   };
 
   if (loading) {
