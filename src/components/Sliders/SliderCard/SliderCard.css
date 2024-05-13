@@ -1,0 +1,12 @@
+.slick-prev::before,
+.slick-next::before {
+  display: none;
+}
+
+.slick-prev {
+  left: -80px;
+}
+
+.slick-next {
+  right: -7px;
+}

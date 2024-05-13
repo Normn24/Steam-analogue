@@ -1,0 +1,61 @@
+.search-form {
+    width: 1170px;
+    height: 122px;
+    margin: 0 auto;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* border-radius: 4px; */
+    margin: 0 auto 50px auto;
+}
+
+.search-buttons {
+    height: 61px;
+    display: flex;
+    padding-bottom: 25px;
+    background-color: white;
+}
+
+.search-buttons button {
+    color: black; 
+    background-color: white; 
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* border-radius: none; */
+}
+
+.search-buttons button.selected {
+    background-color: #b3b3b3; 
+    font-weight: bold;
+}
+
+.search-itself {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    /* border-radius: none; */
+}
+
+.MuiFormControl-root {
+    flex-grow: 1;
+}
+
+.MuiButton-contained {
+    height: 100%;
+}
+
+.MuiInputBase-root {
+    background-color: #e7e5e5; 
+}
+
+.value-range {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-button {
+    height: 100%;
+}

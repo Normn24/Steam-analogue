@@ -1,0 +1,96 @@
+@use '../../styles/mixins/common';
+@use '../../styles/mixins/buttonMixin';
+@use '../../styles/variables/colors';
+
+.productContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+
+    .productItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 50px;
+
+        .productCard {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            width: 60%;
+
+            .salesButton {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 30%;
+
+            }
+
+            .productImg {
+                width: 100%;
+                max-height: 400px;
+                overflow-y: hidden;
+
+            }
+        }
+
+        .productDescription {
+            text-align: left;
+
+            .ratingCont {
+                display: flex;
+                justify-content: flex-start;
+                gap: 20px;
+
+                .favoriteItem {
+                    height: 25px;
+                    width: auto;
+                    //color:#828386;
+                }
+
+                .ratingLine {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+    
+            }
+
+            // table {
+            //     margin-top: 10px;
+            //     border-collapse: collapse;
+            //     border-spacing: 0;
+                
+            //         td {
+            //             width: 50%;
+            //             text-align: left;
+            //             border-bottom: 1px solid #828386;
+            //             padding-top: 5px;
+            //         }
+            // }
+
+            .buyButton {
+                width: 40%;
+                margin: 40px 0 25px 0;
+            }
+
+            
+        }
+    }
+
+    .productOptions {
+
+        .tabText {
+            text-align: left;
+            font-size: 18px;
+        }
+    }
+
+
+}

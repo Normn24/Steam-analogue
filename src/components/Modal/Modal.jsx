@@ -1,22 +1,15 @@
-import "./Modal.scss"
+import './Modal.scss'
 
-export default function Modal({ isOpen, onClose, children }) {
-  return (
-    
-    <>
-      {isOpen ? (
-        <div className="modal-overlay" onClick={onClose}>
-          <div className="Modal" onClick={(e) => e.stopPropagation()}>
-            {children}
-          </div>
+const Modal = ({ children, isModal, modalClose }) => {
+  if (isModal) {
+    return (
+      <div  className='modal' onClick={modalClose}>
+        <div className='modal__container' onClick={(e) => e.stopPropagation()}>
+          {children}
         </div>
-      ) : null}
-    </>
-   
-    
-    
+      </div>
     )
- 
-  
+  }
 }
- 
+
+export default Modal
