@@ -13,6 +13,7 @@ import WishListPage from "./pages/WishListPage";
 import Cart from "./pages/Cart/Cart";
 import "./App.css";
 import FilteredPage from "./pages/FilteredPage";
+import UserPage from "./pages/UserPage/UserPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:searchQuery" element={<FilteredPage />} />
         <Route path="/wishlist" element={<WishListPage />} />
+        <Route path="/userPage/*" element={<UserPage />} />
       </Routes>
       <Footer />
     </>

@@ -1,3 +1,4 @@
+import React from "react";
 import { HeaderWrapper, UserWrapper } from "./HeaderStyle";
 import { NavLink } from "react-router-dom";
 import { CiShoppingBasket } from "react-icons/ci";
@@ -19,7 +20,7 @@ export default function Header() {
           <NavLink to={"/cart"}>
             <CiShoppingBasket />
           </NavLink>
-          <NavLink>
+          <NavLink to={"/userPage"}>
             <CiUser />
           </NavLink>
         </UserWrapper>
