@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export function getAccessToken() {
-  // return localStorage.getItem("accessToken");
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUzNDg2NDQsImV4cCI6MTcxNTM4NDY0NH0.bkt7DlDNGm_ubQCeb56lbkT4BOhurThc1RCCdYW4i_E"
+  return localStorage.getItem("token");
 }
 
 export const addToWishList = createAsyncThunk(
@@ -11,7 +10,7 @@ export const addToWishList = createAsyncThunk(
     const response = await fetch(`http://localhost:4000/api/wishlist/${payload}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${getAccessToken()}`,
+        Authorization: getAccessToken(),
         "Content-Type": "application/json",
       },
     });
@@ -31,7 +30,7 @@ export const removeFromWishList = createAsyncThunk(
       {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${getAccessToken()}`,
+          Authorization: getAccessToken(),
           "Content-Type": "application/json",
         },
       }
@@ -52,7 +51,7 @@ export const fetchWishList = createAsyncThunk(
       {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${getAccessToken()}`,
+          Authorization: getAccessToken(),
           "Content-Type": "application/json",
         },
       }
@@ -79,13 +78,11 @@ const wishListSlice = createSlice({
       })
       .addCase(addToWishList.fulfilled, (state, action) => {
         state.loading = false;
-        state.wishList?.products.push(action.payload);
+        state.wishList = action.payload
       })
       .addCase(removeFromWishList.fulfilled, (state, action) => {
         state.loading = false;
-        state.wishList.products.filter((item) => {
-          item._id !== action.payload._id;
-        });
+        state.wishList = action.payload
       })
       .addCase(fetchWishList.fulfilled, (state, action) => {
         state.loading = false;

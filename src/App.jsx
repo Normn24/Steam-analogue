@@ -1,28 +1,21 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchWishList } from "./redux/wishList.slice/wishList.slice";
 import { fetchCart } from "./redux/cart.slice/cart.slice";
 
 import HeaderPage from "./pages/HeaderPage";
-import MainPage from "./pages/MainPage";
 import Footer from "./components/Footer/Footer";
-// import Products from "./components/Products/Products";
+import MainPage from "./pages/MainPage";
 import FilteredPage from "./pages/FilteredPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import WishListPage from "./pages/WishListPage";
-// import Cart from "./pages/Cart/Cart";
 import "./App.css";
+import LogInForm from "./components/LogInForm/LogInForm";
 import CartPage from "./pages/CartPage";
 
 function App() {
   const dispatch = useDispatch();
-  const { carts } = useSelector((state) => state.carts);
-
-  useEffect(() => {
-    localStorage.setItem("carts", JSON.stringify(carts));
-  }, [carts]);
 
   useEffect(() => {
     dispatch(fetchWishList());
@@ -31,6 +24,42 @@ function App() {
 
   return (
     <>
+      {/* {!isSignd ? (
+        <Modal isOpen={isModalOpen}>
+          <ModalWrapper>
+            <ModalHeader>
+              <h1>Sign In</h1>
+            </ModalHeader>
+
+            <ModalBody>
+              <SignInForm
+                Modalstate={Modalstate}
+                setIsSignd={setIsSignd}
+                isSignd={isSignd}
+              ></SignInForm>
+            </ModalBody>
+            <ModalFooter
+              firstText="Log in now"
+              firstClick={() => {
+                setIsSignd(!isSignd);
+              }}
+            />
+          </ModalWrapper>
+        </Modal>
+      ) : (
+        <Modal isOpen={isModalOpen}>
+          <ModalWrapper>
+            <ModalHeader>
+              <h1>Log in</h1>
+            </ModalHeader>
+
+            <ModalBody>
+              <LogInForm Modalstate={Modalstate}></LogInForm>
+            </ModalBody>
+            <ModalFooter />
+          </ModalWrapper>
+        </Modal>
+      )} */}
       <HeaderPage />
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -38,6 +67,7 @@ function App() {
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/cart" element={<CartPage />} />
         <Route path="/products/:searchQuery" element={<FilteredPage />} />
+        <Route path="/login" element={<LogInForm />} />
         <Route path="/wishlist" element={<WishListPage />} />
       </Routes>
       <Footer />

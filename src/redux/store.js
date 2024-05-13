@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import productItemSlice from './productItem.slice/productItem.slice';
 import productsSlice from './products.slice/products.slice';
 import slidesSlice from './slides.slice/slides.slice';
@@ -12,6 +13,7 @@ import commentsSlice from './comments.slice/comments.slice';
 import productsByGenreSlice from './productsByGenre/productsByGenre.slice';
 import filteredProductsSlice from './filteredProducts.slice/filteredProducts.slice';
 import cartSlice from './cart.slice/cart.slice';
+import loginSlice from './auth.slice/login.slice';
 
 export const store = configureStore({
   reducer: {
@@ -27,7 +29,8 @@ export const store = configureStore({
     comments: commentsSlice,
     productsByGenre: productsByGenreSlice,
     productList: filteredProductsSlice,
-    cart: cartSlice
+    cart: cartSlice,
+    login: loginSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

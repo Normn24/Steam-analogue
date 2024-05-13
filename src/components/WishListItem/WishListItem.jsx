@@ -110,14 +110,14 @@ export default function WishListItem({ product, handleRemove }) {
               backgroundColor: "transparent",
             }}
           >
-            {genres.slice(0, 3).map((value) => (
+            {genres.slice(0, 3).map((value, index) => (
               <ListItem
+                key={index}
                 sx={{
                   width: "auto",
                   padding: "0",
                   textTransform: "capitalize",
                 }}
-                key={value._id}
                 disableGutters
               >
                 <ListItemText
