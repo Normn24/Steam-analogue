@@ -54,7 +54,7 @@ export default function NavBar() {
           InputProps={{
             style: { paddingRight: "4px" },
             endAdornment: (
-              <NavLink to={`/products/${searchQuery}`}>
+              <NavLink to={`/products/search/${searchQuery}`}>
                 <IconButton type="submit" aria-label="search">
                   <SearchIcon />
                 </IconButton>

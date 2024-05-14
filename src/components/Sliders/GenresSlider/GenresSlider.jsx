@@ -86,7 +86,7 @@ export default function GenresSlider() {
         </Typography>
         <Slider {...settings}>
           {genres?.map((genre) => (
-            <Link to={`/products/genre=${genre._id}`} key={genre._id}>
+            <Link to={`/products/genre/${genre._id}`} key={genre._id}>
               <Box
                 sx={{
                   position: "relative",

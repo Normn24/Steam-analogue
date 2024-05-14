@@ -11,14 +11,25 @@ import {
   ListItemText,
   Collapse,
   ImageListItem,
+  Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
   const classes = useStyles();
-  const { _id, name, imageUrls, genres, currentPrice } = product;
+  const {
+    _id,
+    name,
+    imageUrls,
+    genres,
+    currentPrice,
+    description,
+    previousPrice,
+  } = product;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const percent = previousPrice
+    ? Math.floor((currentPrice * 100) / previousPrice)
+    : null;
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
@@ -42,7 +53,6 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
           margin: "0",
           marginBottom: "15px",
           display: "flex",
-          paddingRight: hoveredItem === product._id ? "24px" : "0",
           backgroundColor:
             hoveredItem === product._id ? "#bdbdbd" : "transparent",
         }}
@@ -109,17 +119,80 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
               </ListItem>
             ))}
           </List>
-          <Typography
-            sx={{
-              position: "absolute",
-              right: "16px",
-              bottom: "11px",
-            }}
-            variant="p"
-            component="p"
-          >
-            {currentPrice}$
-          </Typography>
+          {previousPrice ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: previousPrice ? "flex-end" : "center",
+                // backgroundColor: "#cccc",
+                justifyContent: "space-between",
+                padding: "3px 3px 3px 10px",
+                borderRadius: "3px",
+                gap: "10px",
+                position: "absolute",
+                right: "16px",
+                top: "50%",
+                height: "35px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "24px",
+                  lineHeight: "1",
+                  backgroundColor: "#4c6b22",
+                  padding: "8.25px 3px",
+                  color: "#BDED11",
+                  position: "absolute",
+                  top: "0px",
+                  right: "96%",
+                  borderRadius: "4px 0 0 4px",
+                }}
+                variant="p"
+                component="p"
+              >
+                -{percent}%
+              </Typography>
+              <Typography
+                sx={{
+                  position: "absolute",
+                  left: "34.5%",
+                  fontSize: "12px",
+                  bottom: "19px",
+                  color: "#647984",
+                  textDecorationLine: "line-through",
+                }}
+                variant="p"
+                component="p"
+              >
+                {previousPrice}$
+              </Typography>
+              <Typography
+                sx={{
+                  color: "#4c6b22",
+                }}
+                variant="p"
+                component="p"
+              >
+                {currentPrice}$
+              </Typography>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                // backgroundColor: "#cccc",
+                padding: "4px 5px",
+                borderRadius: "3px",
+                position: "absolute",
+                right: "16px",
+                top: "58%",
+              }}
+            >
+              <Typography variant="p" component="p">
+                {currentPrice}$
+              </Typography>
+            </Box>
+          )}
         </CardContent>
       </Card>
       <Collapse
@@ -127,18 +200,20 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
           position: "absolute",
           right: "-43.5%",
           top: "-25%",
-          width: "40.5%",
+          width: "41%",
           backgroundColor: "#bdbdbd",
           borderRadius: 2,
           opacity: 1,
           zIndex: 5,
+          boxShadow:
+            "rgba(0, 0, 0, 0.2) 0px 6px 9px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 11px 20px 5px",
         }}
         in={hoveredItem == product._id}
         timeout="auto"
       >
         <Typography
           sx={{
-            padding: "10px 15px 0",
+            padding: "10px 15px ",
             textTransform: "capitalize",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
@@ -153,7 +228,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
           <ImageListItem
             key={imageUrls[currentImageIndex]}
             sx={{
-              padding: "0 15px 20px",
+              padding: "0 15px 5px",
               transition: "all 2.2s",
             }}
           >
@@ -171,6 +246,19 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
             />
           </ImageListItem>
         </List>
+        <Typography
+          sx={{
+            padding: "0 15px",
+            marginBottom: "5px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            height: "100px",
+          }}
+          variant="p"
+          component="p"
+        >
+          {description}
+        </Typography>
       </Collapse>
     </Link>
   );

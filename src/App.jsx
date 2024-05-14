@@ -33,8 +33,8 @@ function App() {
         {/* <Route path="/cart" element={<Cart />} /> */}
         <Route path="/wishlist" element={<WishListPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/products/:searchQuery" element={<SearchPage />} />
-        {/* <Route path="/products/genre=:genreId" element={<FilteredPage />} /> */}
+        <Route path="/products/search/:searchQuery" element={<SearchPage />} />
+        <Route path="/products/genre/:genreId" element={<SearchPage />} />
         <Route path="/login" element={<LogInForm />} />
       </Routes>
       <Footer />

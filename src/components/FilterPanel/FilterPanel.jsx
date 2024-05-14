@@ -4,7 +4,6 @@ import { Formik, Form } from "formik";
 import Slider from "@mui/material/Slider";
 import {
   TextField,
-  //   Select,
   MenuItem,
   FormControl,
   Button,
@@ -19,6 +18,8 @@ import { useParams } from "react-router-dom";
 function FilterPanel({ products, productList }) {
   const dispatch = useDispatch();
   const { searchQuery } = useParams();
+  const { genreId } = useParams();
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const genres = useSelector((state) => state.genres.genres);
 
@@ -106,7 +107,7 @@ function FilterPanel({ products, productList }) {
           <Formik
             enableReinitialize
             initialValues={{
-              genreId: "",
+              genreId: genreId || "",
               priceRange: [100, 500],
               yearRange: [2010, 2024],
               name: searchQuery || "",
