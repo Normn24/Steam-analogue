@@ -6,10 +6,10 @@ export const HeaderWrapper = styled("div")({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "5px 20.5px 5px 40px",
+    padding: "5px 8.5px 5px 40px",
     // backgroundColor: "#F0F0F4",
     backgroundColor: "#bdbdbd",
-   
+
 })
 
 export const UserWrapper = styled("div")({

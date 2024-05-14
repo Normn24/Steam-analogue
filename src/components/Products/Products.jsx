@@ -108,7 +108,7 @@ export default function Products() {
           }}
         >
           More:
-          <Link to={`/products/category=${catalogItem}`}>
+          <Link to={`/products/category/${catalogItem}`}>
             <Button
               variant="outlined"
               sx={{

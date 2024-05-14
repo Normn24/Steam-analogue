@@ -11,6 +11,7 @@ import {
   ListItemText,
   Collapse,
   ImageListItem,
+  Box,
 } from "@mui/material";
 
 export default function ProductItem({
@@ -18,8 +19,10 @@ export default function ProductItem({
   hoveredItem,
   handleMouseEnter,
 }) {
-  const { _id, name, imageUrls, genres, currentPrice } = product;
-
+  const { _id, name, imageUrls, genres, currentPrice, previousPrice } = product;
+  const percent = previousPrice
+    ? Math.floor((currentPrice * 100) / previousPrice)
+    : null;
   const classes = useStyles();
 
   return (
@@ -99,7 +102,79 @@ export default function ProductItem({
               </ListItem>
             ))}
           </List>
-          <Typography
+          {previousPrice ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: previousPrice ? "flex-end" : "center",
+                justifyContent: "space-between",
+                padding: "3px 3px 3px 10px",
+                borderRadius: "3px",
+                gap: "10px",
+                position: "absolute",
+                right: "16px",
+                top: "50%",
+                height: "35px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "24px",
+                  lineHeight: "1",
+                  backgroundColor: "#4c6b22",
+                  padding: "8.25px 3px",
+                  color: "#BDED11",
+                  position: "absolute",
+                  top: "0px",
+                  right: "96%",
+                  borderRadius: "4px 0 0 4px",
+                }}
+                variant="p"
+                component="p"
+              >
+                -{percent}%
+              </Typography>
+              <Typography
+                sx={{
+                  position: "absolute",
+                  left: "34.5%",
+                  fontSize: "12px",
+                  bottom: "19px",
+                  color: "#647984",
+                  textDecorationLine: "line-through",
+                }}
+                variant="p"
+                component="p"
+              >
+                {previousPrice}$
+              </Typography>
+              <Typography
+                sx={{
+                  color: "#4c6b22",
+                }}
+                variant="p"
+                component="p"
+              >
+                {currentPrice}$
+              </Typography>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                padding: "4px 5px",
+                borderRadius: "3px",
+                position: "absolute",
+                right: "16px",
+                top: "58%",
+              }}
+            >
+              <Typography variant="p" component="p">
+                {currentPrice}$
+              </Typography>
+            </Box>
+          )}
+          {/* <Typography
             sx={{
               position: "absolute",
               right: "16px",
@@ -109,7 +184,7 @@ export default function ProductItem({
             component="p"
           >
             {currentPrice}$
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Card>
       <Collapse

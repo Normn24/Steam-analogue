@@ -12,10 +12,16 @@ import {
   Button,
   Box,
 } from "@mui/material";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import {
+  removeFromCart,
+  addToCart,
+  // fetchCart,
+} from "../../redux/cart.slice/cart.slice";
 export default function WishListItem({ product, handleRemove }) {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   const {
     _id,
     name,
@@ -26,6 +32,8 @@ export default function WishListItem({ product, handleRemove }) {
     developer,
     previousPrice,
   } = product;
+  const { cart } = useSelector((state) => state.cart);
+  const [onCart, setOnCart] = useState(false);
 
   const percent = previousPrice
     ? Math.floor((currentPrice * 100) / previousPrice)
@@ -39,6 +47,22 @@ export default function WishListItem({ product, handleRemove }) {
       day: "numeric",
     }
   );
+
+  useEffect(() => {
+    if (cart?.products?.some((item) => item?.product?._id === product._id)) {
+      setOnCart(true);
+    } else {
+      setOnCart(false);
+    }
+  }, [cart, product]);
+
+  const handleCartList = (_id) => {
+    if (onCart) {
+      dispatch(removeFromCart(_id));
+    } else {
+      dispatch(addToCart(_id));
+    }
+  };
 
   return (
     <Card
@@ -202,14 +226,16 @@ export default function WishListItem({ product, handleRemove }) {
               </Typography>
             )}
             <Button
+              onClick={() => handleCartList(product?._id)}
               sx={{
+                width: "105px",
                 padding: "5px 12px  ",
                 textTransform: "initial",
                 backgroundColor: "#bdbdbd",
                 borderRadius: "3px",
               }}
             >
-              Add to Cart
+              {onCart ? "In cart" : "Add to cart"}
             </Button>
           </Box>
           <Button

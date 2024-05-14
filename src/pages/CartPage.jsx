@@ -33,10 +33,7 @@ export default function CartPage() {
           variant="p"
           component="p"
         >
-          OOPS, THERE`S NOTHING TO SHOW HERE
-          <br />
-          There are 0 items on your wishlist, but none of them match the filters
-          you have applied above
+          Your cart is empty.
         </Typography>
       ) : (
         <>

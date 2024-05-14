@@ -69,6 +69,25 @@ function FilterPanel({ products, productList }) {
     setFilteredProducts(filtered);
   };
 
+  // if (filteredProducts?.length === 0) {
+  //   return (
+  //     <Typography
+  //       sx={{
+  //         textAlign: "center",
+  //         width: "50%",
+  //         position: "absolute",
+  //         top: "50%",
+  //         left: "50%",
+  //         transform: "translate(-50%, -50%)",
+  //       }}
+  //       variant="p"
+  //       component="p"
+  //     >
+  //       Your cart is empty.
+  //     </Typography>
+  //   );
+  // }
+
   return (
     <>
       <Box
@@ -78,18 +97,48 @@ function FilterPanel({ products, productList }) {
           minHeight: "855px",
           display: "flex",
           gap: "25px",
+          justifyContent: "flex-end",
         }}
       >
-        <Box sx={{ width: "70%" }}>
-          {filteredProducts?.map((product) => (
-            <SearchItem
-              key={product._id}
-              product={product}
-              hoveredItem={hoveredItem}
-              handleMouseEnter={handleMouseEnter}
-            />
-          ))}
-        </Box>
+        {filteredProducts?.length === 0 ? (
+          <Typography
+            sx={{
+              textAlign: "center",
+              position: "absolute",
+              left: "25%",
+              top: "5%",
+            }}
+            variant="h5"
+            component="h5"
+          >
+            0 results match your search.
+          </Typography>
+        ) : (
+          <>
+            <Typography
+              sx={{
+                textAlign: "center",
+                position: "absolute",
+                left: "0",
+                top: "0%",
+              }}
+              variant="h5"
+              component="h5"
+            >
+              {`${filteredProducts?.length} results match your search.`}
+            </Typography>
+            <Box sx={{ width: "70%" }}>
+              {filteredProducts?.map((product) => (
+                <SearchItem
+                  key={product._id}
+                  product={product}
+                  hoveredItem={hoveredItem}
+                  handleMouseEnter={handleMouseEnter}
+                />
+              ))}
+            </Box>
+          </>
+        )}
         <div
           style={{
             width: "25%",

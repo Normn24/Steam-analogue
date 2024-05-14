@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchProductId } from "../../redux/productItem.slice/productItem.slice";
-// import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import Modal from "../../components/Modal/Modal";
+import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
 import {
   Box,
   Tabs,
@@ -17,17 +15,12 @@ import {
 } from "@mui/material";
 import { MdBookmarkAdd, MdBookmarkAdded } from "react-icons/md";
 import { TabContext, TabPanel } from "@mui/lab";
-import ProductPageSlider from "../../components/Sliders/ProductPageSlider/ProductPageSlider";
+import ProductPageSlider from "../components/Sliders/ProductPageSlider/ProductPageSlider";
 import {
   addToWishList,
-  // fetchWishList,
   removeFromWishList,
-} from "../../redux/wishList.slice/wishList.slice";
-import {
-  removeFromCart,
-  addToCart,
-  // fetchCart,
-} from "../../redux/cart.slice/cart.slice";
+} from "../redux/wishList.slice/wishList.slice";
+import { removeFromCart, addToCart } from "../redux/cart.slice/cart.slice";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -35,14 +28,23 @@ export default function ProductPage() {
   const { product, status } = useSelector((state) => state.product);
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
-  const [toggleModal, setToggleModal] = useState(false);
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
   const [orientation, setOrientation] = useState("horizontal");
   const [value, setValue] = useState("1");
+  const loggedIn = localStorage.getItem("loggedIn");
   const percent = product.previousPrice
     ? Math.floor((product.currentPrice * 100) / product.previousPrice)
     : null;
+
+  const productYear = new Date(product.yearOfPublication).toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }
+  );
 
   useEffect(() => {
     if (wishList?.products?.some((item) => item._id === product._id)) {
@@ -83,43 +85,22 @@ export default function ProductPage() {
   const handleWishList = (_id) => {
     if (onWishList) {
       dispatch(removeFromWishList(_id));
-      // .then(() => {
-      //   dispatch(fetchWishList());
-      // });
     } else {
       dispatch(addToWishList(_id));
-      // .then(() => {
-      //   dispatch(fetchWishList());
-      // });
     }
   };
 
   const handleCartList = (_id) => {
     if (onCart) {
       dispatch(removeFromCart(_id));
-      // .then(() => {
-      //   dispatch(fetchCart());
-      // });
     } else {
       dispatch(addToCart(_id));
-      // .then(() => {
-      //   dispatch(fetchCart());
-      // });
     }
   };
 
   if (status == "loading") {
     return <p>Loading...</p>;
   }
-
-  const productYear = new Date(product.yearOfPublication).toLocaleDateString(
-    "en-US",
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    }
-  );
 
   return (
     <Box
@@ -253,27 +234,46 @@ export default function ProductPage() {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: `${
+                loggedIn === "true" ? "space-between" : "flex-end"
+              }`,
               gap: "25px",
-              marginTop: "20px",
+              marginTop: `${loggedIn === "true" ? "20px" : "35px"}`,
               alignItems: "center",
+              position: "relative",
             }}
           >
-            <Button
-              sx={{
-                fontSize: "12px",
-                width: "auto",
-                backgroundColor: onWishList ? "#bdbdbd" : "#cccc",
-                borderRadius: "3px",
-                padding: "9.75px 12px",
-                ":hover": { backgroundColor: onWishList ? "#cccc" : "#bdbdbd" },
-              }}
-              startIcon={onWishList ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
-              onClick={() => handleWishList(product._id)}
-            >
-              {onWishList ? "In wishlist" : "Add to wishlist"}
-            </Button>
-
+            {loggedIn === "true" ? (
+              <Button
+                sx={{
+                  fontSize: "12px",
+                  width: "auto",
+                  backgroundColor: onWishList ? "#bdbdbd" : "#cccc",
+                  borderRadius: "3px",
+                  padding: "9.75px 12px",
+                  ":hover": {
+                    backgroundColor: onWishList ? "#cccc" : "#bdbdbd",
+                  },
+                }}
+                startIcon={onWishList ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
+                onClick={() => handleWishList(product._id)}
+              >
+                {onWishList ? "In wishlist" : "Add to wishlist"}
+              </Button>
+            ) : (
+              <Typography
+                sx={{
+                  position: "absolute",
+                  top: "-30px",
+                  width: "100%",
+                  textAlign: "center",
+                }}
+                variant="p"
+                component="p"
+              >
+                Login to add this item to your wishlist, or add to cart
+              </Typography>
+            )}
             <Box
               sx={{
                 display: "flex",
@@ -335,6 +335,7 @@ export default function ProductPage() {
                 </Typography>
               )}
               <Button
+                disabled={loggedIn !== "true"}
                 onClick={() => handleCartList(product?._id)}
                 sx={{
                   padding: "5px 12px  ",
@@ -503,34 +504,6 @@ export default function ProductPage() {
           </TabPanel>
         </TabContext>
       </Box>
-      <div className="products-carousel"></div>
-      {toggleModal && (
-        <Modal modalClose={() => setToggleModal(false)} isModal={toggleModal}>
-          <header className="modal__header">
-            <h2>Замовлення</h2>
-          </header>
-          <div className="modal__content">
-            <p>Ваш товар</p>
-          </div>
-          <footer className="modal__footer">
-            <button
-              onClick={() => {
-                dispatch(addToCart(product));
-                setToggleModal(false);
-              }}
-              className="modal__btn-success"
-            >
-              Додати
-            </button>
-            <button
-              onClick={() => setToggleModal(false)}
-              className="modal__btn-cancel"
-            >
-              Відмінити
-            </button>
-          </footer>
-        </Modal>
-      )}
     </Box>
   );
 }

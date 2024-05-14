@@ -9,12 +9,13 @@ export default function LogInForm() {
   const validationSchema = Yup.object().shape({
     loginOrEmail: Yup.string().min(
       4,
-      "loginOrEmail must be at least 4 characters"
+      "Login or email must be at least 4 characters"
     ),
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
   });
+
   const initialValues = {
     loginOrEmail: "",
     password: "",
@@ -22,7 +23,13 @@ export default function LogInForm() {
 
   function onSubmit(values) {
     console.log("submit", values);
-    dispatch(loginUser(values));
+    dispatch(loginUser(values)).then((response) => {
+      if (response.payload) {
+        if (localStorage.getItem("token")) {
+          window.location.href = "/";
+        }
+      }
+    });
   }
 
   return (
@@ -31,21 +38,33 @@ export default function LogInForm() {
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      <Form>
-        <div className="form">
-          <div className="form_row">
-            <label htmlFor="loginOrEmail">Login Or Email</label>
-            <Field type="loginOrEmail" id="loginOrEmail" name="loginOrEmail" />
-            <ErrorMessage name="loginOrEmail" component="div"></ErrorMessage>
+      {({ isSubmitting }) => (
+        <Form>
+          <div className="form">
+            <div className="form_row">
+              <label htmlFor="loginOrEmail">Login Or Email</label>
+              <Field type="text" id="loginOrEmail" name="loginOrEmail" />
+              <ErrorMessage
+                name="loginOrEmail"
+                component="div"
+                className="error_message"
+              />
+            </div>
+            <div className="form_row">
+              <label htmlFor="password">Password</label>
+              <Field type="password" id="password" name="password" />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="error_message"
+              />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              Log in
+            </button>
           </div>
-          <div className="form_row">
-            <label htmlFor="password">Password</label>
-            <Field type="password" id="password" name="password" />
-            <ErrorMessage name="password" component="div"></ErrorMessage>
-          </div>
-          <button type="submit">Log in</button>
-        </div>
-      </Form>
+        </Form>
+      )}
     </Formik>
   );
 }

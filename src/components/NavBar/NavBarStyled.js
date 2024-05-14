@@ -10,7 +10,7 @@ export const NavBarWrapper = styled("div")({
 });
 
 export const NavBarItem = styled("div")({
-    width: "150px",
+    minWidth: "150px",
     height: "100%",
     display: "flex",
     justifyContent: "center",
@@ -26,5 +26,5 @@ export const StyledNavBarLink = styled(NavLink)({
     fontFamily: '"Gill Sans", sans-serif',
     fontSize: '20px',
     fontWeight: 500,
-    textTransform: "capitalize"
+    textTransform: "uppercase"
 });

@@ -1,54 +1,47 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./SignInForm.scss";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../redux/auth.slice/signup.slice";
 
-export default function SignInForm({ Modalstate, isSignd, setIsSignd }) {
-  const validationSchema = Yup.object().shape({
-    login: Yup.string().min(4, "login must be at least 4 characters"),
-    firstName: Yup.string(),
-    lastName: Yup.string(),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm password is required"),
-  });
-  const initialValues = {
-    firstName: "",
-    lastName: "",
-    login: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+const validationSchema = Yup.object().shape({
+  login: Yup.string()
+    .min(4, "Login must be at least 4 characters")
+    .max(10, "Login must be maximum 10 characters")
+    .required("login is required"),
+  firstName: Yup.string()
+    .min(2, "FirstName must be at least 4 characters")
+    .max(25, "FirstName must be maximum 25 characters")
+    .required("firstname is required"),
+  lastName: Yup.string()
+    .min(2, "LastName must be at least 4 characters")
+    .max(25, "LastName must be maximum 25 characters")
+    .required("lastname is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(7, "Password must be at least 7 characters")
+    .required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm password is required"),
+});
+
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  login: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
+export default function SignInForm() {
+  const dispatch = useDispatch();
+  // const registrationStatus = useSelector((state) => state.signup.status);
+
+  const onSubmit = (values) => {
+    dispatch(registerUser(values));
+    console.log("values :>> ", values);
   };
-
-  function onSubmit(values) {
-    console.log("submit", values);
-
-    fetch("http://localhost:4000/api/customers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        setIsSignd(!isSignd);
-        Modalstate();
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Response from server:", data);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }
 
   return (
     <Formik

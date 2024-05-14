@@ -13,7 +13,9 @@ import commentsSlice from './comments.slice/comments.slice';
 import productsByGenreSlice from './productsByGenre/productsByGenre.slice';
 import filteredProductsSlice from './filteredProducts.slice/filteredProducts.slice';
 import cartSlice from './cart.slice/cart.slice';
+import orderSlice from './order.slice/order.slice';
 import loginSlice from './auth.slice/login.slice';
+import signupSlice from './auth.slice/signup.slice';
 
 export const store = configureStore({
   reducer: {
@@ -30,7 +32,9 @@ export const store = configureStore({
     productsByGenre: productsByGenreSlice,
     productList: filteredProductsSlice,
     cart: cartSlice,
-    login: loginSlice
+    orders: orderSlice,
+    login: loginSlice,
+    signup: signupSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
