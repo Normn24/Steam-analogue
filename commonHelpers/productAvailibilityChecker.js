@@ -7,7 +7,7 @@ module.exports = async orderProducts => {
         const result = await resultPromise;
         const dbProduct = await Product.findOne({ _id: orderItem.product._id });
         const orderedQuantity = orderItem.cartQuantity;
-        const realQuantity = dbProduct.quantity;
+        const realQuantity = 1;
         result.push({
           productId: dbProduct._id,
           itemNo: dbProduct.itemNo,
@@ -21,7 +21,6 @@ module.exports = async orderProducts => {
       },
       Promise.resolve([])
     );
-
     const unavailableProductIds = productsAvailibilityDetails
       .filter(item => !item.available)
       .map(item => item.productId);

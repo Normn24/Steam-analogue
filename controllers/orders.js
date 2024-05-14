@@ -56,7 +56,6 @@ exports.placeOrder = async (req, res, next) => {
     const productAvailibilityInfo = await productAvailibilityChecker(
       order.products
     );
-
     if (!productAvailibilityInfo.productsAvailibilityStatus) {
       res.json({
         message: "Some of your products are unavailable for now",
@@ -97,21 +96,21 @@ exports.placeOrder = async (req, res, next) => {
       newOrder
         .save()
         .then(async order => {
-          const mailResult = await sendMail(
-            subscriberMail,
-            letterSubject,
-            letterHtml,
-            res
-          );
+          // const mailResult = await sendMail(
+          //   subscriberMail,
+          //   letterSubject,
+          //   letterHtml,
+          //   res
+          // );
 
-          for (item of order.products){
+          for (item of order.products) {
             const id = item.product._id;
             const product = await Product.findOne({ _id: id });
             const productQuantity = product.quantity;
             await Product.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.cartQuantity }, { new: true })
           }
 
-          res.json({ order, mailResult });
+          res.json({ order });
         })
         .catch(err =>
           res.status(400).json({

@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema(
   {
+    enabled: {
+      type: Boolean,
+      required: true,
+      default: true
+    },
     itemNo: {
       type: String,
       required: true
