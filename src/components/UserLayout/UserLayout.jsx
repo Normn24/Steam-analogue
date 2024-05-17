@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { CiUser, CiViewList, CiShoppingBasket, CiStar } from "react-icons/ci";
 import useStyles from "./UserStyles";
-import UserWishlist from "./UserWishlist";
+// import UserWishlist from "./UserWishlist";
 
 const UserLayout = ({ children }) => {
     const classes = useStyles();
@@ -16,29 +16,29 @@ const UserLayout = ({ children }) => {
                 <div className={classes.userItem}>
                     <div className={classes.navItem}>
                         <NavLink to="/userPage/profile" className={classes.navLink}>
-                            <span style={{ display: "flex", alignItems: "center" }}> <CiUser /> My Profile</span>
+                            <span style={{ display: "flex", alignItems: "center" }} className={classes.navrText}> <CiUser /> My Profile</span>
                         </NavLink>
                     </div>
                     <div className={classes.navItem}>
                         <NavLink to="/userPage/orders" className={classes.navLink}>
-                            <span style={{ display: "flex", alignItems: "center" }}> <CiShoppingBasket /> My Orders</span>
+                            <span style={{ display: "flex", alignItems: "center" }} className={classes.navrText}> <CiShoppingBasket /> My Orders</span>
                         </NavLink>
                     </div>
                     <div className={classes.navItem}>
                         <NavLink to="/userPage/wishlist" className={classes.navLink}>
-                            <span style={{ display: "flex", alignItems: "center" }}> <CiViewList /> Wishlist</span>
+                            <span style={{ display: "flex", alignItems: "center" }} className={classes.navrText}> <CiViewList /> Wishlist</span>
                         </NavLink>
                     </div>
                     <div className={classes.navItem}>
                         <NavLink to="/userPage/reviews" className={classes.navLink}>
-                            <span style={{ display: "flex", alignItems: "center" }}><CiStar /> My Reviews</span>
+                            <span style={{ display: "flex", alignItems: "center" }} className={classes.navrText}><CiStar /> My Reviews</span>
                         </NavLink>
                     </div>
                 </div>
             </div>
             <div className={classes.contentAreaContainer}>
                 <div className={classes.contentArea}>
-                    <UserWishlist /> <p></p>
+                    {/* <UserWishlist /> */}
                 </div>
             </div>
         </div>
