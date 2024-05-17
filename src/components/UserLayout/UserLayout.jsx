@@ -1,4 +1,3 @@
-// Inside UserLayout.jsx
 import { NavLink } from "react-router-dom";
 import { CiUser, CiViewList, CiShoppingBasket, CiStar } from "react-icons/ci";
 import useStyles from "./UserStyles";
