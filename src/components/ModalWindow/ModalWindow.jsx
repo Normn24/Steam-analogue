@@ -8,7 +8,7 @@ const ModalWindow = ({ open, handleClose, children }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      {children}
+      <>{children}</>
     </Modal>
   );
 };

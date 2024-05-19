@@ -3,7 +3,7 @@ import { TextField, Button, Box, Typography } from '@mui/material';
 
 export const FormContainer = styled(Box)({
   position: "absolute",
-  top: "50%",
+  top: "40%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   boxShadow: 24,
@@ -57,10 +57,11 @@ export const Forgot = styled(Box)({
   fontSize: '16px',
   lineHeight: '1rem',
   color: '#ffff',
-  margin: '14px 0',
+  margin: '14px 0 0',
 });
 
 export const SignButton = styled(Button)({
+  marginTop: "14px",
   display: 'block',
   width: '100%',
   backgroundColor: 'rgba(167, 139, 250, 1)',
@@ -102,7 +103,7 @@ export const Message = styled(Box)({
 export const SocialIcons = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
-  margin: '20px 0'
+  margin: '20px 0',
 });
 
 export const Icon = styled(Button)({

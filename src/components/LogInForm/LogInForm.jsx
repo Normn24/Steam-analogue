@@ -30,7 +30,7 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-export default function LogInForm() {
+export default function LogInForm({ onSignUpClick }) {
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -94,11 +94,13 @@ export default function LogInForm() {
               Forgot Password?
             </Link>
           </Forgot>
-          <SignButton type="submit">Submit</SignButton>
+          <SignButton variant="contained" type="submit">
+            Submit
+          </SignButton>
         </Form>
         <SocialMessage>
           <Line />
-          <Message>or sign in with</Message>
+          <Message>or log in with</Message>
           <Line />
         </SocialMessage>
         <SocialIcons>
@@ -120,7 +122,10 @@ export default function LogInForm() {
         </SocialIcons>
         <SignUp>
           Don`t have an account?
-          <Link href="#" style={{ color: "#ffff", marginLeft: "5px" }}>
+          <Link
+            onClick={onSignUpClick}
+            style={{ color: "#ffff", marginLeft: "5px" }}
+          >
             Sign Up
           </Link>
         </SignUp>

@@ -1,7 +1,24 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/auth.slice/signup.slice";
+import { FaDiscord, FaTwitterSquare, FaLinkedin } from "react-icons/fa";
+import {
+  FormContainer,
+  Title,
+  Form,
+  InputGroup,
+  InputLabel,
+  StyledInput,
+  SocialIcons,
+  SignButton,
+  SignUp,
+  SocialMessage,
+  Line,
+  Message,
+  Icon,
+} from "../LogInForm/StylesLogInForm";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   login: Yup.string()
@@ -9,11 +26,11 @@ const validationSchema = Yup.object().shape({
     .max(10, "Login must be maximum 10 characters")
     .required("login is required"),
   firstName: Yup.string()
-    .min(2, "FirstName must be at least 4 characters")
+    .min(2, "FirstName must be at least 2 characters")
     .max(25, "FirstName must be maximum 25 characters")
     .required("firstname is required"),
   lastName: Yup.string()
-    .min(2, "LastName must be at least 4 characters")
+    .min(2, "LastName must be at least 2 characters")
     .max(25, "LastName must be maximum 25 characters")
     .required("lastname is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -34,61 +51,155 @@ const initialValues = {
   confirmPassword: "",
 };
 
-export default function SignInForm() {
+export default function SignInForm({ onLoginClick }) {
   const dispatch = useDispatch();
-  // const registrationStatus = useSelector((state) => state.signup.status);
 
-  const onSubmit = (values) => {
-    dispatch(registerUser(values));
-    console.log("values :>> ", values);
-  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      dispatch(registerUser(values)).then((response) => {
+        if (response.payload) {
+          if (localStorage.getItem("token")) {
+            onLoginClick();
+          }
+        }
+      });
+      console.log("values :>> ", values);
+    },
+  });
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      <Form>
-        <div className="form">
-          <div className="form_row">
-            <label htmlFor="firstName">FirstName</label>
-            <Field type="firstName" id="firstName" name="firstName" />
-            <ErrorMessage name="firstName" component="div"></ErrorMessage>
-          </div>
-          <div className="form_row">
-            <label htmlFor="lastName">LastName</label>
-            <Field type="lastName" id="lastName" name="lastName" />
-            <ErrorMessage name="lastName" component="div"></ErrorMessage>
-          </div>
-          <div className="form_row">
-            <label htmlFor="login">Login</label>
-            <Field type="login" id="login" name="login" />
-            <ErrorMessage name="login" component="div"></ErrorMessage>
-          </div>
-          <div className="form_row">
-            <label htmlFor="email">Email</label>
-            <Field type="email" id="email" name="email" />
-            <ErrorMessage name="email" component="div"></ErrorMessage>
-          </div>
-
-          <div className="form_row">
-            <label htmlFor="password">Password</label>
-            <Field type="password" id="password" name="password" />
-            <ErrorMessage name="password" component="div"></ErrorMessage>
-          </div>
-          <div className="form_row">
-            <label htmlFor="confirmPassword">confirmPassword</label>
-            <Field
-              type="confirmPassword"
-              id="password"
-              name="confirmPassword"
+    <>
+      <FormContainer>
+        <Title>Sign Up</Title>
+        <Form onSubmit={formik.handleSubmit}>
+          <InputGroup>
+            <InputLabel htmlFor="firstName">First Name</InputLabel>
+            <StyledInput
+              id="firstName"
+              name="firstName"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
+              helperText={formik.touched.firstName && formik.errors.firstName}
+              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
             />
-            <ErrorMessage name="confirmPassword" component="div"></ErrorMessage>
-          </div>
-          <button type="submit">sign in</button>
-        </div>
-      </Form>
-    </Formik>
+          </InputGroup>
+          <InputGroup>
+            <InputLabel htmlFor="lastName">Last Name</InputLabel>
+            <StyledInput
+              id="lastName"
+              name="lastName"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLabel htmlFor="login">Login</InputLabel>
+            <StyledInput
+              id="login"
+              name="login"
+              value={formik.values.login}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.login && Boolean(formik.errors.login)}
+              helperText={formik.touched.login && formik.errors.login}
+              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <StyledInput
+              id="email"
+              name="email"
+              type="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <StyledInput
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="on"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+            <StyledInput
+              id="confirmPassword"
+              name="confirmPassword"
+              autoComplete="on"
+              type="password"
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.confirmPassword &&
+                Boolean(formik.errors.confirmPassword)
+              }
+              helperText={
+                formik.touched.confirmPassword && formik.errors.confirmPassword
+              }
+              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+            />
+          </InputGroup>
+          <SignButton variant="contained" type="submit">
+            Sign Up
+          </SignButton>
+        </Form>
+        <SocialMessage>
+          <Line />
+          <Message>or sign up with</Message>
+          <Line />
+        </SocialMessage>
+        <SocialIcons>
+          <Icon>
+            <FaDiscord
+              style={{ height: "40px", width: "40px", fill: "#fff" }}
+            />
+          </Icon>
+          <Icon>
+            <FaLinkedin
+              style={{ height: "40px", width: "40px", fill: "#fff" }}
+            />
+          </Icon>
+          <Icon>
+            <FaTwitterSquare
+              style={{ height: "40px", width: "40px", fill: "#fff" }}
+            />
+          </Icon>
+        </SocialIcons>
+        <SignUp>
+          Already have an account?
+          <Link
+            onClick={onLoginClick}
+            style={{ color: "#ffff", marginLeft: "5px" }}
+          >
+            Login
+          </Link>
+        </SignUp>
+      </FormContainer>
+    </>
   );
 }

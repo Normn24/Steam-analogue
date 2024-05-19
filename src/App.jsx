@@ -11,7 +11,6 @@ import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
 import ProductPage from "./pages/ProductPage";
 import WishListPage from "./pages/WishListPage";
-import LogInForm from "./components/LogInForm/LogInForm";
 import SignInForm from "./components/SignInForm/SignInForm";
 import CartPage from "./pages/CartPage";
 import LibraryPage from "./pages/LibraryPage";
@@ -44,7 +43,6 @@ function App() {
           path="/products/category/:catalogQuery"
           element={<CategoryPage />}
         />
-        <Route path="/login" element={<LogInForm />} />
         <Route path="/register" element={<SignInForm />} />
 
         <Route

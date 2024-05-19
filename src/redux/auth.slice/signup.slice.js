@@ -14,8 +14,6 @@ export const registerUser = createAsyncThunk(
       throw new Error(payload);
     }
     const data = await response.json();
-    localStorage.setItem('loggedIn', true)
-    localStorage.setItem('token', data.token)
     return data;
   });
 

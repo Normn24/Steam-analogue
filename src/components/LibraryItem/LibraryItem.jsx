@@ -11,41 +11,32 @@ import {
 } from "@mui/material";
 import { HiDotsVertical } from "react-icons/hi";
 import { IoMdDownload, IoIosPlay } from "react-icons/io";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDownloaded,
+  removeDownloaded,
+} from "../../redux/downloaded.slice/downloaded.slice";
 
 export default function LibraryItem({ product }) {
+  const dispatch = useDispatch();
   const { _id, name, imageUrls } = product;
-  const [downloaded, setDownloaded] = useState(null);
-  const isDownloaded = JSON.parse(localStorage.getItem("downloaded"));
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  useEffect(() => {
-    if (isDownloaded && isDownloaded.some((item) => item === _id)) {
-      setDownloaded(true);
-    } else {
-      setDownloaded(null);
-    }
-  }, [_id, isDownloaded]);
+  const downloaded = useSelector((state) => state.downloaded.downloaded);
+  const isDownloaded = downloaded?.some((item) => item === _id);
 
   const handleDownload = (_id) => {
-    if (!downloaded) {
-      let oldData = JSON.parse(localStorage.getItem("downloaded"));
-      oldData
-        ? localStorage.setItem("downloaded", JSON.stringify([...oldData, _id]))
-        : localStorage.setItem("downloaded", JSON.stringify([_id]));
-      setDownloaded(true);
+    if (!isDownloaded) {
+      dispatch(addDownloaded(_id));
     }
   };
 
   const handleDelete = (_id) => {
-    if (isDownloaded && isDownloaded.find((item) => item === _id)) {
-      const index = isDownloaded.indexOf(_id);
-      isDownloaded.splice(index, 1);
-      localStorage.setItem("downloaded", JSON.stringify(isDownloaded));
+    if (isDownloaded) {
+      dispatch(removeDownloaded(_id));
     }
-    setAnchorEl(null);
   };
 
   const handleClick = (event) => {
@@ -86,7 +77,7 @@ export default function LibraryItem({ product }) {
             <MenuItem onClick={handleClose}>Store Page</MenuItem>
           </Link>
           <MenuItem onClick={handleClose}>Manage</MenuItem>
-          {downloaded && (
+          {isDownloaded && (
             <MenuItem onClick={() => handleDelete(_id)}>Uninstall</MenuItem>
           )}
         </Menu>
@@ -146,7 +137,7 @@ export default function LibraryItem({ product }) {
             </Box>
 
             <Box sx={{ display: "flex", gap: "5px" }}>
-              {downloaded ? (
+              {isDownloaded ? (
                 <IoIosPlay style={{ width: "18px", height: "18px" }} />
               ) : (
                 <IoMdDownload style={{ width: "18px", height: "18px" }} />
@@ -160,7 +151,7 @@ export default function LibraryItem({ product }) {
                 variant="p"
                 component="p"
               >
-                {downloaded ? "Play" : "Download"}
+                {isDownloaded ? "Play" : "Download"}
               </Typography>
             </Box>
           </CardContent>
