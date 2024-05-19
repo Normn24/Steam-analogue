@@ -9,7 +9,6 @@ export const fetchCatalogProducts = createAsyncThunk(
         throw new Error('Failed to fetch catalog');
       }
       const { data } = await response.json();
-      // console.log('fetched catalog', data);
       return data;
     } catch (error) {
       console.error('Error fetching catalog:', error);
@@ -22,7 +21,6 @@ const catalogSlice = createSlice({
   name: 'categories',
   initialState: {
     categoriesProducts: [],
-    // categoryNames: [],
     loading: false,
     error: null
   },
@@ -36,8 +34,6 @@ const catalogSlice = createSlice({
       .addCase(fetchCatalogProducts.fulfilled, (state, action) => {
         state.loading = false;
         state.categoriesProducts = action.payload;
-
-        // console.log('fetch catalegories:', state.categoriesProducts);
       })
       .addCase(fetchCatalogProducts.rejected, (state, action) => {
         state.loading = false;
@@ -45,7 +41,5 @@ const catalogSlice = createSlice({
       });
   }
 });
-
-// export const { } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

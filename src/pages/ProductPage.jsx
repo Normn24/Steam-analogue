@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
 import {
   Box,
@@ -25,18 +25,22 @@ import { removeFromCart, addToCart } from "../redux/cart.slice/cart.slice";
 export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { product, status } = useSelector((state) => state.product);
-  const { wishList } = useSelector((state) => state.wishList);
-  const { cart } = useSelector((state) => state.cart);
+  const { wishList = {} } = useSelector((state) => state.wishList || {});
+  const { cart = {} } = useSelector((state) => state.cart || {});
+  const { library = {} } = useSelector((state) => state.orders || {});
+
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
-  const [orientation, setOrientation] = useState("horizontal");
+  const [onLibrary, setOnLibrary] = useState(false);
   const [value, setValue] = useState("1");
+
   const loggedIn = localStorage.getItem("loggedIn");
   const percent = product.previousPrice
     ? Math.floor((product.currentPrice * 100) / product.previousPrice)
     : null;
-
   const productYear = new Date(product.yearOfPublication).toLocaleDateString(
     "en-US",
     {
@@ -47,60 +51,57 @@ export default function ProductPage() {
   );
 
   useEffect(() => {
+    dispatch(fetchProductId(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
     if (wishList?.products?.some((item) => item._id === product._id)) {
       setOnWishList(true);
-    } else {
-      setOnWishList(false);
     }
     if (cart?.products?.some((item) => item?.product?._id === product._id)) {
       setOnCart(true);
-    } else {
-      setOnCart(false);
     }
-  }, [cart, product, wishList]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 600) {
-        setOrientation("vertical");
-      } else {
-        setOrientation("horizontal");
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchProductId(id));
-  }, [dispatch, id]);
+    if (
+      library?.some((item) =>
+        item?.some((element) => element?._id === product._id)
+      )
+    ) {
+      setOnLibrary(true);
+    } else {
+      setOnLibrary(false);
+    }
+  }, [cart, product, wishList, library]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleWishList = (_id) => {
+  const handleWishList = (id) => {
     if (onWishList) {
-      dispatch(removeFromWishList(_id));
+      dispatch(removeFromWishList(id));
+      setOnWishList(false);
     } else {
-      dispatch(addToWishList(_id));
+      dispatch(addToWishList(id));
     }
   };
 
-  const handleCartList = (_id) => {
+  const handleCartList = (id) => {
     if (onCart) {
-      dispatch(removeFromCart(_id));
+      dispatch(removeFromCart(id));
+      setOnCart(false);
     } else {
-      dispatch(addToCart(_id));
+      dispatch(addToCart(id));
     }
+  };
+
+  const handleLibrary = () => {
+    navigate("/products/library");
   };
 
   if (status == "loading") {
     return <p>Loading...</p>;
   }
+  console.log(product);
 
   return (
     <Box
@@ -170,7 +171,7 @@ export default function ProductPage() {
               objectFit: "cover",
               borderRadius: "0px 6px 0px 0px",
             }}
-            src={product.imageUrls ? product.imageUrls[0] : ""}
+            src={product?.imageUrls ? product?.imageUrls[0] : ""}
           />
           <Typography
             variant="h2"
@@ -235,7 +236,7 @@ export default function ProductPage() {
             sx={{
               display: "flex",
               justifyContent: `${
-                loggedIn === "true" ? "space-between" : "flex-end"
+                loggedIn === "true" && !onLibrary ? "space-between" : "flex-end"
               }`,
               gap: "25px",
               marginTop: `${loggedIn === "true" ? "20px" : "35px"}`,
@@ -246,6 +247,7 @@ export default function ProductPage() {
             {loggedIn === "true" ? (
               <Button
                 sx={{
+                  display: onLibrary ? "none" : "flex",
                   fontSize: "12px",
                   width: "auto",
                   backgroundColor: onWishList ? "#bdbdbd" : "#cccc",
@@ -256,7 +258,7 @@ export default function ProductPage() {
                   },
                 }}
                 startIcon={onWishList ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
-                onClick={() => handleWishList(product._id)}
+                onClick={() => handleWishList(id)}
               >
                 {onWishList ? "In wishlist" : "Add to wishlist"}
               </Button>
@@ -274,79 +276,102 @@ export default function ProductPage() {
                 Login to add this item to your wishlist, or add to cart
               </Typography>
             )}
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: product.previousPrice ? "flex-end" : "center",
-                backgroundColor: "#cccc",
-                justifyContent: "space-between",
-                padding: "3px 3px 3px 10px",
-                borderRadius: "3px",
-                gap: "8px",
-                position: "relative",
-              }}
-            >
-              {product.previousPrice ? (
-                <>
-                  <Typography
+            {loggedIn === "true" && onLibrary ? (
+              <>
+                <Button
+                  onClick={() => handleLibrary()}
+                  sx={{
+                    padding: "8px 12px",
+                    textTransform: "initial",
+                    backgroundColor: "#4c6b22",
+                    color: "#BDED11",
+
+                    borderRadius: "3px",
+                    ":hover": {
+                      backgroundColor: "#5e9f06",
+                    },
+                  }}
+                >
+                  Go to library
+                </Button>
+              </>
+            ) : (
+              <>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: product.previousPrice ? "flex-end" : "center",
+                    backgroundColor: "#cccc",
+                    justifyContent: "space-between",
+                    padding: "3px 3px 3px 10px",
+                    borderRadius: "3px",
+                    gap: "8px",
+                    position: "relative",
+                  }}
+                >
+                  {product.previousPrice ? (
+                    <>
+                      <Typography
+                        sx={{
+                          fontSize: "24px",
+                          lineHeight: "1",
+                          backgroundColor: "#4c6b22",
+                          padding: "8.25px 3px",
+                          color: "#BDED11",
+                          position: "absolute",
+                          top: "0px",
+                          left: "-62px",
+                          borderRadius: "4px 0 0 4px",
+                        }}
+                        variant="p"
+                        component="p"
+                      >
+                        -{percent}%
+                      </Typography>
+                      <Typography
+                        sx={{
+                          position: "absolute",
+                          left: "11.5%",
+                          fontSize: "12px",
+                          bottom: "19px",
+                          color: "#647984",
+                          textDecorationLine: "line-through",
+                        }}
+                        variant="p"
+                        component="p"
+                      >
+                        {product.previousPrice}$
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: "#4c6b22",
+                        }}
+                        variant="p"
+                        component="p"
+                      >
+                        {product.currentPrice}$
+                      </Typography>
+                    </>
+                  ) : (
+                    <Typography variant="p" component="p">
+                      {product.currentPrice}$
+                    </Typography>
+                  )}
+                  <Button
+                    disabled={loggedIn !== "true"}
+                    onClick={() => handleCartList(id)}
                     sx={{
-                      fontSize: "24px",
-                      lineHeight: "1",
-                      backgroundColor: "#4c6b22",
-                      padding: "8.25px 3px",
-                      color: "#BDED11",
-                      position: "absolute",
-                      top: "0px",
-                      left: "-62px",
-                      borderRadius: "4px 0 0 4px",
+                      padding: "5px 12px  ",
+                      textTransform: "initial",
+                      backgroundColor: "#bdbdbd",
+                      borderRadius: "3px",
                     }}
-                    variant="p"
-                    component="p"
                   >
-                    -{percent}%
-                  </Typography>
-                  <Typography
-                    sx={{
-                      position: "absolute",
-                      left: "11.5%",
-                      fontSize: "12px",
-                      bottom: "19px",
-                      color: "#647984",
-                      textDecorationLine: "line-through",
-                    }}
-                    variant="p"
-                    component="p"
-                  >
-                    {product.previousPrice}$
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#4c6b22",
-                    }}
-                    variant="p"
-                    component="p"
-                  >
-                    {product.currentPrice}$
-                  </Typography>
-                </>
-              ) : (
-                <Typography variant="p" component="p">
-                  {product.currentPrice}$
-                </Typography>
-              )}
-              <Button
-                disabled={loggedIn !== "true"}
-                onClick={() => handleCartList(product?._id)}
-                sx={{
-                  padding: "5px 12px  ",
-                  textTransform: "initial",
-                  backgroundColor: "#bdbdbd",
-                  borderRadius: "3px",
-                }}
-              >
-                {onCart ? "In cart" : "Add to cart"}
-              </Button>
-            </Box>
+                    {onCart ? "In cart" : "Add to cart"}
+                  </Button>
+                </Box>
+              </>
+            )}
           </Box>
         </Box>
       </Box>
@@ -364,9 +389,6 @@ export default function ProductPage() {
               onChange={handleChange}
               centered
               variant="fullWidth"
-              orientation={
-                orientation === "vertical" ? "vertical" : "horizontal"
-              }
               TabIndicatorProps={{
                 sx: { backgroundColor: "blue", color: "black" },
               }}
@@ -397,12 +419,16 @@ export default function ProductPage() {
               display: value == 1 ? "flex" : "none",
               textAlign: "left",
               fontSize: "28px",
-              backgroundImage: `url(${
-                product?.imageUrls ? product.imageUrls[2] : ""
-              })`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
+              // backgroundImage: `url(${
+              //   product?.imageUrls ? product.imageUrls[2] : ""
+              // })`,
+              // backgroundRepeat: "no-repeat",
+              // backgroundSize: "cover",
+              // backgroundPosition: "center center",
+              backgroundColor: "#cccc",
+              opacity: 0.8,
+              backgroundImage:
+                "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
             }}
           >
             <Typography
@@ -410,8 +436,11 @@ export default function ProductPage() {
               sx={{
                 width: "75%",
                 margin: "0 auto",
-                backgroundColor: "#ffffff",
-                opacity: "0.65",
+                color: "#000",
+                backdropFilter: "blur(10px) saturate(99%)",
+                backgroundColor: "rgba(255, 255, 255, 0.29)",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
                 fontSize: "22px",
                 "@media (max-width: 600px)": { fontSize: "18px" },
@@ -429,12 +458,16 @@ export default function ProductPage() {
               width: "auto",
               gap: "50px",
               alignItems: "center",
-              backgroundImage: `url(${
-                product?.imageUrls ? product.imageUrls[0] : ""
-              })`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
+              // backgroundImage: `url(${
+              //   product?.imageUrls ? product.imageUrls[0] : ""
+              // })`,
+              // backgroundRepeat: "no-repeat",
+              // backgroundSize: "cover",
+              // backgroundPosition: "center center",
+              backgroundColor: "#cccc",
+              opacity: 0.8,
+              backgroundImage:
+                "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
             }}
           >
             <Box
@@ -442,8 +475,10 @@ export default function ProductPage() {
                 display: "flex",
                 flexDirection: "column",
                 width: "50%",
-                backgroundColor: "#ffffff",
-                opacity: "0.65",
+                backdropFilter: "blur(10px) saturate(99%)",
+                backgroundColor: "rgba(255, 255, 255, 0.29)",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
               }}
             >
@@ -451,7 +486,11 @@ export default function ProductPage() {
                 variant="h5"
                 sx={{
                   fontWeight: "700",
-                  "@media (max-width: 600px)": { fontSize: "18px" },
+                  "@media (max-width: 600px)": {
+                    fontSize: "18px",
+                    textWrap: "nowrap",
+                    overflow: "hidden",
+                  },
                 }}
               >
                 MINIMUM:
@@ -462,7 +501,11 @@ export default function ProductPage() {
                   variant="p"
                   sx={{
                     fontSize: "20px",
-                    "@media (max-width: 600px)": { fontSize: "18px" },
+                    "@media (max-width: 600px)": {
+                      fontSize: "18px",
+                      textWrap: "nowrap",
+                      overflow: "hidden",
+                    },
                   }}
                 >
                   {item}
@@ -474,8 +517,10 @@ export default function ProductPage() {
                 display: "flex",
                 flexDirection: "column",
                 width: "50%",
-                backgroundColor: "#ffffff",
-                opacity: "0.65",
+                backdropFilter: "blur(10px) saturate(99%)",
+                backgroundColor: "rgba(255, 255, 255, 0.29)",
+                borderRadius: "12px",
+                border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
               }}
             >

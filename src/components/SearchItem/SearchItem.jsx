@@ -201,8 +201,10 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
           right: "-43.5%",
           top: "-25%",
           width: "41%",
-          backgroundColor: "#bdbdbd",
-          borderRadius: 2,
+          backdropFilter: "blur(14px) saturate(181%)",
+          backgroundColor: " rgba(0, 0, 0, 0.29)",
+          borderRadius: "0 0 12px 12px",
+          border: "1px solid rgba(255, 255, 255, 0.125)",
           opacity: 1,
           zIndex: 5,
           boxShadow:
@@ -211,24 +213,11 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
         in={hoveredItem == product._id}
         timeout="auto"
       >
-        <Typography
-          sx={{
-            padding: "10px 15px ",
-            textTransform: "capitalize",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-          variant="h5"
-          component="h5"
-        >
-          {name}
-        </Typography>
-
         <List sx={{ padding: 0 }}>
           <ImageListItem
             key={imageUrls[currentImageIndex]}
             sx={{
-              padding: "0 15px 5px",
+              padding: "0 0 5px",
               transition: "all 2.2s",
             }}
           >
@@ -246,6 +235,18 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
             />
           </ImageListItem>
         </List>
+        <Typography
+          sx={{
+            padding: "5px 15px ",
+            textTransform: "capitalize",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+          variant="h5"
+          component="h5"
+        >
+          {name}
+        </Typography>
         <Typography
           sx={{
             padding: "0 15px",

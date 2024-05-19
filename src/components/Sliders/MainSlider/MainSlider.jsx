@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, LinearProgress } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import MainSliderItem from "./MainSliderItem";
 import { fetchProducts } from "../../../redux/products.slice/products.slice";
@@ -17,7 +17,7 @@ function MainSlider() {
   }, [dispatch]);
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return <LinearProgress />;
   }
   return (
     <Carousel

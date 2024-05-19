@@ -14,11 +14,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import {
-  removeFromCart,
-  addToCart,
-  // fetchCart,
-} from "../../redux/cart.slice/cart.slice";
+import { removeFromCart, addToCart } from "../../redux/cart.slice/cart.slice";
 export default function WishListItem({ product, handleRemove }) {
   const classes = useStyles();
   const dispatch = useDispatch();

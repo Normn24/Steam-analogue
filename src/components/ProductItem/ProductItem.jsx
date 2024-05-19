@@ -174,17 +174,6 @@ export default function ProductItem({
               </Typography>
             </Box>
           )}
-          {/* <Typography
-            sx={{
-              position: "absolute",
-              right: "16px",
-              bottom: "11px",
-            }}
-            variant="p"
-            component="p"
-          >
-            {currentPrice}$
-          </Typography> */}
         </CardContent>
       </Card>
       <Collapse

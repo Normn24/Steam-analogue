@@ -44,7 +44,7 @@ export default function NavBar() {
           )}
           {catalogs.slice(0, 3).map((catalog) => (
             <NavBarItem key={catalog.id}>
-              <StyledNavBarLink to={`/products/category=${catalog.name}`}>
+              <StyledNavBarLink to={`/products/category/${catalog.name}`}>
                 {catalog.name}
               </StyledNavBarLink>
             </NavBarItem>

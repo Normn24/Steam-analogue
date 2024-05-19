@@ -29,6 +29,7 @@ const orderSlice = createSlice({
   name: "orders",
   initialState: {
     orders: [],
+    library: [],
     loading: false,
   },
   reducers: {},
@@ -39,6 +40,7 @@ const orderSlice = createSlice({
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
         state.loading = false;
+        state.library = action.payload.map(item => item.products.map(el => el.product))
         state.orders = action.payload;
       });
   },
