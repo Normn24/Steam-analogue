@@ -13,9 +13,12 @@ const downloadedSlice = createSlice({
     },
     removeDownloaded: (state, action) => {
       state.downloaded = state.downloaded.filter(id => id !== action.payload);
-    }
+    },
+    clearDownloaded: (state) => {
+      state.downloaded = [];
+    },
   }
 });
 
-export const { addDownloaded, removeDownloaded } = downloadedSlice.actions;
+export const { addDownloaded, removeDownloaded, clearDownloaded } = downloadedSlice.actions;
 export default downloadedSlice.reducer;

@@ -36,6 +36,7 @@ export default function LibraryItem({ product }) {
   const handleDelete = (_id) => {
     if (isDownloaded) {
       dispatch(removeDownloaded(_id));
+      setAnchorEl(null);
     }
   };
 

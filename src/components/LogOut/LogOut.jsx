@@ -1,9 +1,13 @@
 import { Typography, Box, Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { clearDownloaded } from "../../redux/downloaded.slice/downloaded.slice";
 
 export default function Logout({ handleClose }) {
+  const dispatch = useDispatch();
   const logout = () => {
     localStorage.setItem("loggedIn", false);
     localStorage.removeItem("token");
+    dispatch(clearDownloaded());
     window.location.href = "/";
   };
 
