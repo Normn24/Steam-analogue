@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { fetchWishList } from "./redux/wishList.slice/wishList.slice";
 import { fetchCart } from "./redux/cart.slice/cart.slice";
 import { fetchOrders } from "./redux/order.slice/order.slice";
+import { fetchUser } from "./redux/user.slice/user.slice";
 
 import HeaderPage from "./pages/HeaderPage";
 import Footer from "./components/Footer/Footer";
@@ -17,9 +18,11 @@ import LibraryPage from "./pages/LibraryPage";
 import ProtectedRoute from "./ProtectedRoute";
 import CategoryPage from "./pages/CategoryPage";
 import OrderPage from "./pages/OrderPage";
+import UserPage from "./pages/UserPage/UserPage";
 
 import "./App.css";
-import { fetchUser } from "./redux/user.slice/user.slice";
+import UserProfile from "./components/UserLayout/UserProfile";
+import UserOrders from "./components/UserLayout/UserOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +50,10 @@ function App() {
           element={<CategoryPage />}
         />
         <Route path="/register" element={<SignInForm />} />
+        <Route path="/account" element={<UserPage />}>
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="orders" element={<UserOrders />} />
+        </Route>
 
         <Route
           path="/wishlist"

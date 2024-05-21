@@ -19,6 +19,7 @@ import {
   Icon,
 } from "../LogInForm/StylesLogInForm";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const validationSchema = Yup.object().shape({
   login: Yup.string()
@@ -74,34 +75,38 @@ export default function SignInForm({ onLoginClick }) {
       <FormContainer>
         <Title>Sign Up</Title>
         <Form onSubmit={formik.handleSubmit}>
-          <InputGroup>
-            <InputLabel htmlFor="firstName">First Name</InputLabel>
-            <StyledInput
-              id="firstName"
-              name="firstName"
-              value={formik.values.firstName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.touched.firstName && Boolean(formik.errors.firstName)
-              }
-              helperText={formik.touched.firstName && formik.errors.firstName}
-              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
-            />
-          </InputGroup>
-          <InputGroup>
-            <InputLabel htmlFor="lastName">Last Name</InputLabel>
-            <StyledInput
-              id="lastName"
-              name="lastName"
-              value={formik.values.lastName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-              helperText={formik.touched.lastName && formik.errors.lastName}
-              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
-            />
-          </InputGroup>
+          <Box sx={{ display: "flex", gap: "20px" }}>
+            <InputGroup>
+              <InputLabel htmlFor="firstName">First Name</InputLabel>
+              <StyledInput
+                id="firstName"
+                name="firstName"
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.firstName && Boolean(formik.errors.firstName)
+                }
+                helperText={formik.touched.firstName && formik.errors.firstName}
+                inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              />
+            </InputGroup>
+            <InputGroup>
+              <InputLabel htmlFor="lastName">Last Name</InputLabel>
+              <StyledInput
+                id="lastName"
+                name="lastName"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.lastName && Boolean(formik.errors.lastName)
+                }
+                helperText={formik.touched.lastName && formik.errors.lastName}
+                inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              />
+            </InputGroup>
+          </Box>
           <InputGroup>
             <InputLabel htmlFor="login">Login</InputLabel>
             <StyledInput
@@ -129,41 +134,48 @@ export default function SignInForm({ onLoginClick }) {
               inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
             />
           </InputGroup>
-          <InputGroup>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <StyledInput
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="on"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
-            />
-          </InputGroup>
-          <InputGroup>
-            <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
-            <StyledInput
-              id="confirmPassword"
-              name="confirmPassword"
-              autoComplete="on"
-              type="password"
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.touched.confirmPassword &&
-                Boolean(formik.errors.confirmPassword)
-              }
-              helperText={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-              }
-              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
-            />
-          </InputGroup>
+          <Box sx={{ display: "flex", gap: "20px" }}>
+            <InputGroup>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <StyledInput
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="on"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+                inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              />
+            </InputGroup>
+            <InputGroup>
+              <InputLabel htmlFor="confirmPassword">
+                Confirm Password
+              </InputLabel>
+              <StyledInput
+                id="confirmPassword"
+                name="confirmPassword"
+                autoComplete="on"
+                type="password"
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.confirmPassword &&
+                  Boolean(formik.errors.confirmPassword)
+                }
+                helperText={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
+                inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              />
+            </InputGroup>
+          </Box>
           <SignButton variant="contained" type="submit">
             Sign Up
           </SignButton>

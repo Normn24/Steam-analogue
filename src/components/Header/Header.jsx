@@ -33,7 +33,7 @@ export default function Header() {
             <NavLink to={"/cart"}>
               <CiShoppingBasket />
             </NavLink>
-            <NavLink>
+            <NavLink to={"/account/profile"}>
               <CiUser />
             </NavLink>
             <NavLink onClick={() => handleOpen("logout")}>
