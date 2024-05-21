@@ -27,15 +27,14 @@ import orderSlice from './order.slice/order.slice';
 import loginSlice from './auth.slice/login.slice';
 import signupSlice from './auth.slice/signup.slice';
 import downloadedSlice from './downloaded.slice/downloaded.slice';
+import userSlice from './user.slice/user.slice';
 
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-
 const persistedReducer = persistReducer(persistConfig, downloadedSlice);
-
 
 export const store = configureStore({
   reducer: {
@@ -55,7 +54,8 @@ export const store = configureStore({
     orders: orderSlice,
     login: loginSlice,
     signup: signupSlice,
-    downloaded: persistedReducer
+    downloaded: persistedReducer,
+    user: userSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

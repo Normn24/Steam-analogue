@@ -2,14 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography, Button } from "@mui/material";
 import { removeFromCart } from "../redux/cart.slice/cart.slice";
 import CartListItem from "../components/CartListItem/CartListItem";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cart, loading } = useSelector((state) => state.cart);
   const totalPrice = cart?.products?.reduce(
     (total, product) => total + product.product.currentPrice,
     0
   );
+
+  const handlePayment = () => {
+    navigate("/cart/order");
+  };
 
   const handleRemove = (_id) => {
     dispatch(removeFromCart(_id));
@@ -19,7 +25,9 @@ export default function CartPage() {
     return <h4>Loading</h4>;
   }
   return (
-    <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
+    <Box
+      sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 20px" }}
+    >
       {cart === null || cart?.products?.length === 0 ? (
         <Typography
           sx={{
@@ -58,7 +66,7 @@ export default function CartPage() {
             sx={{
               position: "absolute",
               top: "55px",
-              right: 0,
+              right: "0",
               display: "flex",
               flexDirection: "column",
               width: "400px",
@@ -95,6 +103,7 @@ export default function CartPage() {
               Sales tax will be calculated during checkout where applicable
             </Typography>
             <Button
+              onClick={handlePayment}
               sx={{
                 backgroundColor: "#bdbdbd",
                 borderRadius: "3px",

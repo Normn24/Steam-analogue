@@ -28,9 +28,9 @@ export default function ProductPage() {
   const navigate = useNavigate();
 
   const { product, status } = useSelector((state) => state.product);
-  const { wishList = {} } = useSelector((state) => state.wishList || {});
-  const { cart = {} } = useSelector((state) => state.cart || {});
-  const { library = {} } = useSelector((state) => state.orders || {});
+  const { wishList } = useSelector((state) => state.wishList);
+  const { cart } = useSelector((state) => state.cart);
+  const { library } = useSelector((state) => state.orders);
 
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
@@ -57,9 +57,13 @@ export default function ProductPage() {
   useEffect(() => {
     if (wishList?.products?.some((item) => item._id === product._id)) {
       setOnWishList(true);
+    } else {
+      setOnWishList(false);
     }
     if (cart?.products?.some((item) => item?.product?._id === product._id)) {
       setOnCart(true);
+    } else {
+      setOnCart(false);
     }
     if (
       library?.some((item) =>
@@ -101,7 +105,6 @@ export default function ProductPage() {
   if (status == "loading") {
     return <p>Loading...</p>;
   }
-  console.log(product);
 
   return (
     <Box

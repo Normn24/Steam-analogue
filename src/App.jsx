@@ -16,8 +16,10 @@ import CartPage from "./pages/CartPage";
 import LibraryPage from "./pages/LibraryPage";
 import ProtectedRoute from "./ProtectedRoute";
 import CategoryPage from "./pages/CategoryPage";
+import OrderPage from "./pages/OrderPage";
 
 import "./App.css";
+import { fetchUser } from "./redux/user.slice/user.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ function App() {
       dispatch(fetchWishList());
       dispatch(fetchCart());
       dispatch(fetchOrders());
+      dispatch(fetchUser());
     }
   }, [dispatch, loggedIn]);
 
@@ -59,6 +62,15 @@ function App() {
           element={
             <ProtectedRoute
               element={<CartPage />}
+              isAllowed={loggedIn === "true"}
+            />
+          }
+        />
+        <Route
+          path="/cart/order"
+          element={
+            <ProtectedRoute
+              element={<OrderPage />}
               isAllowed={loggedIn === "true"}
             />
           }

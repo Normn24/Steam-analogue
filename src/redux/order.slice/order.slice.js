@@ -4,6 +4,32 @@ export function getAccessToken() {
   return localStorage.getItem("token");
 }
 
+
+export const placeOrder = createAsyncThunk(
+  'orders/placeOrder',
+  async (payload) => {
+    const response = await fetch("http://localhost:4000/api/orders/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customerId: payload.userId,
+        mobile: payload.phone,
+        letterSubject: "Thank you for order! You are welcome!",
+        letterHtml: "Your order is placed"
+      })
+    })
+    console.log(payload)
+
+    if (!response.ok) {
+      throw new Error(payload);
+    }
+    const data = await response.json();
+    console.log(data.order)
+    return data.order;
+  });
+
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async () => {
@@ -42,7 +68,11 @@ const orderSlice = createSlice({
         state.loading = false;
         state.library = action.payload.map(item => item.products.map(el => el.product))
         state.orders = action.payload;
-      });
+      })
+      .addCase(placeOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders.push(action.payload);
+      })
   },
 });
 
