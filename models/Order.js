@@ -34,10 +34,6 @@ const OrderSchema = new Schema(
     status: {
       type: String
     },
-    email: {
-      type: String,
-      required: true
-    },
     mobile: {
       type: String,
       required: true

@@ -73,6 +73,12 @@ const ProductSchema = new Schema(
     yearOfPublication: {
       type: Date
     },
+    weeksInTopChart: {
+      type: Number
+    },
+    currentPlayers: {
+      type: Number
+    },
     date: {
       type: Date,
       default: Date.now

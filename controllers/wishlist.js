@@ -123,7 +123,10 @@ exports.addProductToWishlist = async (req, res, next) => {
             { $set: updatedWishlist },
             { new: true }
           )
-            .populate('products')
+            .populate({
+              path: 'products',
+              populate: { path: 'genres', select: 'name' }
+            })
             .populate('customerId')
             .then((wishlist) => res.json(wishlist))
             .catch((err) =>
@@ -181,7 +184,10 @@ exports.deleteProductFromWishlish = async (req, res, next) => {
           { $set: updatedWishlist },
           { new: true }
         )
-          .populate('products')
+          .populate({
+            path: 'products',
+            populate: { path: 'genres', select: 'name' }
+          })
           .populate('customerId')
           .then((wishlist) => res.json(wishlist))
           .catch((err) =>

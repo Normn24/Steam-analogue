@@ -13,13 +13,17 @@ const CommentSchema = new Schema(
       ref: "products",
       required: true
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: "catalogs"
-    },
+    // category: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "catalogs"
+    // },
     content: {
       type: String,
       required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
     }
   },
   { strict: false }
