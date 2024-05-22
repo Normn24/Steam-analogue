@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { CiUser, CiViewList, CiShoppingBasket, CiStar } from "react-icons/ci";
 import {
@@ -9,11 +9,18 @@ import {
   NavText,
   NavLinkStyled,
   ContentArea,
-} from "./UserStyles";
+} from "../components/UserLayout/UserStyles";
 import { Typography, Box } from "@mui/material";
+import { useEffect } from "react";
+import { fetchUserComments } from "../redux/comments.slice/comments.slice";
 
 const UserLayout = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    dispatch(fetchUserComments(user?._id));
+  });
   console.log(user);
   return (
     <UserPageContainer>

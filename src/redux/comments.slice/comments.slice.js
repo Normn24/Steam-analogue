@@ -17,7 +17,7 @@ export const addComment = createAsyncThunk(
       // body: JSON.stringify({ article_id: payload.pk }),
     });
     if (!response.ok) {
-      throw new Error("Failed to add to favorites");
+      throw new Error("Failed to add to comments");
     }
     const data = await response.json();
     return data;
@@ -37,7 +37,7 @@ export const commentsForProduct = createAsyncThunk(
       // body: JSON.stringify({ article_id: payload.pk }),
     });
     if (!response.ok) {
-      throw new Error("Failed to add to favorites");
+      throw new Error("Failed to add to comments");
     }
     const data = await response.json();
     return data;
@@ -59,7 +59,7 @@ export const removeComment = createAsyncThunk(
       }
     );
     if (!response.ok) {
-      throw new Error("Failed to remove from favorites");
+      throw new Error("Failed to remove from comments");
     }
     const data = await response.json();
     return data;
@@ -80,7 +80,7 @@ export const fetchUserComments = createAsyncThunk(
       }
     );
     if (!response.ok) {
-      throw new Error("Failed to get favorites");
+      throw new Error("Failed to get comments");
     }
     const data = await response.json();
     return data;

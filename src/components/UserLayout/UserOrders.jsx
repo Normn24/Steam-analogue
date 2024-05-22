@@ -1,22 +1,19 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { GoClock } from "react-icons/go";
 import {
-  Card,
   CardMedia,
   CardContent,
   Typography,
   Box,
   Accordion,
-  AccordionActions,
   AccordionSummary,
   AccordionDetails,
-  Button,
 } from "@mui/material";
-
+import { IoIosArrowDown } from "react-icons/io";
 export default function UserOrders() {
-  const { orders, library, loading } = useSelector((state) => state.orders);
+  const { orders } = useSelector((state) => state.orders);
   orders.map((item) => console.log(item));
-  // const product = library.map((item) => item.map((el) => el._id));
 
   return (
     <>
@@ -26,26 +23,66 @@ export default function UserOrders() {
           component="h4"
           sx={{ fontWeight: "700", marginBottom: "15px" }}
         >
-          My profile
+          My orders
         </Typography>
         {orders.map((item) => (
           <Accordion
             key={item._id}
             sx={{
-              // width: "60%",
               boxShadow: 5,
               borderRadius: 2,
               marginBottom: "25px",
               padding: "10px",
-              // display: "flex",
               backgroundColor: "transparent",
               "&::before": {
                 display: "none",
               },
             }}
           >
-            <AccordionSummary aria-controls="panel1-content" id="panel1-header">
-              {item.orderNo}
+            <AccordionSummary
+              aria-controls="panel-content"
+              id="panel-header"
+              expandIcon={
+                <IoIosArrowDown style={{ width: "30px", height: "30px" }} />
+              }
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "80%",
+                }}
+              >
+                <Typography variant="p" component="p">
+                  #{item.orderNo}
+                </Typography>
+                <Typography
+                  variant="p"
+                  component="p"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <GoClock
+                    style={{
+                      marginRight: "5px",
+                      height: "20px",
+                      width: "20px",
+                    }}
+                  />
+                  {new Date(item.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </Typography>
+                <Typography
+                  variant="p"
+                  component="p"
+                  sx={{ minWidth: "100px", textAlign: "right" }}
+                >
+                  ${item.totalSum}
+                </Typography>
+              </Box>
             </AccordionSummary>
             {item.products.map((el) => (
               <AccordionDetails
@@ -78,7 +115,10 @@ export default function UserOrders() {
                   }}
                 >
                   <Box>
-                    <Link className="post__more" to={`/product/${item._id}`}>
+                    <Link
+                      className="post__more"
+                      to={`/product/${el.product._id}`}
+                    >
                       <Typography
                         sx={{ textTransform: "capitalize" }}
                         variant="h5"

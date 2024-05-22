@@ -17,7 +17,7 @@ import {
   Line,
   Message,
   Icon,
-} from "../LogInForm/StylesLogInForm";
+} from "../../styles/forms/StylesLogInForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 

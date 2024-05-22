@@ -18,11 +18,13 @@ import LibraryPage from "./pages/LibraryPage";
 import ProtectedRoute from "./ProtectedRoute";
 import CategoryPage from "./pages/CategoryPage";
 import OrderPage from "./pages/OrderPage";
-import UserPage from "./pages/UserPage/UserPage";
-
-import "./App.css";
+import UserPage from "./pages/UserPage";
 import UserProfile from "./components/UserLayout/UserProfile";
 import UserOrders from "./components/UserLayout/UserOrders";
+import UserWishlist from "./components/UserLayout/UserWishlist";
+import UserReviews from "./components/UserLayout/UserReviews";
+
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,9 +52,19 @@ function App() {
           element={<CategoryPage />}
         />
         <Route path="/register" element={<SignInForm />} />
-        <Route path="/account" element={<UserPage />}>
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute
+              element={<UserPage />}
+              isAllowed={loggedIn === "true"}
+            />
+          }
+        >
           <Route path="profile" element={<UserProfile />} />
           <Route path="orders" element={<UserOrders />} />
+          <Route path="wishlist" element={<UserWishlist />} />
+          <Route path="reviews" element={<UserReviews />} />
         </Route>
 
         <Route

@@ -1,4 +1,8 @@
-import { NavBarItem, NavBarWrapper, StyledNavBarLink } from "./NavBarStyled";
+import {
+  NavBarItem,
+  NavBarWrapper,
+  StyledNavBarLink,
+} from "../../styles/navbar-footer/NavBarStyled";
 import { fetchCatalogs } from "../../redux/catalogs.slice/catalogs.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";

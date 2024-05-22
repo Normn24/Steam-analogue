@@ -7,7 +7,6 @@ import { NavLink } from "react-router-dom";
 export const UserPageContainer = styled(Box)({
     display: "flex",
     gap: "30px",
-    maxWidth: "1200px",
     margin: "30px 20px",
     minHeight: "70svh",
 });
@@ -68,6 +67,5 @@ export const NavLinkStyled = styled(NavLink)({
 });
 
 export const ContentArea = styled(Box)({
-    display: "flex",
-    maxWidth: "960px",
+    width: "100%"
 });

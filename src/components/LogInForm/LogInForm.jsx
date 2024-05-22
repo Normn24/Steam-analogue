@@ -18,7 +18,7 @@ import {
   Forgot,
   Message,
   Icon,
-} from "./StylesLogInForm.js";
+} from "../../styles/forms/StylesLogInForm.js";
 import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
