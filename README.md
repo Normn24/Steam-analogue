@@ -4,4 +4,4 @@
 
 Деякі компоненти будемо брати звідси: [createx-shop](https://www.figma.com/file/Eu3bJwzrCsKebYiDiaYADc/createx-shop?type=design&node-id=0-1&mode=design&t=mZEbkRFe2QttXHPC-0)
 
-Тематика: ?Steam?
+Тематика: Steam
