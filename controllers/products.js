@@ -190,28 +190,34 @@ exports.getProductsByCategory = async (req, res, next) => {
 };
 
 exports.getProductsByGenre = async (req, res, next) => {
-  const { genre } = req.params;
+  // const { genre } = req.params;
   const mongooseQuery = filterParser(req.query);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
   const sort = req.query.sort;
   const q = typeof req.query.q === 'string' ? req.query.q.trim() : null
+  const genre = typeof req.query.genres === 'string' ? req.query.genres.trim() : null;
   if (q) {
     mongooseQuery.name = {
       $regex: new RegExp(q, "i"),
     };
   }
 
-
+  if (genre) {
+    mongooseQuery.genres = {
+      $elemMatch: { name: { $regex: new RegExp(genre, 'i') } }
+    };
+  }
   try {
     const products = await Product.find(mongooseQuery)
       .where("genres").equals(genre)
+      .populate('genres', 'name')
       .skip(startPage * perPage - perPage)
       .limit(perPage)
-      .sort(sort)
-      .populate('genres', 'name')
+      .sort(sort);
 
-    const total = products.length
+    const total = products.length;
+
     res.json({ data: products, total });
   } catch (err) {
     res.status(400).json({
