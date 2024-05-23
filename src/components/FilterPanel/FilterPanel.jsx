@@ -13,16 +13,19 @@ import {
 } from "@mui/material";
 import { fetchGenres } from "../../redux/genres.slice/genres.slice";
 import SearchItem from "../SearchItem/SearchItem";
-import { useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function FilterPanel({ products, productList }) {
+function FilterPanel({ productList }) {
   const dispatch = useDispatch();
-  const { searchQuery } = useParams();
-  const { genreId } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("name");
+  const genreId = queryParams.get("genre");
+  const products = useSelector((state) => state.products.products.data);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const genres = useSelector((state) => state.genres.genres);
-
+  const navigate = useNavigate();
   const [hoveredItem, setHoveredItem] = useState(null);
 
   const handleMouseEnter = (productId) => {
@@ -31,11 +34,14 @@ function FilterPanel({ products, productList }) {
 
   useEffect(() => {
     dispatch(fetchGenres());
-    setFilteredProducts(productList);
-  }, [dispatch, productList]);
+    if (productList) {
+      setFilteredProducts(productList);
+    }
+  }, [dispatch, productList, products]);
 
   const applyFilters = (values) => {
     let filtered = [...products];
+    const params = new URLSearchParams();
 
     if (values.genreId) {
       filtered = filtered.filter((product) =>
@@ -67,27 +73,13 @@ function FilterPanel({ products, productList }) {
     }
 
     setFilteredProducts(filtered);
+    if (values.genreId) params.append("genre", values.genreId);
+    params.append("priceRange", values.priceRange.join(","));
+    params.append("yearRange", values.yearRange.join(","));
+    if (values.name) params.append("name", values.name);
+    if (values.sortBy) params.append("sortBy", values.sortBy);
+    navigate(`/products/search/?${params.toString()}`);
   };
-
-  // if (filteredProducts?.length === 0) {
-  //   return (
-  //     <Typography
-  //       sx={{
-  //         textAlign: "center",
-  //         width: "50%",
-  //         position: "absolute",
-  //         top: "50%",
-  //         left: "50%",
-  //         transform: "translate(-50%, -50%)",
-  //       }}
-  //       variant="p"
-  //       component="p"
-  //     >
-  //       Your cart is empty.
-  //     </Typography>
-  //   );
-  // }
-
   return (
     <>
       <Box
@@ -157,8 +149,8 @@ function FilterPanel({ products, productList }) {
             enableReinitialize
             initialValues={{
               genreId: genreId || "",
-              priceRange: [100, 500],
-              yearRange: [2010, 2024],
+              priceRange: [0, 100],
+              yearRange: [2010, 2025],
               name: searchQuery || "",
               sortBy: "",
             }}
@@ -222,8 +214,8 @@ function FilterPanel({ products, productList }) {
                       applyFilters({ ...values, priceRange: newValue });
                     }}
                     valueLabelDisplay="auto"
-                    min={100}
-                    max={500}
+                    min={0}
+                    max={100}
                   />
                 </FormControl>
 

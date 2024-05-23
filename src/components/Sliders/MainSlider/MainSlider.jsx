@@ -42,7 +42,7 @@ function MainSlider() {
       }}
       className={classes.carouselRoot}
     >
-      {products?.data?.map((item) => (
+      {products?.data?.slice(0, 5).map((item) => (
         <Box key={item._id} className="image-container">
           <MainSliderItem item={item} />
         </Box>

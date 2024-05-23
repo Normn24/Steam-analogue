@@ -25,6 +25,7 @@ import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
 
 import "./App.css";
+import { fetchProducts } from "./redux/products.slice/products.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
       dispatch(fetchCart());
       dispatch(fetchOrders());
       dispatch(fetchUser());
+      dispatch(fetchProducts());
     }
   }, [dispatch, loggedIn]);
 
@@ -45,8 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/products/search/:searchQuery" element={<SearchPage />} />
-        <Route path="/products/genre/:genreId" element={<SearchPage />} />
+        <Route path="/products/search/*" element={<SearchPage />} />
         <Route
           path="/products/category/:catalogQuery"
           element={<CategoryPage />}

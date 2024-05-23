@@ -21,7 +21,7 @@ export default function ProductItem({
 }) {
   const { _id, name, imageUrls, genres, currentPrice, previousPrice } = product;
   const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice)
+    ? Math.floor((currentPrice * 100) / previousPrice - 100)
     : null;
   const classes = useStyles();
 
@@ -56,8 +56,8 @@ export default function ProductItem({
         >
           <Typography
             sx={{ textTransform: "capitalize" }}
-            variant="h4"
-            component="h4"
+            variant="h5"
+            component="h5"
           >
             {name}
           </Typography>
@@ -132,7 +132,7 @@ export default function ProductItem({
                 variant="p"
                 component="p"
               >
-                -{percent}%
+                {percent}%
               </Typography>
               <Typography
                 sx={{
@@ -241,7 +241,7 @@ export default function ProductItem({
         </List>
         <List sx={{ padding: 0 }}>
           {imageUrls.slice(1, 5).map((item) => (
-            <ImageListItem key={item} sx={{ padding: "0 15px 20px" }}>
+            <ImageListItem key={item} sx={{ padding: "0 15px 11px" }}>
               <img
                 srcSet={item}
                 src={item}

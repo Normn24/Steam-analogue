@@ -47,7 +47,7 @@ export default function Products() {
         sx={{
           padding: "20px",
           position: "relative",
-          height: "855px",
+          minHeight: "855px",
           m: "60px 0",
         }}
       >
