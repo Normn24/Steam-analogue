@@ -1,4 +1,7 @@
-import { HeaderWrapper, UserWrapper } from "./HeaderStyle";
+import {
+  HeaderWrapper,
+  UserWrapper,
+} from "../../styles/navbar-footer/HeaderStyle";
 import { NavLink } from "react-router-dom";
 import { CiShoppingBasket, CiViewList, CiUser, CiLogout } from "react-icons/ci";
 import { SiRepublicofgamers } from "react-icons/si";
