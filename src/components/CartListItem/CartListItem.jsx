@@ -20,10 +20,8 @@ export default function CartListItem({ product, handleRemove }) {
     previousPrice,
   } = product;
 
-  // const previousPrice = 520;
-
   const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice)
+    ? Math.floor((currentPrice * 100) / previousPrice - 100)
     : null;
   const dateOfPublication = new Date(yearOfPublication).toLocaleDateString(
     "en-US",
@@ -109,8 +107,9 @@ export default function CartListItem({ product, handleRemove }) {
                 position: "relative",
                 paddingRight: "4px",
                 backgroundColor: "#cccc",
-                width: "fit-content",
+                width: "auto",
                 borderRadius: "4px",
+                justifyContent: "space-between",
               }}
             >
               <Typography
@@ -125,7 +124,7 @@ export default function CartListItem({ product, handleRemove }) {
                 variant="p"
                 component="p"
               >
-                -{percent}%
+                {percent}%
               </Typography>
               <Typography
                 sx={{

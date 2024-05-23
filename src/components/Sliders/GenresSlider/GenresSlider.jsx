@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography, Box, Button } from "@mui/material";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
@@ -86,7 +86,10 @@ export default function GenresSlider() {
         </Typography>
         <Slider {...settings}>
           {genres?.map((genre) => (
-            <Link to={`/products/genre/${genre._id}`} key={genre._id}>
+            <NavLink
+              to={`/products/search/?genre=${genre._id}`}
+              key={genre._id}
+            >
               <Box
                 sx={{
                   position: "relative",
@@ -128,7 +131,7 @@ export default function GenresSlider() {
                   </Typography>
                 </Box>
               </Box>
-            </Link>
+            </NavLink>
           ))}
         </Slider>
       </Box>

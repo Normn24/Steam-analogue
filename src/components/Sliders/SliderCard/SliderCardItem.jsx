@@ -14,11 +14,10 @@ import {
 } from "@mui/material";
 
 export default function SliderCardItem({ product }) {
-  const { _id, name, imageUrls, genres, currentPrice } = product;
+  const { _id, name, imageUrls, genres, currentPrice, previousPrice } = product;
   const classes = useStyles();
-  const previousPrice = 520;
 
-  const percent = Math.floor((currentPrice * 100) / previousPrice);
+  const percent = Math.floor((currentPrice * 100) / previousPrice - 100);
 
   return (
     <Card
@@ -103,7 +102,7 @@ export default function SliderCardItem({ product }) {
               variant="p"
               component="p"
             >
-              -{percent}%
+              {percent}%
             </Typography>
             <Typography
               sx={{

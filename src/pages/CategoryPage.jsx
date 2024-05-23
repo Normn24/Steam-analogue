@@ -69,7 +69,11 @@ export default function CategoryPage() {
           <Typography variant="p" component="p">
             Price
           </Typography>
-          <Typography variant="p" component="p">
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ width: "151px", textAlign: "right" }}
+          >
             {currentCategory}
           </Typography>
         </Box>

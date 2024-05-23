@@ -28,7 +28,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
   } = product;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice)
+    ? Math.floor((currentPrice * 100) / previousPrice - 100)
     : null;
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -73,8 +73,8 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
         >
           <Typography
             sx={{ textTransform: "capitalize" }}
-            variant="h4"
-            component="h4"
+            variant="h5"
+            component="h5"
           >
             {name}
           </Typography>
@@ -150,7 +150,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
                 variant="p"
                 component="p"
               >
-                -{percent}%
+                {percent}%
               </Typography>
               <Typography
                 sx={{
