@@ -20,9 +20,11 @@ import CategoryPage from "./pages/CategoryPage";
 import OrderPage from "./pages/OrderPage";
 import UserPage from "./pages/UserPage/UserPage";
 
+
 import "./App.css";
 import UserProfile from "./components/UserLayout/UserProfile";
 import UserOrders from "./components/UserLayout/UserOrders";
+import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +56,8 @@ function App() {
           <Route path="profile" element={<UserProfile />} />
           <Route path="orders" element={<UserOrders />} />
         </Route>
+
+        
 
         <Route
           path="/wishlist"

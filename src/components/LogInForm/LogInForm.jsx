@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import { loginUser } from "../../redux/auth.slice/login.slice";
 import { useDispatch } from "react-redux";
 import { FaDiscord, FaTwitterSquare, FaLinkedin } from "react-icons/fa";
+import { Routes, Route, Navigate } from "react-router-dom";
+import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
 import {
   FormContainer,
   Title,
@@ -93,6 +95,7 @@ export default function LogInForm({ onSignUpClick }) {
             <Link href="#" style={{ color: "#ffff" }}>
               Forgot Password?
             </Link>
+          
           </Forgot>
           <SignButton variant="contained" type="submit">
             Submit
