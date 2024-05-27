@@ -17,6 +17,7 @@ export default function Header() {
   const [action, setAction] = useState("");
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+
   const handleOpen = (newAction) => {
     setAction(newAction);
     setOpen(true);

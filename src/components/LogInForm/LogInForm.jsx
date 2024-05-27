@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { loginUser } from "../../redux/auth.slice/login.slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaDiscord, FaTwitterSquare, FaLinkedin } from "react-icons/fa";
 import {
   FormContainer,
@@ -18,6 +18,7 @@ import {
   Forgot,
   Message,
   Icon,
+  ErrorMessage,
 } from "../../styles/forms/StylesLogInForm.js";
 import { Link } from "react-router-dom";
 
@@ -32,6 +33,7 @@ const validationSchema = Yup.object().shape({
 
 export default function LogInForm({ onSignUpClick }) {
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.login);
 
   const formik = useFormik({
     initialValues: {
@@ -40,12 +42,9 @@ export default function LogInForm({ onSignUpClick }) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("submit", values);
       dispatch(loginUser(values)).then((response) => {
-        if (response.payload) {
-          if (localStorage.getItem("token")) {
-            window.location.href = "/";
-          }
+        if (response.payload && localStorage.getItem("token")) {
+          window.location.href = "/";
         }
       });
     },
@@ -90,7 +89,12 @@ export default function LogInForm({ onSignUpClick }) {
             />
           </InputGroup>
           <Forgot>
-            <Link href="#" style={{ color: "#ffff" }}>
+            {error && (
+              <ErrorMessage>
+                {error?.loginOrEmail || error?.password || "An error occurred"}
+              </ErrorMessage>
+            )}
+            <Link to="#" style={{ color: "#ffff" }}>
               Forgot Password?
             </Link>
           </Forgot>
@@ -98,6 +102,7 @@ export default function LogInForm({ onSignUpClick }) {
             Submit
           </SignButton>
         </Form>
+
         <SocialMessage>
           <Line />
           <Message>or log in with</Message>

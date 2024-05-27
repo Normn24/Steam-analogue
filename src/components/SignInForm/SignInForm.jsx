@@ -60,13 +60,10 @@ export default function SignInForm({ onLoginClick }) {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(registerUser(values)).then((response) => {
-        if (response.payload) {
-          if (localStorage.getItem("token")) {
-            onLoginClick();
-          }
+        if (response.payload && localStorage.getItem("token")) {
+          onLoginClick();
         }
       });
-      console.log("values :>> ", values);
     },
   });
 
