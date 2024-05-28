@@ -1,20 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export function getAccessToken() {
-  // return localStorage.getItem("accessToken");
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTU3OWE3ZDc2OTcwMmRmMGYwMzJkZiIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MTUwODk1NzEsImV4cCI6MTcxNTEyNTU3MX0.Hz8oCGi7Xt7D4BaUS0ey4xhZiommUPQ27b_wBdtazn0"
+  return localStorage.getItem("token");
 }
 
 export const addComment = createAsyncThunk(
   "comments/addComment",
   async (payload) => {
-    const response = await fetch(`http://localhost:4000/api/comments/${payload}`, {
+    const response = await fetch(`http://localhost:4000/api/comments`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${getAccessToken()}`,
+        Authorization: getAccessToken(),
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({ article_id: payload.pk }),
+      body: JSON.stringify(payload)
     });
     if (!response.ok) {
       throw new Error("Failed to add to comments");
@@ -25,16 +24,11 @@ export const addComment = createAsyncThunk(
 );
 
 
-export const commentsForProduct = createAsyncThunk(
-  "comments/commentsForProduct",
+export const fetchProductComments = createAsyncThunk(
+  "comments/fetchProductComments",
   async (payload) => {
     const response = await fetch(`http://localhost:4000/api/comments/product/${payload}`, {
       method: "GET",
-      // headers: {
-      //   Authorization: `Bearer ${getAccessToken()}`,
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify({ article_id: payload.pk }),
     });
     if (!response.ok) {
       throw new Error("Failed to add to comments");
@@ -52,10 +46,9 @@ export const removeComment = createAsyncThunk(
       {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${getAccessToken()}`,
+          Authorization: getAccessToken(),
           "Content-Type": "application/json",
         },
-        // body: JSON.stringify({ id: payload.pk }),
       }
     );
     if (!response.ok) {
@@ -73,10 +66,6 @@ export const fetchUserComments = createAsyncThunk(
       `http://localhost:4000/api/comments/customer/${payload}`,
       {
         method: "GET",
-        // headers: {
-        //   Authorization: `Bearer ${getAccessToken()}`,
-        //   "Content-Type": "application/json",
-        // },
       }
     );
     if (!response.ok) {
@@ -90,7 +79,8 @@ export const fetchUserComments = createAsyncThunk(
 const commentsSlice = createSlice({
   name: "comments",
   initialState: {
-    comments: [],
+    userComments: [],
+    productComments: [],
     loading: false,
   },
   reducers: {},
@@ -102,7 +92,7 @@ const commentsSlice = createSlice({
       .addCase(addComment.fulfilled, (state, action) => {
         console.log("Added to comments:", action.payload);
         state.loading = false;
-        state.comments.push(action.payload);
+        state.productComments.push(action.payload);
       })
       .addCase(removeComment.fulfilled, (state, action) => {
         console.log("Removed from comments:", action.payload);
@@ -114,12 +104,12 @@ const commentsSlice = createSlice({
       .addCase(fetchUserComments.fulfilled, (state, action) => {
         console.log("Fetched comments:", action.payload);
         state.loading = false;
-        state.comments = action.payload;
+        state.userComments = action.payload;
       })
-      .addCase(commentsForProduct.fulfilled, (state, action) => {
+      .addCase(fetchProductComments.fulfilled, (state, action) => {
         console.log("Fetched comments:", action.payload);
         state.loading = false;
-        state.comments = action.payload;
+        state.productComments = action.payload;
       });
   },
 });

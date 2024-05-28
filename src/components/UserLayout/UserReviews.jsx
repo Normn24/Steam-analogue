@@ -4,7 +4,7 @@ import { Card, CardMedia, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function UserReviews() {
-  const comments = useSelector((state) => state.comments.comments);
+  const userComments = useSelector((state) => state.comments.userComments);
   return (
     <Box>
       <Typography
@@ -14,7 +14,7 @@ export default function UserReviews() {
       >
         My Reviews
       </Typography>
-      {comments?.map((item) => (
+      {userComments?.map((item) => (
         <Card
           key={item._id}
           sx={{

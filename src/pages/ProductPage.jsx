@@ -13,6 +13,7 @@ import {
   TableCell,
   Button,
   Typography,
+  Card,
 } from "@mui/material";
 import { MdBookmarkAdd, MdBookmarkAdded } from "react-icons/md";
 import { TabContext, TabPanel } from "@mui/lab";
@@ -22,6 +23,20 @@ import {
   removeFromWishList,
 } from "../redux/wishList.slice/wishList.slice";
 import { removeFromCart, addToCart } from "../redux/cart.slice/cart.slice";
+import Comments from "../components/Comments/Comments";
+import {
+  addComment,
+  fetchProductComments,
+} from "../redux/comments.slice/comments.slice";
+
+import { useFormik } from "formik";
+import {
+  Form,
+  InputGroup,
+  InputLabel,
+  SignButton,
+  StyledInput,
+} from "../styles/forms/StylesLogInForm.js";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -33,6 +48,9 @@ export default function ProductPage() {
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
+  const productComments = useSelector(
+    (state) => state.comments.productComments
+  );
 
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
@@ -52,8 +70,29 @@ export default function ProductPage() {
     }
   );
 
+  // const [comment, setComment] = useState("");
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (comment.trim()) {
+  //     dispatch(addComment(comment));
+  //     setComment("");
+  //   }
+  // };
+
+  const formik = useFormik({
+    initialValues: {
+      product: id,
+      content: "",
+    },
+    onSubmit: (values) => {
+      dispatch(addComment(values));
+    },
+  });
+
   useEffect(() => {
     dispatch(fetchProductId(id));
+    dispatch(fetchProductComments(id));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -432,23 +471,27 @@ export default function ProductPage() {
               display: value == 1 ? "flex" : "none",
               textAlign: "left",
               fontSize: "28px",
-              // backgroundImage: `url(${
-              //   product?.imageUrls ? product.imageUrls[2] : ""
-              // })`,
-              // backgroundRepeat: "no-repeat",
-              // backgroundSize: "cover",
-              // backgroundPosition: "center center",
-              backgroundColor: "#cccc",
+              backgroundColor: "#b5b7ffcc",
               opacity: 0.8,
               backgroundImage:
                 "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
+              position: "relative",
+              "&:before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                boxShadow: "inset 0px -800px 500px -490px #ffff",
+              },
             }}
           >
             <Typography
               variant="p"
               sx={{
                 width: "75%",
-                margin: "0 auto",
+                margin: "0 auto 60px",
                 color: "#000",
                 backdropFilter: "blur(10px) saturate(99%)",
                 backgroundColor: "rgba(255, 255, 255, 0.29)",
@@ -471,16 +514,20 @@ export default function ProductPage() {
               width: "auto",
               gap: "50px",
               alignItems: "center",
-              // backgroundImage: `url(${
-              //   product?.imageUrls ? product.imageUrls[0] : ""
-              // })`,
-              // backgroundRepeat: "no-repeat",
-              // backgroundSize: "cover",
-              // backgroundPosition: "center center",
-              backgroundColor: "#cccc",
+              backgroundColor: "#b5b7ffcc",
               opacity: 0.8,
               backgroundImage:
                 "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
+              position: "relative",
+              "&:before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                boxShadow: "inset 0px -800px 600px -510px #ffff",
+              },
             }}
           >
             <Box
@@ -493,6 +540,7 @@ export default function ProductPage() {
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
+                marginBottom: "60px",
               }}
             >
               <Typography
@@ -535,6 +583,7 @@ export default function ProductPage() {
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
+                marginBottom: "60px",
               }}
             >
               <Typography
@@ -561,6 +610,48 @@ export default function ProductPage() {
             </Box>
           </TabPanel>
         </TabContext>
+      </Box>
+      <Box sx={{ margin: "60px 0 20px" }}>
+        <Typography
+          variant="h5"
+          component="h5"
+          sx={{
+            fontWeight: "700",
+            marginBottom: "15px",
+            textTransform: "uppercase",
+          }}
+        >
+          CUSTOMER REVIEWS
+        </Typography>
+        <Card className="p-6 md:p-8">
+          <Box>
+            <Typography>Write a Review</Typography>
+            <Typography>
+              Share your thoughts and experiences with our product.
+            </Typography>
+          </Box>
+          <Form onSubmit={formik.handleSubmit}>
+            <InputGroup>
+              <InputLabel htmlFor="content">Email</InputLabel>
+              <StyledInput
+                id="content"
+                name="content"
+                value={formik.values.content}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.content && Boolean(formik.errors.content)}
+                helperText={formik.touched.content && formik.errors.content}
+                inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              />
+            </InputGroup>
+            <SignButton variant="contained" type="submit">
+              Submit
+            </SignButton>
+          </Form>
+        </Card>
+        {productComments?.map((item) => (
+          <Comments key={item?._id} item={item} />
+        ))}
       </Box>
     </Box>
   );
