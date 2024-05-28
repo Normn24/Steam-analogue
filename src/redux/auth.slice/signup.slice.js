@@ -2,25 +2,30 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const registerUser = createAsyncThunk(
   'registration/registerUser',
-  async (payload) => {
-    const response = await fetch("http://localhost:4000/api/customers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload)
-    })
-    if (!response.ok) {
-      throw new Error(payload);
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await fetch("http://localhost:4000/api/customers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
     }
-    const data = await response.json();
-    return data;
   });
 
 const registrationSlice = createSlice({
   name: 'signup',
   initialState: {
-    token: "",
     status: 'idle',
     error: null,
   },
@@ -37,8 +42,8 @@ const registrationSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.error = null;
         console.log(action.payload)
-        state.token = action.payload.token;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed';

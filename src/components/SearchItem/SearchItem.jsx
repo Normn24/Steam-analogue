@@ -155,7 +155,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
               <Typography
                 sx={{
                   position: "absolute",
-                  left: "34.5%",
+                  right: "4px",
                   fontSize: "12px",
                   bottom: "19px",
                   color: "#647984",

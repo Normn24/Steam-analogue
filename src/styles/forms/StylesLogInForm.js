@@ -54,6 +54,7 @@ export const StyledInput = styled(TextField)({
 export const Forgot = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
+  flexDirection: "row-reverse",
   fontSize: '16px',
   lineHeight: '1rem',
   color: '#ffff',

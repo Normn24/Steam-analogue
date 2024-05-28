@@ -113,7 +113,7 @@ export default function ProductItem({
                 gap: "10px",
                 position: "absolute",
                 right: "16px",
-                top: "50%",
+                top: "25px",
                 height: "35px",
               }}
             >
@@ -165,11 +165,11 @@ export default function ProductItem({
                 padding: "4px 5px",
                 borderRadius: "3px",
                 position: "absolute",
-                right: "16px",
-                top: "58%",
+                right: "12px",
+                top: "28px",
               }}
             >
-              <Typography variant="p" component="p">
+              <Typography variant="p" component="p" sx={{ fontSize: "19px" }}>
                 {currentPrice}$
               </Typography>
             </Box>

@@ -89,14 +89,14 @@ export default function LogInForm({ onSignUpClick }) {
             />
           </InputGroup>
           <Forgot>
+            <Link to="#" style={{ color: "#ffff" }}>
+              Forgot Password?
+            </Link>
             {error && (
               <ErrorMessage>
                 {error?.loginOrEmail || error?.password || "An error occurred"}
               </ErrorMessage>
             )}
-            <Link to="#" style={{ color: "#ffff" }}>
-              Forgot Password?
-            </Link>
           </Forgot>
           <SignButton variant="contained" type="submit">
             Submit
