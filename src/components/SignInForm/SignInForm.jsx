@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth.slice/signup.slice";
 import { FaDiscord, FaTwitterSquare, FaLinkedin } from "react-icons/fa";
 import {
@@ -17,6 +17,7 @@ import {
   Line,
   Message,
   Icon,
+  ErrorMessage,
 } from "../../styles/forms/StylesLogInForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
@@ -54,19 +55,18 @@ const initialValues = {
 
 export default function SignInForm({ onLoginClick }) {
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.signup);
+  console.log(error);
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(registerUser(values)).then((response) => {
-        if (response.payload) {
-          if (localStorage.getItem("token")) {
-            onLoginClick();
-          }
+        if (!response.error) {
+          onLoginClick();
         }
       });
-      console.log("values :>> ", values);
     },
   });
 
@@ -134,7 +134,7 @@ export default function SignInForm({ onLoginClick }) {
               inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
             />
           </InputGroup>
-          <Box sx={{ display: "flex", gap: "20px" }}>
+          <Box sx={{ display: "flex", gap: "20px", marginBottom: "14px" }}>
             <InputGroup>
               <InputLabel htmlFor="password">Password</InputLabel>
               <StyledInput
@@ -176,6 +176,9 @@ export default function SignInForm({ onLoginClick }) {
               />
             </InputGroup>
           </Box>
+          {error && (
+            <ErrorMessage>{error?.message || "An error occurred"}</ErrorMessage>
+          )}
           <SignButton variant="contained" type="submit">
             Sign Up
           </SignButton>

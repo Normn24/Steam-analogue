@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
-import Slider from "@mui/material/Slider";
+import { useNavigate, useLocation } from "react-router-dom";
+import SearchItem from "../SearchItem/SearchItem";
 import {
   TextField,
   MenuItem,
@@ -10,37 +11,36 @@ import {
   Divider,
   Typography,
   Box,
+  Slider,
 } from "@mui/material";
-import { fetchGenres } from "../../redux/genres.slice/genres.slice";
-import SearchItem from "../SearchItem/SearchItem";
-import { useNavigate, useLocation } from "react-router-dom";
 
 function FilterPanel({ productList }) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
+  const products = useSelector((state) => state.products.products.data);
+  const genres = useSelector((state) => state.genres.genres);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [hoveredItem, setHoveredItem] = useState(null);
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("name");
   const genreId = queryParams.get("genre");
-  const products = useSelector((state) => state.products.products.data);
-
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const genres = useSelector((state) => state.genres.genres);
-  const navigate = useNavigate();
-  const [hoveredItem, setHoveredItem] = useState(null);
+  const startYear = queryParams.get("startYear");
+  const endYear = queryParams.get("endYear");
+  const minPrice = queryParams.get("minPrice");
+  const maxPrice = queryParams.get("maxPrice");
 
   const handleMouseEnter = (productId) => {
     setHoveredItem(productId);
   };
 
   useEffect(() => {
-    dispatch(fetchGenres());
-    if (productList) {
-      setFilteredProducts(productList);
-    }
-  }, [dispatch, productList, products]);
+    setFilteredProducts(productList);
+  }, [dispatch, productList]);
 
   const applyFilters = (values) => {
-    let filtered = [...products];
+    let filtered = [...productList];
+
     const params = new URLSearchParams();
 
     if (values.genreId) {
@@ -51,13 +51,13 @@ function FilterPanel({ productList }) {
 
     filtered = filtered.filter(
       (product) =>
-        product.currentPrice >= values.priceRange[0] &&
-        product.currentPrice <= values.priceRange[1]
+        product.currentPrice >= values.minPrice &&
+        product.currentPrice <= values.maxPrice
     );
 
     filtered = filtered.filter((product) => {
       const year = new Date(product.yearOfPublication).getFullYear();
-      return year >= values.yearRange[0] && year <= values.yearRange[1];
+      return year >= values.startYear && year <= values.endYear;
     });
 
     if (values.name) {
@@ -73,13 +73,26 @@ function FilterPanel({ productList }) {
     }
 
     setFilteredProducts(filtered);
-    if (values.genreId) params.append("genre", values.genreId);
-    params.append("priceRange", values.priceRange.join(","));
-    params.append("yearRange", values.yearRange.join(","));
     if (values.name) params.append("name", values.name);
+    if (values.genreId) params.append("genre", values.genreId);
+    params.append("minPrice", values.minPrice);
+    params.append("maxPrice", values.maxPrice);
+
+    // params.append("priceRange", values.priceRange.join(","));
+    params.append("startYear", values.startYear);
+    params.append("endYear", values.endYear);
     if (values.sortBy) params.append("sortBy", values.sortBy);
     navigate(`/products/search/?${params.toString()}`);
   };
+
+  // const parseRange = (rangeStr, defaultValue) => {
+  //   if (!rangeStr) return defaultValue;
+  //   return rangeStr.split(",").map(Number);
+  // };
+
+  // const yearRange = parseRange(yearRangeParam, [2010, 2025]);
+  // const priceRange = parseRange(priceRangeParam, [0, 100]);
+
   return (
     <>
       <Box
@@ -149,8 +162,11 @@ function FilterPanel({ productList }) {
             enableReinitialize
             initialValues={{
               genreId: genreId || "",
-              priceRange: [0, 100],
-              yearRange: [2010, 2025],
+              // priceRange: priceRange,
+              minPrice: minPrice || 0,
+              maxPrice: maxPrice || 100,
+              startYear: startYear || 2010,
+              endYear: endYear || 2025,
               name: searchQuery || "",
               sortBy: "",
             }}
@@ -208,10 +224,12 @@ function FilterPanel({ productList }) {
 
                 <FormControl fullWidth>
                   <Slider
-                    value={values.priceRange}
+                    value={[Number(values.minPrice), Number(values.maxPrice)]}
                     onChange={(event, newValue) => {
-                      setFieldValue("priceRange", newValue);
-                      applyFilters({ ...values, priceRange: newValue });
+                      const [minPrice, maxPrice] = newValue;
+                      setFieldValue("minPrice", minPrice);
+                      setFieldValue("maxPrice", maxPrice);
+                      applyFilters({ ...values, minPrice, maxPrice });
                     }}
                     valueLabelDisplay="auto"
                     min={0}
@@ -221,10 +239,10 @@ function FilterPanel({ productList }) {
 
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="subtitle2" gutterBottom>
-                    $ {values.priceRange[0]}
+                    $ {values.minPrice}
                   </Typography>
                   <Typography variant="subtitle2" gutterBottom>
-                    $ {values.priceRange[1]}
+                    $ {values.maxPrice}
                   </Typography>
                 </Box>
 
@@ -236,10 +254,15 @@ function FilterPanel({ productList }) {
 
                 <FormControl fullWidth>
                   <Slider
-                    value={values.yearRange}
+                    // value={values.yearRange}
+                    value={[Number(values.startYear), Number(values.endYear)]}
                     onChange={(event, newValue) => {
-                      setFieldValue("yearRange", newValue);
-                      applyFilters({ ...values, yearRange: newValue });
+                      const [startYear, endYear] = newValue;
+                      setFieldValue("startYear", startYear);
+                      setFieldValue("endYear", endYear);
+                      applyFilters({ ...values, startYear, endYear });
+                      // setFieldValue("yearRange", newValue);
+                      // applyFilters({ ...values, yearRange: newValue });
                     }}
                     valueLabelDisplay="auto"
                     min={2010}
@@ -248,10 +271,10 @@ function FilterPanel({ productList }) {
                 </FormControl>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="subtitle2" gutterBottom>
-                    Year {values.yearRange[0]}
+                    Year {values.startYear}
                   </Typography>
                   <Typography variant="subtitle2" gutterBottom>
-                    Year {values.yearRange[1]}
+                    Year {values.endYear}
                   </Typography>
                 </Box>
 
@@ -286,8 +309,10 @@ function FilterPanel({ productList }) {
                       setFilteredProducts(products);
                       setValues({
                         genreId: "",
-                        priceRange: [100, 500],
-                        yearRange: [2010, 2024],
+                        minPrice: 0,
+                        maxPrice: 100,
+                        startYear: 2010,
+                        endYear: 2025,
                         name: "",
                         sortBy: "",
                       });

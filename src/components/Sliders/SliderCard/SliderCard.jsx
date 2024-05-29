@@ -14,7 +14,11 @@ export default function SliderCard() {
   const { slides } = useSelector((state) => state.slides);
 
   useEffect(() => {
-    dispatch(fetchSlides("http://localhost:4000/api/slides"));
+    dispatch(
+      fetchSlides(
+        "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/slides"
+      )
+    );
   }, [dispatch]);
 
   function SamplePrevArrow(props) {

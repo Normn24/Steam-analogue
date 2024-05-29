@@ -4,6 +4,8 @@ import { Box } from "@mui/material";
 import { fetchFilteredProducts } from "../redux/filteredProducts.slice/filteredProducts.slice";
 import { useLocation } from "react-router-dom";
 import FilterPanel from "../components/FilterPanel/FilterPanel";
+import { fetchGenres } from "../redux/genres.slice/genres.slice";
+import { fetchProducts } from "../redux/products.slice/products.slice";
 
 export default function SearchPage() {
   const dispatch = useDispatch();
@@ -11,7 +13,10 @@ export default function SearchPage() {
   const queryParams = new URLSearchParams(location.search);
   const genreId = queryParams.get("genre");
   const searchQuery = queryParams.get("name");
-
+  const minPrice = queryParams.get("minPrice");
+  const maxPrice = queryParams.get("maxPrice");
+  const startYear = queryParams.get("startYear");
+  const endYear = queryParams.get("endYear");
   const { productList } = useSelector((state) => state.productList);
 
   useEffect(() => {
@@ -19,37 +24,16 @@ export default function SearchPage() {
 
     if (searchQuery) searchParams.append("q", searchQuery);
     if (genreId) searchParams.append("genres", genreId);
-    console.log(searchParams);
-    const url = `http://localhost:4000/api/products?${searchParams.toString()}`;
+    if (minPrice) searchParams.append("minPrice", minPrice);
+    if (maxPrice) searchParams.append("maxPrice", maxPrice);
+    if (startYear) searchParams.append("startYear", startYear);
+    if (endYear) searchParams.append("endYear", endYear);
+    const url = `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products?${searchParams.toString()}`;
 
     dispatch(fetchFilteredProducts(url || null));
-  }, [dispatch, searchQuery, genreId]);
-
-  // useEffect(() => {
-  //   if (searchQuery && genreId) {
-  //     dispatch(
-  //       fetchFilteredProducts(
-  //         `http://localhost:4000/api/products?q=${searchQuery}&genres=${genreId}`
-  //       )
-  //     );
-  //   } else if (genreId) {
-  //     dispatch(
-  //       fetchFilteredProducts(
-  //         `http://localhost:4000/api/products?genres=${genreId}`
-  //       )
-  //     );
-  //   } else if (searchQuery) {
-  //     dispatch(
-  //       fetchFilteredProducts(
-  //         `http://localhost:4000/api/products?q=${searchQuery}`
-  //       )
-  //     );
-  //   }
-  //   if (searchQuery === "" || genreId === "") {
-  //     dispatch(fetchProducts());
-  //   }
-  //   dispatch(fetchProducts());
-  // }, [dispatch, searchQuery, genreId]);
+    dispatch(fetchProducts());
+    dispatch(fetchGenres());
+  }, [dispatch, searchQuery, genreId, minPrice, maxPrice, startYear, endYear]);
 
   return (
     <>

@@ -25,7 +25,6 @@ import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
 
 import "./App.css";
-import { fetchProducts } from "./redux/products.slice/products.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ function App() {
       dispatch(fetchCart());
       dispatch(fetchOrders());
       dispatch(fetchUser());
-      dispatch(fetchProducts());
     }
   }, [dispatch, loggedIn]);
 

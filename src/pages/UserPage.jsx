@@ -17,7 +17,7 @@ import { fetchUserComments } from "../redux/comments.slice/comments.slice";
 const UserLayout = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-
+  console.log(user);
   useEffect(() => {
     dispatch(fetchUserComments(user?._id));
   });

@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const fetchLinks = createAsyncThunk("links/fetchLinks", async () => {
-    const data = await fetch("http://localhost:4000/api/links",)
+    const data = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/links",)
         .then((res) => res.json())
     return data
 })

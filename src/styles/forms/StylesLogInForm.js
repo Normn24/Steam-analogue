@@ -53,7 +53,8 @@ export const StyledInput = styled(TextField)({
 
 export const Forgot = styled(Box)({
   display: 'flex',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
+  flexDirection: "row-reverse",
   fontSize: '16px',
   lineHeight: '1rem',
   color: '#ffff',
@@ -110,4 +111,8 @@ export const Icon = styled(Button)({
   borderRadius: '0.125rem',
   border: 'none',
   backgroundColor: 'transparent',
+});
+
+export const ErrorMessage = styled(Box)({
+  color: "red",
 });

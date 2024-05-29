@@ -17,13 +17,37 @@ import {
 } from "../styles/forms/StylesOrderForm";
 import MaskedInput from "../components/MaskedInput/MaskedInput";
 
+const validateCardNumber = (value) => {
+  const cleanValue = value.replace(/\s+/g, "");
+  let sum = 0;
+  let shouldDouble = false;
+
+  for (let i = cleanValue.length - 1; i >= 0; i--) {
+    let digit = parseInt(cleanValue[i]);
+
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  return sum % 10 === 0;
+};
+
 const validationSchema = Yup.object().shape({
-  payWay: Yup.string().required("You must select a payment method"),
   cardNumber: Yup.string()
     .required("Card number is required")
     .matches(
       /^\d{4} \d{4} \d{4} \d{4}$/,
-      "The card number must be in the format XXXX XXXX XXXX XXXX"
+      "The card number must have 16 numbers"
+    )
+    .test("test-card-number", "Invalid card number", (value) =>
+      validateCardNumber(value)
     ),
   monthOfDate: Yup.string().required("Month required"),
   yearOfDate: Yup.string().required("Year required"),
@@ -46,11 +70,6 @@ const validationSchema = Yup.object().shape({
     ),
 });
 
-const paySystem = [
-  { value: "Visa", label: "Visa" },
-  { value: "Mastercard", label: "Mastercard" },
-];
-
 const getYears = (startYear) => {
   const currentYear = new Date().getFullYear() + 10;
   let years = [];
@@ -60,7 +79,7 @@ const getYears = (startYear) => {
   return years;
 };
 
-const years = getYears(2020);
+const years = getYears(2025);
 
 const getMonth = () => {
   let months = [];
@@ -91,7 +110,7 @@ export default function OrderPage() {
 
   const formik = useFormik({
     initialValues: {
-      payWay: "Visa",
+      // payWay: "Visa",
       cardNumber: "",
       monthOfDate: "",
       yearOfDate: "",
@@ -146,7 +165,7 @@ export default function OrderPage() {
 
         <Form onSubmit={formik.handleSubmit}>
           <InputGroup>
-            <StyledInput
+            {/* <StyledInput
               select
               id="payway"
               name="payWay"
@@ -164,7 +183,7 @@ export default function OrderPage() {
                   {option.label}
                 </MenuItem>
               ))}
-            </StyledInput>
+            </StyledInput> */}
             <Box sx={{ display: "flex", gap: "15px" }}>
               <MaskedInput
                 id="cardNumber"

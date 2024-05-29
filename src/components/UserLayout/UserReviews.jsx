@@ -4,7 +4,7 @@ import { Card, CardMedia, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function UserReviews() {
-  const comments = useSelector((state) => state.comments.comments);
+  const userComments = useSelector((state) => state.comments.userComments);
   return (
     <Box>
       <Typography
@@ -14,14 +14,13 @@ export default function UserReviews() {
       >
         My Reviews
       </Typography>
-      {comments?.map((item) => (
+      {userComments?.map((item) => (
         <Card
           key={item._id}
           sx={{
             boxShadow: 5,
             borderRadius: 2,
             margin: "15px 0",
-            padding: "10px",
             display: "flex",
             backgroundColor: "transparent",
           }}
@@ -43,25 +42,21 @@ export default function UserReviews() {
             sx={{
               width: "100%",
               minHeight: 83,
-              padding: "0px 0px 0px 16px ",
+              padding: "10px 10px 0px 16px ",
               position: "relative",
               display: "flex",
               justifyContent: "space-between",
-              "&:last-child": { pb: 0 },
+              "&:last-child": { pb: "30px" },
             }}
           >
-            <Typography
-              sx={{ paddingBottom: "20px" }}
-              variant="p"
-              component="p"
-            >
+            <Typography variant="p" component="p">
               {item.content}
             </Typography>
             <Typography
               sx={{
                 position: "absolute",
-                bottom: 0,
-                right: 0,
+                bottom: "7px",
+                right: "15px",
                 opacity: 0.6,
                 fontSize: "13px",
               }}

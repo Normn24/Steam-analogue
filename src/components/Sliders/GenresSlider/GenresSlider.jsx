@@ -104,7 +104,7 @@ export default function GenresSlider() {
                   boxShadow: 10,
                   transition: "all .2s ease-in-out",
                   ":hover": {
-                    transform: "scale(1.1)",
+                    transform: "scale(1.02)",
                   },
                 }}
               >

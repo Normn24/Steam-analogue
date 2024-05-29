@@ -8,7 +8,7 @@ export function getAccessToken() {
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async (payload) => {
-    const response = await fetch("http://localhost:4000/api/customers/customer", {
+    const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/customer", {
       method: "GET",
       headers: {
         Authorization: getAccessToken(),

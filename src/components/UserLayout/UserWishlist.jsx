@@ -15,7 +15,7 @@ export default function UserWishlist() {
     return <h4>Loading</h4>;
   }
   return (
-    <Box sx={{ maxWidth: "93%" }}>
+    <Box>
       <Typography
         variant="h4"
         component="h4"

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
@@ -22,6 +22,16 @@ import {
   removeFromWishList,
 } from "../redux/wishList.slice/wishList.slice";
 import { removeFromCart, addToCart } from "../redux/cart.slice/cart.slice";
+import Comments from "../components/Comments/Comments";
+import {
+  addComment,
+  fetchProductComments,
+} from "../redux/comments.slice/comments.slice";
+
+import { useFormik } from "formik";
+import { Form, InputGroup } from "../styles/forms/StylesLogInForm.js";
+
+import Textarea from "@mui/joy/Textarea";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -52,8 +62,26 @@ export default function ProductPage() {
     }
   );
 
+  const formik = useFormik({
+    initialValues: useMemo(
+      () => ({
+        product: id,
+        content: "",
+      }),
+      [id]
+    ),
+    onSubmit: useCallback(
+      (values, { resetForm }) => {
+        dispatch(addComment(values));
+        resetForm();
+      },
+      [dispatch]
+    ),
+  });
+
   useEffect(() => {
     dispatch(fetchProductId(id));
+    dispatch(fetchProductComments(id));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -111,11 +139,11 @@ export default function ProductPage() {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "auto",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
-        margin: "40px 0",
+        margin: "40px 20px",
       }}
     >
       <Box
@@ -164,7 +192,7 @@ export default function ProductPage() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "100%",
+            width: "auto",
             "@media (max-width: 600px)": { alignItems: "center" },
           }}
         >
@@ -172,7 +200,7 @@ export default function ProductPage() {
             component="img"
             sx={{
               height: "140px",
-              width: "auto",
+              width: "446px",
               objectFit: "cover",
               borderRadius: "0px 6px 0px 0px",
             }}
@@ -210,6 +238,7 @@ export default function ProductPage() {
                   sx={{
                     display: "flex",
                     width: "auto",
+                    flexWrap: "wrap",
                     flexDirection: "row",
                     justifyContent: "flex-start",
                     alignItems: "center",
@@ -388,7 +417,70 @@ export default function ProductPage() {
           </Box>
         </Box>
       </Box>
-      <Box component="div" sx={{ marginTop: "110px" }}>
+
+      <Box
+        sx={{
+          marginTop: "110px",
+          display: onLibrary ? "block" : "none",
+          boxShadow: "0px 0px 10px -1px rgba(0, 0, 0, 0.2)",
+          padding: "15px",
+        }}
+      >
+        <Box>
+          <Typography variant="h5" component="h5">
+            Write a review for{" "}
+            <span style={{ textTransform: "capitalize" }}>{product.name}</span>
+          </Typography>
+          <Typography variant="p" component="p" sx={{ opacity: "0.6", m: 0 }}>
+            Please describe what you liked or disliked about this game and
+            whether you recommend it to others.
+          </Typography>
+          <Typography variant="p" component="p" sx={{ opacity: "0.6", m: 0 }}>
+            Please remember to be polite and follow the Rules and Guidelines.
+          </Typography>
+        </Box>
+        <Form onSubmit={formik.handleSubmit}>
+          <InputGroup>
+            <Textarea
+              id="content"
+              name="content"
+              color="neutral"
+              disabled={false}
+              minRows={4}
+              maxRows={8}
+              variant="soft"
+              value={formik.values.content}
+              onChange={formik.handleChange}
+            />
+          </InputGroup>
+          <Button
+            sx={{
+              mt: "17px",
+              fontSize: "12px",
+              width: "auto",
+              backgroundColor: "#cccc",
+              borderRadius: "3px",
+              padding: "9.75px 25px",
+              float: "right",
+              ":hover": {
+                backgroundColor: "#bdbdbd",
+              },
+            }}
+            type="submit"
+            disabled={formik.values.content.trim() === ""}
+          >
+            Submit
+          </Button>
+        </Form>
+      </Box>
+
+      <Box
+        component="div"
+        sx={{
+          marginTop: onLibrary ? "40px" : "100px",
+          boxShadow: "0px -3px 10px -4px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <TabContext value={value}>
           <Box
             sx={{
@@ -413,7 +505,7 @@ export default function ProductPage() {
                   textTransform: "uppercase",
                 },
                 "& button:hover": {
-                  backgroundColor: "#c4c4c4",
+                  backgroundColor: "#cccc",
                 },
                 "& button:active": { borderColor: "transparent" },
                 "& button:Mui-selected": {
@@ -432,23 +524,27 @@ export default function ProductPage() {
               display: value == 1 ? "flex" : "none",
               textAlign: "left",
               fontSize: "28px",
-              // backgroundImage: `url(${
-              //   product?.imageUrls ? product.imageUrls[2] : ""
-              // })`,
-              // backgroundRepeat: "no-repeat",
-              // backgroundSize: "cover",
-              // backgroundPosition: "center center",
-              backgroundColor: "#cccc",
+              backgroundColor: "#b5b7ffcc",
               opacity: 0.8,
               backgroundImage:
                 "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
+              position: "relative",
+              "&:before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                boxShadow: "inset 0px -800px 500px -490px #ffff",
+              },
             }}
           >
             <Typography
               variant="p"
               sx={{
                 width: "75%",
-                margin: "0 auto",
+                margin: "0 auto 60px",
                 color: "#000",
                 backdropFilter: "blur(10px) saturate(99%)",
                 backgroundColor: "rgba(255, 255, 255, 0.29)",
@@ -471,16 +567,20 @@ export default function ProductPage() {
               width: "auto",
               gap: "50px",
               alignItems: "center",
-              // backgroundImage: `url(${
-              //   product?.imageUrls ? product.imageUrls[0] : ""
-              // })`,
-              // backgroundRepeat: "no-repeat",
-              // backgroundSize: "cover",
-              // backgroundPosition: "center center",
-              backgroundColor: "#cccc",
+              backgroundColor: "#b5b7ffcc",
               opacity: 0.8,
               backgroundImage:
                 "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
+              position: "relative",
+              "&:before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                boxShadow: "inset 0px -800px 600px -510px #ffff",
+              },
             }}
           >
             <Box
@@ -493,6 +593,7 @@ export default function ProductPage() {
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
+                marginBottom: "60px",
               }}
             >
               <Typography
@@ -535,6 +636,7 @@ export default function ProductPage() {
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
+                marginBottom: "60px",
               }}
             >
               <Typography
@@ -561,6 +663,21 @@ export default function ProductPage() {
             </Box>
           </TabPanel>
         </TabContext>
+      </Box>
+      <Box sx={{ margin: "10px 0 20px" }}>
+        <Typography
+          variant="h5"
+          component="h5"
+          sx={{
+            fontWeight: "700",
+            marginBottom: "15px",
+            textTransform: "uppercase",
+          }}
+        >
+          CUSTOMER REVIEWS
+        </Typography>
+
+        <Comments />
       </Box>
     </Box>
   );
