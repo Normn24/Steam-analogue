@@ -13,7 +13,6 @@ import storage from 'redux-persist/lib/storage';
 import productItemSlice from './productItem.slice/productItem.slice';
 import productsSlice from './products.slice/products.slice';
 import slidesSlice from './slides.slice/slides.slice';
-import cartsSlice from './carts.slice/carts.slice';
 import linksSlice from './links.slice/links.slice';
 import catalogsSlice from './catalogs.slice/catalogs.slice';
 import genresSlice from './genres.slice/genres.slice';
@@ -42,7 +41,6 @@ export const store = configureStore({
     product: productItemSlice,
     products: productsSlice,
     slides: slidesSlice,
-    carts: cartsSlice,
     links: linksSlice,
     catalogs: catalogsSlice,
     genres: genresSlice,

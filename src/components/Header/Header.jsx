@@ -1,4 +1,7 @@
-import { HeaderWrapper, UserWrapper } from "./HeaderStyle";
+import {
+  HeaderWrapper,
+  UserWrapper,
+} from "../../styles/navbar-footer/HeaderStyle";
 import { NavLink } from "react-router-dom";
 import { CiShoppingBasket, CiViewList, CiUser, CiLogout } from "react-icons/ci";
 import { SiRepublicofgamers } from "react-icons/si";
@@ -8,6 +11,7 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import LogInForm from "../LogInForm/LogInForm";
 import Logout from "../LogOut/LogOut";
 import SignInForm from "../SignInForm/SignInForm";
+import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm";
 
 export default function Header() {
   const loggedIn = localStorage.getItem("loggedIn");
@@ -63,9 +67,16 @@ export default function Header() {
 
       <ModalWindow open={open} handleClose={handleClose}>
         {action === "login" ? (
-          <LogInForm onSignUpClick={() => handleOpen("signup")} />
+          <LogInForm 
+            onSignUpClick={() => handleOpen("signup")}
+            onForgotPasswordClick={() => handleOpen("forgotPassword")}
+          />
         ) : action === "signup" ? (
           <SignInForm onLoginClick={() => handleOpen("login")} />
+        ) : action === "forgotPassword" ? (
+          <ForgotPasswordForm 
+          onSignUpClick={() => handleOpen("signup")}
+          />
         ) : (
           <Logout handleClose={handleClose} />
         )}

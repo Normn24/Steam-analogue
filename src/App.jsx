@@ -18,13 +18,15 @@ import LibraryPage from "./pages/LibraryPage";
 import ProtectedRoute from "./ProtectedRoute";
 import CategoryPage from "./pages/CategoryPage";
 import OrderPage from "./pages/OrderPage";
-import UserPage from "./pages/UserPage/UserPage";
+import UserPage from "./pages/UserPage";
+import UserProfile from "./components/UserLayout/UserProfile";
+import UserOrders from "./components/UserLayout/UserOrders";
+import UserWishlist from "./components/UserLayout/UserWishlist";
+import UserReviews from "./components/UserLayout/UserReviews";
 
 
 import "./App.css";
-import UserProfile from "./components/UserLayout/UserProfile";
-import UserOrders from "./components/UserLayout/UserOrders";
-import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
+import { fetchProducts } from "./redux/products.slice/products.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ function App() {
       dispatch(fetchCart());
       dispatch(fetchOrders());
       dispatch(fetchUser());
+      dispatch(fetchProducts());
     }
   }, [dispatch, loggedIn]);
 
@@ -45,19 +48,28 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/products/search/:searchQuery" element={<SearchPage />} />
-        <Route path="/products/genre/:genreId" element={<SearchPage />} />
+        <Route path="/products/search/*" element={<SearchPage />} />
         <Route
           path="/products/category/:catalogQuery"
           element={<CategoryPage />}
         />
         <Route path="/register" element={<SignInForm />} />
-        <Route path="/account" element={<UserPage />}>
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute
+              element={<UserPage />}
+              isAllowed={loggedIn === "true"}
+            />
+          }
+        >
           <Route path="profile" element={<UserProfile />} />
           <Route path="orders" element={<UserOrders />} />
+          <Route path="wishlist" element={<UserWishlist />} />
+          <Route path="reviews" element={<UserReviews />} />
         </Route>
 
-        
+      
 
         <Route
           path="/wishlist"

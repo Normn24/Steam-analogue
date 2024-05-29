@@ -13,13 +13,14 @@ import {
   Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useStyles } from "../../styles";
+import { useStyles } from "../../styles/styles";
 
 export default function CategoryItem({
   product,
   hoveredItem,
   handleMouseEnter,
   rank,
+  currentCategory,
 }) {
   const {
     _id,
@@ -28,13 +29,13 @@ export default function CategoryItem({
     currentPrice,
     previousPrice,
     genres,
-    // currentPlayers,
-    // weeksInTopChart,
+    currentPlayers,
+    weeksInTopChart,
     yearOfPublication,
   } = product;
   const classes = useStyles();
   const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice)
+    ? Math.floor((currentPrice * 100) / previousPrice - 100)
     : null;
   const productYear = new Date(yearOfPublication).toLocaleDateString("en-US", {
     year: "numeric",
@@ -131,7 +132,7 @@ export default function CategoryItem({
                 variant="p"
                 component="p"
               >
-                -{percent}%
+                {percent}%
               </Typography>
               <Typography
                 sx={{
@@ -164,7 +165,6 @@ export default function CategoryItem({
                 padding: "4px 5px",
                 borderRadius: "3px",
                 position: "absolute",
-                backgroundColor: "#cccc",
                 right: "37.5%",
                 top: "10%",
               }}
@@ -185,9 +185,11 @@ export default function CategoryItem({
             }}
           >
             <Typography variant="p" component="p">
-              {/* {currentPlayers && currentPlayers.toLocaleString()} */}
-              {productYear && productYear}
-              {/* {weeksInTopChart && weeksInTopChart} */}
+              {currentCategory === "Current Players"
+                ? currentPlayers?.toLocaleString()
+                : currentCategory === "Weeks"
+                ? weeksInTopChart
+                : productYear}
             </Typography>
           </Box>
         </CardContent>

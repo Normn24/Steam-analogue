@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useStyles } from "../../styles";
+import { useStyles } from "../../styles/styles";
 import {
   Card,
   CardMedia,
@@ -32,7 +32,7 @@ export default function WishListItem({ product, handleRemove }) {
   const [onCart, setOnCart] = useState(false);
 
   const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice)
+    ? Math.floor((currentPrice * 100) / previousPrice) - 100
     : null;
 
   const dateOfPublication = new Date(yearOfPublication).toLocaleDateString(
@@ -97,7 +97,7 @@ export default function WishListItem({ product, handleRemove }) {
           <Link className="post__more" to={`/product/${_id}`}>
             <Typography
               sx={{ textTransform: "capitalize" }}
-              variant="h4"
+              variant="h5"
               component="h4"
             >
               {name}
@@ -190,7 +190,7 @@ export default function WishListItem({ product, handleRemove }) {
                   variant="p"
                   component="p"
                 >
-                  -{percent}%
+                  {percent}%
                 </Typography>
                 <Typography
                   sx={{

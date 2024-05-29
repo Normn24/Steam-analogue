@@ -1,4 +1,8 @@
-import { InfoWrapper, StyledFooter, StyledTitle } from "./FooterStyle";
+import {
+  InfoWrapper,
+  StyledFooter,
+  StyledTitle,
+} from "../../styles/navbar-footer/FooterStyle";
 import { NavLink } from "react-router-dom";
 import {
   FaDiscord,

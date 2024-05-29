@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
+import { useStyles } from "../styles/styles";
 import {
   Box,
   Tabs,
@@ -26,6 +27,7 @@ export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const classes = useStyles();
 
   const { product, status } = useSelector((state) => state.product);
   const { wishList } = useSelector((state) => state.wishList);
@@ -39,7 +41,7 @@ export default function ProductPage() {
 
   const loggedIn = localStorage.getItem("loggedIn");
   const percent = product.previousPrice
-    ? Math.floor((product.currentPrice * 100) / product.previousPrice)
+    ? Math.floor((product.currentPrice * 100) / product.previousPrice - 100)
     : null;
   const productYear = new Date(product.yearOfPublication).toLocaleDateString(
     "en-US",
@@ -215,21 +217,29 @@ export default function ProductPage() {
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
                     paddingBottom: "10px",
+                    gap: "10px",
                     "@media (max-width: 600px)": { fontSize: "10px" },
                   }}
                 >
-                  {product?.genres?.map((value, index) => (
-                    <Typography
-                      key={index}
+                  {product?.genres?.map((value) => (
+                    <Button
+                      key={value._id}
+                      className={classes.genreItem}
                       sx={{
-                        margin: "0 3px 0px 0",
-                        padding: "4px 7px",
-                        backgroundColor: "lightblue",
-                        borderRadius: "3px",
+                        margin: "0",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        textTransform: "capitalize",
+                        background: "#cccc",
+
+                        color: "#000",
+                        "&:hover": {
+                          background: "#cccc",
+                        },
                       }}
                     >
                       {value.name}
-                    </Typography>
+                    </Button>
                   ))}
                 </TableCell>
               </TableRow>
@@ -302,7 +312,7 @@ export default function ProductPage() {
               <>
                 <Box
                   sx={{
-                    display: "flex",
+                    display: product.currentPrice === 0 ? "none" : "flex",
                     alignItems: product.previousPrice ? "flex-end" : "center",
                     backgroundColor: "#cccc",
                     justifyContent: "space-between",
@@ -329,7 +339,7 @@ export default function ProductPage() {
                         variant="p"
                         component="p"
                       >
-                        -{percent}%
+                        {percent}%
                       </Typography>
                       <Typography
                         sx={{

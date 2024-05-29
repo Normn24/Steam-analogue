@@ -1,4 +1,8 @@
-import { NavBarItem, NavBarWrapper, StyledNavBarLink } from "./NavBarStyled";
+import {
+  NavBarItem,
+  NavBarWrapper,
+  StyledNavBarLink,
+} from "../../styles/navbar-footer/NavBarStyled";
 import { fetchCatalogs } from "../../redux/catalogs.slice/catalogs.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -62,7 +66,10 @@ export default function NavBar() {
           InputProps={{
             style: { paddingRight: "4px" },
             endAdornment: (
-              <NavLink to={`/products/search/${searchQuery}`}>
+              <NavLink
+                to={`/products/search/?name=${searchQuery}`}
+                key={searchQuery}
+              >
                 <IconButton type="submit" aria-label="search">
                   <SearchIcon />
                 </IconButton>

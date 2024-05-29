@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Paper } from "@mui/material";
-import { useStyles } from "../../../styles";
+import { useStyles } from "../../../styles/styles";
 import { Link } from "react-router-dom";
 
 function MainSliderItem({ item }) {
@@ -16,7 +16,7 @@ function MainSliderItem({ item }) {
       <Link className="post__more" to={`/product/${item._id}`}>
         <Paper
           sx={{
-            boxShadow: 21,
+            boxShadow: 15,
             borderRadius: 2,
           }}
           className={classes.itemPaper}

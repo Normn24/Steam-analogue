@@ -3,8 +3,6 @@ import { useFormik } from "formik";
 import { loginUser } from "../../redux/auth.slice/login.slice";
 import { useDispatch } from "react-redux";
 import { FaDiscord, FaTwitterSquare, FaLinkedin } from "react-icons/fa";
-import { Routes, Route, Navigate } from "react-router-dom";
-import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
 import {
   FormContainer,
   Title,
@@ -20,7 +18,7 @@ import {
   Forgot,
   Message,
   Icon,
-} from "./StylesLogInForm.js";
+} from "../../styles/forms/StylesLogInForm.js";
 import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
@@ -32,7 +30,7 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-export default function LogInForm({ onSignUpClick }) {
+export default function LogInForm({ onSignUpClick, onForgotPasswordClick }) {
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -92,10 +90,12 @@ export default function LogInForm({ onSignUpClick }) {
             />
           </InputGroup>
           <Forgot>
-            <Link href="#" style={{ color: "#ffff" }}>
+            <Link
+              onClick={onForgotPasswordClick}
+              style={{ color: "#ffff", marginLeft: "5px" }}
+            >
               Forgot Password?
             </Link>
-          
           </Forgot>
           <SignButton variant="contained" type="submit">
             Submit
