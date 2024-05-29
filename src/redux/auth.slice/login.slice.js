@@ -40,6 +40,10 @@ const loginSlice = createSlice({
       localStorage.removeItem('loggedIn');
       localStorage.removeItem('token');
     },
+    clearAuthState: (state) => {
+      state.status = 'idle';
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,6 +54,7 @@ const loginSlice = createSlice({
         state.status = 'succeeded';
         console.log(action.payload)
         state.token = action.payload.token;
+        state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
@@ -58,6 +63,6 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logout } = loginSlice.actions;
+export const { logout, clearAuthState } = loginSlice.actions;
 
 export default loginSlice.reducer;

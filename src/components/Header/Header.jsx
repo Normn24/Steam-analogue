@@ -11,8 +11,12 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import LogInForm from "../LogInForm/LogInForm";
 import Logout from "../LogOut/LogOut";
 import SignInForm from "../SignInForm/SignInForm";
+import { useDispatch } from "react-redux";
+import { clearRegistrationState } from "../../redux/auth.slice/signup.slice";
+import { clearAuthState } from "../../redux/auth.slice/login.slice";
 
 export default function Header() {
+  const dispatch = useDispatch();
   const loggedIn = localStorage.getItem("loggedIn");
   const [action, setAction] = useState("");
   const [open, setOpen] = useState(false);
@@ -21,6 +25,8 @@ export default function Header() {
   const handleOpen = (newAction) => {
     setAction(newAction);
     setOpen(true);
+    dispatch(clearRegistrationState());
+    dispatch(clearAuthState());
   };
 
   return (
