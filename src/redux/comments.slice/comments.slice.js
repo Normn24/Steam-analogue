@@ -7,7 +7,7 @@ export function getAccessToken() {
 export const addComment = createAsyncThunk(
   "comments/addComment",
   async (payload) => {
-    const response = await fetch(`http://localhost:4000/api/comments`, {
+    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments`, {
       method: "POST",
       headers: {
         Authorization: getAccessToken(),
@@ -27,7 +27,7 @@ export const addComment = createAsyncThunk(
 export const fetchProductComments = createAsyncThunk(
   "comments/fetchProductComments",
   async (payload) => {
-    const response = await fetch(`http://localhost:4000/api/comments/product/${payload}`, {
+    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/product/${payload}`, {
       method: "GET",
     });
     if (!response.ok) {
@@ -42,7 +42,7 @@ export const removeComment = createAsyncThunk(
   "comments/removeComment",
   async (payload) => {
     const response = await fetch(
-      `http://localhost:4000/api/comments/${payload}`,
+      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/${payload}`,
       {
         method: "DELETE",
         headers: {
@@ -63,7 +63,7 @@ export const fetchUserComments = createAsyncThunk(
   "comments/fetchUserComments",
   async (payload) => {
     const response = await fetch(
-      `http://localhost:4000/api/comments/customer/${payload}`,
+      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/customer/${payload}`,
       {
         method: "GET",
       }
@@ -92,7 +92,7 @@ const commentsSlice = createSlice({
       .addCase(addComment.fulfilled, (state, action) => {
         console.log("Added to comments:", action.payload);
         state.loading = false;
-        state.productComments.push(action.payload);
+        state.productComments.unshift(action.payload);
       })
       .addCase(removeComment.fulfilled, (state, action) => {
         console.log("Removed from comments:", action.payload);
@@ -104,12 +104,12 @@ const commentsSlice = createSlice({
       .addCase(fetchUserComments.fulfilled, (state, action) => {
         console.log("Fetched comments:", action.payload);
         state.loading = false;
-        state.userComments = action.payload;
+        state.userComments = action.payload.reverse();
       })
       .addCase(fetchProductComments.fulfilled, (state, action) => {
         console.log("Fetched comments:", action.payload);
         state.loading = false;
-        state.productComments = action.payload;
+        state.productComments = action.payload.reverse();
       });
   },
 });

@@ -4,7 +4,7 @@ export const loginUser = createAsyncThunk(
   'login/loginUser',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:4000/api/customers/login", {
+      const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

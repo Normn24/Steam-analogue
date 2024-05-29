@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
@@ -13,7 +13,6 @@ import {
   TableCell,
   Button,
   Typography,
-  Card,
 } from "@mui/material";
 import { MdBookmarkAdd, MdBookmarkAdded } from "react-icons/md";
 import { TabContext, TabPanel } from "@mui/lab";
@@ -30,13 +29,9 @@ import {
 } from "../redux/comments.slice/comments.slice";
 
 import { useFormik } from "formik";
-import {
-  Form,
-  InputGroup,
-  InputLabel,
-  SignButton,
-  StyledInput,
-} from "../styles/forms/StylesLogInForm.js";
+import { Form, InputGroup } from "../styles/forms/StylesLogInForm.js";
+
+import Textarea from "@mui/joy/Textarea";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -48,9 +43,6 @@ export default function ProductPage() {
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
-  const productComments = useSelector(
-    (state) => state.comments.productComments
-  );
 
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
@@ -70,24 +62,21 @@ export default function ProductPage() {
     }
   );
 
-  // const [comment, setComment] = useState("");
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (comment.trim()) {
-  //     dispatch(addComment(comment));
-  //     setComment("");
-  //   }
-  // };
-
   const formik = useFormik({
-    initialValues: {
-      product: id,
-      content: "",
-    },
-    onSubmit: (values) => {
-      dispatch(addComment(values));
-    },
+    initialValues: useMemo(
+      () => ({
+        product: id,
+        content: "",
+      }),
+      [id]
+    ),
+    onSubmit: useCallback(
+      (values, { resetForm }) => {
+        dispatch(addComment(values));
+        resetForm();
+      },
+      [dispatch]
+    ),
   });
 
   useEffect(() => {
@@ -150,11 +139,11 @@ export default function ProductPage() {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "auto",
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
-        margin: "40px 0",
+        margin: "40px 20px",
       }}
     >
       <Box
@@ -203,7 +192,7 @@ export default function ProductPage() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "100%",
+            width: "auto",
             "@media (max-width: 600px)": { alignItems: "center" },
           }}
         >
@@ -211,7 +200,7 @@ export default function ProductPage() {
             component="img"
             sx={{
               height: "140px",
-              width: "auto",
+              width: "446px",
               objectFit: "cover",
               borderRadius: "0px 6px 0px 0px",
             }}
@@ -249,6 +238,7 @@ export default function ProductPage() {
                   sx={{
                     display: "flex",
                     width: "auto",
+                    flexWrap: "wrap",
                     flexDirection: "row",
                     justifyContent: "flex-start",
                     alignItems: "center",
@@ -427,7 +417,70 @@ export default function ProductPage() {
           </Box>
         </Box>
       </Box>
-      <Box component="div" sx={{ marginTop: "110px" }}>
+
+      <Box
+        sx={{
+          marginTop: "110px",
+          display: onLibrary ? "block" : "none",
+          boxShadow: "0px 0px 10px -1px rgba(0, 0, 0, 0.2)",
+          padding: "15px",
+        }}
+      >
+        <Box>
+          <Typography variant="h5" component="h5">
+            Write a review for{" "}
+            <span style={{ textTransform: "capitalize" }}>{product.name}</span>
+          </Typography>
+          <Typography variant="p" component="p" sx={{ opacity: "0.6", m: 0 }}>
+            Please describe what you liked or disliked about this game and
+            whether you recommend it to others.
+          </Typography>
+          <Typography variant="p" component="p" sx={{ opacity: "0.6", m: 0 }}>
+            Please remember to be polite and follow the Rules and Guidelines.
+          </Typography>
+        </Box>
+        <Form onSubmit={formik.handleSubmit}>
+          <InputGroup>
+            <Textarea
+              id="content"
+              name="content"
+              color="neutral"
+              disabled={false}
+              minRows={4}
+              maxRows={8}
+              variant="soft"
+              value={formik.values.content}
+              onChange={formik.handleChange}
+            />
+          </InputGroup>
+          <Button
+            sx={{
+              mt: "17px",
+              fontSize: "12px",
+              width: "auto",
+              backgroundColor: "#cccc",
+              borderRadius: "3px",
+              padding: "9.75px 25px",
+              float: "right",
+              ":hover": {
+                backgroundColor: "#bdbdbd",
+              },
+            }}
+            type="submit"
+            disabled={formik.values.content.trim() === ""}
+          >
+            Submit
+          </Button>
+        </Form>
+      </Box>
+
+      <Box
+        component="div"
+        sx={{
+          marginTop: onLibrary ? "40px" : "100px",
+          boxShadow: "0px -3px 10px -4px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <TabContext value={value}>
           <Box
             sx={{
@@ -452,7 +505,7 @@ export default function ProductPage() {
                   textTransform: "uppercase",
                 },
                 "& button:hover": {
-                  backgroundColor: "#c4c4c4",
+                  backgroundColor: "#cccc",
                 },
                 "& button:active": { borderColor: "transparent" },
                 "& button:Mui-selected": {
@@ -611,7 +664,7 @@ export default function ProductPage() {
           </TabPanel>
         </TabContext>
       </Box>
-      <Box sx={{ margin: "60px 0 20px" }}>
+      <Box sx={{ margin: "10px 0 20px" }}>
         <Typography
           variant="h5"
           component="h5"
@@ -623,35 +676,8 @@ export default function ProductPage() {
         >
           CUSTOMER REVIEWS
         </Typography>
-        <Card className="p-6 md:p-8">
-          <Box>
-            <Typography>Write a Review</Typography>
-            <Typography>
-              Share your thoughts and experiences with our product.
-            </Typography>
-          </Box>
-          <Form onSubmit={formik.handleSubmit}>
-            <InputGroup>
-              <InputLabel htmlFor="content">Email</InputLabel>
-              <StyledInput
-                id="content"
-                name="content"
-                value={formik.values.content}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.content && Boolean(formik.errors.content)}
-                helperText={formik.touched.content && formik.errors.content}
-                inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
-              />
-            </InputGroup>
-            <SignButton variant="contained" type="submit">
-              Submit
-            </SignButton>
-          </Form>
-        </Card>
-        {productComments?.map((item) => (
-          <Comments key={item?._id} item={item} />
-        ))}
+
+        <Comments />
       </Box>
     </Box>
   );

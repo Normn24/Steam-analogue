@@ -67,5 +67,5 @@ export const NavLinkStyled = styled(NavLink)({
 });
 
 export const ContentArea = styled(Box)({
-    width: "100%"
+    width: "960px"
 });

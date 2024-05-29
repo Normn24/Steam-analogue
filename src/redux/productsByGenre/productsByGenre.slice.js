@@ -4,7 +4,7 @@ export const fetchProductsByGenre = createAsyncThunk(
   'genres/fetchProductsByGenre',
   async (genreId) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/products/genre=${genreId}`,);
+      const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products/genre=${genreId}`,);
       if (!response.ok) {
         throw new Error('Failed to fetch catalog');
       }

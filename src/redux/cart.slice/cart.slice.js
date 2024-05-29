@@ -7,7 +7,7 @@ export function getAccessToken() {
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async (payload) => {
-    const response = await fetch(`http://localhost:4000/api/cart/${payload}`, {
+    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${payload}`, {
       method: "PUT",
       headers: {
         Authorization: getAccessToken(),
@@ -26,7 +26,7 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (payload) => {
     const response = await fetch(
-      `http://localhost:4000/api/cart/${payload}`,
+      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${payload}`,
       {
         method: "DELETE",
         headers: {
@@ -47,7 +47,7 @@ export const fetchCart = createAsyncThunk(
   "cart/fetchCart",
   async () => {
     const response = await fetch(
-      "http://localhost:4000/api/cart/",
+      "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/",
       {
         method: "GET",
         headers: {

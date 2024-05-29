@@ -28,7 +28,7 @@ export default function SearchPage() {
     if (maxPrice) searchParams.append("maxPrice", maxPrice);
     if (startYear) searchParams.append("startYear", startYear);
     if (endYear) searchParams.append("endYear", endYear);
-    const url = `http://localhost:4000/api/products?${searchParams.toString()}`;
+    const url = `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products?${searchParams.toString()}`;
 
     dispatch(fetchFilteredProducts(url || null));
     dispatch(fetchProducts());

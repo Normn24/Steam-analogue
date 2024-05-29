@@ -13,7 +13,11 @@ function MainSlider() {
   const { products, status } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchProducts("http://localhost:4000/api/products/"));
+    dispatch(
+      fetchProducts(
+        "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products/"
+      )
+    );
   }, [dispatch]);
 
   if (status == "loading") {
