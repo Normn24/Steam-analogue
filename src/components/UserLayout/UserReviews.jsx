@@ -1,10 +1,18 @@
-import { useSelector } from "react-redux";
-import { Box, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Button, Typography } from "@mui/material";
 import { Card, CardMedia, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
+import { removeComment } from "../../redux/comments.slice/comments.slice";
+import { MdOutlineDelete } from "react-icons/md";
 
 export default function UserReviews() {
+  const dispatch = useDispatch();
   const userComments = useSelector((state) => state.comments.userComments);
+
+  const handleDeleteComment = (id) => {
+    dispatch(removeComment(id));
+  };
+
   return (
     <Box>
       <Typography
@@ -12,7 +20,7 @@ export default function UserReviews() {
         component="h4"
         sx={{ fontWeight: "700", marginBottom: "15px" }}
       >
-        My Reviews
+        My Reviews ({userComments.length})
       </Typography>
       {userComments?.map((item) => (
         <Card
@@ -30,7 +38,7 @@ export default function UserReviews() {
               sx={{
                 minHeight: "100px",
                 height: "100%",
-                width: "300px",
+                width: "260px",
                 objectFit: "cover",
                 borderRadius: "6px 0px 0px 6px",
               }}
@@ -49,9 +57,22 @@ export default function UserReviews() {
               "&:last-child": { pb: "30px" },
             }}
           >
-            <Typography variant="p" component="p">
+            <Typography variant="p" component="p" sx={{ paddingRight: "35px" }}>
               {item.content}
             </Typography>
+            <Button
+              onClick={() => handleDeleteComment(item._id)}
+              sx={{
+                width: "auto",
+                height: "auto",
+                minWidth: "auto",
+                p: 0,
+                position: "absolute",
+                right: "15px",
+              }}
+            >
+              <MdOutlineDelete style={{ width: "30px", height: "30px" }} />
+            </Button>
             <Typography
               sx={{
                 position: "absolute",

@@ -21,7 +21,6 @@ const UserLayout = () => {
   useEffect(() => {
     dispatch(fetchUserComments(user?._id));
   });
-  console.log(user);
   return (
     <UserPageContainer>
       <UserNav>
