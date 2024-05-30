@@ -56,7 +56,6 @@ const initialValues = {
 export default function SignInForm({ onLoginClick }) {
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.signup);
-  console.log(error);
 
   const formik = useFormik({
     initialValues: initialValues,

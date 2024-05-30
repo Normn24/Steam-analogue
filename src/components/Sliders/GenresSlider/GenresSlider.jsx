@@ -85,7 +85,7 @@ export default function GenresSlider() {
           BROWSE BY GENRE
         </Typography>
         <Slider {...settings}>
-          {genres?.map((genre) => (
+          {genres?.slice(0, 8).map((genre) => (
             <NavLink
               to={`/products/search/?genre=${genre._id}`}
               key={genre._id}

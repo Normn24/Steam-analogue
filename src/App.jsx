@@ -32,10 +32,10 @@ function App() {
 
   useEffect(() => {
     if (loggedIn === "true") {
+      dispatch(fetchUser());
       dispatch(fetchWishList());
       dispatch(fetchCart());
       dispatch(fetchOrders());
-      dispatch(fetchUser());
     }
   }, [dispatch, loggedIn]);
 

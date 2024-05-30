@@ -97,8 +97,8 @@ const commentsSlice = createSlice({
       .addCase(removeComment.fulfilled, (state, action) => {
         console.log("Removed from comments:", action.payload);
         state.loading = false;
-        state.comments.filter((product) => {
-          return product.pk !== action.payload.pk;
+        state.userComments = state.userComments.filter((product) => {
+          return product._id !== action.payload.deletedCommentInfo._id;
         });
       })
       .addCase(fetchUserComments.fulfilled, (state, action) => {

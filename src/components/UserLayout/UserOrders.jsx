@@ -13,7 +13,6 @@ import {
 import { IoIosArrowDown } from "react-icons/io";
 export default function UserOrders() {
   const { orders } = useSelector((state) => state.orders);
-  orders.map((item) => console.log(item));
 
   return (
     <>
