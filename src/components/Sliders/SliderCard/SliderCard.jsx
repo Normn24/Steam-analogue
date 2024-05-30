@@ -85,7 +85,7 @@ export default function SliderCard() {
           special offers
         </Typography>
         <Slider {...settings}>
-          {slides?.map((product, index) => {
+          {slides?.slice(0, 6).map((product, index) => {
             return <SliderCardItem key={index} product={product.product} />;
           })}
         </Slider>

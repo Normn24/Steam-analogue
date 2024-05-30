@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   loginOrEmail: Yup.string()
-    .required("Email is required")
+    .required("Login or email is required")
     .min(4, "Login or email must be at least 4 characters"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
@@ -56,7 +56,7 @@ export default function LogInForm({ onSignUpClick }) {
         <Title>Login</Title>
         <Form onSubmit={formik.handleSubmit}>
           <InputGroup>
-            <InputLabel htmlFor="loginOrEmail">Email</InputLabel>
+            <InputLabel htmlFor="loginOrEmail">Login or email</InputLabel>
             <StyledInput
               id="loginOrEmail"
               name="loginOrEmail"
