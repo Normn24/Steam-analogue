@@ -13,12 +13,9 @@ import {
   ImageListItem,
   Box,
 } from "@mui/material";
+import { memo } from "react";
 
-export default function ProductItem({
-  product,
-  hoveredItem,
-  handleMouseEnter,
-}) {
+const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
   const { _id, name, imageUrls, genres, currentPrice, previousPrice } = product;
   const percent = previousPrice
     ? Math.floor((currentPrice * 100) / previousPrice - 100)
@@ -256,7 +253,7 @@ export default function ProductItem({
       {/* // </Link> */}
     </Link>
   );
-}
+};
 
 ProductItem.propTypes = {
   product: PropTypes.shape({
@@ -269,3 +266,9 @@ ProductItem.propTypes = {
   hoveredItem: PropTypes.string,
   handleMouseEnter: PropTypes.func.isRequired,
 };
+
+const MemoizedProductItem = memo(ProductItem);
+
+MemoizedProductItem.displayName = "ProductItem";
+
+export default MemoizedProductItem;

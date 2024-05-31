@@ -27,6 +27,7 @@ import loginSlice from './auth.slice/login.slice';
 import signupSlice from './auth.slice/signup.slice';
 import downloadedSlice from './downloaded.slice/downloaded.slice';
 import userSlice from './user.slice/user.slice';
+import loaderSlice from './loader.slice/loader.slice';
 
 const persistConfig = {
   key: 'root',
@@ -53,7 +54,8 @@ export const store = configureStore({
     login: loginSlice,
     signup: signupSlice,
     downloaded: persistedReducer,
-    user: userSlice
+    user: userSlice,
+    loader: loaderSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
