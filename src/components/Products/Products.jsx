@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -8,7 +8,7 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import ProductItem from "../ProductItem/ProductItem";
+import MemoizedProductItem from "../ProductItem/ProductItem";
 import { fetchCatalogProducts } from "../../redux/catalogProducts.slice/catalogProducts.slice";
 import { Link } from "react-router-dom";
 
@@ -20,23 +20,33 @@ export default function Products() {
   );
   const [hoveredItem, setHoveredItem] = useState(null);
   const [catalogItem, setCatalogItem] = useState(null);
+  const [allProducts, setAllProducts] = useState({});
 
   useEffect(() => {
-    if (catalogItem !== null) {
-      dispatch(fetchCatalogProducts(catalogItem));
+    if (catalogs.length > 0) {
+      catalogs.forEach((catalog) => {
+        dispatch(fetchCatalogProducts(catalog.name)).then((response) => {
+          setAllProducts((prev) => ({
+            ...prev,
+            [catalog.name]: response.payload,
+          }));
+        });
+      });
     }
-  }, [dispatch, catalogItem]);
+  }, [dispatch, catalogs]);
 
   useEffect(() => {
     if (catalogs.length > 0 && catalogItem === null) {
       setCatalogItem(catalogs[0]?.name);
     }
-    setHoveredItem(categoriesProducts[0]?._id);
-  }, [categoriesProducts, catalogs, catalogItem]);
+    if (allProducts[catalogItem] && allProducts[catalogItem].length > 0) {
+      setHoveredItem(allProducts[catalogItem][0]?._id);
+    }
+  }, [categoriesProducts, catalogs, catalogItem, allProducts]);
 
-  const handleMouseEnter = (productId) => {
+  const handleMouseEnter = useCallback((productId) => {
     setHoveredItem(productId);
-  };
+  }, []);
 
   if (loading) {
     return "";
@@ -89,8 +99,8 @@ export default function Products() {
             </ListItemButton>
           ))}
         </List>
-        {categoriesProducts?.slice(0, 8).map((product) => (
-          <ProductItem
+        {allProducts[catalogItem]?.slice(0, 8).map((product) => (
+          <MemoizedProductItem
             key={product._id}
             product={product}
             hoveredItem={hoveredItem}
