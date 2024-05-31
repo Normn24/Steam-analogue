@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchCatalogProducts = createAsyncThunk(
-  'catalog/fetchCatalogProducts',
+  'catalog/fetchCatalogProducts:load',
   async (categoryName) => {
     try {
       const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products/category=${categoryName}`,);

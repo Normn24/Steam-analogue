@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Button, LinearProgress } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import MainSliderItem from "./MainSliderItem";
 import { fetchProducts } from "../../../redux/products.slice/products.slice";
@@ -10,19 +10,15 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 function MainSlider() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { products, status } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(
-      fetchProducts(
-        "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products/"
-      )
-    );
+    dispatch(fetchProducts());
   }, [dispatch]);
 
-  if (status == "loading") {
-    return <LinearProgress />;
-  }
+  // if (status == "loading") {
+  //   return <LinearProgress />;
+  // }
   return (
     <Carousel
       NavButton={({ onClick, className, next, prev }) => {
