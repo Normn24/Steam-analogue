@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
 import { useStyles } from "../styles/styles";
 import {
@@ -39,7 +39,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const classes = useStyles();
 
-  const { product, status } = useSelector((state) => state.product);
+  const { product } = useSelector((state) => state.product);
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
@@ -131,10 +131,6 @@ export default function ProductPage() {
   const handleLibrary = () => {
     navigate("/products/library");
   };
-
-  if (status == "loading") {
-    return <p>Loading...</p>;
-  }
 
   return (
     <Box
@@ -251,24 +247,28 @@ export default function ProductPage() {
                   }}
                 >
                   {product?.genres?.map((value) => (
-                    <Button
+                    <NavLink
+                      to={`/products/search/?genre=${value._id}`}
                       key={value._id}
-                      className={classes.genreItem}
-                      sx={{
-                        margin: "0",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        textTransform: "capitalize",
-                        background: "#cccc",
-
-                        color: "#000",
-                        "&:hover": {
-                          background: "#cccc",
-                        },
-                      }}
                     >
-                      {value.name}
-                    </Button>
+                      <Button
+                        className={classes.genreItem}
+                        sx={{
+                          margin: "0",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          textTransform: "capitalize",
+                          background: "#cccc",
+
+                          color: "#000",
+                          "&:hover": {
+                            background: "#cccc",
+                          },
+                        }}
+                      >
+                        {value.name}
+                      </Button>
+                    </NavLink>
                   ))}
                 </TableCell>
               </TableRow>

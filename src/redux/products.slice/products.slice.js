@@ -6,7 +6,7 @@ const initialState = {
   status: null
 }
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts:load', async () => {
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   const data = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products")
     .then((res) => res.json())
   return data;

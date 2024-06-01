@@ -28,6 +28,7 @@ import signupSlice from './auth.slice/signup.slice';
 import downloadedSlice from './downloaded.slice/downloaded.slice';
 import userSlice from './user.slice/user.slice';
 import loaderSlice from './loader.slice/loader.slice';
+import delayLoader from './loader.slice/delayLoader';
 
 const persistConfig = {
   key: 'root',
@@ -60,7 +61,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(delayLoader),
 });
 
 export const persistor = persistStore(store);

@@ -6,7 +6,7 @@ export function getAccessToken() {
 
 
 export const placeOrder = createAsyncThunk(
-  'orders/placeOrder',
+  'orders/placeOrder:load',
   async (payload) => {
     const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/orders/", {
       method: "POST",
@@ -31,7 +31,7 @@ export const placeOrder = createAsyncThunk(
   });
 
 export const fetchOrders = createAsyncThunk(
-  "orders/fetchOrders",
+  "orders/fetchOrders:load",
   async () => {
     const response = await fetch(
       "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/orders/",

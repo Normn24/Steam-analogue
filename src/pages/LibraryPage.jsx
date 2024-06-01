@@ -3,11 +3,8 @@ import { Box, Typography } from "@mui/material";
 import LibraryItem from "../components/LibraryItem/LibraryItem";
 
 export default function LibraryPage() {
-  const { orders, library, loading } = useSelector((state) => state.orders);
+  const { orders, library } = useSelector((state) => state.orders);
 
-  if (loading) {
-    return <h4>Loading</h4>;
-  }
   return (
     <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
       {orders === null || library.length === 0 ? (

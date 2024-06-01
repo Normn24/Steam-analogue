@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function CartPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cart, loading } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   const totalPrice = cart?.products?.reduce(
     (total, product) => total + product.product.currentPrice,
     0
@@ -21,9 +21,6 @@ export default function CartPage() {
     dispatch(removeFromCart(_id));
   };
 
-  if (loading) {
-    return <h4>Loading</h4>;
-  }
   return (
     <Box
       sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 20px" }}

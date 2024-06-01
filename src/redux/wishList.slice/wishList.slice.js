@@ -44,7 +44,7 @@ export const removeFromWishList = createAsyncThunk(
 );
 
 export const fetchWishList = createAsyncThunk(
-  "wishList/fetchWishList",
+  "wishList/fetchWishList:load",
   async () => {
     const response = await fetch(
       "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/",

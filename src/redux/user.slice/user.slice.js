@@ -5,7 +5,7 @@ export function getAccessToken() {
 }
 
 export const updateUserProfile = createAsyncThunk(
-  'registration/updateUserProfile',
+  'registration/updateUserProfile:load',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers", {
@@ -29,7 +29,7 @@ export const updateUserProfile = createAsyncThunk(
   });
 
 export const updateUserPassword = createAsyncThunk(
-  'registration/updateUserPassword',
+  'registration/updateUserPassword:load',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/password", {
@@ -53,7 +53,7 @@ export const updateUserPassword = createAsyncThunk(
   });
 
 export const fetchUser = createAsyncThunk(
-  'user/fetchUser',
+  'user/fetchUser:load',
   async (payload) => {
     const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/customer", {
       method: "GET",

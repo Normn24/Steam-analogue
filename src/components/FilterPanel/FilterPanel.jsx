@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchItem from "../SearchItem/SearchItem";
@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 
 function FilterPanel({ productList }) {
-  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products.data);
@@ -36,7 +35,7 @@ function FilterPanel({ productList }) {
 
   useEffect(() => {
     setFilteredProducts(productList);
-  }, [dispatch, productList]);
+  }, [productList]);
 
   const applyFilters = (values) => {
     let filtered = [...productList];

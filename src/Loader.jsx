@@ -1,27 +1,43 @@
 import { useSelector } from "react-redux";
 import { grid } from "ldrs";
+import { Box } from "@mui/material";
 
 export default function Loader() {
   const isLoading = useSelector((state) => state.loader.loading);
 
-  if (!isLoading) return null;
-
+  document.body.style.overflow = "hidden";
   grid.register();
+  if (!isLoading) {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    document.body.style.overflow = "";
+    return null;
+  }
 
   return (
-    <l-grid
-      size="160"
-      speed="1"
-      color="black"
-      style={{
-        position: "absolute",
-        top: "40%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        boxShadow: 24,
-        width: "400px",
-        zIndex: 1330,
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        position: "fixed",
+        left: "0%",
+        zIndex: 100,
+        backgroundColor: "#fff",
       }}
-    ></l-grid>
+    >
+      <l-grid
+        size="160"
+        speed="1"
+        color="black"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          boxShadow: 24,
+          // width: "100%",
+          zIndex: 1330,
+        }}
+      ></l-grid>
+    </Box>
   );
 }
