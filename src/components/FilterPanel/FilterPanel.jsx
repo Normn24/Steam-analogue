@@ -13,12 +13,17 @@ import {
   Box,
   Slider,
 } from "@mui/material";
+import { grid } from "ldrs";
 
-function FilterPanel({ productList }) {
+function FilterPanel() {
   const location = useLocation();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products.data);
   const genres = useSelector((state) => state.genres.genres);
+  const productList = useSelector(
+    (state) => state.productList.productList.data
+  );
+  const loading = useSelector((state) => state.productList.loading);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
   const queryParams = new URLSearchParams(location.search);
@@ -28,6 +33,7 @@ function FilterPanel({ productList }) {
   const endYear = queryParams.get("endYear");
   const minPrice = queryParams.get("minPrice");
   const maxPrice = queryParams.get("maxPrice");
+  grid.register();
 
   const handleMouseEnter = (productId) => {
     setHoveredItem(productId);
@@ -76,21 +82,11 @@ function FilterPanel({ productList }) {
     if (values.genreId) params.append("genre", values.genreId);
     params.append("minPrice", values.minPrice);
     params.append("maxPrice", values.maxPrice);
-
-    // params.append("priceRange", values.priceRange.join(","));
     params.append("startYear", values.startYear);
     params.append("endYear", values.endYear);
     if (values.sortBy) params.append("sortBy", values.sortBy);
     navigate(`/products/search/?${params.toString()}`);
   };
-
-  // const parseRange = (rangeStr, defaultValue) => {
-  //   if (!rangeStr) return defaultValue;
-  //   return rangeStr.split(",").map(Number);
-  // };
-
-  // const yearRange = parseRange(yearRangeParam, [2010, 2025]);
-  // const priceRange = parseRange(priceRangeParam, [0, 100]);
 
   return (
     <>
@@ -100,10 +96,26 @@ function FilterPanel({ productList }) {
           position: "relative",
           minHeight: "855px",
           display: "flex",
-          gap: "25px",
+          gap: "60px",
           justifyContent: "flex-end",
         }}
       >
+        {loading && (
+          <l-grid
+            size="160"
+            speed="1"
+            color="black"
+            style={{
+              top: "0%",
+              height: "100%",
+              width: "69%",
+              position: "absolute",
+              left: "-1%",
+              backgroundColor: "#fff",
+              zIndex: 1100,
+            }}
+          ></l-grid>
+        )}
         {filteredProducts?.length === 0 ? (
           <Typography
             sx={{
@@ -131,7 +143,7 @@ function FilterPanel({ productList }) {
             >
               {`${filteredProducts?.length} results match your search.`}
             </Typography>
-            <Box sx={{ width: "70%" }}>
+            <Box sx={{ width: "67%" }}>
               {filteredProducts?.map((product) => (
                 <SearchItem
                   key={product._id}
@@ -146,7 +158,7 @@ function FilterPanel({ productList }) {
         <div
           style={{
             width: "25%",
-            height: "700px",
+            height: "min-content",
             boxShadow:
               "rgba(0, 0, 0, 0.2) 0px 6px 9px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 11px 20px 5px",
             padding: "20px",
@@ -161,7 +173,6 @@ function FilterPanel({ productList }) {
             enableReinitialize
             initialValues={{
               genreId: genreId || "",
-              // priceRange: priceRange,
               minPrice: minPrice || 0,
               maxPrice: maxPrice || 100,
               startYear: startYear || 2010,
@@ -184,10 +195,17 @@ function FilterPanel({ productList }) {
                     onChange={(event) => {
                       const gameName = event.target.value;
                       setFieldValue("name", gameName);
-                      applyFilters({ ...values, name: gameName });
                     }}
                     variant="outlined"
                   />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => applyFilters({ ...values })}
+                    style={{ marginTop: "10px" }}
+                  >
+                    Search
+                  </Button>
                 </FormControl>
 
                 <Divider style={{ marginBottom: "20px", marginTop: "20px" }} />
