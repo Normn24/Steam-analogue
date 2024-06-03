@@ -6,7 +6,7 @@ const initialState = {
   status: null
 }
 
-export const fetchSlides = createAsyncThunk('slides/fetchSlides', async (url) => {
+export const fetchSlides = createAsyncThunk('slides/fetchSlides:load', async (url) => {
   const data = await fetch(url)
     .then((res) => res.json())
   return data;

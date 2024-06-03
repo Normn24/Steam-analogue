@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 export default function Products() {
   const dispatch = useDispatch();
   const { catalogs } = useSelector((state) => state.catalogs);
-  const { categoriesProducts, loading } = useSelector(
+  const { categoriesProducts } = useSelector(
     (state) => state.categoriesProducts
   );
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -48,9 +48,6 @@ export default function Products() {
     setHoveredItem(productId);
   }, []);
 
-  if (loading) {
-    return "";
-  }
   return (
     <>
       <Box

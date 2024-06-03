@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 export default function CategoryPage() {
   const dispatch = useDispatch();
   const { catalogQuery } = useParams();
-  const { categoriesProducts, loading } = useSelector(
+  const { categoriesProducts } = useSelector(
     (state) => state.categoriesProducts
   );
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -39,16 +39,13 @@ export default function CategoryPage() {
     setHoveredItem(productId);
   };
 
-  if (loading) {
-    return "";
-  }
   return (
     <>
       <Box
         sx={{
           padding: "20px",
           position: "relative",
-          height: "855px",
+          minHeight: "60svh",
           m: "60px 0",
         }}
       >

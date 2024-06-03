@@ -5,15 +5,12 @@ import WishListItem from "../components/WishListItem/WishListItem";
 
 export default function WishListPage() {
   const dispatch = useDispatch();
-  const { wishList, loading } = useSelector((state) => state.wishList);
+  const { wishList } = useSelector((state) => state.wishList);
 
   const handleRemove = (_id) => {
     dispatch(removeFromWishList(_id));
   };
 
-  if (loading) {
-    return <h4>Loading</h4>;
-  }
   return (
     <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
       {wishList === null || wishList?.products?.length === 0 ? (

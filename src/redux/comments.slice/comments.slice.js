@@ -5,7 +5,7 @@ export function getAccessToken() {
 }
 
 export const addComment = createAsyncThunk(
-  "comments/addComment",
+  "comments/addComment:load",
   async (payload) => {
     const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments`, {
       method: "POST",
@@ -25,7 +25,7 @@ export const addComment = createAsyncThunk(
 
 
 export const fetchProductComments = createAsyncThunk(
-  "comments/fetchProductComments",
+  "comments/fetchProductComments:load",
   async (payload) => {
     const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/product/${payload}`, {
       method: "GET",
@@ -39,7 +39,7 @@ export const fetchProductComments = createAsyncThunk(
 );
 
 export const removeComment = createAsyncThunk(
-  "comments/removeComment",
+  "comments/removeComment:load",
   async (payload) => {
     const response = await fetch(
       `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/${payload}`,
@@ -60,7 +60,7 @@ export const removeComment = createAsyncThunk(
 );
 
 export const fetchUserComments = createAsyncThunk(
-  "comments/fetchUserComments",
+  "comments/fetchUserComments:load",
   async (payload) => {
     const response = await fetch(
       `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/customer/${payload}`,
