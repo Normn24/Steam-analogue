@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Paper } from "@mui/material";
-import { useStyles } from "../../../styles/styles";
+import { useStyles } from "../../../styles/sliders/styles";
 import { Link } from "react-router-dom";
 
 function MainSliderItem({ item }) {

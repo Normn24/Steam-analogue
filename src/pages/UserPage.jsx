@@ -17,9 +17,9 @@ import { fetchUserComments } from "../redux/comments.slice/comments.slice";
 const UserLayout = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  console.log(user);
+
   useEffect(() => {
-    dispatch(fetchUserComments(user?._id));
+    if (user._id) dispatch(fetchUserComments(user?._id));
   });
   return (
     <UserPageContainer>
@@ -46,7 +46,7 @@ const UserLayout = () => {
           </NavLinkStyled>
           <NavLinkStyled to="/account/wishlist">
             <NavText>
-              <CiViewList /> Wishlist
+              <CiViewList /> My Wishlist
             </NavText>
           </NavLinkStyled>
           <NavLinkStyled to="/account/reviews">

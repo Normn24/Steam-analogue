@@ -46,7 +46,7 @@ export const SubmitButton = styled(Button)({
   width: '120px',
   padding: '0.75rem',
   textAlign: 'center',
-  border: 'none',
   borderRadius: '0.375rem',
   fontWeight: 600,
+  borderColor: "#000"
 });

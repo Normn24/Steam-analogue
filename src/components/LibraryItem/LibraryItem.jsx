@@ -89,7 +89,7 @@ export default function LibraryItem({ product }) {
             height: "420px",
             borderRadius: 2,
             boxShadow: "none",
-            padding: "20px",
+            padding: "15px",
             display: "flex",
             backgroundColor: "transparent",
             flexDirection: "column",

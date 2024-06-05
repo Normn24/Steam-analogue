@@ -1,19 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export function getAccessToken() {
-  return localStorage.getItem("token");
-}
-
 export const addComment = createAsyncThunk(
   "comments/addComment:load",
-  async (payload) => {
+  async ({ values, token }) => {
     const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments`, {
       method: "POST",
       headers: {
-        Authorization: getAccessToken(),
+        Authorization: token,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(values)
     });
     if (!response.ok) {
       throw new Error("Failed to add to comments");
@@ -40,13 +36,13 @@ export const fetchProductComments = createAsyncThunk(
 
 export const removeComment = createAsyncThunk(
   "comments/removeComment:load",
-  async (payload) => {
+  async ({ id, token }) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/${payload}`,
+      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/${id}`,
       {
         method: "DELETE",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }

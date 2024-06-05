@@ -6,8 +6,8 @@ const initialState = {
   status: null
 }
 
-export const fetchSlides = createAsyncThunk('slides/fetchSlides:load', async (url) => {
-  const data = await fetch(url)
+export const fetchSlides = createAsyncThunk('slides/fetchSlides:load', async () => {
+  const data = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/slides")
     .then((res) => res.json())
   return data;
 });

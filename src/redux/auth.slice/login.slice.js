@@ -1,5 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const initialState = {
+  token: "",
+  loggedIn: false,
+  status: 'idle',
+  error: null,
+}
+
 export const loginUser = createAsyncThunk(
   'login/loginUser:load',
   async (payload, { rejectWithValue }) => {
@@ -18,9 +25,6 @@ export const loginUser = createAsyncThunk(
       }
 
       const data = await response.json();
-      localStorage.setItem('loggedIn', true);
-      localStorage.setItem('token', data.token);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -30,16 +34,8 @@ export const loginUser = createAsyncThunk(
 
 const loginSlice = createSlice({
   name: 'login',
-  initialState: {
-    token: "",
-    status: 'idle',
-    error: null,
-  },
+  initialState,
   reducers: {
-    logout: () => {
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('token');
-    },
     clearAuthState: (state) => {
       state.status = 'idle';
       state.error = null;
@@ -49,20 +45,22 @@ const loginSlice = createSlice({
     builder
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading';
+        state.loggedIn = false
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload)
-        state.token = action.payload.token;
         state.error = null;
+        state.token = action.payload.token;
+        state.loggedIn = true
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
+        state.loggedIn = false
         state.error = action.payload;
       });
   },
 });
 
-export const { logout, clearAuthState } = loginSlice.actions;
+export const { clearAuthState } = loginSlice.actions;
 
 export default loginSlice.reducer;

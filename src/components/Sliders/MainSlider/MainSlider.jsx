@@ -3,7 +3,7 @@ import { Box, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import MainSliderItem from "./MainSliderItem";
 import { fetchProducts } from "../../../redux/products.slice/products.slice";
-import { useStyles } from "../../../styles/styles";
+import { useStyles } from "../../../styles/sliders/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 

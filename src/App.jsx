@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchWishList } from "./redux/wishList.slice/wishList.slice";
 import { fetchCart } from "./redux/cart.slice/cart.slice";
 import { fetchOrders } from "./redux/order.slice/order.slice";
@@ -23,24 +23,30 @@ import UserProfile from "./components/UserLayout/UserProfile";
 import UserOrders from "./components/UserLayout/UserOrders";
 import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
+import Loader from "./pages/Loader.jsx";
+
+import useToken from "./hooks/useToken";
 
 import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const loggedIn = localStorage.getItem("loggedIn");
+  const loggedIn = useSelector((state) => state.login.loggedIn);
+  const token = useToken();
 
   useEffect(() => {
-    if (loggedIn === "true") {
-      dispatch(fetchUser());
-      dispatch(fetchWishList());
-      dispatch(fetchCart());
-      dispatch(fetchOrders());
+    if (loggedIn) {
+      dispatch(fetchUser(token));
+      dispatch(fetchWishList(token));
+      dispatch(fetchCart(token));
+      dispatch(fetchOrders(token));
     }
-  }, [dispatch, loggedIn]);
+  }, [dispatch, loggedIn, token]);
 
   return (
     <>
+      <Loader />
+
       <HeaderPage />
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -54,10 +60,7 @@ function App() {
         <Route
           path="/account"
           element={
-            <ProtectedRoute
-              element={<UserPage />}
-              isAllowed={loggedIn === "true"}
-            />
+            <ProtectedRoute element={<UserPage />} isAllowed={loggedIn} />
           }
         >
           <Route path="profile" element={<UserProfile />} />
@@ -69,37 +72,25 @@ function App() {
         <Route
           path="/wishlist"
           element={
-            <ProtectedRoute
-              element={<WishListPage />}
-              isAllowed={loggedIn === "true"}
-            />
+            <ProtectedRoute element={<WishListPage />} isAllowed={loggedIn} />
           }
         />
         <Route
           path="/cart"
           element={
-            <ProtectedRoute
-              element={<CartPage />}
-              isAllowed={loggedIn === "true"}
-            />
+            <ProtectedRoute element={<CartPage />} isAllowed={loggedIn} />
           }
         />
         <Route
           path="/cart/order"
           element={
-            <ProtectedRoute
-              element={<OrderPage />}
-              isAllowed={loggedIn === "true"}
-            />
+            <ProtectedRoute element={<OrderPage />} isAllowed={loggedIn} />
           }
         />
         <Route
           path="/products/library"
           element={
-            <ProtectedRoute
-              element={<LibraryPage />}
-              isAllowed={loggedIn === "true"}
-            />
+            <ProtectedRoute element={<LibraryPage />} isAllowed={loggedIn} />
           }
         />
 

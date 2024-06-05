@@ -6,7 +6,13 @@ export default function LibraryPage() {
   const { orders, library } = useSelector((state) => state.orders);
 
   return (
-    <Box sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 0" }}>
+    <Box
+      sx={{
+        position: "relative",
+        minHeight: "calc(100vh - 302px)",
+        margin: "40px 20px",
+      }}
+    >
       {orders === null || library.length === 0 ? (
         <Typography
           sx={{

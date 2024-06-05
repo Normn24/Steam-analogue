@@ -20,16 +20,16 @@ export default function Footer() {
           ПДВ (за потреби)
         </StyledTitle>
         <InfoWrapper>
-          <NavLink to="https://discord.com/">
+          <NavLink to="https://discord.com/" target="_blank">
             <FaDiscord />
           </NavLink>
-          <NavLink to="https://twitter.com/">
+          <NavLink to="https://twitter.com/" target="_blank">
             <FaTwitterSquare />
           </NavLink>
-          <NavLink to="https://ua.linkedin.com/">
+          <NavLink to="https://ua.linkedin.com/" target="_blank">
             <FaLinkedin />
           </NavLink>
-          <NavLink to="https://www.instagram.com/">
+          <NavLink to="https://www.instagram.com/" target="_blank">
             <FaInstagramSquare />
           </NavLink>
         </InfoWrapper>

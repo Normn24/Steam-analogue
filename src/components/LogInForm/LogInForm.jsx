@@ -19,7 +19,7 @@ import {
   Message,
   Icon,
   ErrorMessage,
-} from "../../styles/forms/StylesLogInForm.js";
+} from "../../styles/forms/StylesAuthForm.js";
 import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
@@ -31,7 +31,7 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-export default function LogInForm({ onSignUpClick }) {
+export default function LogInForm({ onSignUpClick, handleClose }) {
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.login);
 
@@ -43,8 +43,8 @@ export default function LogInForm({ onSignUpClick }) {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values)).then((response) => {
-        if (response.payload && localStorage.getItem("token")) {
-          window.location.href = "/";
+        if (response.payload && response.payload.token) {
+          handleClose();
         }
       });
     },
@@ -70,7 +70,7 @@ export default function LogInForm({ onSignUpClick }) {
               helperText={
                 formik.touched.loginOrEmail && formik.errors.loginOrEmail
               }
-              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              // inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
             />
           </InputGroup>
           <InputGroup>
@@ -80,7 +80,7 @@ export default function LogInForm({ onSignUpClick }) {
               name="password"
               type="password"
               autoComplete="on"
-              inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
+              // inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

@@ -2,13 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import { removeFromWishList } from "../../redux/wishList.slice/wishList.slice";
 import WishListItem from "../WishListItem/WishListItem";
+import useToken from "../../hooks/useToken";
 
 export default function UserWishlist() {
   const dispatch = useDispatch();
+  const token = useToken();
   const { wishList, loading } = useSelector((state) => state.wishList);
 
-  const handleRemove = (_id) => {
-    dispatch(removeFromWishList(_id));
+  const handleRemove = (id) => {
+    dispatch(removeFromWishList({ id, token }));
   };
 
   if (loading) {
@@ -21,7 +23,7 @@ export default function UserWishlist() {
         component="h4"
         sx={{ fontWeight: "700", marginBottom: "15px" }}
       >
-        My orders
+        My wishlist
       </Typography>
       {wishList === null || wishList?.products?.length === 0 ? (
         <Typography

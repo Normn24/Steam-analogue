@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { fetchProductId } from "../redux/productItem.slice/productItem.slice";
-import { useStyles } from "../styles/styles";
+import { useStyles } from "../styles/sliders/styles.js";
 import {
   Box,
   Tabs,
@@ -29,27 +29,29 @@ import {
 } from "../redux/comments.slice/comments.slice";
 
 import { useFormik } from "formik";
-import { Form, InputGroup } from "../styles/forms/StylesLogInForm.js";
+import { Form, InputGroup } from "../styles/forms/StylesAuthForm.js";
 
 import Textarea from "@mui/joy/Textarea";
+import useToken from "../hooks/useToken.js";
 
 export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const token = useToken();
 
   const { product } = useSelector((state) => state.product);
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
+  const loggedIn = useSelector((state) => state.login.loggedIn);
 
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
   const [onLibrary, setOnLibrary] = useState(false);
   const [value, setValue] = useState("1");
 
-  const loggedIn = localStorage.getItem("loggedIn");
   const percent = product.previousPrice
     ? Math.floor((product.currentPrice * 100) / product.previousPrice - 100)
     : null;
@@ -72,10 +74,10 @@ export default function ProductPage() {
     ),
     onSubmit: useCallback(
       (values, { resetForm }) => {
-        dispatch(addComment(values));
+        dispatch(addComment({ values, token }));
         resetForm();
       },
-      [dispatch]
+      [dispatch, token]
     ),
   });
 
@@ -112,19 +114,19 @@ export default function ProductPage() {
 
   const handleWishList = (id) => {
     if (onWishList) {
-      dispatch(removeFromWishList(id));
+      dispatch(removeFromWishList({ id, token }));
       setOnWishList(false);
     } else {
-      dispatch(addToWishList(id));
+      dispatch(addToWishList({ id, token }));
     }
   };
 
   const handleCartList = (id) => {
     if (onCart) {
-      dispatch(removeFromCart(id));
+      dispatch(removeFromCart({ id, token }));
       setOnCart(false);
     } else {
-      dispatch(addToCart(id));
+      dispatch(addToCart({ id, token }));
     }
   };
 
@@ -278,15 +280,15 @@ export default function ProductPage() {
             sx={{
               display: "flex",
               justifyContent: `${
-                loggedIn === "true" && !onLibrary ? "space-between" : "flex-end"
+                loggedIn && !onLibrary ? "space-between" : "flex-end"
               }`,
               gap: "25px",
-              marginTop: `${loggedIn === "true" ? "20px" : "35px"}`,
+              marginTop: `${loggedIn ? "20px" : "35px"}`,
               alignItems: "center",
               position: "relative",
             }}
           >
-            {loggedIn === "true" ? (
+            {loggedIn ? (
               <Button
                 sx={{
                   display: onLibrary ? "none" : "flex",
@@ -318,7 +320,7 @@ export default function ProductPage() {
                 Login to add this item to your wishlist, or add to cart
               </Typography>
             )}
-            {loggedIn === "true" && onLibrary ? (
+            {loggedIn && onLibrary ? (
               <>
                 <Button
                   onClick={() => handleLibrary()}
@@ -400,7 +402,7 @@ export default function ProductPage() {
                     </Typography>
                   )}
                   <Button
-                    disabled={loggedIn !== "true"}
+                    disabled={!loggedIn}
                     onClick={() => handleCartList(id)}
                     sx={{
                       padding: "5px 12px  ",

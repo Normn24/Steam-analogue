@@ -33,6 +33,7 @@ function FilterPanel() {
   const endYear = queryParams.get("endYear");
   const minPrice = queryParams.get("minPrice");
   const maxPrice = queryParams.get("maxPrice");
+  const sort = queryParams.get("sortBy");
   grid.register();
 
   const handleMouseEnter = (productId) => {
@@ -45,7 +46,6 @@ function FilterPanel() {
 
   const applyFilters = (values) => {
     let filtered = [...productList];
-
     const params = new URLSearchParams();
 
     if (values.genreId) {
@@ -71,10 +71,14 @@ function FilterPanel() {
       );
     }
 
-    if (values.sortBy === "atoz") {
+    if (values.sortBy === "name") {
       filtered.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (values.sortBy === "ztoa") {
+    } else if (values.sortBy === "-name") {
       filtered.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (values.sortBy === "currentPrice") {
+      filtered.sort((a, b) => a.currentPrice - b.currentPrice);
+    } else if (values.sortBy === "-currentPrice") {
+      filtered.sort((a, b) => b.currentPrice - a.currentPrice);
     }
 
     setFilteredProducts(filtered);
@@ -178,7 +182,7 @@ function FilterPanel() {
               startYear: startYear || 2010,
               endYear: endYear || 2025,
               name: searchQuery || "",
-              sortBy: "",
+              sortBy: sort || "",
             }}
             onSubmit={(values) => {
               applyFilters(values);
@@ -202,7 +206,7 @@ function FilterPanel() {
                     variant="contained"
                     color="primary"
                     onClick={() => applyFilters({ ...values })}
-                    style={{ marginTop: "10px" }}
+                    style={{ marginTop: "10px", backgroundColor: "#000" }}
                   >
                     Search
                   </Button>
@@ -251,6 +255,7 @@ function FilterPanel() {
                     valueLabelDisplay="auto"
                     min={0}
                     max={100}
+                    sx={{ color: "#000" }}
                   />
                 </FormControl>
 
@@ -283,7 +288,8 @@ function FilterPanel() {
                     }}
                     valueLabelDisplay="auto"
                     min={2010}
-                    max={2024}
+                    max={2025}
+                    sx={{ color: "#000" }}
                   />
                 </FormControl>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -312,8 +318,12 @@ function FilterPanel() {
                     variant="outlined"
                   >
                     <MenuItem value="">Select</MenuItem>
-                    <MenuItem value="atoz">A to Z</MenuItem>
-                    <MenuItem value="ztoa">Z to A</MenuItem>
+                    <MenuItem value="name">A to Z</MenuItem>
+                    <MenuItem value="-name">Z to A</MenuItem>
+                    <MenuItem value="currentPrice">Price: Low to High</MenuItem>
+                    <MenuItem value="-currentPrice">
+                      Price: High to Low
+                    </MenuItem>
                   </TextField>
                 </FormControl>
 
@@ -333,8 +343,10 @@ function FilterPanel() {
                         name: "",
                         sortBy: "",
                       });
+                      navigate("/products/search");
                     }}
                     variant="contained"
+                    style={{ backgroundColor: "#000" }}
                   >
                     Clear Filters
                   </Button>

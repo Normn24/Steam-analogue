@@ -11,13 +11,14 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import LogInForm from "../LogInForm/LogInForm";
 import Logout from "../LogOut/LogOut";
 import SignInForm from "../SignInForm/SignInForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearRegistrationState } from "../../redux/auth.slice/signup.slice";
 import { clearAuthState } from "../../redux/auth.slice/login.slice";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const loggedIn = localStorage.getItem("loggedIn");
+  const loggedIn = useSelector((state) => state.login.loggedIn);
+
   const [action, setAction] = useState("");
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -35,7 +36,7 @@ export default function Header() {
         <NavLink to={"/"}>
           <SiRepublicofgamers style={{ fontSize: "50px" }} />
         </NavLink>
-        {loggedIn === "true" ? (
+        {loggedIn ? (
           <UserWrapper>
             <NavLink to={"/wishlist"}>
               <CiViewList />
@@ -73,7 +74,10 @@ export default function Header() {
 
       <ModalWindow open={open} handleClose={handleClose}>
         {action === "login" ? (
-          <LogInForm onSignUpClick={() => handleOpen("signup")} />
+          <LogInForm
+            onSignUpClick={() => handleOpen("signup")}
+            handleClose={handleClose}
+          />
         ) : action === "signup" ? (
           <SignInForm onLoginClick={() => handleOpen("login")} />
         ) : (

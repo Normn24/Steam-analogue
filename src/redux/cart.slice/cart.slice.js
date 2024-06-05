@@ -1,22 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export function getAccessToken() {
-  return localStorage.getItem("token");
-}
-
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
-  async (payload) => {
-    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${payload}`, {
+  async ({ id, token }) => {
+    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${id}`, {
       method: "PUT",
       headers: {
-        Authorization: getAccessToken(),
+        Authorization: token,
         "Content-Type": "application/json",
       },
     });
     if (!response.ok) {
       throw new Error("Failed to add to favorites");
     }
+
     const data = await response.json();
     return data;
   }
@@ -24,13 +21,13 @@ export const addToCart = createAsyncThunk(
 
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
-  async (payload) => {
+  async ({ id, token }) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${payload}`,
+      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${id}`,
       {
         method: "DELETE",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }
@@ -45,13 +42,13 @@ export const removeFromCart = createAsyncThunk(
 
 export const fetchCart = createAsyncThunk(
   "cart/fetchCart:load",
-  async () => {
+  async (token) => {
     const response = await fetch(
       "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/",
       {
         method: "GET",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }

@@ -5,20 +5,16 @@ import Slider from "react-slick";
 import SliderCardItem from "./SliderCardItem";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./SliderCard.css";
 import { useEffect } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import "../../../styles/sliders/SliderCard.scss";
 
 export default function SliderCard() {
   const dispatch = useDispatch();
   const { slides } = useSelector((state) => state.slides);
 
   useEffect(() => {
-    dispatch(
-      fetchSlides(
-        "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/slides"
-      )
-    );
+    dispatch(fetchSlides());
   }, [dispatch]);
 
   function SamplePrevArrow(props) {

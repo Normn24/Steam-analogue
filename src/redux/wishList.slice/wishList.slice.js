@@ -1,16 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export function getAccessToken() {
-  return localStorage.getItem("token");
-}
-
 export const addToWishList = createAsyncThunk(
   "wishList/addToWishList",
-  async (payload) => {
-    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/${payload}`, {
+  async ({ id, token }) => {
+
+    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/${id}`, {
       method: "PUT",
       headers: {
-        Authorization: getAccessToken(),
+        Authorization: token,
         "Content-Type": "application/json",
       },
     });
@@ -24,13 +21,13 @@ export const addToWishList = createAsyncThunk(
 
 export const removeFromWishList = createAsyncThunk(
   "wishList/removeFromWishList",
-  async (payload) => {
+  async ({ id, token }) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/${payload}`,
+      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/${id}`,
       {
         method: "DELETE",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }
@@ -38,6 +35,7 @@ export const removeFromWishList = createAsyncThunk(
     if (!response.ok) {
       throw new Error("Failed to remove from favorites");
     }
+
     const data = await response.json();
     return data;
   }
@@ -45,13 +43,13 @@ export const removeFromWishList = createAsyncThunk(
 
 export const fetchWishList = createAsyncThunk(
   "wishList/fetchWishList:load",
-  async () => {
+  async (token) => {
     const response = await fetch(
       "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/",
       {
         method: "GET",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }
@@ -59,6 +57,7 @@ export const fetchWishList = createAsyncThunk(
     if (!response.ok) {
       throw new Error("Failed to get favorites");
     }
+
     const data = await response.json();
     return data;
   }

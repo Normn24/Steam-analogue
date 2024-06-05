@@ -1,13 +1,9 @@
 import { Typography, Box, Button } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { clearDownloaded } from "../../redux/downloaded.slice/downloaded.slice";
+import { persistor } from "../../redux/store";
 
 export default function Logout({ handleClose }) {
-  const dispatch = useDispatch();
-  const logout = () => {
-    localStorage.setItem("loggedIn", false);
-    localStorage.removeItem("token");
-    dispatch(clearDownloaded());
+  const handleLogout = () => {
+    persistor.purge();
     window.location.href = "/";
   };
 
@@ -49,7 +45,7 @@ export default function Logout({ handleClose }) {
               color: "rgba(17, 24, 39, 1)",
               border: "none",
             }}
-            onClick={logout}
+            onClick={handleLogout}
           >
             Logout
           </Button>

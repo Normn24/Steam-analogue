@@ -9,9 +9,11 @@ export const FormContainer = styled(Box)({
   boxShadow: 24,
   width: '400px',
   borderRadius: '0.75rem',
-  backgroundColor: 'rgba(17, 24, 39, 1)',
+
+  backgroundColor: '#bdbdbd',
   padding: '2rem',
-  color: 'rgba(243, 244, 246, 1)',
+
+  color: '#000',
   margin: "50px auto"
 });
 
@@ -34,20 +36,26 @@ export const InputGroup = styled(Box)({
 
 export const InputLabel = styled('label')({
   display: 'block',
-  color: 'rgba(156, 163, 175, 1)',
+
   marginBottom: '4px',
 });
 
 export const StyledInput = styled(TextField)({
   width: '100%',
   borderRadius: '0.375rem',
-  border: '1px solid rgba(55, 65, 81, 1)',
+
+  border: '#000',
   outline: 0,
-  backgroundColor: 'rgba(17, 24, 39, 1)',
+
   padding: '0',
-  color: 'rgba(243, 244, 246, 1)',
+
   '&:focus': {
-    borderColor: 'rgba(167, 139, 250)',
+
+    borderColor: 'rgba(17, 24, 39, 1)',
+  },
+  '&:active': {
+
+    borderColor: 'rgba(17, 24, 39, 1)',
   },
 });
 
@@ -65,20 +73,26 @@ export const SignButton = styled(Button)({
   marginTop: "14px",
   display: 'block',
   width: '100%',
-  backgroundColor: 'rgba(167, 139, 250, 1)',
+
+  backgroundColor: '#000',
   padding: '0.75rem',
   textAlign: 'center',
-  color: 'rgba(17, 24, 39, 1)',
+
+  color: '#ffff',
   border: 'none',
   borderRadius: '0.375rem',
   fontWeight: 600,
+  '&:hover': {
+    backgroundColor: '#000',
+    opacity: 0.8
+  }
 });
 
 export const SignUp = styled(Box)({
   textAlign: 'center',
   fontSize: '16px',
   lineHeight: '1rem',
-  color: 'rgba(156, 163, 175, 1)',
+
 });
 
 export const SocialMessage = styled(Box)({
@@ -90,7 +104,7 @@ export const SocialMessage = styled(Box)({
 export const Line = styled(Box)({
   height: '1px',
   flex: 1,
-  backgroundColor: 'rgba(55, 65, 81, 1)',
+  backgroundColor: '#000',
 });
 
 export const Message = styled(Box)({
@@ -98,7 +112,7 @@ export const Message = styled(Box)({
   paddingRight: '0.75rem',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
-  color: 'rgba(156, 163, 175, 1)',
+
 });
 
 export const SocialIcons = styled(Box)({

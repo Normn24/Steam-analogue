@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./ProductPageSlider.css";
+import "../../../styles/sliders/ProductPageSlider.scss";
 
 export default function ProductPageSlider({ product }) {
   const settings = {

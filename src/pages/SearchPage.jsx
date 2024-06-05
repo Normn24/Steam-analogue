@@ -17,6 +17,8 @@ export default function SearchPage() {
   const maxPrice = queryParams.get("maxPrice");
   const startYear = queryParams.get("startYear");
   const endYear = queryParams.get("endYear");
+  const sort = queryParams.get("sortBy");
+
   const { productList } = useSelector((state) => state.productList);
 
   useEffect(() => {
@@ -28,12 +30,22 @@ export default function SearchPage() {
     if (maxPrice) searchParams.append("maxPrice", maxPrice);
     if (startYear) searchParams.append("startYear", startYear);
     if (endYear) searchParams.append("endYear", endYear);
+    if (sort) searchParams.append("sort", sort);
     const url = `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/products?${searchParams.toString()}`;
 
     dispatch(fetchFilteredProducts(url || null));
     dispatch(fetchProducts());
     dispatch(fetchGenres());
-  }, [dispatch, searchQuery, genreId, minPrice, maxPrice, startYear, endYear]);
+  }, [
+    dispatch,
+    searchQuery,
+    genreId,
+    minPrice,
+    maxPrice,
+    startYear,
+    endYear,
+    sort,
+  ]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useStyles } from "../../styles/styles";
+import { useStyles } from "../../styles/sliders/styles";
 import {
   Card,
   CardMedia,
@@ -15,9 +15,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { removeFromCart, addToCart } from "../../redux/cart.slice/cart.slice";
+import useToken from "../../hooks/useToken";
 export default function WishListItem({ product, handleRemove }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const token = useToken();
   const {
     _id,
     name,
@@ -52,11 +54,11 @@ export default function WishListItem({ product, handleRemove }) {
     }
   }, [cart, product]);
 
-  const handleCartList = (_id) => {
+  const handleCartList = (id) => {
     if (onCart) {
-      dispatch(removeFromCart(_id));
+      dispatch(removeFromCart({ id, token }));
     } else {
-      dispatch(addToCart(_id));
+      dispatch(addToCart({ id, token }));
     }
   };
 

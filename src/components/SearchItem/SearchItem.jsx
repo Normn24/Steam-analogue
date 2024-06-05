@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { useStyles } from "../../styles/styles";
+import { useStyles } from "../../styles/sliders/styles";
 import {
   Card,
   CardMedia,
@@ -198,9 +198,9 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
       <Collapse
         sx={{
           position: "absolute",
-          right: "-43.5%",
+          right: "-49.5%",
           top: "-25%",
-          width: "41%",
+          width: "42%",
           backdropFilter: "blur(14px) saturate(181%)",
           backgroundColor: " rgba(0, 0, 0, 0.29)",
           borderRadius: "0 0 12px 12px",

@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  // Button,
-  Typography,
-  // List,
-  // ListItemButton,
-  // ListItemText,
-} from "@mui/material";
-import CategoryItem from "../components/CategoryItem/CategoryItem";
-import { fetchCatalogProducts } from "../redux/catalogProducts.slice/catalogProducts.slice";
 import { useParams } from "react-router-dom";
+import { fetchCatalogProducts } from "../redux/catalogProducts.slice/catalogProducts.slice";
+import { Box, Typography } from "@mui/material";
+import CategoryItem from "../components/CategoryItem/CategoryItem";
 
 export default function CategoryPage() {
   const dispatch = useDispatch();

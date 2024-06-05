@@ -13,7 +13,7 @@ import {
   Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useStyles } from "../../styles/styles";
+import { useStyles } from "../../styles/sliders/styles";
 
 export default function CategoryItem({
   product,

@@ -16,7 +16,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const { catalogs, status, error } = useSelector((state) => state.catalogs);
   const [searchQuery, setSearchQuery] = useState("");
-  const loggedIn = localStorage.getItem("loggedIn");
+  const loggedIn = useSelector((state) => state.login.loggedIn);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -39,7 +39,7 @@ export default function NavBar() {
           <NavBarItem>
             <StyledNavBarLink to={`/`}>Home</StyledNavBarLink>
           </NavBarItem>
-          {loggedIn === "true" && (
+          {loggedIn && (
             <NavBarItem>
               <StyledNavBarLink to={`/products/library`}>
                 Library

@@ -4,9 +4,9 @@ import { Box } from "@mui/material";
 
 export default function Loader() {
   const isLoading = useSelector((state) => state.loader.loading);
-
   document.body.style.overflow = "hidden";
   grid.register();
+
   if (!isLoading) {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     document.body.style.overflow = "";

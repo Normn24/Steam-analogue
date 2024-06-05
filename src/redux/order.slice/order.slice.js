@@ -1,10 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export function getAccessToken() {
-  return localStorage.getItem("token");
-}
-
-
 export const placeOrder = createAsyncThunk(
   'orders/placeOrder:load',
   async (payload) => {
@@ -32,13 +27,13 @@ export const placeOrder = createAsyncThunk(
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders:load",
-  async () => {
+  async (token) => {
     const response = await fetch(
       "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/orders/",
       {
         method: "GET",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }

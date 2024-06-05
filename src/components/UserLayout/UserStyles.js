@@ -8,7 +8,7 @@ export const UserPageContainer = styled(Box)({
     display: "flex",
     gap: "30px",
     margin: "30px 20px",
-    minHeight: "70svh",
+    minHeight: "calc(100vh - 282px)",
 });
 
 export const UserNav = styled(Paper)({

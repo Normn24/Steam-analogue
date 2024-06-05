@@ -18,7 +18,7 @@ import {
   Message,
   Icon,
   ErrorMessage,
-} from "../../styles/forms/StylesLogInForm";
+} from "../../styles/forms/StylesAuthForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 

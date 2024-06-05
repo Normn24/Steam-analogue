@@ -1,54 +1,57 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  persistReducer, persistStore,
-} from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import cartSlice from './cart.slice/cart.slice';
+import catalogsSlice from './catalogs.slice/catalogs.slice';
+import catalogProductsSlice from './catalogProducts.slice/catalogProducts.slice';
+import commentsSlice from './comments.slice/comments.slice';
+import delayLoader from './loader.slice/delayLoader';
+import downloadedSlice from './downloaded.slice/downloaded.slice';
+import filteredProductsSlice from './filteredProducts.slice/filteredProducts.slice';
+import genresSlice from './genres.slice/genres.slice';
+import loginSlice from './auth.slice/login.slice';
+import loaderSlice from './loader.slice/loader.slice';
+import orderSlice from './order.slice/order.slice';
 import productItemSlice from './productItem.slice/productItem.slice';
 import productsSlice from './products.slice/products.slice';
-import slidesSlice from './slides.slice/slides.slice';
-import catalogsSlice from './catalogs.slice/catalogs.slice';
-import genresSlice from './genres.slice/genres.slice';
-import catalogProductsSlice from './catalogProducts.slice/catalogProducts.slice';
-import wishListSlice from './wishList.slice/wishList.slice';
-import commentsSlice from './comments.slice/comments.slice';
-import productsByGenreSlice from './productsByGenre/productsByGenre.slice';
-import filteredProductsSlice from './filteredProducts.slice/filteredProducts.slice';
-import cartSlice from './cart.slice/cart.slice';
-import orderSlice from './order.slice/order.slice';
-import loginSlice from './auth.slice/login.slice';
 import signupSlice from './auth.slice/signup.slice';
-import downloadedSlice from './downloaded.slice/downloaded.slice';
+import slidesSlice from './slides.slice/slides.slice';
 import userSlice from './user.slice/user.slice';
-import loaderSlice from './loader.slice/loader.slice';
-import delayLoader from './loader.slice/delayLoader';
+import wishListSlice from './wishList.slice/wishList.slice';
 
-const persistConfig = {
-  key: 'root',
-  storage,
+const authPersistConfig = {
+  key: 'login',
+  storage: storage,
+}
+
+const downloadedPersistConfig = {
+  key: 'downloaded',
+  storage: storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, downloadedSlice);
+const persistedLoginReducer = persistReducer(authPersistConfig, loginSlice);
+const persistedDownloadedReducer = persistReducer(downloadedPersistConfig, downloadedSlice);
+
 
 export const store = configureStore({
   reducer: {
-    product: productItemSlice,
-    products: productsSlice,
-    slides: slidesSlice,
-    catalogs: catalogsSlice,
-    genres: genresSlice,
-    categoriesProducts: catalogProductsSlice,
-    wishList: wishListSlice,
-    comments: commentsSlice,
-    productsByGenre: productsByGenreSlice,
-    productList: filteredProductsSlice,
     cart: cartSlice,
+    catalogs: catalogsSlice,
+    categoriesProducts: catalogProductsSlice,
+    comments: commentsSlice,
+    downloaded: persistedDownloadedReducer,
+    genres: genresSlice,
+    login: persistedLoginReducer,
+    productList: filteredProductsSlice,
+    loader: loaderSlice,
     orders: orderSlice,
-    login: loginSlice,
+    products: productsSlice,
+    product: productItemSlice,
     signup: signupSlice,
-    downloaded: persistedReducer,
+    slides: slidesSlice,
     user: userSlice,
-    loader: loaderSlice
+    wishList: wishListSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

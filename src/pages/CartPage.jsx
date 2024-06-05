@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Typography, Button } from "@mui/material";
-import { removeFromCart } from "../redux/cart.slice/cart.slice";
-import CartListItem from "../components/CartListItem/CartListItem";
 import { useNavigate } from "react-router-dom";
+import { removeFromCart } from "../redux/cart.slice/cart.slice";
+import { Box, Typography, Button } from "@mui/material";
+import useToken from "../hooks/useToken";
+import CartListItem from "../components/CartListItem/CartListItem";
 
 export default function CartPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useToken();
+
   const { cart } = useSelector((state) => state.cart);
+
   const totalPrice = cart?.products?.reduce(
     (total, product) => total + product.product.currentPrice,
     0
@@ -17,13 +21,17 @@ export default function CartPage() {
     navigate("/cart/order");
   };
 
-  const handleRemove = (_id) => {
-    dispatch(removeFromCart(_id));
+  const handleRemove = (id) => {
+    dispatch(removeFromCart({ id, token }));
   };
 
   return (
     <Box
-      sx={{ position: "relative", minHeight: "75.3vh", margin: "40px 20px" }}
+      sx={{
+        position: "relative",
+        minHeight: "calc(100vh - 302px)",
+        margin: "40px 20px",
+      }}
     >
       {cart === null || cart?.products?.length === 0 ? (
         <Typography

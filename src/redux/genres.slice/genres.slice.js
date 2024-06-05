@@ -9,7 +9,6 @@ export const fetchGenres = createAsyncThunk(
         throw new Error('Failed to fetch genres');
       }
       const data = await response.json();
-      // console.log('fetched genres', data);
       return data;
     } catch (error) {
       console.error('Error fetching genres:', error);
@@ -20,7 +19,6 @@ export const fetchGenres = createAsyncThunk(
 
 const initialState = {
   genres: [],
-  // categoryNames: [],
   loading: false,
   error: null
 }

@@ -1,20 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export function getAccessToken() {
-  return localStorage.getItem("token");
-}
-
 export const updateUserProfile = createAsyncThunk(
-  'registration/updateUserProfile:load',
-  async (payload, { rejectWithValue }) => {
+  'registration/updateUserProfile',
+  async ({ updateProfile, token }, { rejectWithValue }) => {
     try {
       const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers", {
         method: "PUT",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(updateProfile)
       })
 
       if (!response.ok) {
@@ -29,16 +25,16 @@ export const updateUserProfile = createAsyncThunk(
   });
 
 export const updateUserPassword = createAsyncThunk(
-  'registration/updateUserPassword:load',
-  async (payload, { rejectWithValue }) => {
+  'registration/updateUserPassword',
+  async ({ updatePassword, token }, { rejectWithValue }) => {
     try {
       const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/password", {
         method: "PUT",
         headers: {
-          Authorization: getAccessToken(),
+          Authorization: token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(updatePassword)
       })
 
       if (!response.ok) {
@@ -54,19 +50,18 @@ export const updateUserPassword = createAsyncThunk(
 
 export const fetchUser = createAsyncThunk(
   'user/fetchUser:load',
-  async (payload) => {
+  async (token) => {
     const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/customer", {
       method: "GET",
       headers: {
-        Authorization: getAccessToken(),
+        Authorization: token,
         "Content-Type": "application/json",
       },
     })
     if (!response.ok) {
-      throw new Error(payload);
+      throw new Error("Failed to get customer");
     }
     const data = await response.json();
-
     return data;
   });
 
