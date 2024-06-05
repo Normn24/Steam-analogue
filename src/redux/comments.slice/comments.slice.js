@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const addComment = createAsyncThunk(
-  "comments/addComment:load",
+  "comments/addComment",
   async ({ values, token }) => {
     const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments`, {
       method: "POST",
@@ -35,7 +35,7 @@ export const fetchProductComments = createAsyncThunk(
 );
 
 export const removeComment = createAsyncThunk(
-  "comments/removeComment:load",
+  "comments/removeComment",
   async ({ id, token }) => {
     const response = await fetch(
       `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/${id}`,

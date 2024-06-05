@@ -31,8 +31,8 @@ export default function UserWishlist() {
             textAlign: "center",
             width: "50%",
             position: "absolute",
-            top: "50%",
-            left: "50%",
+            top: "30%",
+            left: "62%",
             transform: "translate(-50%, -50%)",
           }}
           variant="p"
