@@ -3,14 +3,25 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearRegistrationState } from "../../redux/auth.slice/signup.slice";
 import { clearAuthState } from "../../redux/auth.slice/login.slice";
-import { Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { IoIosArrowDown } from "react-icons/io";
 import {
   HeaderWrapper,
   UserWrapper,
   CountIndicator,
+  BurgerItem,
 } from "../../styles/navbar-footer/HeaderStyle";
-import { SiRepublicofgamers } from "react-icons/si";
-import { SiYoutubegaming } from "react-icons/si";
+import { SiRepublicofgamers, SiYoutubegaming } from "react-icons/si";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { GiDiceFire, GiFlamethrowerSoldier } from "react-icons/gi";
 
@@ -25,9 +36,12 @@ export default function Header() {
   const loggedIn = useSelector((state) => state.login.loggedIn);
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
+  const { catalogs } = useSelector((state) => state.catalogs);
 
   const [action, setAction] = useState("");
   const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const handleClose = () => setOpen(false);
 
   const handleOpen = (newAction) => {
@@ -37,12 +51,143 @@ export default function Header() {
     dispatch(clearAuthState());
   };
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const handleLinkClick = () => {
+    setMobileOpen(false);
+  };
+
+  const drawer = (
+    <Box sx={{ width: 220, display: "flex", flexDirection: "column" }}>
+      <Accordion
+        sx={{
+          backgroundColor: "transparent",
+          minHeight: "auto",
+          "&::before": {
+            display: "none",
+          },
+        }}
+      >
+        <AccordionSummary
+          aria-controls="panel-content"
+          id="panel-header"
+          expandIcon={<IoIosArrowDown />}
+        >
+          <Typography variant="p" component="p">
+            Store
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <NavLink
+            to="/"
+            onClick={handleLinkClick}
+            style={{ display: "block" }}
+          >
+            Home
+          </NavLink>
+        </AccordionDetails>
+        {catalogs.slice(0, 3).map((catalog) => (
+          <AccordionDetails key={catalog.id}>
+            <NavLink
+              to={`/products/category/${catalog.name}`}
+              onClick={handleLinkClick}
+              style={{ display: "block" }}
+            >
+              {catalog.name}
+            </NavLink>
+          </AccordionDetails>
+        ))}
+      </Accordion>
+      {loggedIn && (
+        <>
+          <BurgerItem
+            button
+            component={NavLink}
+            to="/account/profile"
+            onClick={handleLinkClick}
+          >
+            Profile
+          </BurgerItem>
+          <BurgerItem
+            button
+            component={NavLink}
+            to="/products/library"
+            onClick={handleLinkClick}
+          >
+            Library
+          </BurgerItem>
+          <BurgerItem
+            button
+            component={NavLink}
+            to="/wishlist"
+            onClick={handleLinkClick}
+          >
+            Wishlist
+          </BurgerItem>
+          <BurgerItem
+            button
+            component={NavLink}
+            to="/cart"
+            onClick={handleLinkClick}
+          >
+            Cart
+          </BurgerItem>
+          <BurgerItem
+            button
+            onClick={() => {
+              handleOpen("logout");
+              handleLinkClick();
+            }}
+          >
+            Logout
+          </BurgerItem>
+        </>
+      )}
+
+      {!loggedIn && (
+        <BurgerItem
+          button
+          onClick={() => {
+            handleOpen("login");
+            handleLinkClick();
+          }}
+        >
+          Login
+        </BurgerItem>
+      )}
+    </Box>
+  );
+
   return (
     <>
       <HeaderWrapper>
-        <NavLink to={"/"}>
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer
+            anchor="left"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+
+        <NavLink to={"/"} style={{ display: { xs: "none", md: "flex" } }}>
           <SiRepublicofgamers style={{ fontSize: "50px" }} />
         </NavLink>
+
         {loggedIn ? (
           <UserWrapper>
             <NavLink to={"/wishlist"} style={{ position: "relative" }}>

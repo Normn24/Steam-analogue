@@ -24,7 +24,6 @@ ul {
 body {
   min-width: 320px;
   min-height: 100vh;
-  width: 1280px;
   margin: 0 auto;
   position: relative;
 }

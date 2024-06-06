@@ -7,3 +7,9 @@
 * {
   scrollbar-width: thin;
 }
+
+@media screen and (max-width: 600px) {
+  #root {
+    width: 400px;
+  }
+}

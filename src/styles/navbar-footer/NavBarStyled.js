@@ -8,6 +8,11 @@ export const NavBarWrapper = styled(Box)({
     width: "auto",
     height: "56px",
     backgroundColor: "#F0F0F4",
+
+    "@media (max-width: 600px)": {
+        display: "none",
+    },
+
 });
 
 export const StyledNavBarLink = styled(NavLink)({
