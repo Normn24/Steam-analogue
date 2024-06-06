@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const loginUser = createAsyncThunk(
-  'login/loginUser:load',
+  'login/loginUser',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/login", {

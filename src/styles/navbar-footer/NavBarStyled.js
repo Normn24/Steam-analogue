@@ -1,7 +1,8 @@
+import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { NavLink } from "react-router-dom";
 
-export const NavBarWrapper = styled("div")({
+export const NavBarWrapper = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     width: "auto",
@@ -9,24 +10,27 @@ export const NavBarWrapper = styled("div")({
     backgroundColor: "#F0F0F4",
 });
 
-export const NavBarItem = styled("div")({
+export const StyledNavBarLink = styled(NavLink)({
     minWidth: "120px",
     height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     padding: "0 15px",
-    "&:hover": {
-        borderBottom: "4px solid #1c62cd",
-        borderRadius: "4px",
-    },
-});
-
-export const StyledNavBarLink = styled(NavLink)({
-    color: '#2f3035',
+    color: '#000',
     textDecoration: 'none',
     fontFamily: '"Gill Sans", sans-serif',
     fontSize: '20px',
     fontWeight: 500,
     textTransform: "uppercase",
+    "&:hover": {
+        borderBottom: "4px solid #000",
+        borderRadius: "4px",
+    },
+
+    "&.active": {
+        borderBottom: "4px solid #000",
+        borderRadius: "4px",
+    }
+
 });

@@ -49,7 +49,7 @@ export const updateUserPassword = createAsyncThunk(
   });
 
 export const fetchUser = createAsyncThunk(
-  'user/fetchUser:load',
+  'user/fetchUser',
   async (token) => {
     const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/customer", {
       method: "GET",

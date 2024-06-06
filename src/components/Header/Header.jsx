@@ -1,23 +1,30 @@
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearRegistrationState } from "../../redux/auth.slice/signup.slice";
+import { clearAuthState } from "../../redux/auth.slice/login.slice";
+import { Button } from "@mui/material";
 import {
   HeaderWrapper,
   UserWrapper,
+  CountIndicator,
 } from "../../styles/navbar-footer/HeaderStyle";
-import { NavLink } from "react-router-dom";
-import { CiShoppingBasket, CiViewList, CiUser, CiLogout } from "react-icons/ci";
 import { SiRepublicofgamers } from "react-icons/si";
-import { Button } from "@mui/material";
-import { useState } from "react";
+import { SiYoutubegaming } from "react-icons/si";
+import { FaUserAstronaut } from "react-icons/fa6";
+import { GiDiceFire, GiFlamethrowerSoldier } from "react-icons/gi";
+
 import ModalWindow from "../ModalWindow/ModalWindow";
 import LogInForm from "../LogInForm/LogInForm";
 import Logout from "../LogOut/LogOut";
 import SignInForm from "../SignInForm/SignInForm";
-import { useDispatch, useSelector } from "react-redux";
-import { clearRegistrationState } from "../../redux/auth.slice/signup.slice";
-import { clearAuthState } from "../../redux/auth.slice/login.slice";
 
 export default function Header() {
   const dispatch = useDispatch();
+
   const loggedIn = useSelector((state) => state.login.loggedIn);
+  const { wishList } = useSelector((state) => state.wishList);
+  const { cart } = useSelector((state) => state.cart);
 
   const [action, setAction] = useState("");
   const [open, setOpen] = useState(false);
@@ -38,31 +45,36 @@ export default function Header() {
         </NavLink>
         {loggedIn ? (
           <UserWrapper>
-            <NavLink to={"/wishlist"}>
-              <CiViewList />
+            <NavLink to={"/wishlist"} style={{ position: "relative" }}>
+              <SiYoutubegaming />
+              <CountIndicator>{wishList?.products?.length}</CountIndicator>
             </NavLink>
-            <NavLink to={"/cart"}>
-              <CiShoppingBasket />
+            <NavLink to={"/cart"} style={{ position: "relative" }}>
+              <GiDiceFire />
+              <CountIndicator>
+                {cart ? cart?.products?.length : 0}
+              </CountIndicator>
             </NavLink>
             <NavLink to={"/account/profile"}>
-              <CiUser />
+              <FaUserAstronaut />
             </NavLink>
             <NavLink onClick={() => handleOpen("logout")}>
-              <CiLogout />
+              <GiFlamethrowerSoldier />
             </NavLink>
           </UserWrapper>
         ) : (
-          <UserWrapper sx={{ fontSize: "medium" }}>
+          <UserWrapper style={{ fontSize: "medium" }}>
             <NavLink onClick={() => handleOpen("login")}>
               <Button
                 variant="contained"
-                sx={{
+                style={{
                   padding: "4px 19px 2px",
                   borderRadius: "5px",
                   borderColor: "#000",
                   backgroundColor: "#000",
                   color: "#fff",
                   boxShadow: "none",
+                  fontWeight: 600,
                 }}
               >
                 login

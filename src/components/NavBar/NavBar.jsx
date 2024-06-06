@@ -1,20 +1,19 @@
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCatalogs } from "../../redux/catalogs.slice/catalogs.slice";
+import { Box } from "@mui/material";
 import {
-  NavBarItem,
   NavBarWrapper,
   StyledNavBarLink,
 } from "../../styles/navbar-footer/NavBarStyled";
-import { fetchCatalogs } from "../../redux/catalogs.slice/catalogs.slice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box } from "@mui/material";
-import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   const dispatch = useDispatch();
-  const { catalogs, status, error } = useSelector((state) => state.catalogs);
+  const { catalogs } = useSelector((state) => state.catalogs);
   const [searchQuery, setSearchQuery] = useState("");
   const loggedIn = useSelector((state) => state.login.loggedIn);
 
@@ -32,29 +31,26 @@ export default function NavBar() {
 
   return (
     <NavBarWrapper>
-      {status === "loading" && <p>Loading...</p>}
-      {status === "failed" && <p>Error: {error}</p>}
-      {status === "succeeded" && (
-        <Box sx={{ display: "flex" }}>
-          <NavBarItem>
-            <StyledNavBarLink to={`/`}>Home</StyledNavBarLink>
-          </NavBarItem>
-          {loggedIn && (
-            <NavBarItem>
-              <StyledNavBarLink to={`/products/library`}>
-                Library
-              </StyledNavBarLink>
-            </NavBarItem>
-          )}
-          {catalogs.slice(0, 3).map((catalog) => (
-            <NavBarItem key={catalog.id}>
-              <StyledNavBarLink to={`/products/category/${catalog.name}`}>
-                {catalog.name}
-              </StyledNavBarLink>
-            </NavBarItem>
-          ))}
-        </Box>
-      )}
+      <Box sx={{ display: "flex" }}>
+        <StyledNavBarLink exact to={`/`} activeClassName="active">
+          Home
+        </StyledNavBarLink>
+        {loggedIn && (
+          <StyledNavBarLink to={`/products/library`} activeClassName="active">
+            Library
+          </StyledNavBarLink>
+        )}
+        {catalogs.slice(0, 3).map((catalog) => (
+          <StyledNavBarLink
+            key={catalog.id}
+            to={`/products/category/${catalog.name}`}
+            activeClassName="active"
+          >
+            {catalog.name}
+          </StyledNavBarLink>
+        ))}
+      </Box>
+
       <form onSubmit={handleSearchSubmit}>
         <TextField
           placeholder="Search..."

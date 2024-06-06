@@ -21,6 +21,7 @@ import {
   ErrorMessage,
 } from "../../styles/forms/StylesAuthForm.js";
 import { Link } from "react-router-dom";
+import PasswordInput from "../PasswordInput/PasswordInput.jsx";
 
 const validationSchema = Yup.object().shape({
   loginOrEmail: Yup.string()
@@ -70,24 +71,14 @@ export default function LogInForm({ onSignUpClick, handleClose }) {
               helperText={
                 formik.touched.loginOrEmail && formik.errors.loginOrEmail
               }
-              // inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
             />
           </InputGroup>
-          <InputGroup>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <StyledInput
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="on"
-              // inputProps={{ style: { color: "rgba(243, 244, 246, 1)" } }}
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-          </InputGroup>
+          <PasswordInput
+            label="Password"
+            formik={formik}
+            formikValues="password"
+          />
+
           <Forgot>
             <Link to="#" style={{ color: "#ffff" }}>
               Forgot Password?

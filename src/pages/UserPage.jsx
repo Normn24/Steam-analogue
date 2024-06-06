@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { CiUser, CiViewList, CiShoppingBasket, CiStar } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { Typography, Box } from "@mui/material";
+import { fetchUserComments } from "../redux/comments.slice/comments.slice";
 import {
   UserPageContainer,
   UserNav,
@@ -10,9 +12,10 @@ import {
   NavLinkStyled,
   ContentArea,
 } from "../components/UserLayout/UserStyles";
-import { Typography, Box } from "@mui/material";
-import { useEffect } from "react";
-import { fetchUserComments } from "../redux/comments.slice/comments.slice";
+import { SiYoutubegaming } from "react-icons/si";
+import { FaUserAstronaut } from "react-icons/fa6";
+import { GiDiceFire } from "react-icons/gi";
+import { BiSolidGame } from "react-icons/bi";
 
 const UserLayout = () => {
   const dispatch = useDispatch();
@@ -21,6 +24,7 @@ const UserLayout = () => {
   useEffect(() => {
     if (user._id) dispatch(fetchUserComments(user?._id));
   });
+
   return (
     <UserPageContainer>
       <UserNav>
@@ -36,22 +40,22 @@ const UserLayout = () => {
         <UserItem>
           <NavLinkStyled to="/account/profile">
             <NavText>
-              <CiUser /> My Profile
+              <FaUserAstronaut /> My Profile
             </NavText>
           </NavLinkStyled>
           <NavLinkStyled to="/account/orders">
             <NavText>
-              <CiShoppingBasket /> My Orders
+              <GiDiceFire /> My Orders
             </NavText>
           </NavLinkStyled>
           <NavLinkStyled to="/account/wishlist">
             <NavText>
-              <CiViewList /> My Wishlist
+              <SiYoutubegaming /> My Wishlist
             </NavText>
           </NavLinkStyled>
           <NavLinkStyled to="/account/reviews">
             <NavText>
-              <CiStar /> My Reviews
+              <BiSolidGame /> My Reviews
             </NavText>
           </NavLinkStyled>
         </UserItem>

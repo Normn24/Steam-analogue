@@ -56,7 +56,7 @@ export const removeComment = createAsyncThunk(
 );
 
 export const fetchUserComments = createAsyncThunk(
-  "comments/fetchUserComments:load",
+  "comments/fetchUserComments",
   async (payload) => {
     const response = await fetch(
       `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/customer/${payload}`,

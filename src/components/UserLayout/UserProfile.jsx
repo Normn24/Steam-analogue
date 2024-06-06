@@ -7,6 +7,7 @@ import {
   updateUserPassword,
 } from "../../redux/user.slice/user.slice";
 import useToken from "../../hooks/useToken";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
@@ -196,7 +197,7 @@ export default function UserProfile() {
             Change password
           </Typography>
           <Box sx={{ display: "flex", gap: "24px" }}>
-            <TextField
+            {/* <TextField
               fullWidth
               autoComplete="on"
               id="old-password"
@@ -209,8 +210,18 @@ export default function UserProfile() {
               onBlur={formik.handleBlur}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
+            /> */}
+            <PasswordInput
+              label="Old Password"
+              formik={formik}
+              formikValues="password"
             />
-            <TextField
+            <PasswordInput
+              label="New Password"
+              formik={formik}
+              formikValues="newPassword"
+            />
+            {/* <TextField
               fullWidth
               autoComplete="on"
               id="new-password"
@@ -227,7 +238,7 @@ export default function UserProfile() {
               helperText={
                 formik.touched.newPassword && formik.errors.newPassword
               }
-            />
+            /> */}
           </Box>
           <Box sx={{ mt: "18px" }}>
             <Button

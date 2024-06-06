@@ -9,10 +9,8 @@ export const FormContainer = styled(Box)({
   boxShadow: 24,
   width: '400px',
   borderRadius: '0.75rem',
-
   backgroundColor: '#bdbdbd',
   padding: '2rem',
-
   color: '#000',
   margin: "50px auto"
 });
@@ -32,6 +30,7 @@ export const InputGroup = styled(Box)({
   marginTop: '0.25rem',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
+  width: "100%"
 });
 
 export const InputLabel = styled('label')({
@@ -43,18 +42,13 @@ export const InputLabel = styled('label')({
 export const StyledInput = styled(TextField)({
   width: '100%',
   borderRadius: '0.375rem',
-
   border: '#000',
   outline: 0,
-
   padding: '0',
-
   '&:focus': {
-
     borderColor: 'rgba(17, 24, 39, 1)',
   },
   '&:active': {
-
     borderColor: 'rgba(17, 24, 39, 1)',
   },
 });
@@ -73,11 +67,9 @@ export const SignButton = styled(Button)({
   marginTop: "14px",
   display: 'block',
   width: '100%',
-
   backgroundColor: '#000',
   padding: '0.75rem',
   textAlign: 'center',
-
   color: '#ffff',
   border: 'none',
   borderRadius: '0.375rem',
