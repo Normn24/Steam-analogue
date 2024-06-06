@@ -8,6 +8,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import PriceBox from "../PriceBox/PriceBox";
 
 export default function CartListItem({ product, handleRemove }) {
   const {
@@ -20,9 +21,6 @@ export default function CartListItem({ product, handleRemove }) {
     previousPrice,
   } = product;
 
-  const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice - 100)
-    : null;
   const dateOfPublication = new Date(yearOfPublication).toLocaleDateString(
     "en-US",
     {
@@ -98,73 +96,25 @@ export default function CartListItem({ product, handleRemove }) {
             width: "120px",
           }}
         >
-          {previousPrice ? (
-            <Box
-              sx={{
-                display: "flex",
-                gap: "11px",
-                alignItems: "baseline",
-                position: "relative",
-                paddingRight: "4px",
-                backgroundColor: "#cccc",
-                width: "auto",
-                borderRadius: "4px",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "24px",
-                  lineHeight: "1",
-                  backgroundColor: "#4c6b22",
-                  padding: "6px 3px 3px",
-                  color: "#BDED11",
-                  borderRadius: "4px 0 0 4px",
-                }}
-                variant="p"
-                component="p"
-              >
-                {percent}%
-              </Typography>
-              <Typography
-                sx={{
-                  position: "absolute",
-                  right: "4.5%",
-                  fontSize: "12px",
-                  bottom: "16px",
-                  color: "#647984",
-                  textDecorationLine: "line-through",
-                }}
-                variant="p"
-                component="p"
-              >
-                {previousPrice}$
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#4c6b22",
-                }}
-                variant="p"
-                component="p"
-              >
-                {currentPrice}$
-              </Typography>
-            </Box>
-          ) : (
-            <Typography
-              sx={{
-                fontSize: "23px",
-                textAlign: "center",
-                backgroundColor: "#cccc",
-                borderRadius: "4px",
-              }}
-              variant="p"
-              component="p"
-            >
-              {currentPrice}$
-            </Typography>
-          )}
-
+          <PriceBox
+            previousPrice={previousPrice}
+            currentPrice={currentPrice}
+            showButton={false}
+            sliderItem={true}
+            position="absolute"
+            additionalStyles={{
+              display: "flex",
+              gap: "8px",
+              alignItems: "baseline",
+              position: "relative",
+              padding: "0 4px 0 0",
+              backgroundColor: "#cccc",
+              width: "auto",
+              borderRadius: "4px",
+              justifyContent: previousPrice ? "space-between" : "center",
+              fontSize: !previousPrice && "23px",
+            }}
+          />
           <Button
             sx={{
               backgroundColor: "#bdbdbd",

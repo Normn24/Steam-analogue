@@ -9,14 +9,12 @@ import {
   List,
   ListItem,
   ListItemText,
-  Box,
 } from "@mui/material";
+import PriceBox from "../../PriceBox/PriceBox";
 
 export default function SliderCardItem({ product }) {
   const { _id, name, imageUrls, genres, currentPrice, previousPrice } = product;
   const classes = useStyles();
-
-  const percent = Math.floor((currentPrice * 100) / previousPrice - 100);
 
   return (
     <Card
@@ -76,57 +74,24 @@ export default function SliderCardItem({ product }) {
               </ListItem>
             ))}
           </List>
-          <Box
-            sx={{
+          <PriceBox
+            previousPrice={previousPrice}
+            currentPrice={currentPrice}
+            showButton={false}
+            sliderItem={true}
+            position="absolute"
+            additionalStyles={{
               display: "flex",
               gap: "11px",
               alignItems: "baseline",
               position: "relative",
               mb: "10px",
-              paddingRight: "4px",
+              padding: "0 4px 0 0",
               backgroundColor: "#cccc",
               width: "fit-content",
               borderRadius: "4px",
             }}
-          >
-            <Typography
-              sx={{
-                fontSize: "34px",
-                lineHeight: "1",
-                backgroundColor: "#4c6b22",
-                padding: "2px",
-                color: "#BDED11",
-                borderRadius: "4px 0 0 4px",
-              }}
-              variant="p"
-              component="p"
-            >
-              {percent}%
-            </Typography>
-            <Typography
-              sx={{
-                position: "absolute",
-                right: "3.5%",
-                fontSize: "12px",
-                bottom: "17px",
-                color: "#647984",
-                textDecorationLine: "line-through",
-              }}
-              variant="p"
-              component="p"
-            >
-              {previousPrice}$
-            </Typography>
-            <Typography
-              sx={{
-                color: "#4c6b22",
-              }}
-              variant="p"
-              component="p"
-            >
-              {currentPrice}$
-            </Typography>
-          </Box>
+          />
         </CardContent>
       </Link>
     </Card>

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useStyles } from "../../styles/sliders/styles";
+import PriceBox from "../PriceBox/PriceBox";
 
 export default function CategoryItem({
   product,
@@ -34,9 +35,7 @@ export default function CategoryItem({
     yearOfPublication,
   } = product;
   const classes = useStyles();
-  const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice - 100)
-    : null;
+
   const productYear = new Date(yearOfPublication).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -101,79 +100,27 @@ export default function CategoryItem({
           >
             {name}
           </Typography>
-          {previousPrice ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: previousPrice ? "flex-end" : "center",
-                backgroundColor: "#cccc",
-                justifyContent: "space-between",
-                padding: "3px 3px 3px 10px",
-                borderRadius: "3px",
-                gap: "10px",
-                position: "absolute",
-                right: "37.5%",
-                top: "0",
-                height: "35px",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "24px",
-                  lineHeight: "1",
-                  backgroundColor: "#4c6b22",
-                  padding: "8.25px 3px",
-                  color: "#BDED11",
-                  position: "absolute",
-                  top: "0px",
-                  right: "96%",
-                  borderRadius: "4px 0 0 4px",
-                }}
-                variant="p"
-                component="p"
-              >
-                {percent}%
-              </Typography>
-              <Typography
-                sx={{
-                  position: "absolute",
-                  left: "34.5%",
-                  fontSize: "12px",
-                  bottom: "19px",
-                  color: "#647984",
-                  textDecorationLine: "line-through",
-                }}
-                variant="p"
-                component="p"
-              >
-                {previousPrice}$
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#4c6b22",
-                }}
-                variant="p"
-                component="p"
-              >
-                {currentPrice}$
-              </Typography>
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                padding: "4px 5px",
-                borderRadius: "3px",
-                position: "absolute",
-                right: "37.5%",
-                top: "10%",
-              }}
-            >
-              <Typography variant="p" component="p">
-                {currentPrice}$
-              </Typography>
-            </Box>
-          )}
+
+          <PriceBox
+            previousPrice={previousPrice}
+            currentPrice={currentPrice}
+            showButton={false}
+            position="absolute"
+            additionalStyles={{
+              display: "flex",
+              alignItems: previousPrice ? "flex-end" : "center",
+              backgroundColor: previousPrice ? "#cccc" : "transparent",
+              justifyContent: "space-between",
+              padding: "3px 3px 3px 10px",
+              borderRadius: "3px",
+              gap: "10px",
+              position: "absolute",
+              right: "37.5%",
+              top: "0",
+              height: "35px",
+            }}
+          />
+
           <Box
             sx={{
               display: "flex",

@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import useToken from "../../hooks/useToken";
+import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart, addToCart } from "../../redux/cart.slice/cart.slice";
 import { useStyles } from "../../styles/sliders/styles";
 import {
   Card,
@@ -7,15 +11,10 @@ import {
   CardContent,
   Typography,
   List,
-  ListItem,
-  ListItemText,
   Button,
   Box,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { removeFromCart, addToCart } from "../../redux/cart.slice/cart.slice";
-import useToken from "../../hooks/useToken";
+import PriceBox from "../PriceBox/PriceBox";
 export default function WishListItem({ product, handleRemove }) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -32,10 +31,6 @@ export default function WishListItem({ product, handleRemove }) {
   } = product;
   const { cart } = useSelector((state) => state.cart);
   const [onCart, setOnCart] = useState(false);
-
-  const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice) - 100
-    : null;
 
   const dateOfPublication = new Date(yearOfPublication).toLocaleDateString(
     "en-US",
@@ -96,7 +91,7 @@ export default function WishListItem({ product, handleRemove }) {
         }}
       >
         <Box sx={{ width: "70%" }}>
-          <Link className="post__more" to={`/product/${_id}`}>
+          <NavLink className="post__more" to={`/product/${_id}`}>
             <Typography
               sx={{ textTransform: "capitalize" }}
               variant="h5"
@@ -118,7 +113,7 @@ export default function WishListItem({ product, handleRemove }) {
             >
               Developer: {developer}
             </Typography>
-          </Link>
+          </NavLink>
 
           <List
             sx={{
@@ -132,27 +127,29 @@ export default function WishListItem({ product, handleRemove }) {
               backgroundColor: "transparent",
             }}
           >
-            {genres.slice(0, 3).map((value, index) => (
-              <ListItem
-                key={index}
-                sx={{
-                  width: "auto",
-                  padding: "0",
-                  textTransform: "capitalize",
-                }}
-                disableGutters
+            {genres.slice(0, 3).map((value) => (
+              <NavLink
+                to={`/products/search/?genre=${value._id}`}
+                key={value._id}
               >
-                <ListItemText
+                <Button
                   className={classes.genreItem}
                   sx={{
                     margin: "0",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    backgroundColor: "transparent",
+                    textTransform: "capitalize",
+                    background: "#cccc",
+
+                    color: "#000",
+                    "&:hover": {
+                      background: "#cccc",
+                    },
                   }}
-                  primary={value.name}
-                />
-              </ListItem>
+                >
+                  {value.name}
+                </Button>
+              </NavLink>
             ))}
           </List>
         </Box>
@@ -163,79 +160,14 @@ export default function WishListItem({ product, handleRemove }) {
             justifyContent: "space-evenly",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: previousPrice ? "flex-end" : "center",
-              backgroundColor: "#cccc",
-              justifyContent: "space-between",
-              padding: "3px 3px 3px 10px",
-              borderRadius: "3px",
-              gap: "10px",
-              position: "relative",
-            }}
-          >
-            {previousPrice ? (
-              <>
-                <Typography
-                  sx={{
-                    fontSize: "24px",
-                    lineHeight: "1",
-                    backgroundColor: "#4c6b22",
-                    padding: "8.25px 3px",
-                    color: "#BDED11",
-                    position: "absolute",
-                    top: "0px",
-                    left: "-37%",
-                    borderRadius: "4px 0 0 4px",
-                  }}
-                  variant="p"
-                  component="p"
-                >
-                  {percent}%
-                </Typography>
-                <Typography
-                  sx={{
-                    position: "absolute",
-                    left: "11%",
-                    fontSize: "12px",
-                    bottom: "18px",
-                    color: "#647984",
-                    textDecorationLine: "line-through",
-                  }}
-                  variant="p"
-                  component="p"
-                >
-                  {previousPrice}$
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#4c6b22",
-                  }}
-                  variant="p"
-                  component="p"
-                >
-                  {currentPrice}$
-                </Typography>
-              </>
-            ) : (
-              <Typography variant="p" component="p">
-                {currentPrice}$
-              </Typography>
-            )}
-            <Button
-              onClick={() => handleCartList(product?._id)}
-              sx={{
-                width: "105px",
-                padding: "5px 12px  ",
-                textTransform: "initial",
-                backgroundColor: "#bdbdbd",
-                borderRadius: "3px",
-              }}
-            >
-              {onCart ? "In cart" : "Add to cart"}
-            </Button>
-          </Box>
+          <PriceBox
+            previousPrice={previousPrice}
+            currentPrice={currentPrice}
+            onCart={onCart}
+            handleCartList={handleCartList}
+            productId={product?._id}
+            loggedIn={true}
+          />
           <Button
             sx={{
               backgroundColor: "#bdbdbd",

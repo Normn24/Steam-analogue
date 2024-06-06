@@ -33,6 +33,7 @@ import { Form, InputGroup } from "../styles/forms/StylesAuthForm.js";
 
 import Textarea from "@mui/joy/Textarea";
 import useToken from "../hooks/useToken.js";
+import PriceBox from "../components/PriceBox/PriceBox.jsx";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -52,9 +53,6 @@ export default function ProductPage() {
   const [onLibrary, setOnLibrary] = useState(false);
   const [value, setValue] = useState("1");
 
-  const percent = product.previousPrice
-    ? Math.floor((product.currentPrice * 100) / product.previousPrice - 100)
-    : null;
   const productYear = new Date(product.yearOfPublication).toLocaleDateString(
     "en-US",
     {
@@ -341,79 +339,14 @@ export default function ProductPage() {
               </>
             ) : (
               <>
-                <Box
-                  sx={{
-                    display: product.currentPrice === 0 ? "none" : "flex",
-                    alignItems: product.previousPrice ? "flex-end" : "center",
-                    backgroundColor: "#cccc",
-                    justifyContent: "space-between",
-                    padding: "3px 3px 3px 10px",
-                    borderRadius: "3px",
-                    gap: "8px",
-                    position: "relative",
-                  }}
-                >
-                  {product.previousPrice ? (
-                    <>
-                      <Typography
-                        sx={{
-                          fontSize: "24px",
-                          lineHeight: "1",
-                          backgroundColor: "#4c6b22",
-                          padding: "8.25px 3px",
-                          color: "#BDED11",
-                          position: "absolute",
-                          top: "0px",
-                          left: "-62px",
-                          borderRadius: "4px 0 0 4px",
-                        }}
-                        variant="p"
-                        component="p"
-                      >
-                        {percent}%
-                      </Typography>
-                      <Typography
-                        sx={{
-                          position: "absolute",
-                          left: "11.5%",
-                          fontSize: "12px",
-                          bottom: "19px",
-                          color: "#647984",
-                          textDecorationLine: "line-through",
-                        }}
-                        variant="p"
-                        component="p"
-                      >
-                        {product.previousPrice}$
-                      </Typography>
-                      <Typography
-                        sx={{
-                          color: "#4c6b22",
-                        }}
-                        variant="p"
-                        component="p"
-                      >
-                        {product.currentPrice}$
-                      </Typography>
-                    </>
-                  ) : (
-                    <Typography variant="p" component="p">
-                      {product.currentPrice}$
-                    </Typography>
-                  )}
-                  <Button
-                    disabled={!loggedIn}
-                    onClick={() => handleCartList(id)}
-                    sx={{
-                      padding: "5px 12px  ",
-                      textTransform: "initial",
-                      backgroundColor: "#bdbdbd",
-                      borderRadius: "3px",
-                    }}
-                  >
-                    {onCart ? "In cart" : "Add to cart"}
-                  </Button>
-                </Box>
+                <PriceBox
+                  previousPrice={product.previousPrice}
+                  currentPrice={product.currentPrice}
+                  onCart={onCart}
+                  handleCartList={handleCartList}
+                  productId={product?._id}
+                  loggedIn={loggedIn}
+                />
               </>
             )}
           </Box>

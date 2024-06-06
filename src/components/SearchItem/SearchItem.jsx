@@ -11,9 +11,9 @@ import {
   ListItemText,
   Collapse,
   ImageListItem,
-  Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import PriceBox from "../PriceBox/PriceBox";
 
 export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
   const classes = useStyles();
@@ -27,9 +27,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
     previousPrice,
   } = product;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const percent = previousPrice
-    ? Math.floor((currentPrice * 100) / previousPrice - 100)
-    : null;
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
@@ -119,80 +117,26 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
               </ListItem>
             ))}
           </List>
-          {previousPrice ? (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: previousPrice ? "flex-end" : "center",
-                // backgroundColor: "#cccc",
-                justifyContent: "space-between",
-                padding: "3px 3px 3px 10px",
-                borderRadius: "3px",
-                gap: "10px",
-                position: "absolute",
-                right: "16px",
-                top: "23px",
-                height: "35px",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "24px",
-                  lineHeight: "1",
-                  backgroundColor: "#4c6b22",
-                  padding: "8.25px 3px",
-                  color: "#BDED11",
-                  position: "absolute",
-                  top: "0px",
-                  right: "96%",
-                  borderRadius: "4px 0 0 4px",
-                }}
-                variant="p"
-                component="p"
-              >
-                {percent}%
-              </Typography>
-              <Typography
-                sx={{
-                  position: "absolute",
-                  right: "4px",
-                  fontSize: "12px",
-                  bottom: "19px",
-                  color: "#647984",
-                  textDecorationLine: "line-through",
-                }}
-                variant="p"
-                component="p"
-              >
-                {previousPrice}$
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#4c6b22",
-                }}
-                variant="p"
-                component="p"
-              >
-                {currentPrice}$
-              </Typography>
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                // backgroundColor: "#cccc",
-                padding: "4px 5px",
-                borderRadius: "3px",
-                position: "absolute",
-                right: "12px",
-                top: "28px",
-              }}
-            >
-              <Typography variant="p" component="p" sx={{ fontSize: "19px" }}>
-                {currentPrice}$
-              </Typography>
-            </Box>
-          )}
+
+          <PriceBox
+            previousPrice={previousPrice}
+            currentPrice={currentPrice}
+            showButton={false}
+            position="absolute"
+            additionalStyles={{
+              display: "flex",
+              gap: "11px",
+              alignItems: previousPrice ? "flex-end" : "center",
+              backgroundColor: "transperent",
+              width: "fit-content",
+              borderRadius: "4px",
+              padding: "2px 3px 2px 10px",
+              position: "absolute",
+              right: "16px",
+              top: "25px",
+              height: "35px",
+            }}
+          />
         </CardContent>
       </Card>
       <Collapse
