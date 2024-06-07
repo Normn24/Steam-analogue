@@ -10,7 +10,7 @@ export const NavBarWrapper = styled(Box)({
     backgroundColor: "#F0F0F4",
 
     "@media (max-width: 600px)": {
-        display: "none",
+        justifyContent: "center",
     },
 
 });
@@ -36,6 +36,10 @@ export const StyledNavBarLink = styled(NavLink)({
     "&.active": {
         borderBottom: "4px solid #000",
         borderRadius: "4px",
-    }
+    },
 
+
+    "@media (max-width: 600px)": {
+        display: "none",
+    },
 });

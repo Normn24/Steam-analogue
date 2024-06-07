@@ -4,6 +4,7 @@ import LibraryItem from "../components/LibraryItem/LibraryItem";
 
 export default function LibraryPage() {
   const { orders, library } = useSelector((state) => state.orders);
+  const user = useSelector((state) => state.user.user);
 
   return (
     <Box
@@ -34,18 +35,19 @@ export default function LibraryPage() {
             sx={{
               width: "auto",
               textTransform: "uppercase",
-              pl: "20px",
+              pl: { xs: 0, md: "20px" },
+              textAlign: { xs: "center", md: "left" },
             }}
             variant="h4"
             component="h4"
           >
-            Library {orders?.customerId?.login}
+            Library {user?.login}
           </Typography>
           <Box
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              justifyContent: "flex-start",
+              justifyContent: { xs: "center", md: "flex-start" },
               mt: "15px",
             }}
           >

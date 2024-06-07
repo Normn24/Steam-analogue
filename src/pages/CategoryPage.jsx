@@ -42,27 +42,43 @@ export default function CategoryPage() {
           m: "60px 0",
         }}
       >
-        <Typography variant="h3" component="h3">
+        <Typography
+          variant="h3"
+          component="h3"
+          sx={{ textAlign: { xs: "center", md: "left" } }}
+        >
           {catalogQuery}
         </Typography>
         <Box
           sx={{
             display: "flex",
-            margin: "15px 15px 0",
+            margin: { xs: "15px 8px 0", md: "15px 15px 0" },
             textTransform: "uppercase",
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="p" component="p" sx={{ width: "50%" }}>
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ width: "50%", fontSize: { xs: "10px" } }}
+          >
             Rate
           </Typography>
-          <Typography variant="p" component="p">
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ fontSize: { xs: "10px" } }}
+          >
             Price
           </Typography>
           <Typography
             variant="p"
             component="p"
-            sx={{ width: "151px", textAlign: "right" }}
+            sx={{
+              width: "151px",
+              textAlign: "right",
+              fontSize: { xs: "10px" },
+            }}
           >
             {currentCategory}
           </Typography>

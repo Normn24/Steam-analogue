@@ -68,7 +68,11 @@ export default function CategoryItem({
         }}
       >
         <Typography
-          sx={{ fontWeight: "800", margin: "0 20px" }}
+          sx={{
+            fontWeight: "800",
+            margin: { xs: "0 10px", md: "0 20px" },
+            fontSize: { xs: "24px" },
+          }}
           variant="h4"
           component="h4"
         >
@@ -77,8 +81,8 @@ export default function CategoryItem({
         <CardMedia
           sx={{
             borderRadius: "5px",
-            height: "70px",
-            width: "250px",
+            height: { xs: "45px", md: "70px" },
+            width: { xs: "150px", md: "250px" },
             objectFit: "cover",
             margin: "7px 0",
           }}
@@ -94,7 +98,13 @@ export default function CategoryItem({
           }}
         >
           <Typography
-            sx={{ textTransform: "capitalize" }}
+            sx={{
+              textTransform: "capitalize",
+              fontSize: { xs: "12px" },
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              width: { xs: "87px" },
+            }}
             variant="h5"
             component="h5"
           >
@@ -111,13 +121,13 @@ export default function CategoryItem({
               alignItems: previousPrice ? "flex-end" : "center",
               backgroundColor: previousPrice ? "#cccc" : "transparent",
               justifyContent: "space-between",
-              padding: "3px 3px 3px 10px",
-              borderRadius: "3px",
+              padding: { xs: "2px 4px 4px", md: "3px 3px 3px 10px" },
+              borderRadius: "0 3px 3px 0",
               gap: "10px",
               position: "absolute",
               right: "37.5%",
               top: "0",
-              height: "35px",
+              height: { xs: "20.5px", md: "35px" },
             }}
           />
 

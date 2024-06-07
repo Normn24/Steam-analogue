@@ -39,7 +39,7 @@ const PriceBox = ({
         <>
           <Typography
             sx={{
-              fontSize: sliderItem ? "30px" : "24px",
+              fontSize: { xs: "10px", md: sliderItem ? "30px" : "24px" },
               lineHeight: "1",
               backgroundColor: "#4c6b22",
               padding: sliderItem ? "4px" : "8.25px 3px",
@@ -60,8 +60,8 @@ const PriceBox = ({
               position: "absolute",
               left: showButton && "14px",
               right: "5px",
-              fontSize: "12px",
-              bottom: "18px",
+              fontSize: { xs: "6px", md: "12px" },
+              bottom: { xs: "13px", md: "18px" },
               color: "#647984",
               textDecorationLine: "line-through",
             }}
@@ -73,6 +73,7 @@ const PriceBox = ({
           <Typography
             sx={{
               color: "#4c6b22",
+              fontSize: { xs: "9px" },
             }}
             variant="p"
             component="p"
@@ -81,7 +82,13 @@ const PriceBox = ({
           </Typography>
         </>
       ) : (
-        <Typography variant="p" component="p">
+        <Typography
+          variant="p"
+          component="p"
+          sx={{
+            fontSize: { xs: "12px" },
+          }}
+        >
           {currentPrice}$
         </Typography>
       )}

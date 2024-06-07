@@ -61,6 +61,9 @@ export default function Header() {
 
   const drawer = (
     <Box sx={{ width: 220, display: "flex", flexDirection: "column" }}>
+      <BurgerItem to="/" onClick={handleLinkClick} style={{ display: "block" }}>
+        Home
+      </BurgerItem>
       <Accordion
         sx={{
           backgroundColor: "transparent",
@@ -79,15 +82,6 @@ export default function Header() {
             Store
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <NavLink
-            to="/"
-            onClick={handleLinkClick}
-            style={{ display: "block" }}
-          >
-            Home
-          </NavLink>
-        </AccordionDetails>
         {catalogs.slice(0, 3).map((catalog) => (
           <AccordionDetails key={catalog.id}>
             <NavLink
@@ -104,7 +98,7 @@ export default function Header() {
         <>
           <BurgerItem
             button
-            component={NavLink}
+            // component={NavLink}
             to="/account/profile"
             onClick={handleLinkClick}
           >
@@ -112,7 +106,7 @@ export default function Header() {
           </BurgerItem>
           <BurgerItem
             button
-            component={NavLink}
+            // component={NavLink}
             to="/products/library"
             onClick={handleLinkClick}
           >
@@ -120,7 +114,7 @@ export default function Header() {
           </BurgerItem>
           <BurgerItem
             button
-            component={NavLink}
+            // component={NavLink}
             to="/wishlist"
             onClick={handleLinkClick}
           >
@@ -128,7 +122,7 @@ export default function Header() {
           </BurgerItem>
           <BurgerItem
             button
-            component={NavLink}
+            // component={NavLink}
             to="/cart"
             onClick={handleLinkClick}
           >
@@ -169,6 +163,7 @@ export default function Header() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
+            sx={{ margin: 0, padding: 0 }}
           >
             <MenuIcon />
           </IconButton>

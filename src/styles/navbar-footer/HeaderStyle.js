@@ -1,4 +1,5 @@
 import { Box, styled } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 export const HeaderWrapper = styled(Box)({
     height: "40px",
@@ -10,7 +11,7 @@ export const HeaderWrapper = styled(Box)({
     backgroundColor: "#bdbdbd",
 
     "@media (max-width: 600px)": {
-        padding: "5px 8.5px",
+        padding: "5px 15px",
     },
 
 })
@@ -41,10 +42,12 @@ export const CountIndicator = styled(Box)({
     padding: "1px 6px"
 })
 
-export const BurgerItem = styled(Box)({
+export const BurgerItem = styled(NavLink)({
     padding: "12px 16px",
     borderRadius: "4px",
     boxShadow:
         "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
+
+
 })
 
