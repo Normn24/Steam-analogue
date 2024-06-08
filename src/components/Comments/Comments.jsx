@@ -22,8 +22,8 @@ const CommentsComponent = () => {
         >
           <CardMedia
             sx={{
-              minHeight: "140px",
-              width: "140px",
+              minHeight: { xs: "85px", md: "140px" },
+              width: { xs: "100px", md: "140px" },
               objectFit: "cover",
               borderRadius: "6px 0px 0px 6px",
             }}
@@ -34,11 +34,11 @@ const CommentsComponent = () => {
             sx={{
               width: "100%",
               minHeight: 83,
-              padding: "15px",
+              padding: { xs: "2px 7px", md: "15px" },
               position: "relative",
               display: "flex",
               flexDirection: "column",
-              "&:last-child": { pb: "15px" },
+              "&:last-child": { pb: { xs: "0", md: "15px" } },
             }}
           >
             <Typography variant="p" component="p">
@@ -47,7 +47,7 @@ const CommentsComponent = () => {
             <Typography
               sx={{
                 opacity: 0.6,
-                fontSize: "13px",
+                fontSize: { xs: "10px", md: "13px" },
                 textTransform: "uppercase",
               }}
               variant="p"
@@ -60,7 +60,11 @@ const CommentsComponent = () => {
                 day: "numeric",
               })}
             </Typography>
-            <Typography sx={{ padding: "5px 0" }} variant="p" component="p">
+            <Typography
+              sx={{ padding: "5px 0", fontSize: { xs: "13px", md: "16px" } }}
+              variant="p"
+              component="p"
+            >
               {item.content}
             </Typography>
           </CardContent>

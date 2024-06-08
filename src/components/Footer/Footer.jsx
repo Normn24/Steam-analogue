@@ -15,9 +15,9 @@ export default function Footer() {
     <>
       <StyledFooter>
         <StyledTitle>
-          Усі права захищено. Усі торговельні марки є власністю відповідних
-          власників у Україні та інших країнах. Усі ціни вказані з урахуванням
-          ПДВ (за потреби)
+          All rights reserved. All trademarks are the property of their
+          respective owners in Ukraine and other countries. All prices are
+          inclusive of VAT (if applicable)
         </StyledTitle>
         <InfoWrapper>
           <NavLink to="https://discord.com/" target="_blank">

@@ -146,25 +146,17 @@ export default function ProductPage() {
         component="div"
         sx={{
           display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
-          gap: "50px",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "center", md: "flex-start" },
+          gap: { xs: "0", md: "50px" },
           height: "auto",
-          "@media (max-width: 960px)": {
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            gap: "25px",
-          },
         }}
       >
         <Box
           component="div"
           sx={{
             position: "relative",
-            width: "60%",
-            "@media (max-width: 960px)": {
-              width: "100%",
-            },
+            width: { xs: "100%", md: "60%" },
           }}
         >
           {product.previousPrice && (
@@ -244,7 +236,6 @@ export default function ProductPage() {
                     whiteSpace: "nowrap",
                     paddingBottom: "10px",
                     gap: "10px",
-                    "@media (max-width: 600px)": { fontSize: "10px" },
                   }}
                 >
                   {product?.genres?.map((value) => (
@@ -357,7 +348,7 @@ export default function ProductPage() {
 
       <Box
         sx={{
-          marginTop: "110px",
+          marginTop: { xs: "40px", md: "110px" },
           display: onLibrary ? "block" : "none",
           boxShadow: "0px 0px 10px -1px rgba(0, 0, 0, 0.2)",
           padding: "15px",
@@ -452,7 +443,7 @@ export default function ProductPage() {
               sx={{
                 border: "none",
                 "& button": {
-                  fontSize: { xs: "10px", md: "16px" },
+                  fontSize: { xs: "13px", md: "16px" },
 
                   textTransform: "uppercase",
                 },
@@ -478,6 +469,8 @@ export default function ProductPage() {
               fontSize: "28px",
               backgroundColor: "#b5b7ffcc",
               opacity: 0.8,
+              backgroundAttachment: "fixed",
+
               backgroundImage:
                 "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
               position: "relative",
@@ -503,7 +496,7 @@ export default function ProductPage() {
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
-                fontSize: { xs: "12px", md: "22px" },
+                fontSize: { xs: "14px", md: "22px" },
               }}
             >
               {product.description}
@@ -521,6 +514,7 @@ export default function ProductPage() {
               alignItems: "center",
               backgroundColor: "#b5b7ffcc",
               opacity: 0.8,
+              backgroundAttachment: "fixed",
               backgroundImage:
                 "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
               position: "relative",
@@ -552,11 +546,7 @@ export default function ProductPage() {
                 variant="h5"
                 sx={{
                   fontWeight: "700",
-                  "@media (max-width: 600px)": {
-                    fontSize: "18px",
-                    textWrap: "nowrap",
-                    overflow: "hidden",
-                  },
+                  fontSize: { xs: "16px", md: "24px" },
                 }}
               >
                 MINIMUM:
@@ -566,12 +556,7 @@ export default function ProductPage() {
                   key={index}
                   variant="p"
                   sx={{
-                    fontSize: "20px",
-                    "@media (max-width: 600px)": {
-                      fontSize: "18px",
-                      textWrap: "nowrap",
-                      overflow: "hidden",
-                    },
+                    fontSize: { xs: "14px", md: "20px" },
                   }}
                 >
                   {item}
@@ -596,7 +581,7 @@ export default function ProductPage() {
                 variant="h5"
                 sx={{
                   fontWeight: "700",
-                  "@media (max-width: 600px)": { fontSize: "18px" },
+                  fontSize: { xs: "16px", md: "24px" },
                 }}
               >
                 RECOMMENDED:
@@ -606,8 +591,7 @@ export default function ProductPage() {
                   key={index}
                   variant="p"
                   sx={{
-                    fontSize: "20px",
-                    "@media (max-width: 600px)": { fontSize: "18px" },
+                    fontSize: { xs: "14px", md: "20px" },
                   }}
                 >
                   {item}
@@ -617,7 +601,7 @@ export default function ProductPage() {
           </TabPanel>
         </TabContext>
       </Box>
-      <Box sx={{ margin: "10px 0 20px" }}>
+      <Box sx={{ margin: "20px 0" }}>
         <Typography
           variant="h5"
           component="h5"
