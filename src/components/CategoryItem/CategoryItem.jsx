@@ -71,7 +71,7 @@ export default function CategoryItem({
           sx={{
             fontWeight: "800",
             margin: { xs: "0 10px", md: "0 20px" },
-            fontSize: { xs: "24px" },
+            fontSize: { xs: "20px", md: "34px" },
           }}
           variant="h4"
           component="h4"
@@ -82,7 +82,7 @@ export default function CategoryItem({
           sx={{
             borderRadius: "5px",
             height: { xs: "45px", md: "70px" },
-            width: { xs: "150px", md: "250px" },
+            width: { xs: "135px", md: "250px" },
             objectFit: "cover",
             margin: "7px 0",
           }}
@@ -92,7 +92,7 @@ export default function CategoryItem({
         <CardContent
           sx={{
             width: "100%",
-            padding: "5px 16px",
+            padding: { xs: "5px 6px", md: "5px 16px" },
             position: "relative",
             "&:last-child": { pb: 0 },
           }}
@@ -100,10 +100,10 @@ export default function CategoryItem({
           <Typography
             sx={{
               textTransform: "capitalize",
-              fontSize: { xs: "12px" },
+              fontSize: { xs: "12px", md: "24px" },
               whiteSpace: "nowrap",
               overflow: "hidden",
-              width: { xs: "87px" },
+              width: { xs: "87px", md: "auto" },
             }}
             variant="h5"
             component="h5"
@@ -121,12 +121,12 @@ export default function CategoryItem({
               alignItems: previousPrice ? "flex-end" : "center",
               backgroundColor: previousPrice ? "#cccc" : "transparent",
               justifyContent: "space-between",
-              padding: { xs: "2px 4px 4px", md: "3px 3px 3px 10px" },
+              padding: { xs: "0px 4px 2px", md: "3px 3px 3px 10px" },
               borderRadius: "0 3px 3px 0",
               gap: "10px",
               position: "absolute",
-              right: "37.5%",
-              top: "0",
+              right: { xs: "70px", md: "37.5%" },
+              top: { xs: "3px", md: "0" },
               height: { xs: "20.5px", md: "35px" },
             }}
           />
@@ -137,12 +137,16 @@ export default function CategoryItem({
               padding: "4px 5px",
               borderRadius: "3px",
               position: "absolute",
-              right: "16px",
+              right: { xs: "4px", md: "16px" },
               top: "10%",
             }}
           >
-            <Typography variant="p" component="p">
-              {currentCategory === "Current Players"
+            <Typography
+              variant="p"
+              component="p"
+              sx={{ fontSize: { xs: "10px", md: "14px" } }}
+            >
+              {currentCategory === "Players"
                 ? currentPlayers?.toLocaleString()
                 : currentCategory === "Weeks"
                 ? weeksInTopChart
@@ -152,6 +156,7 @@ export default function CategoryItem({
         </CardContent>
         <Collapse
           sx={{
+            display: { xs: "none", md: "block" },
             position: "absolute",
             right: "0%",
             top: "0%",

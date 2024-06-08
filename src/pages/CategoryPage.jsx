@@ -20,7 +20,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     if (catalogQuery === "Most Played") {
-      setCurrentCategory("Current Players");
+      setCurrentCategory("Players");
     } else if (catalogQuery === "Top Sellers") {
       setCurrentCategory("Weeks");
     } else {
@@ -45,7 +45,10 @@ export default function CategoryPage() {
         <Typography
           variant="h3"
           component="h3"
-          sx={{ textAlign: { xs: "center", md: "left" } }}
+          sx={{
+            textAlign: { xs: "center", md: "left" },
+            fontSize: { xs: "24px", md: "48px" },
+          }}
         >
           {catalogQuery}
         </Typography>
@@ -53,21 +56,27 @@ export default function CategoryPage() {
           sx={{
             display: "flex",
             margin: { xs: "15px 8px 0", md: "15px 15px 0" },
+            position: "relative",
             textTransform: "uppercase",
             justifyContent: "space-between",
+            height: { xs: "15px", md: "25px" },
           }}
         >
           <Typography
             variant="p"
             component="p"
-            sx={{ width: "50%", fontSize: { xs: "10px" } }}
+            sx={{ position: "absolute", fontSize: { xs: "10px", md: "16px" } }}
           >
             Rate
           </Typography>
           <Typography
             variant="p"
             component="p"
-            sx={{ fontSize: { xs: "10px" } }}
+            sx={{
+              position: "absolute",
+              right: { xs: "75px", md: "29.5%" },
+              fontSize: { xs: "10px", md: "16px" },
+            }}
           >
             Price
           </Typography>
@@ -75,9 +84,9 @@ export default function CategoryPage() {
             variant="p"
             component="p"
             sx={{
-              width: "151px",
-              textAlign: "right",
-              fontSize: { xs: "10px" },
+              position: "absolute",
+              right: "0",
+              fontSize: { xs: "10px", md: "16px" },
             }}
           >
             {currentCategory}
