@@ -65,7 +65,9 @@ export default function UserProfile() {
           display: "flex",
           justifyContent: "space-between",
           mb: "20px",
-          alignItems: "center",
+          alignItems: { xs: "flex-start", md: "center" },
+          flexDirection: { xs: "column", md: "row" },
+          gap: { xs: "5px", md: "0" },
         }}
       >
         <Typography variant="h4" component="h4" sx={{ fontWeight: "700" }}>

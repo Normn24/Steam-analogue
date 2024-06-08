@@ -168,10 +168,10 @@ export default function WishListItem({ product, handleRemove }) {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
+            flexDirection: { xs: "row-reverse", md: "column" },
+            justifyContent: { xs: "space-between", md: "space-evenly" },
             gap: { xs: "8px", md: "0" },
-            alignItems: { xs: "flex-end" },
+            alignItems: { xs: "stretch" },
           }}
         >
           <PriceBox
@@ -184,7 +184,6 @@ export default function WishListItem({ product, handleRemove }) {
           />
           <Button
             sx={{
-              minWidth: "153px",
               backgroundColor: "#bdbdbd",
               borderRadius: "3px",
               ":hover": { backgroundColor: "#cccc" },

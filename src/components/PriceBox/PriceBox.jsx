@@ -47,12 +47,8 @@ const PriceBox = ({
                 : sliderItem
                 ? "30px"
                 : "24px",
-
-              // fontSize: sliderItem ? "30px" : "24px",
               lineHeight: "1",
               backgroundColor: "#4c6b22",
-              // padding: sliderItem ? "4px" : "8.25px 3px",
-
               padding: categoryItem
                 ? {
                     xs: "6.25px 3px",
@@ -63,7 +59,10 @@ const PriceBox = ({
               color: "#BDED11",
               position: sliderItem ? "none" : "absolute",
               top: "0px",
-              left: position === "relative" ? "-39%" : "unset",
+              left: {
+                xs: "-51%",
+                md: position === "relative" ? "-39%" : "unset",
+              },
               right: position !== "relative" ? "96%" : "unset",
               borderRadius: "4px 0 0 4px",
             }}
@@ -79,8 +78,6 @@ const PriceBox = ({
               right: "5px",
               fontSize: categoryItem ? { xs: "6px", md: "12px" } : "12px",
               bottom: categoryItem ? { xs: "12px", md: "18px" } : "18px",
-              // fontSize: "12px",
-              // bottom: "18px",
               color: "#647984",
               textDecorationLine: "line-through",
             }}
@@ -117,8 +114,8 @@ const PriceBox = ({
           disabled={!loggedIn}
           onClick={() => handleCartList(productId)}
           sx={{
-            width: buttonWidth,
-            padding: buttonPadding,
+            width: { xs: "auto", md: buttonWidth },
+            padding: { xs: "5px 0", md: buttonPadding },
             textTransform: "initial",
             backgroundColor: "#bdbdbd",
             borderRadius: "3px",
