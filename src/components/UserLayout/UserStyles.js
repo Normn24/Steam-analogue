@@ -9,6 +9,10 @@ export const UserPageContainer = styled(Box)({
     gap: "30px",
     margin: "30px 20px",
     minHeight: "calc(100vh - 282px)",
+
+    "@media screen and (max-width: 600px)": {
+        flexDirection: "column"
+    }
 });
 
 export const UserNav = styled(Paper)({
@@ -20,6 +24,10 @@ export const UserNav = styled(Paper)({
     boxShadow:
         "0px 6px 6px -3px rgba(0,0,0,0.2), 0px 10px 14px 1px rgba(0,0,0,0.14), 0px 4px 18px 3px rgba(0,0,0,0.12)",
     borderRadius: "5px",
+
+    "@media screen and (max-width: 600px)": {
+        width: "auto",
+    }
 });
 
 export const UserInfo = styled(Box)({
@@ -33,6 +41,10 @@ export const UserItem = styled(Box)({
     display: "flex",
     flexDirection: "column",
     width: "250px",
+
+    "@media screen and (max-width: 600px)": {
+        width: "auto",
+    }
 });
 
 export const NavText = styled(Box)({
@@ -67,5 +79,9 @@ export const NavLinkStyled = styled(NavLink)({
 });
 
 export const ContentArea = styled(Box)({
-    width: "960px"
+    width: "960px",
+
+    "@media screen and (max-width: 600px)": {
+        width: "auto",
+    }
 });

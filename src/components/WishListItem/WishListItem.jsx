@@ -67,14 +67,15 @@ export default function WishListItem({ product, handleRemove }) {
         padding: "15px",
         display: "flex",
         backgroundColor: "transparent",
+        flexDirection: { xs: "column", md: "row" },
       }}
     >
       <CardMedia
         sx={{
           height: "140px",
-          width: "500px",
+          width: { xs: "auto", md: "500px" },
           objectFit: "cover",
-          borderRadius: "6px 0px 0px 6px",
+          borderRadius: { xs: "6px", md: "6px 0px 0px 6px" },
         }}
         image={imageUrls[0]}
         title={name}
@@ -83,31 +84,42 @@ export default function WishListItem({ product, handleRemove }) {
         sx={{
           width: "100%",
           minHeight: 83,
-          padding: "0px 0px 0px 16px ",
+          padding: { xs: "0", md: "0px 0px 0px 16px " },
           position: "relative",
           display: "flex",
+          flexDirection: { xs: "column", md: "row" },
           justifyContent: "space-between",
           "&:last-child": { pb: 0 },
         }}
       >
-        <Box sx={{ width: "70%" }}>
+        <Box sx={{ width: { xs: "auto", md: "70%" } }}>
           <NavLink className="post__more" to={`/product/${_id}`}>
             <Typography
-              sx={{ textTransform: "capitalize" }}
+              sx={{
+                textTransform: "capitalize",
+                mt: { xs: "5px", md: "0" },
+                fontSize: { xs: "20px", md: "24px" },
+              }}
               variant="h5"
               component="h4"
             >
               {name}
             </Typography>
             <Typography
-              sx={{ textTransform: "capitalize" }}
+              sx={{
+                textTransform: "capitalize",
+                fontSize: { xs: "14px", md: "16px" },
+              }}
               variant="p"
               component="p"
             >
               Release Date: {dateOfPublication}
             </Typography>
             <Typography
-              sx={{ textTransform: "capitalize" }}
+              sx={{
+                textTransform: "capitalize",
+                fontSize: { xs: "14px", md: "16px" },
+              }}
               variant="p"
               component="p"
             >
@@ -118,7 +130,7 @@ export default function WishListItem({ product, handleRemove }) {
           <List
             sx={{
               display: "flex",
-              maxWidth: "50%",
+              maxWidth: { xs: "100%", md: "50%" },
               bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
@@ -158,6 +170,8 @@ export default function WishListItem({ product, handleRemove }) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-evenly",
+            gap: { xs: "8px", md: "0" },
+            alignItems: { xs: "flex-end" },
           }}
         >
           <PriceBox
@@ -170,6 +184,7 @@ export default function WishListItem({ product, handleRemove }) {
           />
           <Button
             sx={{
+              minWidth: "153px",
               backgroundColor: "#bdbdbd",
               borderRadius: "3px",
               ":hover": { backgroundColor: "#cccc" },

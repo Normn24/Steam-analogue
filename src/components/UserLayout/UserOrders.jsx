@@ -51,6 +51,7 @@ export default function UserOrders() {
                   borderRadius: 2,
                   marginBottom: "25px",
                   padding: "10px",
+                  fontSize: { xs: "13px", md: "16px" },
                   backgroundColor: "transparent",
                   "&::before": {
                     display: "none",
@@ -69,7 +70,7 @@ export default function UserOrders() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      width: "80%",
+                      width: { xs: "97%", md: "80%" },
                     }}
                   >
                     <Typography variant="p" component="p">
@@ -96,7 +97,10 @@ export default function UserOrders() {
                     <Typography
                       variant="p"
                       component="p"
-                      sx={{ minWidth: "100px", textAlign: "right" }}
+                      sx={{
+                        minWidth: { xs: "auto", md: "100px" },
+                        textAlign: "right",
+                      }}
                     >
                       ${item.totalSum}
                     </Typography>
@@ -113,8 +117,8 @@ export default function UserOrders() {
                   >
                     <CardMedia
                       sx={{
-                        height: "100px",
-                        width: "300px",
+                        minHeight: "100px",
+                        width: { xs: "150px", md: "300px" },
                         objectFit: "cover",
                         borderRadius: "6px 0px 0px 6px",
                       }}
@@ -128,6 +132,8 @@ export default function UserOrders() {
                         padding: "0px 0px 0px 16px ",
                         position: "relative",
                         display: "flex",
+                        flexDirection: { xs: "column", md: "row" },
+                        gap: { xs: "5px", md: "0" },
                         justifyContent: "space-between",
                         "&:last-child": { pb: 0 },
                       }}
@@ -138,7 +144,10 @@ export default function UserOrders() {
                           to={`/product/${el.product._id}`}
                         >
                           <Typography
-                            sx={{ textTransform: "capitalize" }}
+                            sx={{
+                              textTransform: "capitalize",
+                              fontSize: { xs: "16px", md: "24px" },
+                            }}
                             variant="h5"
                             component="h5"
                           >
@@ -147,7 +156,7 @@ export default function UserOrders() {
                           <Typography
                             sx={{
                               textTransform: "capitalize",
-                              fontSize: "14px",
+                              fontSize: { xs: "10px", md: "14px" },
                             }}
                             variant="p"
                             component="p"
@@ -157,7 +166,7 @@ export default function UserOrders() {
                           <Typography
                             sx={{
                               textTransform: "capitalize",
-                              fontSize: "14px",
+                              fontSize: { xs: "10px", md: "14px" },
                             }}
                             variant="p"
                             component="p"

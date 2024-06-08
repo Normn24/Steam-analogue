@@ -60,7 +60,7 @@ export default function UserReviews() {
                   sx={{
                     minHeight: "100px",
                     height: "100%",
-                    width: "260px",
+                    width: { xs: "100px", md: "260px" },
                     objectFit: "cover",
                     borderRadius: "6px 0px 0px 6px",
                   }}

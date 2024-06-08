@@ -33,21 +33,22 @@ export default function CartListItem({ product, handleRemove }) {
   return (
     <Card
       sx={{
-        width: "60%",
+        width: { xs: "auto", md: "60%" },
         boxShadow: 5,
         borderRadius: 2,
         margin: "15px 0",
         padding: "10px",
         display: "flex",
         backgroundColor: "transparent",
+        flexDirection: { xs: "column", md: "row" },
       }}
     >
       <CardMedia
         sx={{
           height: "100px",
-          width: "300px",
+          width: { xs: "auto", md: "300px" },
           objectFit: "cover",
-          borderRadius: "6px 0px 0px 6px",
+          borderRadius: { xs: "6px", md: "6px 0px 0px 6px" },
         }}
         image={imageUrls[0]}
         title={name}
@@ -56,14 +57,15 @@ export default function CartListItem({ product, handleRemove }) {
         sx={{
           width: "100%",
           minHeight: 83,
-          padding: "0px 0px 0px 16px ",
+          padding: { xs: "0", md: "0px 0px 0px 16px " },
           position: "relative",
+          flexDirection: { xs: "column", md: "row" },
           display: "flex",
           justifyContent: "space-between",
           "&:last-child": { pb: 0 },
         }}
       >
-        <Box sx={{ width: "70%" }}>
+        <Box sx={{ width: { xs: "auto", md: "70%" } }}>
           <Link className="post__more" to={`/product/${_id}`}>
             <Typography
               sx={{ textTransform: "capitalize" }}
@@ -91,9 +93,10 @@ export default function CartListItem({ product, handleRemove }) {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            width: "120px",
+            flexDirection: { xs: "row", md: "column" },
+            justifyContent: { xs: "space-between", md: "space-around" },
+            width: { xs: "auto ", md: "120px" },
+            mt: { xs: "5px", md: "0" },
           }}
         >
           <PriceBox

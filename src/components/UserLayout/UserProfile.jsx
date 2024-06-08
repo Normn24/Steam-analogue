@@ -196,21 +196,13 @@ export default function UserProfile() {
           >
             Change password
           </Typography>
-          <Box sx={{ display: "flex", gap: "24px" }}>
-            {/* <TextField
-              fullWidth
-              autoComplete="on"
-              id="old-password"
-              name="password"
-              label="Old Password"
-              placeholder="••••••••"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            /> */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: "24px",
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
             <PasswordInput
               label="Old Password"
               formik={formik}
@@ -221,24 +213,6 @@ export default function UserProfile() {
               formik={formik}
               formikValues="newPassword"
             />
-            {/* <TextField
-              fullWidth
-              autoComplete="on"
-              id="new-password"
-              name="newPassword"
-              label="New Password"
-              placeholder="••••••••"
-              type="password"
-              value={formik.values.newPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.touched.newPassword && Boolean(formik.errors.newPassword)
-              }
-              helperText={
-                formik.touched.newPassword && formik.errors.newPassword
-              }
-            /> */}
           </Box>
           <Box sx={{ mt: "18px" }}>
             <Button

@@ -69,12 +69,12 @@ export default function CartPage() {
           ))}
           <Box
             sx={{
-              position: "absolute",
+              position: { xs: "static", md: "absolute" },
               top: "55px",
               right: "0",
               display: "flex",
               flexDirection: "column",
-              width: "400px",
+              width: { xs: "auto", md: "400px" },
               boxShadow: 5,
               borderRadius: 2,
               padding: "10px",
