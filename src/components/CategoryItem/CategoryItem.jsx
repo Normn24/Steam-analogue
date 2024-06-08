@@ -115,6 +115,7 @@ export default function CategoryItem({
             previousPrice={previousPrice}
             currentPrice={currentPrice}
             showButton={false}
+            categoryItem={true}
             position="absolute"
             additionalStyles={{
               display: "flex",
@@ -126,7 +127,7 @@ export default function CategoryItem({
               gap: "10px",
               position: "absolute",
               right: { xs: "70px", md: "37.5%" },
-              top: { xs: "3px", md: "0" },
+              top: { xs: "2px", md: "0" },
               height: { xs: "20.5px", md: "35px" },
             }}
           />

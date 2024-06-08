@@ -69,22 +69,16 @@
     height: 250px !important;
   }
 
-  .slider-container {
-    width: calc(100vw - 50px);
-  }
-
-  .slick-dots {
-    width: calc(100vw - 30px);
-  }
-
 }
 
 ;
 
 @media (max-width: 600px) {
 
+
   .slider-item {
-    width: 75px;
+    height: 250px !important;
+
   }
 
   .slick-dots {

@@ -8,7 +8,11 @@ export default function ProductPageSlider({ product }) {
     customPaging: function (i) {
       return (
         <img
-          style={{ width: "135.5px", height: "100%", objectFit: "cover" }}
+          style={{
+            width: "135.5px",
+            height: "100%",
+            objectFit: "cover",
+          }}
           src={product ? product[i] : ""}
           alt={product}
         />

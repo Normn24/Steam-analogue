@@ -195,6 +195,7 @@ export default function ProductPage() {
           <Box
             component="img"
             sx={{
+              display: { xs: "none", md: "block" },
               height: "140px",
               width: "446px",
               objectFit: "cover",
@@ -282,8 +283,10 @@ export default function ProductPage() {
               }`,
               gap: "25px",
               marginTop: `${loggedIn ? "20px" : "35px"}`,
-              alignItems: "center",
+              alignItems: { xs: "flex-end", md: "center" },
               position: "relative",
+              flexDirection: { xs: "column-reverse", md: "row" },
+              width: "100%",
             }}
           >
             {loggedIn ? (
@@ -327,7 +330,6 @@ export default function ProductPage() {
                     textTransform: "initial",
                     backgroundColor: "#4c6b22",
                     color: "#BDED11",
-
                     borderRadius: "3px",
                     ":hover": {
                       backgroundColor: "#5e9f06",
@@ -362,15 +364,29 @@ export default function ProductPage() {
         }}
       >
         <Box>
-          <Typography variant="h5" component="h5">
+          <Typography
+            variant="h5"
+            component="h5"
+            sx={{
+              fontSize: { xs: "16px", md: "24px" },
+            }}
+          >
             Write a review for{" "}
             <span style={{ textTransform: "capitalize" }}>{product.name}</span>
           </Typography>
-          <Typography variant="p" component="p" sx={{ opacity: "0.6", m: 0 }}>
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ opacity: "0.6", m: 0, fontSize: { xs: "11px", md: "16px" } }}
+          >
             Please describe what you liked or disliked about this game and
             whether you recommend it to others.
           </Typography>
-          <Typography variant="p" component="p" sx={{ opacity: "0.6", m: 0 }}>
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ opacity: "0.6", m: 0, fontSize: { xs: "11px", md: "16px" } }}
+          >
             Please remember to be polite and follow the Rules and Guidelines.
           </Typography>
         </Box>
@@ -436,7 +452,8 @@ export default function ProductPage() {
               sx={{
                 border: "none",
                 "& button": {
-                  fontSize: "16px",
+                  fontSize: { xs: "10px", md: "16px" },
+
                   textTransform: "uppercase",
                 },
                 "& button:hover": {
@@ -478,7 +495,7 @@ export default function ProductPage() {
             <Typography
               variant="p"
               sx={{
-                width: "75%",
+                width: { xs: "90%", md: "75%" },
                 margin: "0 auto 60px",
                 color: "#000",
                 backdropFilter: "blur(10px) saturate(99%)",
@@ -486,8 +503,7 @@ export default function ProductPage() {
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
-                fontSize: "22px",
-                "@media (max-width: 600px)": { fontSize: "18px" },
+                fontSize: { xs: "12px", md: "22px" },
               }}
             >
               {product.description}
@@ -498,6 +514,7 @@ export default function ProductPage() {
             index={1}
             sx={{
               display: value == 2 ? "flex" : "none",
+              flexDirection: { xs: "column", md: "row" },
               height: "auto",
               width: "auto",
               gap: "50px",
@@ -522,13 +539,13 @@ export default function ProductPage() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "50%",
+                width: { xs: "90%", md: "50%" },
                 backdropFilter: "blur(10px) saturate(99%)",
                 backgroundColor: "rgba(255, 255, 255, 0.29)",
                 borderRadius: "12px",
                 border: "1px solid rgba(255, 255, 255, 0.125)",
                 padding: "20px",
-                marginBottom: "60px",
+                marginBottom: { xs: "0", md: "60px" },
               }}
             >
               <Typography
@@ -565,7 +582,8 @@ export default function ProductPage() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "50%",
+                width: { xs: "90%", md: "50%" },
+
                 backdropFilter: "blur(10px) saturate(99%)",
                 backgroundColor: "rgba(255, 255, 255, 0.29)",
                 borderRadius: "12px",
@@ -607,6 +625,7 @@ export default function ProductPage() {
             fontWeight: "700",
             marginBottom: "15px",
             textTransform: "uppercase",
+            fontSize: { xs: "18px", md: "24px" },
           }}
         >
           CUSTOMER REVIEWS

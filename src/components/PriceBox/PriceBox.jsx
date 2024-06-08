@@ -9,6 +9,7 @@ const PriceBox = ({
   loggedIn,
   showButton = true,
   sliderItem = false,
+  categoryItem = false,
   additionalStyles = {},
   position = "relative",
   alignItems = "center",
@@ -39,13 +40,26 @@ const PriceBox = ({
         <>
           <Typography
             sx={{
-              fontSize: { xs: "10px", md: sliderItem ? "30px" : "24px" },
+              fontSize: categoryItem
+                ? {
+                    xs: "10px",
+                  }
+                : sliderItem
+                ? "30px"
+                : "24px",
+
+              // fontSize: sliderItem ? "30px" : "24px",
               lineHeight: "1",
               backgroundColor: "#4c6b22",
-              padding: {
-                xs: "6.25px 3px",
-                md: sliderItem ? "4px" : "8.25px 3px",
-              },
+              // padding: sliderItem ? "4px" : "8.25px 3px",
+
+              padding: categoryItem
+                ? {
+                    xs: "6.25px 3px",
+                  }
+                : sliderItem
+                ? "4px"
+                : "8.25px 3px",
               color: "#BDED11",
               position: sliderItem ? "none" : "absolute",
               top: "0px",
@@ -63,8 +77,10 @@ const PriceBox = ({
               position: "absolute",
               left: showButton && "14px",
               right: "5px",
-              fontSize: { xs: "6px", md: "12px" },
-              bottom: { xs: "12px", md: "18px" },
+              fontSize: categoryItem ? { xs: "6px", md: "12px" } : "12px",
+              bottom: categoryItem ? { xs: "12px", md: "18px" } : "18px",
+              // fontSize: "12px",
+              // bottom: "18px",
               color: "#647984",
               textDecorationLine: "line-through",
             }}
@@ -76,7 +92,7 @@ const PriceBox = ({
           <Typography
             sx={{
               color: "#4c6b22",
-              fontSize: { xs: "9px", md: "16px" },
+              fontSize: categoryItem && { xs: "9px", md: "16px" },
             }}
             variant="p"
             component="p"
@@ -89,7 +105,8 @@ const PriceBox = ({
           variant="p"
           component="p"
           sx={{
-            fontSize: { xs: "12px", md: "16px" },
+            fontSize: categoryItem && { xs: "10px", md: "16px" },
+            margin: categoryItem && { xs: "4px 10px 0 0 ", md: "0" },
           }}
         >
           {currentPrice}$
