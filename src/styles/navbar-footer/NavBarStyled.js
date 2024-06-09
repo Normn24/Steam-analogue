@@ -39,7 +39,7 @@ export const StyledNavBarLink = styled(NavLink)({
     },
 
 
-    "@media (max-width: 600px)": {
+    "@media (max-width: 960px)": {
         display: "none",
     },
 });

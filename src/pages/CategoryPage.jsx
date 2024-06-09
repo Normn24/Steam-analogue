@@ -38,7 +38,7 @@ export default function CategoryPage() {
         sx={{
           padding: "20px",
           position: "relative",
-          minHeight: "60svh",
+          minHeight: "calc(100vh - 288px)",
           m: { xs: "0", md: "60px 0" },
         }}
       >

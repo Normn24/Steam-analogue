@@ -29,6 +29,7 @@ export default function GenresSlider() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
+            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowBack />
@@ -49,6 +50,7 @@ export default function GenresSlider() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
+            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowForward />
@@ -60,13 +62,31 @@ export default function GenresSlider() {
     dots: true,
     infinite: true,
     speed: 500,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 4000,
     slidesToShow: 4,
     slidesToScroll: 2,
     cssEase: "linear",
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   return (
@@ -78,7 +98,11 @@ export default function GenresSlider() {
         }}
       >
         <Typography
-          sx={{ textTransform: "capitalize", paddingLeft: "20px" }}
+          sx={{
+            textTransform: "capitalize",
+            paddingLeft: { xs: 0, md: "20px" },
+            textAlign: { xs: "center", md: "left" },
+          }}
           variant="h5"
           component="h5"
         >
@@ -94,8 +118,10 @@ export default function GenresSlider() {
                 sx={{
                   position: "relative",
                   height: "270px",
-                  margin: "20px",
-                  width: "280px !important",
+                  margin: { xs: "20px auto", md: "20px" },
+                  width: { xs: "385px", md: "280px !important" },
+                  maxWidth: "calc(100% - 20px)",
+
                   textAlign: "center",
                   borderRadius: "8px",
                   backgroundImage: `url(${genre.imageUrls}) `,

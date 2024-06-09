@@ -52,7 +52,7 @@ export default function Products() {
     <>
       <Box
         sx={{
-          padding: "20px",
+          padding: { xs: "10px", md: "20px" },
           position: "relative",
           minHeight: "855px",
           m: "60px 0",
@@ -61,7 +61,7 @@ export default function Products() {
         <List
           sx={{
             display: "flex",
-            width: "min-content",
+            width: { xs: "auto", md: "min-content" },
             flexDirection: "row",
             justifyContent: "flex-start",
             columnGap: "15px",
@@ -88,8 +88,11 @@ export default function Products() {
                   textOverflow: "ellipsis",
                   borderRadius: "4px",
                   whiteSpace: "nowrap",
-                  fontSize: { xs: "12px", md: "14px" },
+                  textAlign: "center",
                   backgroundColor: catalogItem === value.name ? "#bdbdbd" : "",
+                }}
+                primaryTypographyProps={{
+                  fontSize: { xs: "3vw ", md: "16px" },
                 }}
                 primary={value.name}
               />
@@ -110,8 +113,9 @@ export default function Products() {
           sx={{
             display: "flex",
             alignItems: "flex-end",
-            width: "70%",
+            width: { md: "70%" },
             justifyContent: "flex-end",
+            fontSize: { xs: "12px ", md: "16px" },
           }}
         >
           More:
@@ -123,6 +127,7 @@ export default function Products() {
                 marginLeft: "5px",
                 width: "auto",
                 lineHeight: 1,
+                fontSize: { xs: "11px ", md: "16px" },
               }}
             >
               {catalogItem}

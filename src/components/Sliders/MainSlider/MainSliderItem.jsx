@@ -16,6 +16,7 @@ function MainSliderItem({ item }) {
       <Link className="post__more" to={`/product/${item._id}`}>
         <Paper
           sx={{
+            display: { xs: "none" },
             boxShadow: 15,
             borderRadius: 2,
           }}

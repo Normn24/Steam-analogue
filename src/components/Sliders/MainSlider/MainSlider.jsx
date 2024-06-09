@@ -16,9 +16,6 @@ function MainSlider() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // if (status == "loading") {
-  //   return <LinearProgress />;
-  // }
   return (
     <Carousel
       NavButton={({ onClick, className, next, prev }) => {

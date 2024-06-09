@@ -19,14 +19,19 @@ export default function SliderCardItem({ product }) {
   return (
     <Card
       sx={{
+        maxWidth: "calc(100% - 20px)",
         width: 385,
         boxShadow: 10,
         borderRadius: 2,
-        margin: "20px 20.8px",
+        margin: { xs: "8px auto 23px", md: "20px 20.8px" },
       }}
     >
       <Link className="post__more" to={`/product/${_id}`}>
-        <CardMedia sx={{ height: 300 }} image={imageUrls[0]} title={name} />
+        <CardMedia
+          sx={{ height: { xs: 200, md: 300 } }}
+          image={imageUrls[0]}
+          title={name}
+        />
         <CardContent
           sx={{
             minHeight: 83,
@@ -46,7 +51,6 @@ export default function SliderCardItem({ product }) {
             sx={{
               display: "flex",
               width: "100%",
-              maxWidth: "70%",
               bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",

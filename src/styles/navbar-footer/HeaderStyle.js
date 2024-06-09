@@ -22,7 +22,7 @@ export const UserWrapper = styled(Box)({
     fontSize: "26px",
     gap: "18px",
 
-    "@media (max-width: 600px)": {
+    "@media (max-width: 960px)": {
         display: "none",
     },
 })

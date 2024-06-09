@@ -30,6 +30,7 @@ export default function SliderCard() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
+            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowBack />
@@ -50,6 +51,7 @@ export default function SliderCard() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
+            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowForward />
@@ -68,13 +70,35 @@ export default function SliderCard() {
     cssEase: "linear",
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   return (
     <>
       <Box sx={{ margin: "60px auto 0", width: "auto" }}>
         <Typography
-          sx={{ textTransform: "uppercase", paddingLeft: "20px" }}
+          sx={{
+            textTransform: "uppercase",
+            paddingLeft: { xs: 0, md: "20px" },
+            textAlign: { xs: "center", md: "left" },
+          }}
           variant="h5"
           component="h5"
         >

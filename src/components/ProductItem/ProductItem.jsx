@@ -25,18 +25,25 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
         sx={{
-          width: "70%",
+          width: { md: "70%" },
+          position: "relative",
           boxShadow: 5,
           borderRadius: 2,
           margin: "10px 0",
           display: "flex",
-          paddingRight: hoveredItem === product._id ? "24px" : "0",
-          backgroundColor:
-            hoveredItem === product._id ? "#bdbdbd" : "transparent",
+          paddingRight: { md: hoveredItem === product._id ? "24px" : "0" },
+          backgroundColor: {
+            md: hoveredItem === product._id ? "#bdbdbd" : "transparent",
+          },
         }}
       >
         <CardMedia
-          sx={{ height: "auto", width: "300px", objectFit: "cover" }}
+          sx={{
+            height: "auto",
+            width: { xs: "75px", md: "300px" },
+            minWidth: "75px",
+            objectFit: "cover",
+          }}
           image={imageUrls[0]}
           title={name}
         />
@@ -50,7 +57,10 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
           }}
         >
           <Typography
-            sx={{ textTransform: "capitalize" }}
+            sx={{
+              textTransform: "capitalize",
+              fontSize: { xs: "4vw ", md: "24px" },
+            }}
             variant="h5"
             component="h5"
           >
@@ -59,14 +69,15 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
           <List
             sx={{
               display: "flex",
-              maxWidth: "50%",
+              maxWidth: { xs: "120px", md: "50%" },
               bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
               columnGap: "15px",
               overflow: "hidden",
-              backgroundColor:
-                hoveredItem === product._id ? "#bdbdbd" : "transparent",
+              backgroundColor: {
+                md: hoveredItem === product._id ? "#bdbdbd" : "transparent",
+              },
             }}
           >
             {genres.map((value) => (
@@ -85,12 +96,18 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
                     margin: "0",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    backgroundColor:
-                      hoveredItem === product._id ? "transparent" : "",
-                    border:
-                      hoveredItem === product._id
-                        ? "1px solid #000"
-                        : "1px solid transparent ",
+                    backgroundColor: {
+                      md: hoveredItem === product._id ? "transparent" : "",
+                    },
+                    border: {
+                      md:
+                        hoveredItem === product._id
+                          ? "1px solid #000"
+                          : "1px solid transparent ",
+                    },
+                  }}
+                  primaryTypographyProps={{
+                    fontSize: { xs: "2.5vw", md: "16px" },
                   }}
                   primary={value.name}
                 />
@@ -102,26 +119,28 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
             previousPrice={previousPrice}
             currentPrice={currentPrice}
             showButton={false}
+            categoryItem={true}
             position="absolute"
             additionalStyles={{
               display: "flex",
-              gap: "11px",
               alignItems: previousPrice ? "flex-end" : "center",
-              backgroundColor: "transperent",
-              width: "fit-content",
-              borderRadius: "4px",
-              padding: "2px 3px 2px 10px",
+              backgroundColor: previousPrice ? "#cccc" : "transparent",
+              justifyContent: "space-between",
+              padding: { xs: "0px 4px 2px", md: "3px 3px 3px 10px" },
+              borderRadius: "0 3px 3px 0",
+              gap: "10px",
               position: "absolute",
               right: "16px",
-              top: "25px",
-              height: "35px",
+              top: { xs: "50%", md: "25px" },
+              transform: "translateY(-50%)",
+              height: { xs: "20.5px", md: "35px" },
             }}
           />
         </CardContent>
       </Card>
       <Collapse
         sx={{
-          display: { sx: "none", md: "block" },
+          display: { xs: "none", md: "block" },
           position: "absolute",
           right: "20px",
           top: "20px",
