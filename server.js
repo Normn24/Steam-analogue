@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
-const cors = require("cors")
+const cors = require("cors");
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const globalConfigs = require('./routes/globalConfigs');
@@ -24,6 +28,7 @@ const comments = require('./routes/comments');
 const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
+const password = require('./routes/password')
 
 const app = express();
 const corsOptions = {
@@ -49,6 +54,17 @@ app.use(passport.initialize());
 // Passport Config
 require('./services/passport')(passport);
 
+// Email setup
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // or another email service
+  auth: {
+    user: process.env.NODEMAILER_USER,
+    pass: process.env.NODEMAILER_PASSWORD,
+  },
+});
+
+
+
 // Use Routes
 app.use('/api/configs', globalConfigs);
 app.use('/api/customers', customers);
@@ -68,6 +84,7 @@ app.use('/api/comments', comments);
 app.use('/api/shipping-methods', shippingMethods);
 app.use('/api/payment-methods', paymentMethods);
 app.use('/api/partners', partners);
+app.use('/api/password', password);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
