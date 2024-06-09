@@ -88,7 +88,7 @@ export default function Products() {
                   textOverflow: "ellipsis",
                   borderRadius: "4px",
                   whiteSpace: "nowrap",
-                  fontSize: "14px",
+                  fontSize: { xs: "12px", md: "14px" },
                   backgroundColor: catalogItem === value.name ? "#bdbdbd" : "",
                 }}
                 primary={value.name}

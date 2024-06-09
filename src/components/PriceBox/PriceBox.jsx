@@ -60,7 +60,7 @@ const PriceBox = ({
               position: sliderItem ? "none" : "absolute",
               top: "0px",
               left: {
-                xs: "-51%",
+                xs: !categoryItem && "-51%",
                 md: position === "relative" ? "-39%" : "unset",
               },
               right: position !== "relative" ? "96%" : "unset",

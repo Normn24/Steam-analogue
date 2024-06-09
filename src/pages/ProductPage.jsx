@@ -202,7 +202,6 @@ export default function ProductPage() {
               fontSize: "32px",
               margin: "10px 0",
               fontWeight: 600,
-              "@media (max-width: 600px)": { fontSize: "22px" },
             }}
           >
             {product.name}
@@ -305,6 +304,7 @@ export default function ProductPage() {
                   top: "-30px",
                   width: "100%",
                   textAlign: "center",
+                  fontSize: { xs: "12px", md: "16px" },
                 }}
                 variant="p"
                 component="p"

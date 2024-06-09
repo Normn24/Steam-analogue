@@ -39,7 +39,7 @@ export default function CategoryPage() {
           padding: "20px",
           position: "relative",
           minHeight: "60svh",
-          m: "60px 0",
+          m: { xs: "0", md: "60px 0" },
         }}
       >
         <Typography
@@ -47,7 +47,7 @@ export default function CategoryPage() {
           component="h3"
           sx={{
             textAlign: { xs: "center", md: "left" },
-            fontSize: { xs: "24px", md: "48px" },
+            fontSize: { xs: "34px", md: "48px" },
           }}
         >
           {catalogQuery}

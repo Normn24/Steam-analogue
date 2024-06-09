@@ -121,6 +121,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
       </Card>
       <Collapse
         sx={{
+          display: { sx: "none", md: "block" },
           position: "absolute",
           right: "20px",
           top: "20px",
