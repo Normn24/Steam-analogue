@@ -117,6 +117,9 @@ export default function CategoryItem({
             showButton={false}
             categoryItem={true}
             position="absolute"
+            discountFontSize={{ xs: "10px", md: "28px" }}
+            currentPriceStylesFontSizeXs={{ xs: "9px", md: "16px" }}
+            previousPriceFontSizeMd={{ xs: "6px", md: "12px" }}
             additionalStyles={{
               display: "flex",
               alignItems: previousPrice ? "flex-end" : "center",

@@ -50,7 +50,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
         <CardContent
           sx={{
             width: "100%",
-            minHeight: 83,
+            minHeight: { md: 83 },
             padding: "5px 16px",
             position: "relative",
             "&:last-child": { pb: 0 },
@@ -59,7 +59,11 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
           <Typography
             sx={{
               textTransform: "capitalize",
-              fontSize: { xs: "4vw ", md: "24px" },
+              fontSize: { xs: "4.5vw ", md: "24px" },
+              width: { xs: "70%" },
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
             }}
             variant="h5"
             component="h5"
@@ -107,33 +111,35 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
                     },
                   }}
                   primaryTypographyProps={{
-                    fontSize: { xs: "2.5vw", md: "16px" },
+                    fontSize: { xs: "3vw", md: "16px" },
                   }}
                   primary={value.name}
                 />
               </ListItem>
             ))}
           </List>
-
           <PriceBox
             previousPrice={previousPrice}
             currentPrice={currentPrice}
             showButton={false}
-            categoryItem={true}
+            productItem={true}
             position="absolute"
+            discountFontSize={{ xs: "16px", md: "24px" }}
+            currentPriceStylesFontSizeXs={{ xs: "14px", md: "16px" }}
+            previousPriceFontSizeMd={{ xs: "10px", md: "12px" }}
             additionalStyles={{
               display: "flex",
+              gap: "11px",
               alignItems: previousPrice ? "flex-end" : "center",
-              backgroundColor: previousPrice ? "#cccc" : "transparent",
-              justifyContent: "space-between",
-              padding: { xs: "0px 4px 2px", md: "3px 3px 3px 10px" },
-              borderRadius: "0 3px 3px 0",
-              gap: "10px",
+              backgroundColor: "transperent",
+              width: "fit-content",
+              borderRadius: "4px",
+              padding: "2px 3px 2px 10px",
               position: "absolute",
               right: "16px",
               top: { xs: "50%", md: "25px" },
-              transform: "translateY(-50%)",
-              height: { xs: "20.5px", md: "35px" },
+              transform: { xs: "translateY(-45%)", md: "none" },
+              height: { xs: "30px", md: "35px" },
             }}
           />
         </CardContent>

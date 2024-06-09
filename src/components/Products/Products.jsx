@@ -92,7 +92,7 @@ export default function Products() {
                   backgroundColor: catalogItem === value.name ? "#bdbdbd" : "",
                 }}
                 primaryTypographyProps={{
-                  fontSize: { xs: "3vw ", md: "16px" },
+                  fontSize: { xs: "3.5vw ", md: "16px" },
                 }}
                 primary={value.name}
               />

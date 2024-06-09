@@ -84,6 +84,7 @@ export default function SliderCardItem({ product }) {
             showButton={false}
             sliderItem={true}
             position="absolute"
+            discountFontSize={{ xs: "30px", md: "30px" }}
             additionalStyles={{
               display: "flex",
               gap: "11px",
