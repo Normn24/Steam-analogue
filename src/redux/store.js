@@ -18,7 +18,12 @@ import productsSlice from './products.slice/products.slice';
 import signupSlice from './auth.slice/signup.slice';
 import slidesSlice from './slides.slice/slides.slice';
 import userSlice from './user.slice/user.slice';
+
+
 import wishListSlice from './wishList.slice/wishList.slice';
+
+import forgotPasswordSlice from './auth.slice/forgotPassword.slice';
+
 
 const authPersistConfig = {
   key: 'login',
@@ -49,9 +54,12 @@ export const store = configureStore({
     products: productsSlice,
     product: productItemSlice,
     signup: signupSlice,
+
     slides: slidesSlice,
     user: userSlice,
     wishList: wishListSlice,
+    forgotPassword: forgotPasswordSlice
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ id, token }) => {
-    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${id}`, {
+    const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/cart/${id}`, {
       method: "PUT",
       headers: {
         Authorization: token,
@@ -23,7 +23,7 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async ({ id, token }) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/${id}`,
+      `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/cart/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -44,7 +44,7 @@ export const fetchCart = createAsyncThunk(
   "cart/fetchCart:load",
   async (token) => {
     const response = await fetch(
-      "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/cart/",
+      "https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/cart/",
       {
         method: "GET",
         headers: {

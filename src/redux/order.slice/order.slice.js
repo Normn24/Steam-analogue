@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const placeOrder = createAsyncThunk(
   'orders/placeOrder:load',
   async (payload) => {
-    const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/orders/", {
+    const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/orders/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders:load",
   async (token) => {
     const response = await fetch(
-      "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/orders/",
+      "https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/orders/",
       {
         method: "GET",
         headers: {

@@ -4,7 +4,7 @@ export const updateUserProfile = createAsyncThunk(
   'registration/updateUserProfile',
   async ({ updateProfile, token }, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers", {
+      const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers", {
         method: "PUT",
         headers: {
           Authorization: token,
@@ -28,7 +28,7 @@ export const updateUserPassword = createAsyncThunk(
   'registration/updateUserPassword',
   async ({ updatePassword, token }, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/password", {
+      const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers/password", {
         method: "PUT",
         headers: {
           Authorization: token,
@@ -51,7 +51,7 @@ export const updateUserPassword = createAsyncThunk(
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async (token) => {
-    const response = await fetch("https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/customers/customer", {
+    const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers/customer", {
       method: "GET",
       headers: {
         Authorization: token,

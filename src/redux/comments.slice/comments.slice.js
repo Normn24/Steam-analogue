@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const addComment = createAsyncThunk(
   "comments/addComment",
   async ({ values, token }) => {
-    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments`, {
+    const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments`, {
       method: "POST",
       headers: {
         Authorization: token,
@@ -23,7 +23,7 @@ export const addComment = createAsyncThunk(
 export const fetchProductComments = createAsyncThunk(
   "comments/fetchProductComments:load",
   async (payload) => {
-    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/product/${payload}`, {
+    const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments/product/${payload}`, {
       method: "GET",
     });
     if (!response.ok) {
@@ -38,7 +38,7 @@ export const removeComment = createAsyncThunk(
   "comments/removeComment",
   async ({ id, token }) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/${id}`,
+      `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -59,7 +59,7 @@ export const fetchUserComments = createAsyncThunk(
   "comments/fetchUserComments",
   async (payload) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/comments/customer/${payload}`,
+      `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments/customer/${payload}`,
       {
         method: "GET",
       }

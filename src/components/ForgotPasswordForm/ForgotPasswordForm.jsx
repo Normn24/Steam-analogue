@@ -1,6 +1,5 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { loginUser } from "../../redux/auth.slice/login.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { FaDiscord, FaTwitterSquare, FaLinkedin } from "react-icons/fa";
 import {
@@ -15,92 +14,58 @@ import {
   SignUp,
   SocialMessage,
   Line,
-  Forgot,
   Message,
   Icon,
-  ErrorMessage,
 } from "../../styles/forms/StylesAuthForm.js";
 import { Link } from "react-router-dom";
-import PasswordInput from "../PasswordInput/PasswordInput.jsx";
+import { sendResetPasswordEmail } from "../../redux/auth.slice/forgotPassword.slice";
 
 const validationSchema = Yup.object().shape({
-  loginOrEmail: Yup.string()
-    .required("Login or email is required")
-    .min(4, "Login or email must be at least 4 characters"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+  email: Yup.string()
+    .email("Enter a valid email")
+    .required("Email is required"),
 });
 
-export default function LogInForm({
-  onSignUpClick,
-  onForgotPasswordClick,
-  handleClose,
-}) {
+export default function ForgotPasswordForm({ onSignUpClick }) {
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.login);
+  const { loading, success, error } = useSelector(
+    (state) => state.forgotPassword
+  );
 
   const formik = useFormik({
     initialValues: {
-      loginOrEmail: "",
-      password: "",
+      email: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(loginUser(values)).then((response) => {
-        if (response.payload && response.payload.token) {
-          handleClose();
-        }
-      });
+      dispatch(sendResetPasswordEmail(values.email));
     },
   });
 
   return (
     <>
       <FormContainer>
-        <Title>Login</Title>
+        <Title>Forgot Password</Title>
         <Form onSubmit={formik.handleSubmit}>
           <InputGroup>
-            <InputLabel htmlFor="loginOrEmail">Login or email</InputLabel>
+            <InputLabel htmlFor="email">Email</InputLabel>
             <StyledInput
-              id="loginOrEmail"
-              name="loginOrEmail"
-              value={formik.values.loginOrEmail}
+              id="email"
+              name="email"
+              value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={
-                formik.touched.loginOrEmail &&
-                Boolean(formik.errors.loginOrEmail)
-              }
-              helperText={
-                formik.touched.loginOrEmail && formik.errors.loginOrEmail
-              }
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
             />
           </InputGroup>
-          <PasswordInput
-            label="Password"
-            formik={formik}
-            formikValues="password"
-          />
-
-          <Forgot>
-            <Link
-              onClick={onForgotPasswordClick}
-              style={{ color: "#ffff", marginLeft: "5px" }}
-            >
-              Forgot Password?
-            </Link>
-            {error && (
-              <ErrorMessage>
-                {error?.loginOrEmail || error?.password || "An error occurred"}
-              </ErrorMessage>
-            )}
-          </Forgot>
+          {loading && <p>Sending reset password email...</p>}
+          {success && <p>Email sent successfully!</p>}
+          {error && <p>Error: {error.message || error}</p>}
           <SignButton variant="contained" type="submit">
             Submit
           </SignButton>
         </Form>
-
         <SocialMessage>
           <Line />
           <Message>or log in with</Message>

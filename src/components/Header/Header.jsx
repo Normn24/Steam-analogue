@@ -29,6 +29,7 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 import LogInForm from "../LogInForm/LogInForm";
 import Logout from "../LogOut/LogOut";
 import SignInForm from "../SignInForm/SignInForm";
+import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -187,7 +188,9 @@ export default function Header() {
           <UserWrapper>
             <NavLink to={"/wishlist"} style={{ position: "relative" }}>
               <SiYoutubegaming />
-              <CountIndicator>{wishList?.products?.length}</CountIndicator>
+              <CountIndicator>
+                {wishList ? wishList?.products?.length : 0}
+              </CountIndicator>
             </NavLink>
             <NavLink to={"/cart"} style={{ position: "relative" }}>
               <GiDiceFire />
@@ -229,9 +232,12 @@ export default function Header() {
           <LogInForm
             onSignUpClick={() => handleOpen("signup")}
             handleClose={handleClose}
+            onForgotPasswordClick={() => handleOpen("forgotPassword")}
           />
         ) : action === "signup" ? (
           <SignInForm onLoginClick={() => handleOpen("login")} />
+        ) : action === "forgotPassword" ? (
+          <ForgotPasswordForm onSignUpClick={() => handleOpen("signup")} />
         ) : (
           <Logout handleClose={handleClose} />
         )}

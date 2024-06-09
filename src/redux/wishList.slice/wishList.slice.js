@@ -4,7 +4,7 @@ export const addToWishList = createAsyncThunk(
   "wishList/addToWishList",
   async ({ id, token }) => {
 
-    const response = await fetch(`https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/${id}`, {
+    const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/wishlist/${id}`, {
       method: "PUT",
       headers: {
         Authorization: token,
@@ -23,7 +23,7 @@ export const removeFromWishList = createAsyncThunk(
   "wishList/removeFromWishList",
   async ({ id, token }) => {
     const response = await fetch(
-      `https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/${id}`,
+      `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/wishlist/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -45,7 +45,7 @@ export const fetchWishList = createAsyncThunk(
   "wishList/fetchWishList:load",
   async (token) => {
     const response = await fetch(
-      "https://pet-project-back-7ppvv6gn4-normn24s-projects.vercel.app/api/wishlist/",
+      "https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/wishlist/",
       {
         method: "GET",
         headers: {

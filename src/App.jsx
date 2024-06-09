@@ -23,9 +23,12 @@ import UserProfile from "./components/UserLayout/UserProfile";
 import UserOrders from "./components/UserLayout/UserOrders";
 import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
+
 import Loader from "./pages/Loader.jsx";
 
 import useToken from "./hooks/useToken";
+
+import ResetPasswordForm from "./components/ForgotPasswordForm/ResetPasswordForm";
 
 import "./App.css";
 
@@ -68,6 +71,8 @@ function App() {
           <Route path="wishlist" element={<UserWishlist />} />
           <Route path="reviews" element={<UserReviews />} />
         </Route>
+
+        <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
 
         <Route
           path="/wishlist"
