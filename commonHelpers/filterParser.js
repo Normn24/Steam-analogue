@@ -1,4 +1,4 @@
-const excludedParams = ["perPage", "startPage", "minPrice", "maxPrice", "sort", "q"];
+const excludedParams = ["perPage", "startPage", "minPrice", "maxPrice", "sort", "q", "startYear", "endYear"];
 
 module.exports = function filterParser(filtersQueryString) {
   const mongooseQuery = {};
@@ -9,6 +9,14 @@ module.exports = function filterParser(filtersQueryString) {
       $lte: Number(filtersQueryString.maxPrice)
     };
   }
+
+  if (filtersQueryString.startYear || filtersQueryString.endYear) {
+    mongooseQuery.yearOfPublication = {
+      $gte: new Date(filtersQueryString.startYear),
+      $lte: new Date(filtersQueryString.endYear)
+    };
+  }
+
 
   return Object.keys(filtersQueryString).reduce(
     (mongooseQuery, filterParam) => {
