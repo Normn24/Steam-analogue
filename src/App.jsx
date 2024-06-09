@@ -23,7 +23,7 @@ import UserProfile from "./components/UserLayout/UserProfile";
 import UserOrders from "./components/UserLayout/UserOrders";
 import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
-
+import ResetPasswordForm from "./components/ForgotPasswordForm/ResetPasswordForm";
 
 import "./App.css";
 import { fetchProducts } from "./redux/products.slice/products.slice";
@@ -69,7 +69,7 @@ function App() {
           <Route path="reviews" element={<UserReviews />} />
         </Route>
 
-      
+        <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
 
         <Route
           path="/wishlist"
