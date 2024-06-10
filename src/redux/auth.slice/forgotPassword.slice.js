@@ -6,7 +6,7 @@ export const sendResetPasswordEmail = createAsyncThunk(
   'auth/sendResetPasswordEmail',
   async (email, thunkAPI) => {
     try {
-      const response = await axios.post('https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/password/request-reset', { email });
+      const response = await axios.post('https://pet-project-5-c2wdq9puy-normn24s-projects.vercel.app/api/password/request-reset', { email });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data || { message: 'Server error' });
@@ -19,7 +19,7 @@ export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
   async ({ token, newPassword, navigate }, thunkAPI) => {
     try {
-      const response = await axios.post(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/password/reset-password/${token}`, { newPassword });
+      const response = await axios.post(`https://pet-project-5-c2wdq9puy-normn24s-projects.vercel.app/api/password/reset-password/${token}`, { newPassword });
       navigate('/'); // Use navigate here
       return response.data;
     } catch (error) {
