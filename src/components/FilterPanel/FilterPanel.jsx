@@ -115,7 +115,14 @@ function FilterPanel() {
         {loading && (
           <Box
             sx={{
-              display: { xs: "none", md: "block" },
+              display: {
+                xs: "none",
+                md: "flex",
+                top: "0%",
+                height: "100%",
+                width: "68%",
+                position: "absolute",
+              },
             }}
           >
             <l-grid
@@ -126,7 +133,7 @@ function FilterPanel() {
               style={{
                 top: "0%",
                 height: "100%",
-                width: "69%",
+                width: "100%",
                 position: "absolute",
                 left: "-1%",
                 backgroundColor: "#fff",
@@ -199,7 +206,7 @@ function FilterPanel() {
         )}
         <Box
           sx={{
-            width: { xs: "calc(100% - 40px)", md: "25%" },
+            width: { xs: "calc(100% - 40px)", md: "310px" },
             display: { xs: filtersOpen ? "block" : "none", md: "block" },
             position: { xs: "absolute", md: "static" },
             height: "min-content",
