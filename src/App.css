@@ -8,6 +8,7 @@
   scrollbar-width: thin;
 }
 
+
 @media screen and (max-width: 600px) {
   #root {
     max-width: 430px;

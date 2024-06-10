@@ -13,6 +13,8 @@ import {
   Box,
   Slider,
 } from "@mui/material";
+import { BsFilterRight } from "react-icons/bs";
+import { IoCloseOutline } from "react-icons/io5";
 import { grid } from "ldrs";
 
 function FilterPanel() {
@@ -35,6 +37,12 @@ function FilterPanel() {
   const maxPrice = queryParams.get("maxPrice");
   const sort = queryParams.get("sortBy");
   grid.register();
+
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  const toggleFilters = () => {
+    setFiltersOpen(!filtersOpen);
+  };
 
   const handleMouseEnter = (productId) => {
     setHoveredItem(productId);
@@ -105,21 +113,45 @@ function FilterPanel() {
         }}
       >
         {loading && (
-          <l-grid
-            size="160"
-            speed="1"
-            color="black"
-            style={{
-              top: "0%",
-              height: "100%",
-              width: "69%",
-              position: "absolute",
-              left: "-1%",
-              backgroundColor: "#fff",
-              zIndex: 1100,
+          <Box
+            sx={{
+              display: { xs: "none", md: "block" },
             }}
-          ></l-grid>
+          >
+            <l-grid
+              size="160"
+              speed="1"
+              color="black"
+              className="loadingSearch"
+              style={{
+                top: "0%",
+                height: "100%",
+                width: "69%",
+                position: "absolute",
+                left: "-1%",
+                backgroundColor: "#fff",
+                zIndex: 1100,
+              }}
+            ></l-grid>
+          </Box>
         )}
+        <Button
+          onClick={toggleFilters}
+          sx={{
+            display: { xs: "block", md: "none" },
+            position: "absolute",
+            top: "-0.5%",
+            right: -7,
+            minWidth: "auto",
+            height: "35px",
+          }}
+        >
+          {filtersOpen ? (
+            <IoCloseOutline style={{ width: 20, height: 20 }} />
+          ) : (
+            <BsFilterRight style={{ width: 20, height: 20 }} />
+          )}
+        </Button>
         {filteredProducts?.length === 0 ? (
           <Typography
             sx={{
@@ -127,6 +159,7 @@ function FilterPanel() {
               position: "absolute",
               left: "25%",
               top: "5%",
+              fontSize: { xs: "5vw", md: "24px" },
             }}
             variant="h5"
             component="h5"
@@ -141,13 +174,19 @@ function FilterPanel() {
                 position: "absolute",
                 left: "0",
                 top: "0%",
+                fontSize: { xs: "5vw", md: "24px" },
               }}
               variant="h5"
               component="h5"
             >
               {`${filteredProducts?.length} results match your search.`}
             </Typography>
-            <Box sx={{ width: "67%" }}>
+            <Box
+              sx={{
+                width: { xs: "100%", md: "67%" },
+                display: filtersOpen && "none",
+              }}
+            >
               {filteredProducts?.map((product) => (
                 <SearchItem
                   key={product._id}
@@ -159,20 +198,21 @@ function FilterPanel() {
             </Box>
           </>
         )}
-        <div
-          style={{
-            width: "25%",
+        <Box
+          sx={{
+            width: { xs: "calc(100% - 40px)", md: "25%" },
+            display: { xs: filtersOpen ? "block" : "none", md: "block" },
+            position: { xs: "absolute", md: "static" },
             height: "min-content",
             boxShadow:
               "rgba(0, 0, 0, 0.2) 0px 6px 9px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 11px 20px 5px",
             padding: "20px",
             borderRadius: "6px",
+            backgroundColor: "#fff",
           }}
         >
           <h4>Filters</h4>
-
           <Divider style={{ marginBottom: "20px" }} />
-
           <Formik
             enableReinitialize
             initialValues={{
@@ -276,15 +316,12 @@ function FilterPanel() {
 
                 <FormControl fullWidth>
                   <Slider
-                    // value={values.yearRange}
                     value={[Number(values.startYear), Number(values.endYear)]}
                     onChange={(event, newValue) => {
                       const [startYear, endYear] = newValue;
                       setFieldValue("startYear", startYear);
                       setFieldValue("endYear", endYear);
                       applyFilters({ ...values, startYear, endYear });
-                      // setFieldValue("yearRange", newValue);
-                      // applyFilters({ ...values, yearRange: newValue });
                     }}
                     valueLabelDisplay="auto"
                     min={2010}
@@ -354,7 +391,7 @@ function FilterPanel() {
               </Form>
             )}
           </Formik>
-        </div>
+        </Box>
       </Box>
     </>
   );

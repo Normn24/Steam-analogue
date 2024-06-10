@@ -86,7 +86,7 @@ export const useStyles = makeStyles({
         marginTop: "40px",
         marginLeft: "-81px",
 
-        "@media (max-width: 960px)": {
+        "@media (max-width: 1424px)": {
             margin: "20px auto 0",
             maxWidth: "100%",
             paddingTop: "20px"
@@ -98,6 +98,5 @@ export const useStyles = makeStyles({
         borderRadius: 0,
         color: "#000",
         fontSize: "80px",
-
     }
 });

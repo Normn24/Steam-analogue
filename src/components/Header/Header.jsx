@@ -97,36 +97,16 @@ export default function Header() {
       </Accordion>
       {loggedIn && (
         <>
-          <BurgerItem
-            button
-            // component={NavLink}
-            to="/account/profile"
-            onClick={handleLinkClick}
-          >
+          <BurgerItem button to="/account/profile" onClick={handleLinkClick}>
             Profile
           </BurgerItem>
-          <BurgerItem
-            button
-            // component={NavLink}
-            to="/products/library"
-            onClick={handleLinkClick}
-          >
+          <BurgerItem button to="/products/library" onClick={handleLinkClick}>
             Library
           </BurgerItem>
-          <BurgerItem
-            button
-            // component={NavLink}
-            to="/wishlist"
-            onClick={handleLinkClick}
-          >
+          <BurgerItem button to="/wishlist" onClick={handleLinkClick}>
             Wishlist
           </BurgerItem>
-          <BurgerItem
-            button
-            // component={NavLink}
-            to="/cart"
-            onClick={handleLinkClick}
-          >
+          <BurgerItem button to="/cart" onClick={handleLinkClick}>
             Cart
           </BurgerItem>
           <BurgerItem
