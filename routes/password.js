@@ -2,13 +2,13 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User = require('../models/Customer'); 
+const User = require('../models/Customer');
 require('dotenv').config();
 
 const router = express.Router();
 
 const transporter = nodemailer.createTransport({
-  service: 'Gmail', 
+  service: 'Gmail',
   auth: {
     user: process.env.NODEMAILER_USER,
     pass: process.env.NODEMAILER_PASSWORD,
@@ -24,7 +24,7 @@ router.post('/request-reset', async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.SECRET_OR_KEY, { expiresIn: '1h' });
-    const url = `http://localhost:5173/reset-password/${token}`;
+    const url = `https://transcendent-tartufo-db32bd.netlify.app/reset-password/${token}`;
 
     await transporter.sendMail({
       to: user.email,
@@ -39,6 +39,7 @@ router.post('/request-reset', async (req, res) => {
               background-color: #f4f4f4;
               margin: 0;
               padding: 0;
+              
           }
           .container {
               max-width: 600px;
@@ -98,7 +99,7 @@ router.post('/request-reset', async (req, res) => {
     res.status(200).json({ message: 'Password reset link sent to your email account' });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
-    
+
   }
 });
 
@@ -112,7 +113,7 @@ router.post('/reset-password/:token', async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'Invalid token or user does not exist' });
     }
-    user.password = await bcrypt.hash(newPassword, 10); 
+    user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
     res.status(200).json({ message: 'Password has been reset' });
   } catch (err) {
