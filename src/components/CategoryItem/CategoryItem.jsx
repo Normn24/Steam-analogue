@@ -70,7 +70,7 @@ export default function CategoryItem({
         <Typography
           sx={{
             fontWeight: "800",
-            margin: { xs: "0 10px", md: "0 20px" },
+            margin: { xs: "0 10px", md: rank >= 10 ? "0 10px" : "0 20px" },
             fontSize: { xs: "20px", md: "34px" },
           }}
           variant="h4"

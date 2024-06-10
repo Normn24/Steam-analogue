@@ -30,7 +30,7 @@ export default function UserOrders() {
               textAlign: "center",
               width: "50%",
               position: "absolute",
-              top: { xs: "65%", md: "30%" },
+              top: { xs: "70%", md: "30%" },
               left: { xs: "50%", md: "62%" },
               transform: "translate(-50%, -50%)",
             }}

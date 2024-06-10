@@ -332,14 +332,16 @@ export default function ProductPage() {
               </>
             ) : (
               <>
-                <PriceBox
-                  previousPrice={product.previousPrice}
-                  currentPrice={product.currentPrice}
-                  onCart={onCart}
-                  handleCartList={handleCartList}
-                  productId={product?._id}
-                  loggedIn={loggedIn}
-                />
+                {product.category !== "6632424ed9075d19584c508d" && (
+                  <PriceBox
+                    previousPrice={product.previousPrice}
+                    currentPrice={product.currentPrice}
+                    onCart={onCart}
+                    handleCartList={handleCartList}
+                    productId={product?._id}
+                    loggedIn={loggedIn}
+                  />
+                )}
               </>
             )}
           </Box>

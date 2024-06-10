@@ -9,6 +9,32 @@ const CommentsComponent = () => {
   );
   return (
     <Box>
+      {productComments && productComments.length === 0 && (
+        <>
+          <Typography
+            variant="p"
+            component="p"
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              textAlign: "center",
+            }}
+          >
+            There are no reviews for this product
+          </Typography>
+          <Typography
+            variant="p"
+            component="p"
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              textAlign: "center",
+            }}
+          >
+            You can write your own review for this product to share your
+            experience with the community. Use the area above the purchase
+            buttons on this page to write your review.
+          </Typography>
+        </>
+      )}
       {productComments.map((item) => (
         <Card
           key={item?._id}
