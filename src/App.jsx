@@ -23,12 +23,11 @@ import UserProfile from "./components/UserLayout/UserProfile";
 import UserOrders from "./components/UserLayout/UserOrders";
 import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
+import ResetPasswordForm from "./components/ForgotPasswordForm/ResetPasswordForm";
 
 import Loader from "./pages/Loader.jsx";
 
 import useToken from "./hooks/useToken";
-
-import ResetPasswordForm from "./components/ForgotPasswordForm/ResetPasswordForm";
 
 import "./App.css";
 
@@ -52,7 +51,12 @@ function App() {
 
       <HeaderPage />
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage />}>
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPasswordForm />}
+          />
+        </Route>
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/products/search/*" element={<SearchPage />} />
         <Route
@@ -71,8 +75,6 @@ function App() {
           <Route path="wishlist" element={<UserWishlist />} />
           <Route path="reviews" element={<UserReviews />} />
         </Route>
-
-        <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
 
         <Route
           path="/wishlist"
