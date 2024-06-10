@@ -1,0 +1,17 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+
+@media screen and (max-width: 600px) {
+  #root {
+    max-width: 430px;
+    width: auto;
+  }
+}
