@@ -1,20 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import MainSliderItem from "./MainSliderItem";
-import { fetchProducts } from "../../../redux/products.slice/products.slice";
 import { useStyles } from "../../../styles/sliders/styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
+const getRandomProducts = (products, count) => {
+  const shuffled = [...products].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
+
 function MainSlider() {
-  const dispatch = useDispatch();
   const classes = useStyles();
   const { products } = useSelector((state) => state.products);
+  const [randomProducts, setRandomProducts] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (products?.data?.length) {
+      const selectedProducts = getRandomProducts(products.data, 5);
+      setRandomProducts(selectedProducts);
+    }
+  }, [products]);
 
   return (
     <Carousel
@@ -32,7 +39,7 @@ function MainSlider() {
               top: "40%",
             }}
             sx={{
-              display: { xs: "none", md: "block" },
+              display: { xs: "none", md: "flex" },
             }}
           >
             {next && <IoIosArrowForward />}
@@ -42,7 +49,7 @@ function MainSlider() {
       }}
       className={classes.carouselRoot}
     >
-      {products?.data?.slice(0, 5).map((item) => (
+      {randomProducts.map((item) => (
         <Box
           key={item._id}
           className="image-container"

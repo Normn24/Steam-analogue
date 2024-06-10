@@ -29,7 +29,6 @@ export default function GenresSlider() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
-            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowBack />
@@ -50,7 +49,6 @@ export default function GenresSlider() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
-            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowForward />
@@ -62,7 +60,7 @@ export default function GenresSlider() {
     dots: true,
     infinite: true,
     speed: 500,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 4000,
     slidesToShow: 4,
     slidesToScroll: 2,

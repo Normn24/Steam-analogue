@@ -5,6 +5,7 @@ import { fetchWishList } from "./redux/wishList.slice/wishList.slice";
 import { fetchCart } from "./redux/cart.slice/cart.slice";
 import { fetchOrders } from "./redux/order.slice/order.slice";
 import { fetchUser } from "./redux/user.slice/user.slice";
+import { fetchProducts } from "./redux/products.slice/products.slice.js";
 
 import HeaderPage from "./pages/HeaderPage";
 import Footer from "./components/Footer/Footer";
@@ -24,7 +25,6 @@ import UserOrders from "./components/UserLayout/UserOrders";
 import UserWishlist from "./components/UserLayout/UserWishlist";
 import UserReviews from "./components/UserLayout/UserReviews";
 import ResetPasswordForm from "./components/ForgotPasswordForm/ResetPasswordForm";
-
 import Loader from "./pages/Loader.jsx";
 
 import useToken from "./hooks/useToken";
@@ -37,6 +37,8 @@ function App() {
   const token = useToken();
 
   useEffect(() => {
+    dispatch(fetchProducts());
+
     if (loggedIn) {
       dispatch(fetchUser(token));
       dispatch(fetchWishList(token));

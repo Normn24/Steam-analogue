@@ -30,7 +30,6 @@ export default function SliderCard() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
-            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowBack />
@@ -51,7 +50,6 @@ export default function SliderCard() {
             color: "#000",
             fontSize: "80px",
             top: "-30px",
-            display: { xs: "none", md: "block" },
           }}
         >
           <IoIosArrowForward />

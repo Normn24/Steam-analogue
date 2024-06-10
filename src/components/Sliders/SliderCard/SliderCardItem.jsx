@@ -41,7 +41,12 @@ export default function SliderCardItem({ product }) {
           }}
         >
           <Typography
-            sx={{ textTransform: "capitalize" }}
+            sx={{
+              textTransform: "capitalize",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+            }}
             variant="h4"
             component="h4"
           >
