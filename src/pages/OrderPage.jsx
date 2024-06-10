@@ -196,7 +196,13 @@ export default function OrderPage() {
 
           <Form onSubmit={formik.handleSubmit}>
             <InputGroup>
-              <Box sx={{ display: "flex", gap: "15px" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: { xs: "column", md: "row" },
+                }}
+              >
                 <MaskedInput
                   id="cardNumber"
                   label="Card number"
@@ -213,72 +219,80 @@ export default function OrderPage() {
                   helperText={
                     formik.touched.cardNumber && formik.errors.cardNumber
                   }
-                  sx={{ width: "360px" }}
+                  sx={{ width: { xs: "auto", md: "360px" } }}
                 />
-
-                <StyledInput
-                  select
-                  id="monthDate"
-                  name="monthOfDate"
-                  label="month"
-                  value={formik.values.monthOfDate}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.monthOfDate &&
-                    Boolean(formik.errors.monthOfDate)
-                  }
-                  helperText={
-                    formik.touched.monthOfDate && formik.errors.monthOfDate
-                  }
-                  sx={{ width: "120px", marginLeft: "110px" }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: { xs: "auto", md: "360px" },
+                    gap: "15px",
+                    flexDirection: { xs: "column", md: "row" },
+                  }}
                 >
-                  {months.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </StyledInput>
+                  <StyledInput
+                    select
+                    id="monthDate"
+                    name="monthOfDate"
+                    label="month"
+                    value={formik.values.monthOfDate}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.monthOfDate &&
+                      Boolean(formik.errors.monthOfDate)
+                    }
+                    helperText={
+                      formik.touched.monthOfDate && formik.errors.monthOfDate
+                    }
+                    sx={{ width: { xs: "auto", md: "120px" } }}
+                  >
+                    {months.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </StyledInput>
 
-                <StyledInput
-                  select
-                  id="yearDate"
-                  name="yearOfDate"
-                  label="year"
-                  value={formik.values.yearOfDate}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.yearOfDate &&
-                    Boolean(formik.errors.yearOfDate)
-                  }
-                  helperText={
-                    formik.touched.yearOfDate && formik.errors.yearOfDate
-                  }
-                  sx={{ width: "120px" }}
-                >
-                  {years.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </StyledInput>
+                  <StyledInput
+                    select
+                    id="yearDate"
+                    name="yearOfDate"
+                    label="year"
+                    value={formik.values.yearOfDate}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.yearOfDate &&
+                      Boolean(formik.errors.yearOfDate)
+                    }
+                    helperText={
+                      formik.touched.yearOfDate && formik.errors.yearOfDate
+                    }
+                    sx={{ width: { xs: "auto", md: "120px" } }}
+                  >
+                    {years.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </StyledInput>
 
-                <MaskedInput
-                  id="cvvCode"
-                  label="CVV code"
-                  placeholder="XXX"
-                  mask="999"
-                  autoComplete="off"
-                  value={formik.values.cvvCode}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.cvvCode && Boolean(formik.errors.cvvCode)
-                  }
-                  helperText={formik.touched.cvvCode && formik.errors.cvvCode}
-                  sx={{ width: "120px" }}
-                />
+                  <MaskedInput
+                    id="cvvCode"
+                    label="CVV code"
+                    placeholder="XXX"
+                    mask="999"
+                    autoComplete="off"
+                    value={formik.values.cvvCode}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.cvvCode && Boolean(formik.errors.cvvCode)
+                    }
+                    helperText={formik.touched.cvvCode && formik.errors.cvvCode}
+                    sx={{ width: { xs: "auto", md: "120px" } }}
+                  />
+                </Box>
               </Box>
             </InputGroup>
 
@@ -286,14 +300,18 @@ export default function OrderPage() {
               BILLING INFORMATION
             </Title>
             <InputGroup
-              sx={{ flexDirection: "row", justifyContent: "space-between" }}
+              sx={{
+                flexDirection: { xs: "column", md: "row" },
+                justifyContent: "space-between",
+              }}
             >
               <Box
                 sx={{
                   display: "flex",
                   gap: "10px",
-                  flexWrap: "wrap",
-                  width: "min-content",
+                  flexWrap: { xs: "nowrap", md: "wrap" },
+                  width: { xs: "auto", md: "min-content" },
+                  flexDirection: { xs: "column", md: "row" },
                 }}
               >
                 <StyledInput
@@ -309,7 +327,7 @@ export default function OrderPage() {
                   helperText={
                     formik.touched.customerName && formik.errors.customerName
                   }
-                  sx={{ width: "175px" }}
+                  sx={{ width: { xs: "auto", md: "175px" } }}
                 />
 
                 <StyledInput
@@ -326,7 +344,7 @@ export default function OrderPage() {
                     formik.touched.customerSurname &&
                     formik.errors.customerSurname
                   }
-                  sx={{ width: "175px" }}
+                  sx={{ width: { xs: "auto", md: "175px" } }}
                 />
                 <MaskedInput
                   id="phone"
@@ -338,7 +356,7 @@ export default function OrderPage() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.phone && Boolean(formik.errors.phone)}
                   helperText={formik.touched.phone && formik.errors.phone}
-                  sx={{ width: "360px" }}
+                  sx={{ width: { xs: "auto", md: "360px" } }}
                 />
 
                 <StyledInput
@@ -349,15 +367,18 @@ export default function OrderPage() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.adress && Boolean(formik.errors.adress)}
                   helperText={formik.touched.adress && formik.errors.adress}
-                  sx={{ width: "360px" }}
+                  sx={{ width: { xs: "auto", md: "360px" } }}
                 />
               </Box>
               <Box
                 sx={{
                   display: "flex",
                   gap: "10px",
-                  flexWrap: "wrap",
-                  width: "min-content",
+                  flexWrap: { xs: "nowrap", md: "wrap" },
+
+                  flexDirection: { xs: "column", md: "row" },
+
+                  width: { xs: "auto", md: "min-content" },
                 }}
               >
                 <StyledInput
@@ -373,7 +394,7 @@ export default function OrderPage() {
                     formik.touched.country && Boolean(formik.errors.country)
                   }
                   helperText={formik.touched.country && formik.errors.country}
-                  sx={{ width: "390px" }}
+                  sx={{ width: { xs: "auto", md: "360px" } }}
                 >
                   {countries.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -390,7 +411,7 @@ export default function OrderPage() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.city && Boolean(formik.errors.city)}
                   helperText={formik.touched.city && formik.errors.city}
-                  sx={{ width: "390px" }}
+                  sx={{ width: { xs: "auto", md: "360px" } }}
                 />
 
                 <MaskedInput
@@ -407,7 +428,7 @@ export default function OrderPage() {
                   helperText={
                     formik.touched.postIndex && formik.errors.postIndex
                   }
-                  sx={{ width: "390px" }}
+                  sx={{ width: { xs: "auto", md: "360px" } }}
                 />
               </Box>
             </InputGroup>
@@ -450,7 +471,7 @@ export default function OrderPage() {
             position: "absolute",
             top: "150px",
             right: "20px",
-            display: "flex",
+            display: { xs: "none", md: "flex" },
             flexDirection: "column",
             width: "280px",
             boxShadow: 5,

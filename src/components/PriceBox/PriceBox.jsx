@@ -62,7 +62,7 @@ const PriceBox = ({
 
   const buttonStyles = {
     width: { xs: "auto", md: buttonWidth },
-    padding: { xs: "5px 0", md: buttonPadding },
+    padding: { xs: "5px 3px", md: buttonPadding },
     textTransform: "initial",
     backgroundColor: "#bdbdbd",
     borderRadius: "3px",

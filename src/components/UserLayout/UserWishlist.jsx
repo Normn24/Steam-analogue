@@ -31,8 +31,8 @@ export default function UserWishlist() {
             textAlign: "center",
             width: "50%",
             position: "absolute",
-            top: "30%",
-            left: "62%",
+            top: { xs: "65%", md: "30%" },
+            left: { xs: "50%", md: "62%" },
             transform: "translate(-50%, -50%)",
           }}
           variant="p"
@@ -40,8 +40,7 @@ export default function UserWishlist() {
         >
           OOPS, THERE`S NOTHING TO SHOW HERE
           <br />
-          There are 0 items on your wishlist, but none of them match the filters
-          you have applied above
+          There are 0 items on your wishlist
         </Typography>
       ) : (
         <>

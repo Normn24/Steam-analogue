@@ -2,14 +2,16 @@ import { styled } from '@mui/system';
 import { TextField, Button, Box, Typography } from '@mui/material';
 
 export const FormContainer = styled(Box)({
-  width: 'min-content',
+  width: "67%",
   borderRadius: '6px',
   backgroundColor: '#bdbdbd',
   padding: '20px',
   color: "#000",
   margin: "50px 20px",
   boxShadow: "0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12)",
-
+  "@media (max-width: 960px)": {
+    width: "auto"
+  },
 });
 
 export const Title = styled(Typography)({
@@ -17,6 +19,10 @@ export const Title = styled(Typography)({
   fontSize: '1.5rem',
   lineHeight: '2rem',
   fontWeight: 700,
+
+  "@media (max-width: 960px)": {
+    fontSize: '20px',
+  },
 });
 
 export const Form = styled('form')({
@@ -34,7 +40,6 @@ export const StyledInput = styled(TextField)({
   outline: 0,
   backgroundColor: '#bdbdbd',
   padding: '0',
-  color: 'rgba(243, 244, 246, 1)',
   '&:focus': {
     borderColor: 'rgba(167, 139, 250)',
   },

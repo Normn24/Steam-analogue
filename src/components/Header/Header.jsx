@@ -80,7 +80,7 @@ export default function Header() {
           expandIcon={<IoIosArrowDown />}
         >
           <Typography variant="p" component="p">
-            Store
+            Categories
           </Typography>
         </AccordionSummary>
         {catalogs.slice(0, 3).map((catalog) => (
