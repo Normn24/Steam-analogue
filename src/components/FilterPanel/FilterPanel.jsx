@@ -138,18 +138,17 @@ function FilterPanel() {
         <Button
           onClick={toggleFilters}
           sx={{
-            display: { xs: "block", md: "none" },
+            display: { xs: "flex", md: "none" },
             position: "absolute",
-            top: "-0.5%",
+            top: "0%",
             right: -7,
             minWidth: "auto",
-            height: "35px",
           }}
         >
           {filtersOpen ? (
-            <IoCloseOutline style={{ width: 20, height: 20 }} />
+            <IoCloseOutline style={{ fontSize: "26px" }} />
           ) : (
-            <BsFilterRight style={{ width: 20, height: 20 }} />
+            <BsFilterRight style={{ fontSize: "26px" }} />
           )}
         </Button>
         {filteredProducts?.length === 0 ? (
@@ -159,7 +158,7 @@ function FilterPanel() {
               position: "absolute",
               left: "25%",
               top: "5%",
-              fontSize: { xs: "5vw", md: "24px" },
+              fontSize: { xs: "3vw", md: "24px" },
             }}
             variant="h5"
             component="h5"
@@ -173,8 +172,8 @@ function FilterPanel() {
                 textAlign: "center",
                 position: "absolute",
                 left: "0",
-                top: "0%",
-                fontSize: { xs: "5vw", md: "24px" },
+                top: { xs: "1%", md: "0%" },
+                fontSize: { xs: "18px", md: "24px" },
               }}
               variant="h5"
               component="h5"

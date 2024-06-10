@@ -54,7 +54,7 @@ export default function SearchPage() {
           padding: "20px",
           position: "relative",
           minHeight: "855px",
-          m: "60px 0",
+          m: { xs: "20px 0", md: "60px 0" },
         }}
       >
         <FilterPanel productList={productList?.data} />
