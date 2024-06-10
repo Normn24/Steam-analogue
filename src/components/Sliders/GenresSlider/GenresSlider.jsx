@@ -120,7 +120,7 @@ export default function GenresSlider() {
                   height: "270px",
                   margin: { xs: "20px auto", md: "20px" },
                   width: { xs: "385px", md: "280px !important" },
-                  maxWidth: "calc(100% - 20px)",
+                  maxWidth: "calc(100% - 40px)",
 
                   textAlign: "center",
                   borderRadius: "8px",

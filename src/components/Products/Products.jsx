@@ -52,7 +52,7 @@ export default function Products() {
     <>
       <Box
         sx={{
-          padding: { xs: "10px", md: "20px" },
+          padding: { xs: "10px 20px", md: "20px" },
           position: "relative",
           minHeight: "855px",
           m: "60px 0",

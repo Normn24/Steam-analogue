@@ -16,7 +16,6 @@ function MainSliderItem({ item }) {
       <Link className="post__more" to={`/product/${item._id}`}>
         <Paper
           sx={{
-            display: { xs: "none" },
             boxShadow: 15,
             borderRadius: 2,
           }}
@@ -34,14 +33,7 @@ function MainSliderItem({ item }) {
             ))}
           </div>
           <div className={classes.description}>
-            <h1
-              style={{
-                margin: "0 0 16px",
-                fontSize: "42px",
-              }}
-            >
-              {item?.name}
-            </h1>
+            <h1 className={classes.title}>{item?.name}</h1>
             <img
               src={mainImage}
               alt={item.name}

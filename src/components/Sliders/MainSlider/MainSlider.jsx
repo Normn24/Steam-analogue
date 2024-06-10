@@ -31,6 +31,9 @@ function MainSlider() {
               fontSize: "80px",
               top: "40%",
             }}
+            sx={{
+              display: { xs: "none", md: "block" },
+            }}
           >
             {next && <IoIosArrowForward />}
             {prev && <IoIosArrowBack />}
@@ -40,7 +43,14 @@ function MainSlider() {
       className={classes.carouselRoot}
     >
       {products?.data?.slice(0, 5).map((item) => (
-        <Box key={item._id} className="image-container">
+        <Box
+          key={item._id}
+          className="image-container"
+          sx={{
+            maxWidth: "calc(100% - 40px)",
+            margin: "0 auto",
+          }}
+        >
           <MainSliderItem item={item} />
         </Box>
       ))}

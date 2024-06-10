@@ -19,7 +19,7 @@ export default function SliderCardItem({ product }) {
   return (
     <Card
       sx={{
-        maxWidth: "calc(100% - 20px)",
+        maxWidth: "calc(100% - 40px)",
         width: 385,
         boxShadow: 10,
         borderRadius: 2,
