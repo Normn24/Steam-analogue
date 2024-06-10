@@ -115,15 +115,13 @@ function FilterPanel() {
         {loading && (
           <Box
             sx={{
-              display: {
-                xs: "none",
-                md: "flex",
-                top: "0%",
-                height: "100%",
-                width: "69%",
-                position: "absolute",
-                left: "0",
-              },
+              display: { xs: "none", md: "flex" },
+              top: "0",
+              height: "100%",
+              width: "69%",
+              position: "absolute",
+              left: "0",
+              backgroundColor: "#fff",
             }}
           >
             <l-grid
@@ -132,8 +130,8 @@ function FilterPanel() {
               color="black"
               className="loadingSearch"
               style={{
-                top: "0%",
-                height: "100%",
+                top: "0",
+                height: "100vh",
                 width: "100%",
                 position: "absolute",
                 left: "-1%",
@@ -180,7 +178,7 @@ function FilterPanel() {
                 textAlign: "center",
                 position: "absolute",
                 left: "0",
-                top: { xs: "1%", md: "0%" },
+                top: { xs: "0.5%", md: "0%" },
                 fontSize: { xs: "18px", md: "24px" },
               }}
               variant="h5"
@@ -191,7 +189,7 @@ function FilterPanel() {
             <Box
               sx={{
                 width: { xs: "100%", md: "67%" },
-                display: filtersOpen && "none",
+                display: loading || filtersOpen ? "none" : "block",
               }}
             >
               {filteredProducts?.map((product) => (
