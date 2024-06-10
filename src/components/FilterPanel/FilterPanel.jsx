@@ -120,8 +120,9 @@ function FilterPanel() {
                 md: "flex",
                 top: "0%",
                 height: "100%",
-                width: "68%",
+                width: "69%",
                 position: "absolute",
+                left: "0",
               },
             }}
           >
