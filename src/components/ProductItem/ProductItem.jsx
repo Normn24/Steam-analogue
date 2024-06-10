@@ -60,7 +60,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
             sx={{
               textTransform: "capitalize",
               fontSize: { xs: "4.5vw ", md: "24px" },
-              width: { xs: "70%" },
+              width: { xs: "170px", md: "auto" },
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
               overflow: "hidden",
