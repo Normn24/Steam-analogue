@@ -1,25 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
 
 export const registerUser = createAsyncThunk(
   'registration/registerUser:load',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload)
-      })
+      const response = await axios.post("/api/customers",
+        JSON.stringify(payload)
+      )
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData);
-      }
-      const data = await response.json();
-      return data;
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response?.data);
     }
   });
 

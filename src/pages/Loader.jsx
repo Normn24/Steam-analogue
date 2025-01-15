@@ -20,6 +20,7 @@ export default function Loader() {
         width: "100%",
         position: "fixed",
         left: "0%",
+        top: "0",
         zIndex: 1330,
         backgroundColor: "#fff",
       }}

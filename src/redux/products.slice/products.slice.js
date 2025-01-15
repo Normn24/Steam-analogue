@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
 
 const initialState = {
   products: [],
@@ -7,9 +8,8 @@ const initialState = {
 }
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const data = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/products")
-    .then((res) => res.json())
-  return data;
+  const response = await axios.get("/api/products")
+  return response.data;
 });
 
 const productsSlice = createSlice({

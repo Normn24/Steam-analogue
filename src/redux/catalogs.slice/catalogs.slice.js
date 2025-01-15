@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
 
 const initialState = {
     catalogs: [],
@@ -7,9 +8,8 @@ const initialState = {
 }
 
 export const fetchCatalogs = createAsyncThunk("catalogs/fetchCatalogs:load", async () => {
-    const data = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/catalog",)
-        .then((res) => res.json())
-    return data
+    const response = await axios.get("/api/catalog",)
+    return response.data;
 })
 
 const catalogsSlice = createSlice({

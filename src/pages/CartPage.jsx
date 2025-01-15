@@ -2,13 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart } from "../redux/cart.slice/cart.slice";
 import { Box, Typography, Button } from "@mui/material";
-import useToken from "../hooks/useToken";
 import CartListItem from "../components/CartListItem/CartListItem";
 
 export default function CartPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useToken();
 
   const { cart } = useSelector((state) => state.cart);
 
@@ -22,7 +20,7 @@ export default function CartPage() {
   };
 
   const handleRemove = (id) => {
-    dispatch(removeFromCart({ id, token }));
+    dispatch(removeFromCart({ id }));
   };
 
   return (

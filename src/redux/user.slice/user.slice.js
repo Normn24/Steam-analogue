@@ -1,68 +1,35 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
 
 export const updateUserProfile = createAsyncThunk(
   'registration/updateUserProfile',
-  async ({ updateProfile, token }, { rejectWithValue }) => {
+  async ({ updateProfile }, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers", {
-        method: "PUT",
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateProfile)
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData);
-      }
-      const data = await response.json();
-      return data;
+      const response = await axios.put("/api/customers",
+        updateProfile)
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response?.data);
     }
   });
 
 export const updateUserPassword = createAsyncThunk(
   'registration/updateUserPassword',
-  async ({ updatePassword, token }, { rejectWithValue }) => {
+  async ({ updatePassword }, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers/password", {
-        method: "PUT",
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatePassword)
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData);
-      }
-      const data = await response.json();
-      return data;
+      const response = await axios.put("/api/customers/password", 
+      updatePassword)
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response?.data);
     }
   });
 
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
-  async (token) => {
-    const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers/customer", {
-      method: "GET",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-    })
-    if (!response.ok) {
-      throw new Error("Failed to get customer");
-    }
-    const data = await response.json();
-    return data;
+  async () => {
+    const response = await axios.get("/api/customers/customer")
+    return response.data;
   });
 
 const userSlice = createSlice({

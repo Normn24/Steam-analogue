@@ -1,18 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
+
 
 export const fetchCatalogProducts = createAsyncThunk(
   'catalog/fetchCatalogProducts:load',
   async (categoryName) => {
     try {
-      const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/products/category=${categoryName}`,);
-      if (!response.ok) {
-        throw new Error('Failed to fetch catalog');
-      }
-      const { data } = await response.json();
+      const response = await axios.get(`/api/products/category=${categoryName}`,);
+      const { data } = await response.data;
       return data;
     } catch (error) {
-      console.error('Error fetching catalog:', error);
-      throw error;
+      return error.response?.data;
+
     }
   }
 );

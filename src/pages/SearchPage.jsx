@@ -31,7 +31,7 @@ export default function SearchPage() {
     if (startYear) searchParams.append("startYear", startYear);
     if (endYear) searchParams.append("endYear", endYear);
     if (sort) searchParams.append("sort", sort);
-    const url = `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/products?${searchParams.toString()}`;
+    const url = `/api/products?${searchParams.toString()}`;
 
     dispatch(fetchFilteredProducts(url || null));
     dispatch(fetchProducts());

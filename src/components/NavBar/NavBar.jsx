@@ -15,7 +15,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const { catalogs } = useSelector((state) => state.catalogs);
   const [searchQuery, setSearchQuery] = useState("");
-  const loggedIn = useSelector((state) => state.login.loggedIn);
+  const token = useSelector((state) => state.login.token);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -35,7 +35,7 @@ export default function NavBar() {
         <StyledNavBarLink exact to={`/`}>
           Home
         </StyledNavBarLink>
-        {loggedIn && (
+        {token && (
           <StyledNavBarLink to={`/products/library`}>Library</StyledNavBarLink>
         )}
         {catalogs.slice(0, 3).map((catalog) => (

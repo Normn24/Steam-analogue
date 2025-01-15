@@ -1,48 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../api/apiClient";
 
 export const placeOrder = createAsyncThunk(
   'orders/placeOrder:load',
   async (payload) => {
-    const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/orders/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const response = await axios.post("/api/orders/",  
+      JSON.stringify({
         customerId: payload.userId,
         mobile: payload.phone,
         letterSubject: "Thank you for order! You are welcome!",
         letterHtml: "Your order is placed"
       })
-    })
-    console.log(payload)
-
-    if (!response.ok) {
-      throw new Error(payload);
-    }
-    const data = await response.json();
-    console.log(data.order)
-    return data.order;
+    )
+    return response.data.order;
   });
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders:load",
-  async (token) => {
-    const response = await fetch(
-      "https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/orders/",
-      {
-        method: "GET",
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to get orders");
-    }
-    const data = await response.json();
-    return data;
+  async () => {
+    const response = await axios.get(
+      "/api/orders/");
+    return response.data;
   }
 );
 

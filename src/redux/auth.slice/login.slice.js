@@ -1,66 +1,81 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getTokenFromLocalStorage, removeTokenFromLocalStorage, setTokenToLocalStorage } from '../../utils/TokenUtils';
+import axios from "../../api/apiClient";
+import { fetchUser } from '../user.slice/user.slice';
+import { fetchWishList } from '../wishList.slice/wishList.slice';
+import { fetchCart } from '../cart.slice/cart.slice';
+import { fetchOrders } from '../order.slice/order.slice';
 
 const initialState = {
   token: "",
-  loggedIn: false,
-  status: 'idle',
+  status: 'loading',
   error: null,
 }
 
 export const loginUser = createAsyncThunk(
   'login/loginUser',
-  async (payload, { rejectWithValue }) => {
+  async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const response = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/customers/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData);
-      }
-
-      const data = await response.json();
-      return data;
+      const response = await axios.post("/api/customers/login", 
+        JSON.stringify(payload)
+      );
+      dispatch(setToken(response.data.token));
+      dispatch(initializeSession())
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data);
     }
   }
 );
+
+export const initializeSession = createAsyncThunk(
+  "auth/initializeSession",
+  async (_, { dispatch  }) => {
+    const token = getTokenFromLocalStorage();
+    if (token) {
+      dispatch(setToken(token));
+      dispatch(fetchUser());
+      dispatch(fetchWishList());
+      dispatch(fetchCart());
+      dispatch(fetchOrders());
+    }
+  }
+);
+
 
 const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
+    setToken: (state, { payload }) => {
+      state.token = payload;
+      setTokenToLocalStorage(payload);
+    },
     clearAuthState: (state) => {
       state.status = 'idle';
       state.error = null;
+    },
+    clearToken: (state) => {
+      removeTokenFromLocalStorage();
+      state.token = null;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading';
-        state.loggedIn = false
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state) => {
         state.status = 'succeeded';
         state.error = null;
-        state.token = action.payload.token;
-        state.loggedIn = true
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.loggedIn = false
         state.error = action.payload;
       });
   },
 });
 
-export const { clearAuthState } = loginSlice.actions;
+export const { clearAuthState, setToken, clearToken } = loginSlice.actions;
 
 export default loginSlice.reducer;

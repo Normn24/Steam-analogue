@@ -6,7 +6,6 @@ import {
   updateUserProfile,
   updateUserPassword,
 } from "../../redux/user.slice/user.slice";
-import useToken from "../../hooks/useToken";
 import PasswordInput from "../PasswordInput/PasswordInput";
 
 const validationSchema = Yup.object().shape({
@@ -24,9 +23,7 @@ const validationSchema = Yup.object().shape({
 
 export default function UserProfile() {
   const dispatch = useDispatch();
-  const token = useToken();
   const { user, error, message } = useSelector((state) => state.user);
-
   const initialValues = {
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
@@ -39,14 +36,14 @@ export default function UserProfile() {
   const handleProfileSubmit = () => {
     const { firstName, lastName, email, login } = formik.values;
     const updateProfile = { firstName, lastName, email, login };
-    dispatch(updateUserProfile({ updateProfile, token }));
+    dispatch(updateUserProfile({ updateProfile,  }));
   };
 
   const handlePasswordSubmit = () => {
     const { password, newPassword } = formik.values;
     const updatePassword = { password, newPassword };
     if (password && newPassword) {
-      dispatch(updateUserPassword({ updatePassword, token }));
+      dispatch(updateUserPassword({ updatePassword,  }));
     }
   };
 

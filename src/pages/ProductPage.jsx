@@ -32,7 +32,7 @@ import { useFormik } from "formik";
 import { Form, InputGroup } from "../styles/forms/StylesAuthForm.js";
 
 import Textarea from "@mui/joy/Textarea";
-import useToken from "../hooks/useToken.js";
+
 import PriceBox from "../components/PriceBox/PriceBox.jsx";
 
 export default function ProductPage() {
@@ -40,13 +40,12 @@ export default function ProductPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
-  const token = useToken();
 
   const { product } = useSelector((state) => state.product);
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
-  const loggedIn = useSelector((state) => state.login.loggedIn);
+  const token = useSelector((state) => state.login.token);
 
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
@@ -72,10 +71,10 @@ export default function ProductPage() {
     ),
     onSubmit: useCallback(
       (values, { resetForm }) => {
-        dispatch(addComment({ values, token }));
+        dispatch(addComment({ values,  }));
         resetForm();
       },
-      [dispatch, token]
+      [dispatch, ]
     ),
   });
 
@@ -112,19 +111,19 @@ export default function ProductPage() {
 
   const handleWishList = (id) => {
     if (onWishList) {
-      dispatch(removeFromWishList({ id, token }));
+      dispatch(removeFromWishList({ id,  }));
       setOnWishList(false);
     } else {
-      dispatch(addToWishList({ id, token }));
+      dispatch(addToWishList({ id,  }));
     }
   };
 
   const handleCartList = (id) => {
     if (onCart) {
-      dispatch(removeFromCart({ id, token }));
+      dispatch(removeFromCart({ id,  }));
       setOnCart(false);
     } else {
-      dispatch(addToCart({ id, token }));
+      dispatch(addToCart({ id,  }));
     }
   };
 
@@ -269,17 +268,17 @@ export default function ProductPage() {
             sx={{
               display: "flex",
               justifyContent: `${
-                loggedIn && !onLibrary ? "space-between" : "flex-end"
+                token && !onLibrary ? "space-between" : "flex-end"
               }`,
               gap: "25px",
-              marginTop: `${loggedIn ? "20px" : "35px"}`,
+              marginTop: `${token ? "20px" : "35px"}`,
               alignItems: { xs: "flex-end", md: "center" },
               position: "relative",
               flexDirection: { xs: "column-reverse", md: "row" },
               width: "100%",
             }}
           >
-            {loggedIn ? (
+            {token ? (
               <Button
                 sx={{
                   display: onLibrary ? "none" : "flex",
@@ -312,7 +311,7 @@ export default function ProductPage() {
                 Login to add this item to your wishlist, or add to cart
               </Typography>
             )}
-            {loggedIn && onLibrary ? (
+            {token && onLibrary ? (
               <>
                 <Button
                   onClick={() => handleLibrary()}
@@ -339,7 +338,7 @@ export default function ProductPage() {
                     onCart={onCart}
                     handleCartList={handleCartList}
                     productId={product?._id}
-                    loggedIn={loggedIn}
+                    token={token}
                   />
                 )}
               </>

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import useToken from "../../hooks/useToken";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,6 @@ import PriceBox from "../PriceBox/PriceBox";
 export default function WishListItem({ product, handleRemove }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const token = useToken();
   const {
     _id,
     name,
@@ -51,9 +49,9 @@ export default function WishListItem({ product, handleRemove }) {
 
   const handleCartList = (id) => {
     if (onCart) {
-      dispatch(removeFromCart({ id, token }));
+      dispatch(removeFromCart({ id }));
     } else {
-      dispatch(addToCart({ id, token }));
+      dispatch(addToCart({ id }));
     }
   };
 
@@ -180,7 +178,7 @@ export default function WishListItem({ product, handleRemove }) {
             onCart={onCart}
             handleCartList={handleCartList}
             productId={product?._id}
-            loggedIn={true}
+            token={true}
           />
           <Button
             sx={{

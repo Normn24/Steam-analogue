@@ -34,7 +34,7 @@ import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm";
 export default function Header() {
   const dispatch = useDispatch();
 
-  const loggedIn = useSelector((state) => state.login.loggedIn);
+  const token = useSelector((state) => state.login.token);
   const { wishList } = useSelector((state) => state.wishList);
   const { cart } = useSelector((state) => state.cart);
   const { catalogs } = useSelector((state) => state.catalogs);
@@ -95,7 +95,7 @@ export default function Header() {
           </AccordionDetails>
         ))}
       </Accordion>
-      {loggedIn && (
+      {token && (
         <>
           <BurgerItem button to="/account/profile" onClick={handleLinkClick}>
             Profile
@@ -121,7 +121,7 @@ export default function Header() {
         </>
       )}
 
-      {!loggedIn && (
+      {!token && (
         <BurgerItem
           button
           onClick={() => {
@@ -164,7 +164,7 @@ export default function Header() {
           <SiRepublicofgamers style={{ fontSize: "50px" }} />
         </NavLink>
 
-        {loggedIn ? (
+        {token ? (
           <UserWrapper>
             <NavLink to={"/wishlist"} style={{ position: "relative" }}>
               <SiYoutubegaming />

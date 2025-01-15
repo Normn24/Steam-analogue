@@ -4,16 +4,14 @@ import { Card, CardMedia, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
 import { removeComment } from "../../redux/comments.slice/comments.slice";
 import { MdOutlineDelete } from "react-icons/md";
-import useToken from "../../hooks/useToken";
 
 export default function UserReviews() {
   const dispatch = useDispatch();
-  const token = useToken();
 
   const userComments = useSelector((state) => state.comments.userComments);
 
   const handleDeleteComment = (id) => {
-    dispatch(removeComment({ id, token }));
+    dispatch(removeComment({ id }));
   };
 
   return (

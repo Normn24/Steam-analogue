@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
 
 const initialState = {
   slides: [],
@@ -7,9 +8,8 @@ const initialState = {
 }
 
 export const fetchSlides = createAsyncThunk('slides/fetchSlides:load', async () => {
-  const data = await fetch("https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/slides")
-    .then((res) => res.json())
-  return data;
+  const response = await axios.get("/api/slides")
+  return response.data;
 });
 
 const slidesSlice = createSlice({
