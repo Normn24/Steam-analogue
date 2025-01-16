@@ -97,20 +97,20 @@ export default function Header() {
       </Accordion>
       {token && (
         <>
-          <BurgerItem button to="/account/profile" onClick={handleLinkClick}>
+          <BurgerItem  to="/account/profile" onClick={handleLinkClick}>
             Profile
           </BurgerItem>
-          <BurgerItem button to="/products/library" onClick={handleLinkClick}>
+          <BurgerItem  to="/products/library" onClick={handleLinkClick}>
             Library
           </BurgerItem>
-          <BurgerItem button to="/wishlist" onClick={handleLinkClick}>
+          <BurgerItem  to="/wishlist" onClick={handleLinkClick}>
             Wishlist
           </BurgerItem>
-          <BurgerItem button to="/cart" onClick={handleLinkClick}>
+          <BurgerItem  to="/cart" onClick={handleLinkClick}>
             Cart
           </BurgerItem>
           <BurgerItem
-            button
+            
             onClick={() => {
               handleOpen("logout");
               handleLinkClick();
@@ -123,7 +123,7 @@ export default function Header() {
 
       {!token && (
         <BurgerItem
-          button
+          
           onClick={() => {
             handleOpen("login");
             handleLinkClick();

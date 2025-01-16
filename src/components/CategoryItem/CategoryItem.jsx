@@ -249,19 +249,6 @@ export default function CategoryItem({
               </ListItem>
             ))}
           </List>
-          {/* <Typography
-          sx={{
-            padding: "0 15px",
-            marginBottom: "5px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            height: "100px",
-          }}
-          variant="p"
-          component="p"
-        >
-          {description}
-        </Typography> */}
         </Collapse>
       </Card>
     </Link>

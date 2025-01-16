@@ -32,17 +32,17 @@ export default function NavBar() {
   return (
     <NavBarWrapper>
       <Box sx={{ display: "flex" }}>
-        <StyledNavBarLink exact to={`/`}>
+        <StyledNavBarLink to={`/`}>
           Home
         </StyledNavBarLink>
         {token && (
           <StyledNavBarLink to={`/products/library`}>Library</StyledNavBarLink>
         )}
-        {catalogs.slice(0, 3).map((catalog) => (
+        {catalogs.map((catalog) => (
           <StyledNavBarLink
             key={catalog.id}
             to={`/products/category/${catalog.name}`}
-          >
+          > 
             {catalog.name}
           </StyledNavBarLink>
         ))}
