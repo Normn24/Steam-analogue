@@ -2,15 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import { removeFromWishList } from "../redux/wishList.slice/wishList.slice";
 import WishListItem from "../components/WishListItem/WishListItem";
-import useToken from "../hooks/useToken";
 
 export default function WishListPage() {
   const dispatch = useDispatch();
   const { wishList } = useSelector((state) => state.wishList);
-  const token = useToken();
 
   const handleRemove = (id) => {
-    dispatch(removeFromWishList({ id, token }));
+    dispatch(removeFromWishList({ id }));
   };
 
   return (

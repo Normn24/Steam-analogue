@@ -1,21 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../api/apiClient";
 
 export const addComment = createAsyncThunk(
   "comments/addComment",
-  async ({ values, token }) => {
-    const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments`, {
-      method: "POST",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values)
-    });
-    if (!response.ok) {
-      throw new Error("Failed to add to comments");
-    }
-    const data = await response.json();
-    return data;
+  async ({ values }) => {
+    const response = await axios.post(`/api/comments`, values);
+    return response.data;
   }
 );
 
@@ -23,52 +13,26 @@ export const addComment = createAsyncThunk(
 export const fetchProductComments = createAsyncThunk(
   "comments/fetchProductComments:load",
   async (payload) => {
-    const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments/product/${payload}`, {
-      method: "GET",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to add to comments");
-    }
-    const data = await response.json();
-    return data;
+    const response = await axios.get(`/api/comments/product/${payload}`);
+    return response.data;
   }
 );
 
 export const removeComment = createAsyncThunk(
   "comments/removeComment",
-  async ({ id, token }) => {
-    const response = await fetch(
-      `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to remove from comments");
-    }
-    const data = await response.json();
-    return data;
+  async ({ id }) => {
+    const response = await axios.delete(
+      `/api/comments/${id}`);
+    return response.data;
   }
 );
 
 export const fetchUserComments = createAsyncThunk(
   "comments/fetchUserComments",
   async (payload) => {
-    const response = await fetch(
-      `https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/comments/customer/${payload}`,
-      {
-        method: "GET",
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to get comments");
-    }
-    const data = await response.json();
-    return data;
+    const response = await axios.get(
+      `/api/comments/customer/${payload}`);
+    return response.data;
   }
 );
 

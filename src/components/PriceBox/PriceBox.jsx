@@ -6,7 +6,7 @@ const PriceBox = ({
   onCart,
   handleCartList,
   productId,
-  loggedIn,
+  token,
   showButton = true,
   sliderItem = false,
   categoryItem = false,
@@ -109,7 +109,7 @@ const PriceBox = ({
       )}
       {showButton && (
         <Button
-          disabled={!loggedIn}
+          disabled={!token}
           onClick={() => handleCartList(productId)}
           sx={buttonStyles}
         >

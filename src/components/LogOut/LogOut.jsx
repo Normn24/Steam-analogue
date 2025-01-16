@@ -5,10 +5,15 @@ import {
   SignButton,
 } from "../../styles/forms/StylesAuthForm.js";
 import { persistor } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { clearToken } from "../../redux/auth.slice/login.slice.js";
 
 export default function Logout({ handleClose }) {
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
     persistor.purge();
+    dispatch(clearToken());
     window.location.href = "/";
   };
 

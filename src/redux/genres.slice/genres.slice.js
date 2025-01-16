@@ -1,18 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "../../api/apiClient";
 
 export const fetchGenres = createAsyncThunk(
   'catalog/fetchGenres',
   async () => {
     try {
-      const response = await fetch(`https://pet-project-5-qnedui3gt-normn24s-projects.vercel.app/api/filters`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch genres');
-      }
-      const data = await response.json();
-      return data;
+      const response = await axios.get(`/api/filters`);
+      return response.data;
     } catch (error) {
-      console.error('Error fetching genres:', error);
-      throw error;
+      return error.response?.data;
     }
   }
 );

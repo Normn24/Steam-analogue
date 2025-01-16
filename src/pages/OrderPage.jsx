@@ -15,7 +15,6 @@ import {
   SubmitButton,
 } from "../styles/forms/StylesOrderForm";
 import MaskedInput from "../components/MaskedInput/MaskedInput";
-import useToken from "../hooks/useToken";
 import * as Yup from "yup";
 import { grid } from "ldrs";
 import { useState } from "react";
@@ -102,7 +101,6 @@ const countries = [
 export default function OrderPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useToken();
   grid.register();
 
   const { wishList } = useSelector((state) => state.wishList);
@@ -139,14 +137,14 @@ export default function OrderPage() {
           for (const item of cart.products) {
             const id = item.product._id;
 
-            await dispatch(removeFromCart({ id, token })).unwrap();
+            await dispatch(removeFromCart({ id })).unwrap();
 
             if (wishList?.products?.some((el) => el._id === item.product._id)) {
-              await dispatch(removeFromWishList({ id, token })).unwrap();
+              await dispatch(removeFromWishList({ id })).unwrap();
             }
           }
 
-          dispatch(fetchOrders(token));
+          dispatch(fetchOrders());
 
           navigate("/products/library");
         }

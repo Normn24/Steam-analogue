@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
+import { tokenExpiryMiddleware } from '../middleware/tokenExpiryMiddleware';
 import storage from 'redux-persist/lib/storage';
 
 import cartSlice from './cart.slice/cart.slice';
@@ -18,26 +19,15 @@ import productsSlice from './products.slice/products.slice';
 import signupSlice from './auth.slice/signup.slice';
 import slidesSlice from './slides.slice/slides.slice';
 import userSlice from './user.slice/user.slice';
-
-
 import wishListSlice from './wishList.slice/wishList.slice';
-
 import forgotPasswordSlice from './auth.slice/forgotPassword.slice';
-
-
-const authPersistConfig = {
-  key: 'login',
-  storage: storage,
-}
 
 const downloadedPersistConfig = {
   key: 'downloaded',
   storage: storage,
 };
 
-const persistedLoginReducer = persistReducer(authPersistConfig, loginSlice);
 const persistedDownloadedReducer = persistReducer(downloadedPersistConfig, downloadedSlice);
-
 
 export const store = configureStore({
   reducer: {
@@ -47,14 +37,13 @@ export const store = configureStore({
     comments: commentsSlice,
     downloaded: persistedDownloadedReducer,
     genres: genresSlice,
-    login: persistedLoginReducer,
+    login: loginSlice,
     productList: filteredProductsSlice,
     loader: loaderSlice,
     orders: orderSlice,
     products: productsSlice,
     product: productItemSlice,
     signup: signupSlice,
-
     slides: slidesSlice,
     user: userSlice,
     wishList: wishListSlice,
@@ -64,7 +53,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(delayLoader),
+    }).concat(delayLoader, tokenExpiryMiddleware),
 });
 
 export const persistor = persistStore(store);
