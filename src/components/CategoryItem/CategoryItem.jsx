@@ -42,14 +42,15 @@ export default function CategoryItem({
     day: "numeric",
   });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    const updateImage = () => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
-    }, 3000);
-
-    return () => clearInterval(intervalId);
-  }, [imageUrls]);
+    };
+    const timeoutId = setTimeout(updateImage, 3000);
+    return () => clearTimeout(timeoutId);
+  }, [currentImageIndex, imageUrls.length]);
+  
   return (
     <Link className="post__more" to={`/product/${_id}`}>
       <Card
@@ -94,7 +95,7 @@ export default function CategoryItem({
         />
         <CardContent
           sx={{
-            width: "100%",
+            width: "calc(100% - 135px)",
             padding: { xs: "5px 6px", md: "5px 16px" },
             position: "relative",
             "&:last-child": { pb: 0 },
@@ -106,7 +107,7 @@ export default function CategoryItem({
               fontSize: { xs: "12px", md: "24px" },
               whiteSpace: "nowrap",
               overflow: "hidden",
-              width: { xs: "87px", md: "auto" },
+              width: { xs: "87px", md: "487px" },
             }}
             variant="h5"
             component="h5"
@@ -167,9 +168,9 @@ export default function CategoryItem({
             position: "absolute",
             right: "0%",
             top: "0%",
-            width: "41%",
+            width: "31%",
             backdropFilter: "blur(14px) saturate(181%)",
-            backgroundColor: " rgba(0, 0, 0, 0.29)",
+            backgroundColor: "rgba(0, 0, 0, 0.29)",
             borderRadius: "0 0 12px 12px",
             border: "1px solid rgba(255, 255, 255, 0.125)",
             opacity: 1,
@@ -177,26 +178,21 @@ export default function CategoryItem({
             boxShadow:
               "rgba(0, 0, 0, 0.2) 0px 6px 9px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 11px 20px 5px",
           }}
-          in={hoveredItem == product._id}
+          in={hoveredItem === product._id}
           timeout="auto"
         >
           <List sx={{ padding: 0 }}>
-            <ImageListItem
-              key={imageUrls[currentImageIndex]}
-              sx={{
-                transition: "all 2.2s",
-              }}
-            >
+            <ImageListItem key={imageUrls[currentImageIndex]}>
               <img
                 srcSet={imageUrls[currentImageIndex]}
                 src={imageUrls[currentImageIndex]}
                 alt={imageUrls[currentImageIndex]}
-                loading="lazy"
                 style={{
                   width: "100%",
-                  height: "280px",
+                  height: "176px",
                   objectFit: "cover",
                   opacity: "1",
+                  transition: "all 0.5s ease-out",
                 }}
               />
             </ImageListItem>

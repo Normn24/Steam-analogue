@@ -24,6 +24,7 @@ export default function SliderCardItem({ product }) {
         boxShadow: 10,
         borderRadius: 2,
         margin: { xs: "8px auto 23px", md: "20px 20.8px" },
+        backgroundColor: "var(--card-background-color)",
       }}
     >
       <Link className="post__more" to={`/product/${_id}`}>
@@ -46,6 +47,7 @@ export default function SliderCardItem({ product }) {
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
               overflow: "hidden",
+              color: "var(--text-color)",
             }}
             variant="h4"
             component="h4"
@@ -56,7 +58,6 @@ export default function SliderCardItem({ product }) {
             sx={{
               display: "flex",
               width: "100%",
-              bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
               flexWrap: "wrap",
@@ -97,7 +98,7 @@ export default function SliderCardItem({ product }) {
               position: "relative",
               mb: "10px",
               padding: "0 4px 0 0",
-              backgroundColor: "#cccc",
+              backgroundColor: "var(--genre-color)",
               width: "fit-content",
               borderRadius: "4px",
             }}

@@ -6,8 +6,8 @@ import { Box } from "@mui/material";
 import {
   NavBarWrapper,
   StyledNavBarLink,
+  SearchField,
 } from "../../styles/navbar-footer/NavBarStyled";
-import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -49,22 +49,22 @@ export default function NavBar() {
       </Box>
 
       <form onSubmit={handleSearchSubmit}>
-        <TextField
+        <SearchField
           placeholder="Search..."
           variant="outlined"
           value={searchQuery}
           onChange={handleSearchChange}
           size="small"
-          sx={{ margin: "8px" }}
+          sx={{ margin: "8px"}}
           InputProps={{
-            style: { paddingRight: "4px" },
+            style: { paddingRight: "4px", color: "var(--text-color)"  },
             endAdornment: (
               <NavLink
                 to={`/products/search/?name=${searchQuery}`}
                 key={searchQuery}
               >
                 <IconButton type="submit" aria-label="search">
-                  <SearchIcon />
+                  <SearchIcon style={{color: "var(--text-color)" }} />
                 </IconButton>
               </NavLink>
             ),

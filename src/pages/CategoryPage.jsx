@@ -36,7 +36,7 @@ export default function CategoryPage() {
     <>
       <Box
         sx={{
-          padding: "20px",
+          padding: { xs: "20px 10px", md: "20px" },
           position: "relative",
           minHeight: "calc(100vh - 288px)",
           m: { xs: "0", md: "60px 0" },

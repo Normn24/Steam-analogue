@@ -51,12 +51,12 @@ const PriceBox = ({
     right: "5px",
     fontSize: previousPriceFontSizeMd,
     bottom: categoryItem ? { xs: "12px", md: "18px" } : "18px",
-    color: "#647984",
+    color: "var(--old-price-color)",
     textDecorationLine: "line-through",
   };
 
   const currentPriceStyles = {
-    color: "#4c6b22",
+    color: "var(--curent-price-color)",
     fontSize: currentPriceStylesFontSizeXs,
   };
 
@@ -102,6 +102,7 @@ const PriceBox = ({
             fontSize: categoryItem && { xs: "10px", md: "16px" },
             margin: categoryItem && { xs: "4px 10px 0 0 ", md: "0" },
             padding: { xs: "0 0 0 5px ", md: 0 },
+            color: "var(--text-color)",
           }}
         >
           {currentPrice}$

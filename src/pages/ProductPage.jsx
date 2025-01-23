@@ -46,7 +46,7 @@ export default function ProductPage() {
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
   const token = useSelector((state) => state.login.token);
-
+  console.log(product)
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
   const [onLibrary, setOnLibrary] = useState(false);

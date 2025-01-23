@@ -26,7 +26,7 @@ export default function GenresSlider() {
             opacity: 1,
             background: "none",
             borderRadius: 0,
-            color: "#000",
+            color: "var(--text-color)",
             fontSize: "80px",
             top: "-30px",
           }}
@@ -46,7 +46,7 @@ export default function GenresSlider() {
             opacity: 1,
             background: "none",
             borderRadius: 0,
-            color: "#000",
+            color: "var(--text-color)",
             fontSize: "80px",
             top: "-30px",
           }}

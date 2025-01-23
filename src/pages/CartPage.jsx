@@ -52,6 +52,7 @@ export default function CartPage() {
             sx={{
               width: "auto",
               textTransform: "uppercase",
+              textAlign: { xs: "center", md: "left" },
             }}
             variant="h4"
             component="h4"
