@@ -27,6 +27,18 @@ export const SearchField = styled(TextField)({
             borderColor: "var(--header-tabs-hover-color)", 
         },
     },
+    '& label.Mui-focused': {
+        color: "var(--text-color)",
+    },
+    '& label.Mui-root': {
+        color: "var(--text-color)",
+    },
+    '& .MuiInputBase-root': {
+        color: "var(--text-color) !important",
+    },
+    '& .MuiInputLabel-root': {
+        color: "var(--input-color)"
+    },
 });
 
 export const StyledNavBarLink = styled(NavLink)({

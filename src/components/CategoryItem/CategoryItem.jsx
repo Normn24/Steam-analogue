@@ -63,8 +63,10 @@ export default function CategoryItem({
           alignItems: "center",
           position: "relative",
           overflow: "visible",
+          color: "var(--text-color)",
+          backgroundColor: "var(--card-background-color)", 
           "&:hover": {
-            backgroundColor: "#bdbdbd",
+            backgroundColor: "var(--header-background-color)",
           },
         }}
       >
@@ -127,7 +129,7 @@ export default function CategoryItem({
             additionalStyles={{
               display: "flex",
               alignItems: previousPrice ? "flex-end" : "center",
-              backgroundColor: previousPrice ? "#cccc" : "transparent",
+              backgroundColor: previousPrice ? "var(--genre-color)" : "transparent",
               justifyContent: "space-between",
               padding: { xs: "0px 4px 2px", md: "3px 3px 3px 10px" },
               borderRadius: "0 3px 3px 0",

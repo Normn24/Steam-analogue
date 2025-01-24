@@ -77,7 +77,7 @@ export default function CartPage() {
               boxShadow: 5,
               borderRadius: 2,
               padding: "10px",
-              backgroundColor: "transparent",
+              backgroundColor: "var(--card-background-color)",
               gap: "10px",
             }}
           >
@@ -109,10 +109,10 @@ export default function CartPage() {
             <Button
               onClick={handlePayment}
               sx={{
-                backgroundColor: "#bdbdbd",
+                backgroundColor: "var(--header-background-color)",
                 borderRadius: "3px",
                 padding: "4.25px 8px",
-                ":hover": { backgroundColor: "#cccc" },
+                ":hover": { backgroundColor: "var(--genre-color)" },
               }}
             >
               Continue to payment

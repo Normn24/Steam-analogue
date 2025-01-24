@@ -1,7 +1,9 @@
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
+  --input-color: #00000099;
   --genre-color: #cccc;
+  --primary-color: #fff;
   --header-background-color: #bdbdbd;
   --header-tabs-hover-color: #000;
   --curent-price-color: #4c6b22;
@@ -22,6 +24,8 @@
   --background-color: #0d1012;
   /* --text-color: #e8e6e3; */
   --text-color: #f78d63;
+  --input-color: #f78d63;
+  --primary-color: #f78d63;
   /* --card-background-color: #26292b; */
   --card-background-color: #191b1c;
   /* --card-background-color: #111414; */
@@ -29,13 +33,13 @@
   /* --header-background-color: #656666; */
   --header-background-color: #242729;
   --header-tabs-background-color: #181a1b;
-  --header-tabs-hover-color: #8c8273;
+  --header-tabs-hover-color: #f78d63;
   --curent-price-color: #badb8c;
   --old-price-color: #bdbdbd;
 }
 
 a {
-  color: #000;
+  color: var(--text-color);
   text-decoration: none;
 }
 

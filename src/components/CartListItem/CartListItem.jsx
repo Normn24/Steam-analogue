@@ -39,7 +39,7 @@ export default function CartListItem({ product, handleRemove }) {
         margin: "15px 0",
         padding: "10px",
         display: "flex",
-        backgroundColor: "transparent",
+        backgroundColor: "var(--card-background-color)",
         flexDirection: { xs: "column", md: "row" },
       }}
     >
@@ -111,7 +111,7 @@ export default function CartListItem({ product, handleRemove }) {
               alignItems: "baseline",
               position: "relative",
               padding: "0 4px 0 0",
-              backgroundColor: "#cccc",
+              backgroundColor: "var(--genre-color)",
               width: "auto",
               borderRadius: "4px",
               justifyContent: previousPrice ? "space-between" : "center",
@@ -120,10 +120,10 @@ export default function CartListItem({ product, handleRemove }) {
           />
           <Button
             sx={{
-              backgroundColor: "#bdbdbd",
+              backgroundColor: "var(--header-background-color)",
               borderRadius: "3px",
               padding: "4.25px 8px",
-              ":hover": { backgroundColor: "#cccc" },
+              ":hover": { backgroundColor: "var(--genre-color)" },
             }}
             onClick={() => handleRemove(_id)}
           >

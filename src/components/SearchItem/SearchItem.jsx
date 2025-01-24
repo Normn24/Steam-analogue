@@ -148,8 +148,8 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
           margin: "0",
           marginBottom: "15px",
           display: "flex",
-          backgroundColor: {
-            md: hoveredItem === product._id ? "#bdbdbd" : "transparent",
+          backgroundColor: {xs: "var(--card-background-color)",
+            md: hoveredItem === product._id ?  "var(--header-background-color)" : "var(--card-background-color)",
           },
         }}
       >
@@ -180,6 +180,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
               overflow: "hidden",
+              color: "var(--text-color)",
             }}
             variant="h5"
             component="h5"
@@ -190,14 +191,13 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
             sx={{
               display: "flex",
               maxWidth: { xs: "120px", md: "50%" },
-              bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
               columnGap: "15px",
               overflow: "hidden",
-              backgroundColor: {
-                md: hoveredItem === product._id ? "#bdbdbd" : "transparent",
-              },
+              // backgroundColor: {
+              //   md: hoveredItem === product._id ? "var(--header-background-color)" : "transparent",
+              // },
             }}
           >
             {genres.map((value) => (
@@ -271,6 +271,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
           backgroundColor: " rgba(0, 0, 0, 0.29)",
           borderRadius: "0 0 12px 12px",
           border: "1px solid rgba(255, 255, 255, 0.125)",
+          color: "var(--text-color)",
           opacity: 1,
           zIndex: 5,
           boxShadow:
@@ -307,6 +308,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
             textTransform: "capitalize",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
+            overflow: "hidden",
           }}
           variant="h5"
           component="h5"

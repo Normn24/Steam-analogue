@@ -64,20 +64,34 @@ export default function LibraryItem({ product }) {
             width: "30px",
             p: "4px 6px",
             borderRadius: "6px",
-            color: "#000",
+            color: "var(--text-color)",
             "&:hover": {
               opacity: 0.9,
-              backgroundColor: "#bdbdbd",
+              backgroundColor: "var(--header-background-color)",
             },
           }}
         >
           <HiDotsVertical style={{ width: "20px", height: "20px" }} />
         </Button>
-        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          sx={{
+            "& .MuiPaper-root": {
+              backgroundColor: "var(--header-background-color)",
+            },
+            "& .MuiMenuItem-root": {
+              color: "var(--text-color)",
+            }
+          }}
+        >
           <Link to={`/product/${_id}`}>
             <MenuItem onClick={handleClose}>Store Page</MenuItem>
           </Link>
-          <MenuItem onClick={handleClose}>Manage</MenuItem>
+          <MenuItem onClick={handleClose}>
+            Manage
+          </MenuItem>
           {isDownloaded && (
             <MenuItem onClick={() => handleDelete(_id)}>Uninstall</MenuItem>
           )}
@@ -93,9 +107,10 @@ export default function LibraryItem({ product }) {
             display: "flex",
             backgroundColor: "transparent",
             flexDirection: "column",
+            color: "var(--text-color)",
             "&:hover": {
               opacity: 0.9,
-              backgroundColor: "#bdbdbd",
+              backgroundColor: "var(--header-background-color)",
             },
           }}
         >

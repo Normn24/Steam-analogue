@@ -164,6 +164,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
             textTransform: "capitalize",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
+            overflow: "hidden",
             color: "var(--text-color)",
           }}
           variant="h5"

@@ -64,8 +64,9 @@ const PriceBox = ({
     width: { xs: "auto", md: buttonWidth },
     padding: { xs: "5px 3px", md: buttonPadding },
     textTransform: "initial",
-    backgroundColor: "#bdbdbd",
+    backgroundColor: "var(--header-background-color)",
     borderRadius: "3px",
+    ":hover": { backgroundColor: "var(--genre-color)" },
   };
 
   return (
@@ -73,7 +74,7 @@ const PriceBox = ({
       sx={{
         display,
         alignItems: previousPrice ? "flex-end" : alignItems,
-        backgroundColor: "#cccc",
+        backgroundColor: "var(--genre-color)",
         justifyContent,
         padding: "3px 3px 3px 10px",
         borderRadius: "3px",
