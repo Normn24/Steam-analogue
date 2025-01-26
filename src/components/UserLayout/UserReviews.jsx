@@ -50,7 +50,8 @@ export default function UserReviews() {
                 borderRadius: 2,
                 margin: "15px 0",
                 display: "flex",
-                backgroundColor: "transparent",
+                backgroundColor: "var(--card-background-color)",
+                color: "var(--text-color)",
               }}
             >
               <Link className="post__more" to={`/product/${item.product._id}`}>
@@ -96,7 +97,7 @@ export default function UserReviews() {
                   }}
                 >
                   <MdOutlineDelete
-                    style={{ width: "30px", height: "30px", color: "#000" }}
+                    style={{ width: "30px", height: "30px", color: "var(--text-color)" }}
                   />
                 </Button>
                 <Typography

@@ -34,7 +34,8 @@ export const InputGroup = styled(Box)({
   marginTop: '0.25rem',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
-  width: "100%"
+  width: "100%",
+  backgroundColor: "var(--card-background-color)",
 });
 
 export const InputLabel = styled('label')({
@@ -58,9 +59,9 @@ export const StyledInput = styled(TextField)({
     color: "var(--text-color) !important",
   },
   "& .MuiOutlinedInput-root": {
-    // '& fieldset': {           
-    //     borderColor: "var(--header-background-color)",  
-    // },
+    '& fieldset': {           
+        borderColor: "var(--header-background-color)",  
+    },
     "&.Mui-focused fieldset": {
         borderColor: "var(--header-tabs-hover-color)"
     },

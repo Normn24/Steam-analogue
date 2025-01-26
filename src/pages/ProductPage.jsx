@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { MdBookmarkAdd, MdBookmarkAdded } from "react-icons/md";
-import { TabContext, TabPanel } from "@mui/lab";
+import { TabContext } from "@mui/lab";
 import ProductPageSlider from "../components/Sliders/ProductPageSlider/ProductPageSlider";
 import {
   addToWishList,
@@ -34,6 +34,7 @@ import { Form, InputGroup } from "../styles/forms/StylesAuthForm.js";
 import Textarea from "@mui/joy/Textarea";
 
 import PriceBox from "../components/PriceBox/PriceBox.jsx";
+import { TableCellStyle, TabPanelContentStyle, TabPanelStyle } from "../styles/pagesStyle/ProductPage.js";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -46,7 +47,6 @@ export default function ProductPage() {
   const { cart } = useSelector((state) => state.cart);
   const { library } = useSelector((state) => state.orders);
   const token = useSelector((state) => state.login.token);
-  console.log(product)
   const [onWishList, setOnWishList] = useState(false);
   const [onCart, setOnCart] = useState(false);
   const [onLibrary, setOnLibrary] = useState(false);
@@ -159,18 +159,21 @@ export default function ProductPage() {
           }}
         >
           {product.previousPrice && (
-            <Button
-              variant="contained"
-              disableElevation
+            <Box
               sx={{
                 position: "absolute",
                 width: "30%",
                 borderRadius: "6px 0 0 0 ",
                 zIndex: 10,
+                backgroundColor: "var(--header-background-color)",
+                textAlign: "center",
+                color: "var(--text-color)", 
+                fontSize: "24px",
+                textTransform: "uppercase", 
               }}
             >
               Sale
-            </Button>
+            </Box>
           )}
 
           <ProductPageSlider product={product?.imageUrls} />
@@ -208,19 +211,19 @@ export default function ProductPage() {
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>Release</TableCell>
-                <TableCell>{productYear}</TableCell>
+                <TableCellStyle>Release</TableCellStyle>
+                <TableCellStyle>{productYear}</TableCellStyle>
               </TableRow>
               <TableRow>
-                <TableCell>Developer</TableCell>
-                <TableCell>{product.developer}</TableCell>
+                <TableCellStyle>Developer</TableCellStyle>
+                <TableCellStyle>{product.developer}</TableCellStyle>
               </TableRow>
               <TableRow>
-                <TableCell>Publisher</TableCell>
-                <TableCell>{product.publisher}</TableCell>
+                <TableCellStyle>Publisher</TableCellStyle>
+                <TableCellStyle>{product.publisher}</TableCellStyle>
               </TableRow>
               <TableRow>
-                <TableCell>Genres</TableCell>
+                <TableCellStyle>Genres</TableCellStyle>
                 <TableCell
                   sx={{
                     display: "flex",
@@ -248,11 +251,10 @@ export default function ProductPage() {
                           textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
                           textTransform: "capitalize",
-                          background: "#cccc",
-
-                          color: "#000",
+                          background: "var(--genre-color)",
+                          color: "var(--text-color)",
                           "&:hover": {
-                            background: "#cccc",
+                            background: "var(--genre-color)",
                           },
                         }}
                       >
@@ -284,11 +286,11 @@ export default function ProductPage() {
                   display: onLibrary ? "none" : "flex",
                   fontSize: "12px",
                   width: "auto",
-                  backgroundColor: onWishList ? "#bdbdbd" : "#cccc",
+                  backgroundColor: onWishList ? "var(--header-background-color)" : "var(--genre-color)",
                   borderRadius: "3px",
                   padding: "9.75px 12px",
                   ":hover": {
-                    backgroundColor: onWishList ? "#cccc" : "#bdbdbd",
+                    backgroundColor: onWishList ? "var(--genre-color)" : "var(--header-background-color)",
                   },
                 }}
                 startIcon={onWishList ? <MdBookmarkAdded /> : <MdBookmarkAdd />}
@@ -353,6 +355,7 @@ export default function ProductPage() {
           display: onLibrary ? "block" : "none",
           boxShadow: "0px 0px 10px -1px rgba(0, 0, 0, 0.2)",
           padding: "15px",
+          backgroundColor: "var(--card-background-color)",
         }}
       >
         <Box>
@@ -387,13 +390,18 @@ export default function ProductPage() {
             <Textarea
               id="content"
               name="content"
-              color="neutral"
               disabled={false}
               minRows={4}
               maxRows={8}
-              variant="soft"
+              variant="plain"
               value={formik.values.content}
               onChange={formik.handleChange}
+              sx={{
+                width: '100%',
+                backgroundColor: "var(--header-background-color)",
+                color: "var(--text-color) !important",
+                borderColor: "var(--header-background-color) !important",
+              }}
             />
           </InputGroup>
           <Button
@@ -401,12 +409,12 @@ export default function ProductPage() {
               mt: "17px",
               fontSize: "12px",
               width: "auto",
-              backgroundColor: "#cccc",
+              backgroundColor: "var(--genre-color)",
               borderRadius: "3px",
               padding: "9.75px 25px",
               float: "right",
               ":hover": {
-                backgroundColor: "#bdbdbd",
+                backgroundColor: "var(--header-background-color)",
               },
             }}
             type="submit"
@@ -429,7 +437,7 @@ export default function ProductPage() {
             sx={{
               borderBottom: 1,
               borderColor: "divider",
-              backgroundColor: "#fff",
+              backgroundColor: "var(--header-background-color)",
             }}
           >
             <Tabs
@@ -438,22 +446,23 @@ export default function ProductPage() {
               centered
               variant="fullWidth"
               TabIndicatorProps={{
-                sx: { backgroundColor: "blue", color: "black" },
+                sx: { backgroundColor: "var(--header-tabs-hover-color)", color: "var(--text-color)" },
               }}
               aria-label="secondary tabs example"
               sx={{
                 border: "none",
                 "& button": {
                   fontSize: { xs: "13px", md: "16px" },
-
                   textTransform: "uppercase",
+                  color: "var(--text-color)",
                 },
                 "& button:hover": {
-                  backgroundColor: "#cccc",
+                  backgroundColor: "var(--genre-color)",
                 },
-                "& button:active": { borderColor: "transparent" },
-                "& button:Mui-selected": {
+                "& button:active": { borderColor: "transparent", color: "var(--text-color)" },
+                "& .Mui-selected": {
                   backgroundColor: "transparent",
+                  color: "var(--text-color) !important", 
                 },
               }}
             >
@@ -461,85 +470,37 @@ export default function ProductPage() {
               <Tab value="2" label="SYSTEM REQUIREMENTS" />
             </Tabs>
           </Box>
-          <TabPanel
+          <TabPanelStyle
             value="1"
             index={0}
             sx={{
               display: value == 1 ? "flex" : "none",
-              textAlign: "left",
-              fontSize: "28px",
-              backgroundColor: "#b5b7ffcc",
-              opacity: 0.8,
-              backgroundAttachment: "fixed",
-
-              backgroundImage:
-                "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
-              position: "relative",
-              "&:before": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                boxShadow: "inset 0px -800px 500px -490px #ffff",
-              },
             }}
           >
-            <Typography
+            <TabPanelContentStyle
               variant="p"
               sx={{
                 width: { xs: "90%", md: "75%" },
                 margin: "0 auto 60px",
-                color: "#000",
-                backdropFilter: "blur(10px) saturate(99%)",
-                backgroundColor: "rgba(255, 255, 255, 0.29)",
-                borderRadius: "12px",
-                border: "1px solid rgba(255, 255, 255, 0.125)",
-                padding: "20px",
                 fontSize: { xs: "14px", md: "22px" },
               }}
             >
               {product.description}
-            </Typography>
-          </TabPanel>
-          <TabPanel
+            </TabPanelContentStyle>
+          </TabPanelStyle>
+          <TabPanelStyle
             value="2"
             index={1}
             sx={{
               display: value == 2 ? "flex" : "none",
               flexDirection: { xs: "column", md: "row" },
-              height: "auto",
-              width: "auto",
-              gap: "50px",
-              alignItems: "center",
-              backgroundColor: "#b5b7ffcc",
-              opacity: 0.8,
-              backgroundAttachment: "fixed",
-              backgroundImage:
-                "repeating-radial-gradient( circle at 0 0, transparent 0, #cccc 100px ), repeating-linear-gradient( #00000055, #000000 )",
-              position: "relative",
-              "&:before": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                boxShadow: "inset 0px -800px 600px -510px #ffff",
-              },
             }}
           >
-            <Box
+            <TabPanelContentStyle
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 width: { xs: "90%", md: "50%" },
-                backdropFilter: "blur(10px) saturate(99%)",
-                backgroundColor: "rgba(255, 255, 255, 0.29)",
-                borderRadius: "12px",
-                border: "1px solid rgba(255, 255, 255, 0.125)",
-                padding: "20px",
                 marginBottom: { xs: "0", md: "60px" },
               }}
             >
@@ -563,18 +524,12 @@ export default function ProductPage() {
                   {item}
                 </Typography>
               ))}
-            </Box>
-            <Box
+            </TabPanelContentStyle>
+            <TabPanelContentStyle
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 width: { xs: "90%", md: "50%" },
-
-                backdropFilter: "blur(10px) saturate(99%)",
-                backgroundColor: "rgba(255, 255, 255, 0.29)",
-                borderRadius: "12px",
-                border: "1px solid rgba(255, 255, 255, 0.125)",
-                padding: "20px",
                 marginBottom: "60px",
               }}
             >
@@ -598,8 +553,8 @@ export default function ProductPage() {
                   {item}
                 </Typography>
               ))}
-            </Box>
-          </TabPanel>
+            </TabPanelContentStyle>
+          </TabPanelStyle>
         </TabContext>
       </Box>
       <Box sx={{ margin: "20px 0" }}>

@@ -20,7 +20,7 @@ export const UserNav = styled(Paper)({
     flexDirection: "column",
     width: "250px",
     height: "330px",
-    backgroundColor: "#BDBDBD",
+    backgroundColor: "var(--header-background-color)",
     boxShadow:
         "0px 6px 6px -3px rgba(0,0,0,0.2), 0px 10px 14px 1px rgba(0,0,0,0.14), 0px 4px 18px 3px rgba(0,0,0,0.12)",
     borderRadius: "5px",
@@ -35,6 +35,7 @@ export const UserInfo = styled(Box)({
     flexDirection: "column",
     gap: "5px",
     padding: "20px",
+    color: "var(--text-color)",
 });
 
 export const UserItem = styled(Box)({
@@ -63,7 +64,7 @@ export const NavLinkStyled = styled(NavLink)({
     fontSize: "18px",
     position: "relative",
     "&.active": {
-        backgroundColor: "#CCCCCC",
+        backgroundColor: "var(--genre-color)",
         cursor: "pointer",
         borderRadius: "5px",
     },

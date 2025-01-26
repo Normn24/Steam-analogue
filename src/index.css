@@ -8,6 +8,7 @@
   --header-tabs-hover-color: #000;
   --curent-price-color: #4c6b22;
   --old-price-color: #647984;
+  --tab-panel-background-color: rgba(255, 255, 255, 0.29);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -36,6 +37,7 @@
   --header-tabs-hover-color: #f78d63;
   --curent-price-color: #badb8c;
   --old-price-color: #bdbdbd;
+  --tab-panel-background-color: rgba(13, 16, 18, 0.29);
 }
 
 a {

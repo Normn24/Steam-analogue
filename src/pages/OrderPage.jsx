@@ -171,13 +171,13 @@ export default function OrderPage() {
             left: "0%",
             top: 0,
             zIndex: 100,
-            backgroundColor: "#fff",
+            backgroundColor: "var(--background-color)",
           }}
         >
           <l-grid
             size="160"
             speed="1"
-            color="black"
+            color="var(--text-color)"
             style={{
               position: "absolute",
               top: "50%",
@@ -439,7 +439,7 @@ export default function OrderPage() {
                 }}
                 variant="outlined"
                 sx={{
-                  color: "#000",
+                  color: "var(--text-color)",
                   "&:hover": {
                     borderColor: "#000",
                     opacity: 0.8,
@@ -467,7 +467,7 @@ export default function OrderPage() {
         <Box
           sx={{
             position: "absolute",
-            top: "150px",
+            top: "155px",
             right: "20px",
             display: { xs: "none", md: "flex" },
             flexDirection: "column",
@@ -476,7 +476,7 @@ export default function OrderPage() {
             borderRadius: 2,
             padding: "10px",
             gap: "10px",
-            backgroundColor: "#bdbdbd",
+            backgroundColor: "var(--card-background-color)",
             pb: "3px",
           }}
         >

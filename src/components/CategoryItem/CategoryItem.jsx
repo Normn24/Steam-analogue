@@ -20,6 +20,7 @@ export default function CategoryItem({
   product,
   hoveredItem,
   handleMouseEnter,
+  handleMouseLeave,
   rank,
   currentCategory,
 }) {
@@ -55,7 +56,7 @@ export default function CategoryItem({
     <Link className="post__more" to={`/product/${_id}`}>
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
-        onMouseLeave={() => handleMouseEnter("")}
+        onMouseLeave={handleMouseLeave}
         sx={{
           boxShadow: 5,
           margin: "5px 0",

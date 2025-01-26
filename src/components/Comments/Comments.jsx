@@ -43,7 +43,7 @@ const CommentsComponent = () => {
             borderRadius: 2,
             margin: "15px 0",
             display: "flex",
-            backgroundColor: "transparent",
+            backgroundColor: "var(--card-background-color)",
           }}
         >
           <CardMedia
@@ -65,6 +65,7 @@ const CommentsComponent = () => {
               display: "flex",
               flexDirection: "column",
               "&:last-child": { pb: { xs: "0", md: "15px" } },
+              color: "var(--text-color)", 
             }}
           >
             <Typography variant="p" component="p">
