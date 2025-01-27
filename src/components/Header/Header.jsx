@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearRegistrationState } from "../../redux/auth.slice/signup.slice";
@@ -24,6 +24,8 @@ import {
 import { SiRepublicofgamers, SiYoutubegaming } from "react-icons/si";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { GiDiceFire, GiFlamethrowerSoldier } from "react-icons/gi";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import ModalWindow from "../ModalWindow/ModalWindow";
 import LogInForm from "../LogInForm/LogInForm";
@@ -42,6 +44,16 @@ export default function Header() {
   const [action, setAction] = useState("");
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
 
   const handleClose = () => setOpen(false);
 
@@ -97,20 +109,20 @@ export default function Header() {
       </Accordion>
       {token && (
         <>
-          <BurgerItem button to="/account/profile" onClick={handleLinkClick}>
+          <BurgerItem  to="/account/profile" onClick={handleLinkClick}>
             Profile
           </BurgerItem>
-          <BurgerItem button to="/products/library" onClick={handleLinkClick}>
+          <BurgerItem  to="/products/library" onClick={handleLinkClick}>
             Library
           </BurgerItem>
-          <BurgerItem button to="/wishlist" onClick={handleLinkClick}>
+          <BurgerItem  to="/wishlist" onClick={handleLinkClick}>
             Wishlist
           </BurgerItem>
-          <BurgerItem button to="/cart" onClick={handleLinkClick}>
+          <BurgerItem  to="/cart" onClick={handleLinkClick}>
             Cart
           </BurgerItem>
           <BurgerItem
-            button
+            
             onClick={() => {
               handleOpen("logout");
               handleLinkClick();
@@ -123,7 +135,7 @@ export default function Header() {
 
       {!token && (
         <BurgerItem
-          button
+          
           onClick={() => {
             handleOpen("login");
             handleLinkClick();
@@ -161,28 +173,31 @@ export default function Header() {
         </Box>
 
         <NavLink to={"/"} style={{ display: { xs: "none", md: "flex" } }}>
-          <SiRepublicofgamers style={{ fontSize: "50px" }} />
+          <SiRepublicofgamers style={{ fontSize: "50px", color: "var(--text-color)" }} />
         </NavLink>
-
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <button onClick={toggleTheme} color="inherit" style={{ marginRight: "15px", padding: "0", border: "none", background: "none" }}>
+          {theme === 'light' ? <Brightness4Icon style={{color: "var(--text-color)"}}/> : <Brightness7Icon style={{color: "var(--text-color)"}}/>}
+        </button>    
         {token ? (
           <UserWrapper>
             <NavLink to={"/wishlist"} style={{ position: "relative" }}>
-              <SiYoutubegaming />
+              <SiYoutubegaming style={{color: "var(--text-color)"}}/>
               <CountIndicator>
-                {wishList ? wishList?.products?.length : 0}
+                {wishList?.products ? wishList?.products?.length : 0}
               </CountIndicator>
             </NavLink>
             <NavLink to={"/cart"} style={{ position: "relative" }}>
-              <GiDiceFire />
+              <GiDiceFire style={{color: "var(--text-color)"}}/>
               <CountIndicator>
-                {cart ? cart?.products?.length : 0}
+                {cart?.products ? cart?.products?.length : 0}
               </CountIndicator>
             </NavLink>
             <NavLink to={"/account/profile"}>
-              <FaUserAstronaut />
+              <FaUserAstronaut style={{color: "var(--text-color)"}}/>
             </NavLink>
             <NavLink onClick={() => handleOpen("logout")}>
-              <GiFlamethrowerSoldier />
+              <GiFlamethrowerSoldier style={{color: "var(--text-color)"}}/>
             </NavLink>
           </UserWrapper>
         ) : (
@@ -205,6 +220,7 @@ export default function Header() {
             </NavLink>
           </UserWrapper>
         )}
+        </Box>
       </HeaderWrapper>
 
       <ModalWindow open={open} handleClose={handleClose}>

@@ -1,6 +1,7 @@
 import { Box, styled } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+
 export const HeaderWrapper = styled(Box)({
     height: "40px",
     width: "auto",
@@ -8,7 +9,7 @@ export const HeaderWrapper = styled(Box)({
     justifyContent: "space-between",
     alignItems: "center",
     padding: "5px 8.5px 5px 40px",
-    backgroundColor: "#bdbdbd",
+    backgroundColor: "var(--header-background-color)",
 
     "@media (max-width: 600px)": {
         padding: "5px 15px",
@@ -36,8 +37,8 @@ export const CountIndicator = styled(Box)({
     fontSize: "10px",
     fontWeight: 900,
     justifyContent: "center",
-    backgroundColor: "#fff",
-    color: "#000",
+    backgroundColor: "var(--background-color)",
+    color: "var(--text-color)",
     borderRadius: "50%",
     padding: "1px 6px"
 })

@@ -32,8 +32,8 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
           margin: "10px 0",
           display: "flex",
           paddingRight: { md: hoveredItem === product._id ? "24px" : "0" },
-          backgroundColor: {
-            md: hoveredItem === product._id ? "#bdbdbd" : "transparent",
+          backgroundColor: {xs: "var(--card-background-color)",
+            md: hoveredItem === product._id ? "var(--header-background-color)" : "var(--card-background-color)",
           },
         }}
       >
@@ -64,6 +64,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
               overflow: "hidden",
+              color: "var(--text-color)",
             }}
             variant="h5"
             component="h5"
@@ -74,14 +75,10 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
             sx={{
               display: "flex",
               maxWidth: { xs: "120px", md: "50%" },
-              bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
               columnGap: "15px",
               overflow: "hidden",
-              backgroundColor: {
-                md: hoveredItem === product._id ? "#bdbdbd" : "transparent",
-              },
             }}
           >
             {genres.map((value) => (
@@ -100,15 +97,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
                     margin: "0",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    backgroundColor: {
-                      md: hoveredItem === product._id ? "transparent" : "",
-                    },
-                    border: {
-                      md:
-                        hoveredItem === product._id
-                          ? "1px solid #000"
-                          : "1px solid transparent ",
-                    },
+                    border: "1px solid var(--card-background-color)",
                   }}
                   primaryTypographyProps={{
                     fontSize: { xs: "3vw", md: "16px" },
@@ -151,7 +140,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
           right: "20px",
           top: "20px",
           width: "28%",
-          backgroundColor: "#bdbdbd",
+          backgroundColor: "var(--header-background-color)",
           borderRadius: 2,
         }}
         in={hoveredItem == product._id}
@@ -163,6 +152,8 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
             textTransform: "capitalize",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
+            overflow: "hidden",
+            color: "var(--text-color)",
           }}
           variant="h5"
           component="h5"
@@ -175,12 +166,10 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
             maxWidth: "70%",
             padding: "5px 0",
             marginLeft: "15px",
-            bgcolor: "background.paper",
             flexDirection: "row",
             justifyContent: "flex-start",
             columnGap: "15px",
             overflow: "hidden",
-            backgroundColor: "#bdbdbd",
             mb: "5px",
           }}
         >
@@ -201,7 +190,7 @@ const ProductItem = ({ product, hoveredItem, handleMouseEnter }) => {
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
                   backgroundColor: "transparent",
-                  border: "1px solid #000",
+                  border: "1px solid var(--card-background-color)",
                 }}
                 primary={value.name}
               />

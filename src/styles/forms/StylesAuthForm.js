@@ -9,9 +9,9 @@ export const FormContainer = styled(Box)({
   boxShadow: 24,
   width: '400px',
   borderRadius: '0.75rem',
-  backgroundColor: '#bdbdbd',
+  backgroundColor: 'var(--card-background-color)',
   padding: '2rem',
-  color: '#000',
+  color: 'var(--text-color)',
   margin: "50px auto",
 
   "@media screen and (max-width: 600px)": {
@@ -34,13 +34,13 @@ export const InputGroup = styled(Box)({
   marginTop: '0.25rem',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
-  width: "100%"
+  width: "100%",
+  backgroundColor: "var(--card-background-color)",
 });
 
 export const InputLabel = styled('label')({
   display: 'block',
-
-  marginBottom: '4px',
+  paddingBottom: '4px',
 });
 
 export const StyledInput = styled(TextField)({
@@ -55,6 +55,20 @@ export const StyledInput = styled(TextField)({
   '&:active': {
     borderColor: 'rgba(17, 24, 39, 1)',
   },
+  '& .MuiInputBase-root': {
+    color: "var(--text-color) !important",
+  },
+  "& .MuiOutlinedInput-root": {
+    '& fieldset': {           
+        borderColor: "var(--header-background-color)",  
+    },
+    "&.Mui-focused fieldset": {
+        borderColor: "var(--header-tabs-hover-color)"
+    },
+    '&:hover fieldset': {
+        borderColor: "var(--header-tabs-hover-color)", 
+    },
+},
 });
 
 export const Forgot = styled(Box)({

@@ -50,24 +50,22 @@ const commentsSlice = createSlice({
         state.loading = true;
       })
       .addCase(addComment.fulfilled, (state, action) => {
-        console.log("Added to comments:", action.payload);
+      
         state.loading = false;
         state.productComments.unshift(action.payload);
       })
       .addCase(removeComment.fulfilled, (state, action) => {
-        console.log("Removed from comments:", action.payload);
+      
         state.loading = false;
         state.userComments = state.userComments.filter((product) => {
           return product._id !== action.payload.deletedCommentInfo._id;
         });
       })
       .addCase(fetchUserComments.fulfilled, (state, action) => {
-        console.log("Fetched comments:", action.payload);
         state.loading = false;
         state.userComments = action.payload.reverse();
       })
       .addCase(fetchProductComments.fulfilled, (state, action) => {
-        console.log("Fetched comments:", action.payload);
         state.loading = false;
         state.productComments = action.payload.reverse();
       });

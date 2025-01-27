@@ -52,7 +52,7 @@ function PasswordInput({ label, formik, formikValues }) {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <PiEye /> : <PiEyeClosed />}
+                {showPassword ? <PiEye style={{color: "var(--text-color)"}} /> : <PiEyeClosed style={{color: "var(--text-color)"}}/>}
               </IconButton>
             </InputAdornment>
           ),

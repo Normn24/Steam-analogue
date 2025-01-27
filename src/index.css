@@ -1,4 +1,15 @@
 :root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --input-color: #00000099;
+  --genre-color: #cccc;
+  --primary-color: #fff;
+  --secondary-color: #000;
+  --header-background-color: #bdbdbd;
+  --header-tabs-hover-color: #000;
+  --curent-price-color: #4c6b22;
+  --old-price-color: #647984;
+  --tab-panel-background-color: rgba(255, 255, 255, 0.29);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -10,8 +21,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme="dark"] {
+  --background-color: #0d1012;
+  --text-color: #f78d63;
+  --input-color: #f78d63;
+  --primary-color: #f78d63;
+  --secondary-color: #ffffff;
+  --card-background-color: #191b1c;
+  --genre-color: #303436;
+  --header-background-color: #242729;
+  --header-tabs-background-color: #181a1b;
+  --header-tabs-hover-color: #f78d63;
+  --curent-price-color: #badb8c;
+  --old-price-color: #bdbdbd;
+  --tab-panel-background-color: rgba(13, 16, 18, 0.29);
+}
+
 a {
-  color: #000;
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -22,6 +49,8 @@ ul {
 }
 
 body {
+  background-color: var(--background-color);
+  color: var(--text-color);
   min-width: 320px;
   min-height: 100vh;
   margin: 0 auto;

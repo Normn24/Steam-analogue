@@ -1,12 +1,13 @@
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { Box, Button, Grid, Typography, TextField } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateUserProfile,
   updateUserPassword,
 } from "../../redux/user.slice/user.slice";
 import PasswordInput from "../PasswordInput/PasswordInput";
+import { SearchField } from "../../styles/navbar-footer/NavBarStyled";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
@@ -25,10 +26,10 @@ export default function UserProfile() {
   const dispatch = useDispatch();
   const { user, error, message } = useSelector((state) => state.user);
   const initialValues = {
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-    email: user?.email || "",
-    login: user?.login || "",
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
+    login: user?.login,
     password: "",
     newPassword: "",
   };
@@ -100,6 +101,8 @@ export default function UserProfile() {
           boxShadow:
             "0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12)",
           padding: "24px",
+          backgroundColor: "var(--card-background-color)",
+          borderRadius: "5px",
         }}
       >
         <form
@@ -110,7 +113,7 @@ export default function UserProfile() {
         >
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <TextField
+              <SearchField
                 fullWidth
                 id="first-name"
                 name="firstName"
@@ -126,7 +129,7 @@ export default function UserProfile() {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <SearchField
                 fullWidth
                 id="last-name"
                 name="lastName"
@@ -142,7 +145,7 @@ export default function UserProfile() {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <SearchField
                 fullWidth
                 id="email"
                 name="email"
@@ -157,7 +160,7 @@ export default function UserProfile() {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
+              <SearchField
                 fullWidth
                 id="login"
                 name="login"
@@ -174,11 +177,11 @@ export default function UserProfile() {
           <Box sx={{ mt: "18px" }}>
             <Button
               sx={{
-                backgroundColor: "#bdbdbd",
+                backgroundColor: "var(--header-background-color)",
                 borderRadius: "3px",
                 padding: "8px 0",
                 width: "180px",
-                ":hover": { backgroundColor: "#cccc" },
+                ":hover": { backgroundColor: "var(--genre-color)" },
               }}
               type="submit"
             >
@@ -215,12 +218,12 @@ export default function UserProfile() {
           </Box>
           <Box sx={{ mt: "18px" }}>
             <Button
-              sx={{
-                backgroundColor: "#bdbdbd",
+               sx={{
+                backgroundColor: "var(--header-background-color)",
                 borderRadius: "3px",
                 padding: "8px 0",
                 width: "180px",
-                ":hover": { backgroundColor: "#cccc" },
+                ":hover": { backgroundColor: "var(--genre-color)" },
               }}
               type="submit"
             >

@@ -7,7 +7,7 @@ const initialState = {
   status: null
 }
 
-export const fetchProductId = createAsyncThunk('product/fetchProductId:load', async (id) => {
+export const fetchProductId = createAsyncThunk('product/fetchProductId', async (id) => {
   const response = await axios.get(`/api/products/${id}`,)
   return response.data;
 });

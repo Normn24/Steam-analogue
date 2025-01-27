@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCatalogProducts } from "../redux/catalogProducts.slice/catalogProducts.slice";
@@ -13,6 +13,8 @@ export default function CategoryPage() {
   );
   const [hoveredItem, setHoveredItem] = useState(null);
   const [currentCategory, setCurrentCategory] = useState("");
+
+  const hoverTimeoutRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchCatalogProducts(catalogQuery));
@@ -29,80 +31,88 @@ export default function CategoryPage() {
   }, [catalogQuery]);
 
   const handleMouseEnter = (productId) => {
-    setHoveredItem(productId);
+    clearTimeout(hoverTimeoutRef.current);
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoveredItem(productId);
+    }, 1000);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeoutRef.current);
+    setHoveredItem(null);
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        padding: { xs: "20px 10px", md: "20px" },
+        position: "relative",
+        minHeight: "calc(100vh - 288px)",
+        m: { xs: "0", md: "60px 0" },
+      }}
+    >
+      <Typography
+        variant="h3"
+        component="h3"
+        sx={{
+          textAlign: { xs: "center", md: "left" },
+          fontSize: { xs: "34px", md: "48px" },
+        }}
+      >
+        {catalogQuery}
+      </Typography>
       <Box
         sx={{
-          padding: "20px",
+          display: "flex",
+          margin: { xs: "15px 8px 0", md: "15px 15px 0" },
           position: "relative",
-          minHeight: "calc(100vh - 288px)",
-          m: { xs: "0", md: "60px 0" },
+          textTransform: "uppercase",
+          justifyContent: "space-between",
+          height: { xs: "15px", md: "25px" },
         }}
       >
         <Typography
-          variant="h3"
-          component="h3"
-          sx={{
-            textAlign: { xs: "center", md: "left" },
-            fontSize: { xs: "34px", md: "48px" },
-          }}
+          variant="p"
+          component="p"
+          sx={{ position: "absolute", fontSize: { xs: "10px", md: "16px" } }}
         >
-          {catalogQuery}
+          Rate
         </Typography>
-        <Box
+        <Typography
+          variant="p"
+          component="p"
           sx={{
-            display: "flex",
-            margin: { xs: "15px 8px 0", md: "15px 15px 0" },
-            position: "relative",
-            textTransform: "uppercase",
-            justifyContent: "space-between",
-            height: { xs: "15px", md: "25px" },
+            position: "absolute",
+            right: { xs: "75px", md: "29.5%" },
+            fontSize: { xs: "10px", md: "16px" },
           }}
         >
-          <Typography
-            variant="p"
-            component="p"
-            sx={{ position: "absolute", fontSize: { xs: "10px", md: "16px" } }}
-          >
-            Rate
-          </Typography>
-          <Typography
-            variant="p"
-            component="p"
-            sx={{
-              position: "absolute",
-              right: { xs: "75px", md: "29.5%" },
-              fontSize: { xs: "10px", md: "16px" },
-            }}
-          >
-            Price
-          </Typography>
-          <Typography
-            variant="p"
-            component="p"
-            sx={{
-              position: "absolute",
-              right: "0",
-              fontSize: { xs: "10px", md: "16px" },
-            }}
-          >
-            {currentCategory}
-          </Typography>
-        </Box>
-        {categoriesProducts?.map((product, index) => (
-          <CategoryItem
-            key={product._id}
-            product={product}
-            hoveredItem={hoveredItem}
-            handleMouseEnter={handleMouseEnter}
-            rank={index + 1}
-            currentCategory={currentCategory}
-          />
-        ))}
+          Price
+        </Typography>
+        <Typography
+          variant="p"
+          component="p"
+          sx={{
+            position: "absolute",
+            right: "0",
+            fontSize: { xs: "10px", md: "16px" },
+          }}
+        >
+          {currentCategory}
+        </Typography>
       </Box>
-    </>
+      {categoriesProducts?.map((product, index) => (
+        <CategoryItem
+          key={product._id}
+          product={product}
+          hoveredItem={hoveredItem}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+          rank={index + 1}
+          currentCategory={currentCategory}
+        />
+      ))}
+    </Box>
   );
 }

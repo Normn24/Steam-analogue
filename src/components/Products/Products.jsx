@@ -89,7 +89,7 @@ export default function Products() {
                   borderRadius: "4px",
                   whiteSpace: "nowrap",
                   textAlign: "center",
-                  backgroundColor: catalogItem === value.name ? "#bdbdbd" : "",
+                  backgroundColor: catalogItem === value.name ? "var(--header-background-color)" : "",
                 }}
                 primaryTypographyProps={{
                   fontSize: { xs: "3.5vw ", md: "16px" },
@@ -112,7 +112,7 @@ export default function Products() {
           component="div"
           sx={{
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "ceneter",
             width: { md: "70%" },
             justifyContent: "flex-end",
             fontSize: { xs: "12px ", md: "16px" },
@@ -123,10 +123,10 @@ export default function Products() {
             <Button
               variant="outlined"
               sx={{
-                padding: "3px 10px",
+                padding: "3px 10px 1px",
                 marginLeft: "5px",
                 width: "auto",
-                lineHeight: 1,
+                lineHeight: "1",
                 fontSize: { xs: "11px ", md: "16px" },
               }}
             >

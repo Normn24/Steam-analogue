@@ -32,10 +32,9 @@ const registrationSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state) => {
         state.status = 'succeeded';
         state.error = null;
-        console.log(action.payload)
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed';

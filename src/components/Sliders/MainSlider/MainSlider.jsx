@@ -34,7 +34,7 @@ function MainSlider() {
               opacity: 1,
               background: "none",
               borderRadius: 0,
-              color: "#000",
+              color: "var(--text-color)",
               fontSize: "80px",
               top: "40%",
             }}

@@ -52,7 +52,8 @@ export default function UserOrders() {
                   marginBottom: "25px",
                   padding: "10px",
                   fontSize: { xs: "13px", md: "16px" },
-                  backgroundColor: "transparent",
+                  color: "var(--text-color)",
+                  backgroundColor: "var(--card-background-color)",
                   "&::before": {
                     display: "none",
                   },
@@ -62,7 +63,7 @@ export default function UserOrders() {
                   aria-controls="panel-content"
                   id="panel-header"
                   expandIcon={
-                    <IoIosArrowDown style={{ width: "30px", height: "30px" }} />
+                    <IoIosArrowDown style={{ width: "30px", height: "30px", color:"var(--text-color)" }} />
                   }
                 >
                   <Box
@@ -111,7 +112,7 @@ export default function UserOrders() {
                     key={el.product._id}
                     sx={{
                       display: "flex",
-                      borderBottom: "1px solid #cccc",
+                      borderBottom: "1px solid var(--genre-color)",
                       p: "15px",
                     }}
                   >
@@ -191,7 +192,7 @@ export default function UserOrders() {
                               alignItems: "baseline",
                               position: "relative",
                               paddingRight: "4px",
-                              backgroundColor: "#cccc",
+                              backgroundColor: "var(--genre-color)",
                               width: "fit-content",
                               borderRadius: "4px",
                             }}
@@ -223,7 +224,7 @@ export default function UserOrders() {
                                 right: "4.5%",
                                 fontSize: "12px",
                                 bottom: "16px",
-                                color: "#647984",
+                                color: "var(--old-price-color)",
                                 textDecorationLine: "line-through",
                               }}
                               variant="p"
@@ -233,7 +234,7 @@ export default function UserOrders() {
                             </Typography>
                             <Typography
                               sx={{
-                                color: "#4c6b22",
+                                color: "var(--curent-price-color)",
                               }}
                               variant="p"
                               component="p"
@@ -246,7 +247,7 @@ export default function UserOrders() {
                             sx={{
                               fontSize: "23px",
                               textAlign: "center",
-                              backgroundColor: "#cccc",
+                              backgroundColor: "var(--genre-color)",
                               borderRadius: "4px",
                             }}
                             variant="p"

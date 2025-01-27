@@ -21,16 +21,16 @@ export default function Footer() {
         </StyledTitle>
         <InfoWrapper>
           <NavLink to="https://discord.com/" target="_blank">
-            <FaDiscord />
+            <FaDiscord style={{color: "var(--text-color)"}}/>
           </NavLink>
           <NavLink to="https://twitter.com/" target="_blank">
-            <FaTwitterSquare />
+            <FaTwitterSquare style={{color: "var(--text-color)"}}/>
           </NavLink>
           <NavLink to="https://ua.linkedin.com/" target="_blank">
-            <FaLinkedin />
+            <FaLinkedin style={{color: "var(--text-color)"}}/>
           </NavLink>
           <NavLink to="https://www.instagram.com/" target="_blank">
-            <FaInstagramSquare />
+            <FaInstagramSquare style={{color: "var(--text-color)"}}/>
           </NavLink>
         </InfoWrapper>
       </StyledFooter>

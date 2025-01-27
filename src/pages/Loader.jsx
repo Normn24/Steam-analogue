@@ -22,13 +22,13 @@ export default function Loader() {
         left: "0%",
         top: "0",
         zIndex: 1330,
-        backgroundColor: "#fff",
+        backgroundColor: "var(--background-color)",
       }}
     >
       <l-grid
         size="160"
         speed="1"
-        color="black"
+        color="var(--text-color)"
         style={{
           position: "absolute",
           top: "50%",

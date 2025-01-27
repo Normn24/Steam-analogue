@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchItem from "../SearchItem/SearchItem";
 import {
-  TextField,
   MenuItem,
   FormControl,
   Button,
@@ -16,6 +15,7 @@ import {
 import { BsFilterRight } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import { grid } from "ldrs";
+import { SearchField } from "../../styles/navbar-footer/NavBarStyled";
 
 function FilterPanel() {
   const location = useLocation();
@@ -43,10 +43,23 @@ function FilterPanel() {
   const toggleFilters = () => {
     setFiltersOpen(!filtersOpen);
   };
+  const hoverTimeoutRef = useRef(null);
 
   const handleMouseEnter = (productId) => {
-    setHoveredItem(productId);
+    clearTimeout(hoverTimeoutRef.current);
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoveredItem(productId);
+    }, 1000);
   };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeoutRef.current);
+    setHoveredItem(null);
+  };
+  // const handleMouseEnter = (productId) => {
+  //   setHoveredItem(productId);
+  // };
 
   useEffect(() => {
     setFilteredProducts(productList);
@@ -121,13 +134,13 @@ function FilterPanel() {
               width: "69%",
               position: "absolute",
               left: "0",
-              backgroundColor: "#fff",
+              backgroundColor: "var(--background-color)",
             }}
           >
             <l-grid
               size="160"
               speed="1"
-              color="black"
+              color="var(--text-color)"
               className="loadingSearch"
               style={{
                 top: "0",
@@ -135,7 +148,6 @@ function FilterPanel() {
                 width: "100%",
                 position: "absolute",
                 left: "-1%",
-                backgroundColor: "#fff",
                 zIndex: 1100,
               }}
             ></l-grid>
@@ -198,6 +210,7 @@ function FilterPanel() {
                   product={product}
                   hoveredItem={hoveredItem}
                   handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
                 />
               ))}
             </Box>
@@ -213,11 +226,11 @@ function FilterPanel() {
               "rgba(0, 0, 0, 0.2) 0px 6px 9px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 11px 20px 5px",
             padding: "20px",
             borderRadius: "6px",
-            backgroundColor: "#fff",
+            backgroundColor: "var(--card-background-color)", 
           }}
         >
           <h4>Filters</h4>
-          <Divider style={{ marginBottom: "20px" }} />
+          <Divider style={{ marginBottom: "20px", backgroundColor: "var(--genre-color)" }} />
           <Formik
             enableReinitialize
             initialValues={{
@@ -236,7 +249,7 @@ function FilterPanel() {
             {({ values, setFieldValue, setValues }) => (
               <Form>
                 <FormControl fullWidth>
-                  <TextField
+                  <SearchField
                     id="name"
                     name="name"
                     label="Game Name"
@@ -257,10 +270,10 @@ function FilterPanel() {
                   </Button>
                 </FormControl>
 
-                <Divider style={{ marginBottom: "20px", marginTop: "20px" }} />
+                <Divider style={{ marginBottom: "20px", marginTop: "20px", backgroundColor: "var(--genre-color)" }} />
 
                 <FormControl fullWidth>
-                  <TextField
+                  <SearchField
                     select
                     id="genreId"
                     name="genre"
@@ -279,10 +292,10 @@ function FilterPanel() {
                         {genre.name.toUpperCase()}
                       </MenuItem>
                     ))}
-                  </TextField>
+                  </SearchField>
                 </FormControl>
 
-                <Divider style={{ marginBottom: "20px", marginTop: "20px" }} />
+                <Divider style={{ marginBottom: "20px", marginTop: "20px", backgroundColor: "var(--genre-color)" }} />
 
                 <Typography variant="subtitle1" gutterBottom>
                   Price Range
@@ -313,7 +326,7 @@ function FilterPanel() {
                   </Typography>
                 </Box>
 
-                <Divider style={{ marginBottom: "20px", marginTop: "20px" }} />
+                <Divider style={{ marginBottom: "20px", marginTop: "20px", backgroundColor: "var(--genre-color)" }} />
 
                 <Typography variant="subtitle1" gutterBottom>
                   Year Range
@@ -343,10 +356,10 @@ function FilterPanel() {
                   </Typography>
                 </Box>
 
-                <Divider style={{ marginBottom: "20px", marginTop: "20px" }} />
+                <Divider style={{ marginBottom: "20px", marginTop: "20px", backgroundColor: "var(--genre-color)" }} />
 
                 <FormControl fullWidth>
-                  <TextField
+                  <SearchField
                     select
                     id="sortBy"
                     name="sort"
@@ -366,10 +379,10 @@ function FilterPanel() {
                     <MenuItem value="-currentPrice">
                       Price: High to Low
                     </MenuItem>
-                  </TextField>
+                  </SearchField>
                 </FormControl>
 
-                <Divider style={{ marginBottom: "20px", marginTop: "20px" }} />
+                <Divider style={{ marginBottom: "20px", marginTop: "20px", backgroundColor: "var(--genre-color)" }} />
 
                 <FormControl fullWidth>
                   <Button

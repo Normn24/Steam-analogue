@@ -5,7 +5,7 @@ import { Typography } from '@mui/material';
 export const StyledFooter = styled('footer')({
     width: 'auto',
     height: 'auto',
-    backgroundColor: '#bdbdbd',
+    backgroundColor: 'var(--header-background-color)',
     display: 'flex',
     gap: '10px',
     // padding: "15px",
@@ -24,7 +24,7 @@ export const InfoWrapper = styled('div')({
 });
 
 export const StyledTitle = styled(Typography)({
-    color: '#2f3035',
+    color: 'var(text-color)',
     fontFamily: '"Gill Sans", sans-serif',
     fontSize: '14px',
     fontWeight: 400,

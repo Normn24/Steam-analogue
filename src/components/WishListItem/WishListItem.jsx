@@ -64,7 +64,7 @@ export default function WishListItem({ product, handleRemove }) {
         margin: "15px 0",
         padding: "15px",
         display: "flex",
-        backgroundColor: "transparent",
+        backgroundColor: "var(--card-background-color)",
         flexDirection: { xs: "column", md: "row" },
       }}
     >
@@ -129,12 +129,10 @@ export default function WishListItem({ product, handleRemove }) {
             sx={{
               display: "flex",
               maxWidth: { xs: "100%", md: "50%" },
-              bgcolor: "background.paper",
               flexDirection: "row",
               justifyContent: "flex-start",
               columnGap: "15px",
               overflow: "hidden",
-              backgroundColor: "transparent",
             }}
           >
             {genres.slice(0, 3).map((value) => (
@@ -149,11 +147,9 @@ export default function WishListItem({ product, handleRemove }) {
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
                     textTransform: "capitalize",
-                    background: "#cccc",
-
                     color: "#000",
                     "&:hover": {
-                      background: "#cccc",
+                      background: "var(--genre-color)",
                     },
                   }}
                 >
@@ -182,9 +178,9 @@ export default function WishListItem({ product, handleRemove }) {
           />
           <Button
             sx={{
-              backgroundColor: "#bdbdbd",
+              backgroundColor: "var(--header-background-color)",
               borderRadius: "3px",
-              ":hover": { backgroundColor: "#cccc" },
+              ":hover": { backgroundColor: "var(--genre-color)" },
             }}
             onClick={() => handleRemove(_id)}
           >
