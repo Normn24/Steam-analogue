@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import PriceBox from "../PriceBox/PriceBox";
 
-export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
+export default function SearchItem({ product, hoveredItem, handleMouseEnter, handleMouseLeave }) {
   const classes = useStyles();
   const {
     _id,
@@ -42,114 +42,18 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
       to={`/product/${_id}`}
       style={{ position: "relative" }}
     >
-      {/* <Card
-        onMouseEnter={() => handleMouseEnter(product._id)}
-        onMouseLeave={() => handleMouseEnter("")}
-        sx={{
-          boxShadow: 5,
-          borderRadius: 2,
-          margin: "0",
-          marginBottom: "15px",
-          display: "flex",
-          backgroundColor:
-            hoveredItem === product._id ? "#bdbdbd" : "transparent",
-        }}
-      >
-        <CardMedia
-          sx={{ height: "auto", width: "300px", objectFit: "cover" }}
-          image={imageUrls[0]}
-          title={name}
-        />
-        <CardContent
-          sx={{
-            width: "100%",
-            minHeight: 83,
-            padding: "5px 16px",
-            position: "relative",
-            "&:last-child": { pb: 0 },
-          }}
-        >
-          <Typography
-            sx={{ textTransform: "capitalize" }}
-            variant="h5"
-            component="h5"
-          >
-            {name}
-          </Typography>
-          <List
-            sx={{
-              display: "flex",
-              maxWidth: "50%",
-              bgcolor: "background.paper",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              columnGap: "15px",
-              overflow: "hidden",
-              backgroundColor:
-                hoveredItem === product._id ? "#bdbdbd" : "transparent",
-            }}
-          >
-            {genres.map((value) => (
-              <ListItem
-                sx={{
-                  width: "auto",
-                  padding: "0",
-                  textTransform: "capitalize",
-                }}
-                key={value._id}
-                disableGutters
-              >
-                <ListItemText
-                  className={classes.genreItem}
-                  sx={{
-                    margin: "0",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    backgroundColor:
-                      hoveredItem === product._id ? "transparent" : "",
-                    border:
-                      hoveredItem === product._id
-                        ? "1px solid #000"
-                        : "1px solid transparent ",
-                  }}
-                  primary={value.name}
-                />
-              </ListItem>
-            ))}
-          </List>
-
-          <PriceBox
-            previousPrice={previousPrice}
-            currentPrice={currentPrice}
-            showButton={false}
-            position="absolute"
-            additionalStyles={{
-              display: "flex",
-              gap: "11px",
-              alignItems: previousPrice ? "flex-end" : "center",
-              backgroundColor: "transperent",
-              width: "fit-content",
-              borderRadius: "4px",
-              padding: "2px 3px 2px 10px",
-              position: "absolute",
-              right: "16px",
-              top: "25px",
-              height: "35px",
-            }}
-          />
-        </CardContent>
-      </Card> */}
       <Card
         onMouseEnter={() => handleMouseEnter(product._id)}
-        onMouseLeave={() => handleMouseEnter("")}
+        onMouseLeave={handleMouseLeave}
         sx={{
           boxShadow: 5,
           borderRadius: 2,
           margin: "0",
           marginBottom: "15px",
           display: "flex",
-          backgroundColor: {xs: "var(--card-background-color)",
-            md: hoveredItem === product._id ?  "var(--header-background-color)" : "var(--card-background-color)",
+          backgroundColor:  "var(--card-background-color)",
+          "&:hover": {
+            backgroundColor: "var(--header-background-color)",
           },
         }}
       >
@@ -195,9 +99,6 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
               justifyContent: "flex-start",
               columnGap: "15px",
               overflow: "hidden",
-              // backgroundColor: {
-              //   md: hoveredItem === product._id ? "var(--header-background-color)" : "transparent",
-              // },
             }}
           >
             {genres.map((value) => (
@@ -216,15 +117,7 @@ export default function SearchItem({ product, hoveredItem, handleMouseEnter }) {
                     margin: "0",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                    backgroundColor: {
-                      md: hoveredItem === product._id ? "transparent" : "",
-                    },
-                    border: {
-                      md:
-                        hoveredItem === product._id
-                          ? "1px solid #000"
-                          : "1px solid transparent ",
-                    },
+                    border: "1px solid var(--card-background-color)",
                   }}
                   primaryTypographyProps={{
                     fontSize: { xs: "3vw", md: "16px" },

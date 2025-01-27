@@ -4,6 +4,7 @@
   --input-color: #00000099;
   --genre-color: #cccc;
   --primary-color: #fff;
+  --secondary-color: #000;
   --header-background-color: #bdbdbd;
   --header-tabs-hover-color: #000;
   --curent-price-color: #4c6b22;
@@ -21,17 +22,13 @@
 }
 
 [data-theme="dark"] {
-  /* --background-color: #181a1b; */
   --background-color: #0d1012;
-  /* --text-color: #e8e6e3; */
   --text-color: #f78d63;
   --input-color: #f78d63;
   --primary-color: #f78d63;
-  /* --card-background-color: #26292b; */
+  --secondary-color: #ffffff;
   --card-background-color: #191b1c;
-  /* --card-background-color: #111414; */
   --genre-color: #303436;
-  /* --header-background-color: #656666; */
   --header-background-color: #242729;
   --header-tabs-background-color: #181a1b;
   --header-tabs-hover-color: #f78d63;

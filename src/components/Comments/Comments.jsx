@@ -88,7 +88,7 @@ const CommentsComponent = () => {
               })}
             </Typography>
             <Typography
-              sx={{ padding: "5px 0", fontSize: { xs: "13px", md: "16px" } }}
+              sx={{ padding: "5px 0", fontSize: { xs: "13px", md: "16px" }, color: "var(--secondary-color)" }}
               variant="p"
               component="p"
             >

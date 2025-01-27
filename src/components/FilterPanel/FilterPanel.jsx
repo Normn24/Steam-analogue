@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -43,10 +43,23 @@ function FilterPanel() {
   const toggleFilters = () => {
     setFiltersOpen(!filtersOpen);
   };
+  const hoverTimeoutRef = useRef(null);
 
   const handleMouseEnter = (productId) => {
-    setHoveredItem(productId);
+    clearTimeout(hoverTimeoutRef.current);
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoveredItem(productId);
+    }, 1000);
   };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeoutRef.current);
+    setHoveredItem(null);
+  };
+  // const handleMouseEnter = (productId) => {
+  //   setHoveredItem(productId);
+  // };
 
   useEffect(() => {
     setFilteredProducts(productList);
@@ -197,6 +210,7 @@ function FilterPanel() {
                   product={product}
                   hoveredItem={hoveredItem}
                   handleMouseEnter={handleMouseEnter}
+                  handleMouseLeave={handleMouseLeave}
                 />
               ))}
             </Box>

@@ -9,7 +9,7 @@ export const FormContainer = styled(Box)({
   boxShadow: 24,
   width: '400px',
   borderRadius: '0.75rem',
-  backgroundColor: 'var(--header-background-color)',
+  backgroundColor: 'var(--card-background-color)',
   padding: '2rem',
   color: 'var(--text-color)',
   margin: "50px auto",
@@ -40,7 +40,7 @@ export const InputGroup = styled(Box)({
 
 export const InputLabel = styled('label')({
   display: 'block',
-  marginBottom: '4px',
+  paddingBottom: '4px',
 });
 
 export const StyledInput = styled(TextField)({

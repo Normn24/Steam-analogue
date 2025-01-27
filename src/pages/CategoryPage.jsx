@@ -35,7 +35,7 @@ export default function CategoryPage() {
 
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredItem(productId);
-    }, 2000);
+    }, 1000);
   };
 
   const handleMouseLeave = () => {

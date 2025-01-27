@@ -26,7 +26,7 @@ export const updateUserPassword = createAsyncThunk(
   });
 
 export const fetchUser = createAsyncThunk(
-  'user/fetchUser',
+  'user/fetchUser:load',
   async () => {
     const response = await axios.get("/api/customers/customer")
     return response.data;

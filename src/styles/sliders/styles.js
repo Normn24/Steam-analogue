@@ -83,8 +83,8 @@ export const useStyles = makeStyles({
     },
   },
   genreItem: {
-    backgroundColor: "var(--genre-color)",
-    color: "var(--text-color)",
+    backgroundColor: "var(--genre-color) !important",
+    color: "var(--text-color) !important",
     padding: "2px 5px",
     borderRadius: "3px",
   },

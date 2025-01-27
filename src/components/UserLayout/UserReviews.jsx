@@ -21,7 +21,7 @@ export default function UserReviews() {
         component="h4"
         sx={{ fontWeight: "700", marginBottom: "15px" }}
       >
-        My Reviews ({userComments.length})
+        My reviews ({userComments.length})
       </Typography>
       {userComments.length === 0 ? (
         <Typography
@@ -81,7 +81,7 @@ export default function UserReviews() {
                 <Typography
                   variant="p"
                   component="p"
-                  sx={{ paddingRight: "35px" }}
+                  sx={{ paddingRight: "35px", color: "var(--secondary-color)" }}
                 >
                   {item.content}
                 </Typography>
