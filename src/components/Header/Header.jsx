@@ -73,7 +73,7 @@ export default function Header() {
   };
 
   const drawer = (
-    <Box sx={{ width: 220, display: "flex", flexDirection: "column" }}>
+    <Box sx={{ width: 220, display: "flex", flexDirection: "column"}}>
       <BurgerItem to="/" onClick={handleLinkClick} style={{ display: "block" }}>
         Home
       </BurgerItem>
@@ -89,9 +89,9 @@ export default function Header() {
         <AccordionSummary
           aria-controls="panel-content"
           id="panel-header"
-          expandIcon={<IoIosArrowDown />}
+          expandIcon={<IoIosArrowDown style={{color: "var(--text-color)"}}/>}
         >
-          <Typography variant="p" component="p">
+          <Typography variant="p" component="p" sx={{ color: "var(--text-color)" }}>
             Categories
           </Typography>
         </AccordionSummary>
@@ -167,6 +167,7 @@ export default function Header() {
             ModalProps={{
               keepMounted: true,
             }}
+            sx={{"& .MuiDrawer-paper": {backgroundColor: "var(--header-background-color) !important"} }}
           >
             {drawer}
           </Drawer>

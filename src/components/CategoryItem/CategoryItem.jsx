@@ -206,6 +206,7 @@ export default function CategoryItem({
               textTransform: "capitalize",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
+              overflow: "hidden",
             }}
             variant="h5"
             component="h5"

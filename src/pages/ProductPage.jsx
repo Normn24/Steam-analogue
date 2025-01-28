@@ -10,7 +10,6 @@ import {
   Table,
   TableBody,
   TableRow,
-  TableCell,
   Button,
   Typography,
 } from "@mui/material";
@@ -170,6 +169,7 @@ export default function ProductPage() {
                 color: "var(--text-color)", 
                 fontSize: "24px",
                 textTransform: "uppercase", 
+                border: "1px solid",
               }}
             >
               Sale
@@ -182,8 +182,7 @@ export default function ProductPage() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "auto",
-            "@media (max-width: 600px)": { alignItems: "center" },
+            width: { xs: "100%", md: "calc(40% - 50px)" },
           }}
         >
           <Box
@@ -191,7 +190,7 @@ export default function ProductPage() {
             sx={{
               display: { xs: "none", md: "block" },
               height: "140px",
-              width: "446px",
+              width: "100%",
               objectFit: "cover",
               borderRadius: "0px 6px 0px 0px",
             }}
@@ -204,11 +203,14 @@ export default function ProductPage() {
               fontSize: "32px",
               margin: "10px 0",
               fontWeight: 600,
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
             }}
           >
             {product.name}
           </Typography>
-          <Table>
+          <Table sx={{ width: "100%"}}>
             <TableBody>
               <TableRow>
                 <TableCellStyle>Release</TableCellStyle>
@@ -224,21 +226,23 @@ export default function ProductPage() {
               </TableRow>
               <TableRow>
                 <TableCellStyle>Genres</TableCellStyle>
-                <TableCell
+                <TableCellStyle
                   sx={{
-                    display: "flex",
-                    width: "auto",
-                    flexWrap: "wrap",
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                    overflowX: "auto",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
                     paddingBottom: "10px",
-                    gap: "10px",
+                    position: "relative",
+                    height: { xs: "50px", md: "60px" }
                   }}
                 >
+                  <Box  sx={{
+                    position: "absolute",
+                    left: "16px",
+                    top: "20px",
+                    width: "calc(100% - 16px)",
+                    display: "flex",
+                    gap: "10px",
+                    paddingBottom: "10px",
+                    overflowX: "auto",
+                  }}>
                   {product?.genres?.map((value) => (
                     <NavLink
                       to={`/products/search/?genre=${value._id}`}
@@ -248,11 +252,10 @@ export default function ProductPage() {
                         className={classes.genreItem}
                         sx={{
                           margin: "0",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
                           textTransform: "capitalize",
                           background: "var(--genre-color)",
                           color: "var(--text-color)",
+                          whiteSpace: "nowrap",
                           "&:hover": {
                             background: "var(--genre-color)",
                           },
@@ -262,7 +265,8 @@ export default function ProductPage() {
                       </Button>
                     </NavLink>
                   ))}
-                </TableCell>
+                  </Box>
+                </TableCellStyle>
               </TableRow>
             </TableBody>
           </Table>
@@ -428,7 +432,7 @@ export default function ProductPage() {
       <Box
         component="div"
         sx={{
-          marginTop: onLibrary ? "40px" : "100px",
+          marginTop: product.category !== "6632424ed9075d19584c508d" ? onLibrary ? "40px" : "100px" : "140px",
           boxShadow: "0px -3px 10px -4px rgba(0, 0, 0, 0.2)",
         }}
       >

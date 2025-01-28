@@ -61,31 +61,29 @@
   border-radius: 6px 0px 0px 0px;
 }
 
-
-
-
-@media (max-width: 960px) {
-  .slider-items {
-    height: 250px !important;
+@media (max-width: 900px) {
+  .slider-container{
+    height: 530px !important;
   }
-
-}
-
-;
-
-@media (max-width: 600px) {
-
 
   .slider-item {
-    height: 250px !important;
-
+    height: 380px !important;
   }
+};
 
+@media (max-width: 600px) {
+  .slider-container{
+    height: 400px !important;
+  }
+  .slider-item {
+    height: 250px !important;
+  }
   .slick-dots {
     & li {
       margin: 7px 7px !important;
-
+    }
+    & li button::before{
+      color: #a6a6a6 !important;
     }
   }
-
 }
