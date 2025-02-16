@@ -57,13 +57,12 @@ function FilterPanel() {
     clearTimeout(hoverTimeoutRef.current);
     setHoveredItem(null);
   };
-  // const handleMouseEnter = (productId) => {
-  //   setHoveredItem(productId);
-  // };
 
   useEffect(() => {
     setFilteredProducts(productList);
   }, [productList]);
+
+  const validGenreId = genres.some((genre) => genre._id === genreId) ? genreId : "";
 
   const applyFilters = (values) => {
     let filtered = [...productList];
@@ -101,7 +100,7 @@ function FilterPanel() {
     } else if (values.sortBy === "-currentPrice") {
       filtered.sort((a, b) => b.currentPrice - a.currentPrice);
     }
-
+ 
     setFilteredProducts(filtered);
     if (values.name) params.append("name", values.name);
     if (values.genreId) params.append("genre", values.genreId);
@@ -234,7 +233,7 @@ function FilterPanel() {
           <Formik
             enableReinitialize
             initialValues={{
-              genreId: genreId || "",
+              genreId: validGenreId,
               minPrice: minPrice || 0,
               maxPrice: maxPrice || 100,
               startYear: startYear || 2010,
